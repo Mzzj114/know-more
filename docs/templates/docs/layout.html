@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %} Know More - 文档站 {% endblock %}
+
+{% block extra_head %}
+<style>
+    .docs-container {
+        flex: 1;
+        display: flex;
+        background-color: var(--bg);
+    }
+    .docs-aside {
+        width: 280px !important;
+        background-color: var(--surface);
+        border-right: 1px solid var(--border);
+        overflow-y: auto;
+    }
+    .docs-menu {
+        border-right: none !important;
+        background-color: transparent;
+    }
+    .docs-menu .el-menu-item {
+        color: var(--text-secondary);
+        font-weight: 500;
+        margin: 4px 12px;
+        border-radius: var(--el-border-radius-base);
+        height: 48px;
+        line-height: 48px;
+    }
+    .docs-menu .el-menu-item:hover, .docs-menu .el-menu-item.is-active {
+        background-color: var(--primary-light);
+        color: var(--primary);
+        font-weight: 700;
+    }
+    .docs-main {
+        flex: 1;
+        padding: 40px;
+        overflow-y: auto;
+        position: relative;
+    }
+    /* Simple Markdown Typography inside main area */
+    .markdown-body {
+        max-width: 800px;
+        margin: 0 auto;
+        font-family: var(--el-font-family);
+        color: var(--text-primary);
+        line-height: 1.7;
+    }
+    .markdown-body h1 {
+        font-size: 32px;
+        color: var(--primary);
+        margin-bottom: 24px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border);
+    }
+    .markdown-body h2 {
+        font-size: 24px;
+        margin-top: 32px;
+        margin-bottom: 16px;
+        color: var(--text-primary);
+    }
+    .markdown-body p, .markdown-body li {
+        font-size: 16px;
+        color: var(--text-secondary);
+    }
+    .markdown-body code {
+        background-color: var(--primary-light);
+        color: var(--primary-dark-2);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-family: monospace;
+    }
+    .markdown-body blockquote {
+        border-left: 4px solid var(--accent);
+        background-color: var(--surface);
+        padding: 16px;
+        margin: 24px 0;
+        border-radius: var(--el-border-radius-base);
+        color: var(--text-secondary);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+</style>
+{% endblock %}
+
+{% block layout_content %}
+<el-container class="docs-container">
+    <el-aside class="docs-aside">
+        <!-- Element Plus Menu for Documentation Sidebar -->
+        <el-menu 
+            :default-active="activeMenu"
+            class="docs-menu"
+        >
+            {% for doc in docs %}
+                <a href="{% url 'doc_detail' doc.slug %}" style="text-decoration: none;">
+                    <el-menu-item index="{{ doc.slug }}">
+                        <span>{{ doc.title }}</span>
+                    </el-menu-item>
+                </a>
+            {% endfor %}
+        </el-menu>
+    </el-aside>
+    
+    <el-main class="docs-main">
+        {% block doc_content %}
+        {% endblock %}
+    </el-main>
+</el-container>
+{% endblock %}
+
+{% block vue_data %}
+    // We get the active slug directly from the template context if available
+    activeMenu: '{{ request.resolver_match.kwargs.slug|default:"" }}',
+{% endblock %}

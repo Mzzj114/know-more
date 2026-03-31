@@ -1,0 +1,136 @@
+/* 
+  Know More - 全局主题与设计系统 (Design System)
+  基于 Element Plus 变量覆盖与原生 CSS 变量
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+
+:root {
+  /* === Element Plus 主题变量覆盖 === */
+  /* 主色：Indigo 500 - 充满活力的 AI 科技感 */
+  --el-color-primary: #6366F1;
+  --el-color-primary-light-3: #818CF8;
+  --el-color-primary-light-5: #A5B4FC;
+  --el-color-primary-light-7: #C7D2FE;
+  --el-color-primary-light-8: #E0E7FF;
+  --el-color-primary-light-9: #EEF2FF;
+  --el-color-primary-dark-2: #4F46E5;
+  
+  /* 语义色 */
+  --el-color-success: #10B981;       /* Emerald 500: 清新友好的成功色 */
+  --el-color-warning: #F59E0B;       /* Amber 500: 温暖的灵感/提示色 */
+  --el-color-danger: #EF4444;        /* Red 500: 柔和的错误提示色 */
+  
+  /* 基础组件规范 */
+  --el-border-radius-base: 8px;      /* 圆润的组件边角 */
+  --el-font-family: 'Nunito', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* === 自定义系统变量 (语义化) === */
+  --primary: var(--el-color-primary);
+  --primary-hover: var(--el-color-primary-light-3);
+  --primary-light: var(--el-color-primary-light-9);
+
+  --secondary: #0EA5E9;              /* Sky 500: 开放、清晰的辅助色 */
+  --secondary-light: #E0F2FE;
+
+  --accent: var(--el-color-warning); /* 强调色，主要用于灵感和提示 */
+
+  /* 中性色 (Slate 系列) */
+  --bg: #F8FAFC;                     /* 全局背景色 */
+  --surface: #FFFFFF;                /* 卡片、容器背景色 */
+  --text-primary: #0F172A;           /* 主文字色 */
+  --text-secondary: #64748B;         /* 次要文字/说明文字 */
+  --border: #E2E8F0;                 /* 边框色 */
+
+  /* 状态颜色快捷方式 */
+  --success: var(--el-color-success);
+  --warning: var(--el-color-warning);
+  --error: var(--el-color-danger);
+}
+
+/* === 全局基础样式 === */
+body {
+  margin: 0;
+  background: var(--bg);
+  font-family: var(--el-font-family);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+}
+
+/* === 通用布局组件 === */
+
+.container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+/* 区块间距与动画 */
+.section {
+  margin-bottom: 48px;
+  animation: km-fadeIn 0.6s ease-out backwards;
+}
+
+@keyframes km-fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 标题样式 */
+.title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.title::before {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 24px;
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+/* 卡片样式 */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -2px rgba(0, 0, 0, 0.02);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+  box-shadow: 0 12px 20px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.02);
+  transform: translateY(-2px);
+  border-color: var(--primary-light);
+}
+
+/* 网格布局 */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+/* 提示框样式 */
+.tip-box {
+  background: var(--primary-light);
+  color: var(--primary-dark-2);
+  padding: 16px 20px;
+  border-radius: 12px;
+  border-left: 4px solid var(--primary);
+  margin-bottom: 24px;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}

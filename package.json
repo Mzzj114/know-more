@@ -1,0 +1,23 @@
+{
+  "name": "know-more",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.3.2",
+    "axios": "^1.14.0",
+    "element-plus": "^2.13.6",
+    "vue": "^3.5.31",
+    "vue3-sfc-loader": "^0.9.5"
+  }
+}

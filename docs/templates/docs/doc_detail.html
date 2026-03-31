@@ -1,0 +1,24 @@
+{% extends "docs/layout.html" %}
+
+{% block title %} {{ title }} - Know More Docs {% endblock %}
+
+{% block doc_content %}
+<div class="markdown-container" style="animation: km-fadeIn 0.6s ease-out backwards;">
+    <!-- Rendered Markdown Output -->
+    <article class="markdown-body">
+        {{ content|safe }}
+    </article>
+
+    <!-- Bottom navigation / action area -->
+    <div style="margin-top: 64px; border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center;">
+        <div style="color: var(--text-secondary); font-size: 14px;">
+            更新于近期 · 文档代码开源
+        </div>
+        <div>
+            <el-button type="primary" plain round>
+                <el-icon style="margin-right: 4px"><Share /></el-icon> 分享此文档
+            </el-button>
+        </div>
+    </div>
+</div>
+{% endblock %}

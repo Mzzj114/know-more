@@ -1,0 +1,146 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Know More{% endblock %}</title>
+
+    <!-- Element Plus CSS -->
+    <link rel="stylesheet" href="{% static 'element-plus/dist/index.css' %}" />
+    <!-- Global Theme CSS -->
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}" />
+
+    <!-- Vue 3 -->
+    <script src="{% static 'vue/dist/vue.global.js' %}"></script>
+    <!-- Element Plus JS -->
+    <script src="{% static 'element-plus/dist/index.full.js' %}"></script>
+    <!-- Element Plus Icons -->
+    <script src="{% static '@element-plus/icons-vue/dist/index.iife.min.js' %}"></script>
+
+    <style>
+        /* Specific layout overrides keeping the fixed layout in mind */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        #app {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        /* Navbar styling */
+        .global-header {
+            border-bottom: 1px solid var(--border);
+            background-color: var(--surface);
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 16px;
+        }
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 600;
+            transition: color 0.2s;
+            padding: 8px 12px;
+            border-radius: var(--el-border-radius-base);
+        }
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary);
+            background-color: var(--primary-light);
+        }
+        .main-content-layout {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <div id="app">
+        <!-- Global Navbar -->
+        <header class="global-header">
+            <div class="header-left">
+                <a href="/" class="logo">
+                    <el-icon><Monitor /></el-icon> Know More
+                </a>
+                <nav class="nav-links">
+                    <a href="/" class="nav-link">首页</a>
+                    <a href="{% url 'doc_index' %}" class="nav-link active">文档</a>
+                    <!-- Placeholder route for forum -->
+                    <a href="#" class="nav-link">论坛</a> 
+                </nav>
+            </div>
+            <div class="header-right">
+                <!-- Reserved for user system -->
+                <el-button type="primary" plain round>登录 / 注册</el-button>
+            </div>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="main-content-layout">
+            {% block layout_content %}
+                <!-- Child templates will inject content here -->
+            {% endblock %}
+        </main>
+    </div>
+
+    <!-- Base Vue Instantiation script -->
+    <script>
+        const AppRoot = {
+            data() {
+                return {
+                    {% block vue_data %}{% endblock %}
+                }
+            },
+            methods: {
+                {% block vue_methods %}{% endblock %}
+            },
+            mounted() {
+                {% block vue_mounted %}{% endblock %}
+            }
+        };
+    </script>
+
+    <!-- Block for child templates to inject their own methods/computed before mount -->
+    {% block vue_app_setup %}{% endblock %}
+
+    <script>
+        // Create full Vue app natively merging base definitions
+        const app = Vue.createApp(AppRoot);
+        app.use(ElementPlus);
+        
+        // Register all icons globally
+        for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+            app.component(key, component)
+        }
+
+        app.mount('#app');
+    </script>
+</body>
+</html>
