@@ -7,7 +7,7 @@ def doc_index(request):
     Renders the index page listing all available documents.
     """
     docs = get_all_docs()
-    return render(request, 'docs/doc_index.html', {'docs': docs})
+    return render(request, 'docs/doc_index.html', {'docs': docs, 'nav_active': 'docs'})
 
 def doc_detail(request, slug):
     """
@@ -23,7 +23,8 @@ def doc_detail(request, slug):
         'title': doc_data['metadata'].get('title', 'Untitled'),
         'content': doc_data['html'],
         'metadata': doc_data['metadata'],
-        'docs': get_all_docs() # Pass all docs for sidebar navigation
+        'docs': get_all_docs(),
+        'nav_active': 'docs',
     }
     
     return render(request, 'docs/doc_detail.html', context)
