@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <title>Know More - 配色 Demo</title>
+  <title>Know More - 配色系统 (稳定性与信任感)</title>
 
   <!-- Element Plus -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-plus/dist/index.css" />
@@ -14,40 +14,40 @@
   <script src="https://cdn.jsdelivr.net/npm/element-plus"></script>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
     :root {
-      /* === Element Plus 主题变量覆盖 === */
-      --el-color-primary: #6366F1;       /* Indigo 500: 充满活力的AI科技色 */
-      --el-color-primary-light-3: #818CF8;
-      --el-color-primary-light-5: #A5B4FC;
-      --el-color-primary-light-7: #C7D2FE;
-      --el-color-primary-light-8: #E0E7FF;
-      --el-color-primary-light-9: #EEF2FF;
-      --el-color-primary-dark-2: #4F46E5;
+      /* === Element Plus 主题变量覆盖 (稳定性与信任感方案) === */
+      --el-color-primary: #1E3A8A;       /* Navy 900: 深沉、专业、值得信赖 */
+      --el-color-primary-light-3: #1D4ED8;
+      --el-color-primary-light-5: #3B82F6;
+      --el-color-primary-light-7: #93C5FD;
+      --el-color-primary-light-8: #DBEAFE;
+      --el-color-primary-light-9: #EFF6FF;
+      --el-color-primary-dark-2: #172554;
       
-      --el-color-success: #10B981;       /* Emerald 500: 清新友好的成功色 */
-      --el-color-warning: #F59E0B;       /* Amber 500: 温暖的灵感/提示色 */
-      --el-color-danger: #EF4444;        /* Red 500: 柔和的错误提示色 */
+      --el-color-success: #059669;       /* Emerald 600: 稳健的成功色 */
+      --el-color-warning: #B45309;       /* Amber 700: 沉稳的灵感提示色 */
+      --el-color-danger: #991B1B;        /* Red 800: 庄重的警告色 */
       
-      --el-border-radius-base: 8px;      /* 圆润的组件边角，提升亲和力 */
+      --el-border-radius-base: 6px;      /* 稍小的圆角，增加结构的严谨感 */
 
       /* === 自定义系统变量 === */
       --primary: var(--el-color-primary);
       --primary-hover: var(--el-color-primary-light-3);
       --primary-light: var(--el-color-primary-light-9);
 
-      --secondary: #0EA5E9;              /* Sky 500: 开放、清晰的辅助色 */
-      --secondary-light: #E0F2FE;
+      --secondary: #334155;              /* Slate 700: 冷静、中立的辅助色 */
+      --secondary-light: #F1F5F9;
 
       --accent: var(--el-color-warning);
 
-      /* 中性色：使用柔和的 Slate 灰度，比冷灰色更护眼且现代 */
+      /* 中性色：使用更具质感的 Slate 灰度 */
       --bg: #F8FAFC;
       --surface: #FFFFFF;
-      --text-primary: #0F172A;
-      --text-secondary: #64748B;
-      --border: #E2E8F0;
+      --text-primary: #0F172A;           /* Slate 900: 极佳的阅读对比度 */
+      --text-secondary: #475569;         /* Slate 600 */
+      --border: #CBD5E1;                 /* Slate 300: 明确的边界感 */
 
       /* 语义色 */
       --success: var(--el-color-success);
@@ -58,7 +58,7 @@
     body {
       margin: 0;
       background: var(--bg);
-      font-family: 'Nunito', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       color: var(--text-primary);
       -webkit-font-smoothing: antialiased;
     }
@@ -71,7 +71,7 @@
 
     .section {
       margin-bottom: 48px;
-      animation: fadeIn 0.6s ease-out backwards;
+      animation: fadeIn 0.5s ease-in-out backwards;
     }
     
     .section:nth-child(2) { animation-delay: 0.1s; }
@@ -82,48 +82,48 @@
     .section:nth-child(7) { animation-delay: 0.6s; }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(15px); }
+      from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     .title {
-      font-size: 24px;
-      margin-bottom: 20px;
+      font-size: 22px;
+      margin-bottom: 24px;
       font-weight: 700;
       color: var(--text-primary);
       display: flex;
       align-items: center;
       gap: 12px;
+      letter-spacing: -0.01em;
     }
     
     .title::before {
       content: '';
       display: block;
-      width: 6px;
-      height: 24px;
+      width: 4px;
+      height: 20px;
       background: var(--primary);
-      border-radius: 4px;
+      border-radius: 2px;
     }
 
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 16px;
+      border-radius: 12px;
       padding: 24px;
       margin-bottom: 16px;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -2px rgba(0, 0, 0, 0.02);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+      transition: all 0.2s ease;
     }
     
     .card:hover {
-      box-shadow: 0 12px 20px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.02);
-      transform: translateY(-2px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
       border-color: var(--primary-light);
     }
 
     .color-box {
       height: 80px;
-      border-radius: 12px;
+      border-radius: 8px;
       margin-bottom: 12px;
       box-shadow: inset 0 0 0 1px rgba(0,0,0,0.05);
       display: flex;
@@ -136,13 +136,13 @@
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 24px;
     }
     
     .color-info {
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-size: 13px;
+      font-size: 12px;
       color: var(--text-secondary);
       display: flex;
       flex-direction: column;
@@ -152,22 +152,23 @@
     .color-name {
       font-weight: 700;
       color: var(--text-primary);
-      font-family: 'Nunito', sans-serif;
-      font-size: 15px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
     }
     
-    /* 工具/教育风格的提示框 */
+    /* 稳重、专业风格的提示框 */
     .tip-box {
       background: var(--primary-light);
-      color: var(--primary-dark-2);
-      padding: 16px 20px;
-      border-radius: 12px;
-      border-left: 4px solid var(--primary);
-      margin-bottom: 24px;
+      color: var(--primary);
+      padding: 18px 24px;
+      border-radius: 10px;
+      border-left: 5px solid var(--primary);
+      margin-bottom: 32px;
       font-size: 15px;
+      line-height: 1.6;
       display: flex;
-      align-items: center;
-      gap: 12px;
+      align-items: flex-start;
+      gap: 16px;
     }
   </style>
 </head>
@@ -178,36 +179,39 @@
 
     <!-- 标题 -->
     <div class="section">
-      <div class="title">Know More 配色系统 Demo</div>
+      <div class="title">Know More 配色系统 (稳定性优先)</div>
       <div class="tip-box">
-        <span style="font-size: 20px;">💡</span>
-        设计理念：“教育 + 工具” — 采用充满活力的靛青色（Indigo）与温暖的琥珀色（Amber），使 Prompt 工程学习变得富有启发性且平易近人。
+        <span style="font-size: 24px; line-height: 1;">🛡️</span>
+        <div>
+          <strong>设计哲学：稳定性与信任</strong> <br/>
+          脱离高饱和度的 AI 幻彩感，回归经典的“深海军蓝”与“沉稳琥珀”。我们相信，优秀的教育平台应当像导师一样稳重可信，而非像玩具一样炫酷多变。
+        </div>
       </div>
     </div>
 
     <!-- 主色 -->
     <div class="section">
-      <div class="title">主色（Primary）</div>
+      <div class="title">核心主色 (Primary)</div>
       <div class="grid">
         <div>
-          <div class="color-box" style="background: var(--primary)">#6366F1</div>
+          <div class="color-box" style="background: var(--primary)">#1E3A8A</div>
           <div class="color-info">
-            <span class="color-name">Indigo 500</span>
-            核心科技色，平易近人
+            <span class="color-name">Navy Blue 900</span>
+            权威、专业、稳如磐石
           </div>
         </div>
         <div>
-          <div class="color-box" style="background: var(--primary-hover)">#818CF8</div>
+          <div class="color-box" style="background: var(--primary-hover)">#1D4ED8</div>
           <div class="color-info">
-            <span class="color-name">Hover State</span>
-            用于按钮悬停交互
+            <span class="color-name">Interactive State</span>
+            用于交互反馈
           </div>
         </div>
         <div>
-          <div class="color-box" style="background: var(--primary-light); color: var(--primary)">#EEF2FF</div>
+          <div class="color-box" style="background: var(--primary-light); color: var(--primary)">#EFF6FF</div>
           <div class="color-info">
-            <span class="color-name">Light State</span>
-            用于背景和选中状态
+            <span class="color-name">Subtle State</span>
+            用于背景和容器区分
           </div>
         </div>
       </div>
@@ -215,20 +219,20 @@
 
     <!-- 强调色/辅助色 -->
     <div class="section">
-      <div class="title">辅助色与强调色</div>
+      <div class="title">辅助与强调感</div>
       <div class="grid">
         <div>
-          <div class="color-box" style="background: var(--secondary)">#0EA5E9</div>
+          <div class="color-box" style="background: var(--secondary)">#334155</div>
           <div class="color-info">
-            <span class="color-name">Sky 500 (Secondary)</span>
-            用于补充说明、开放感元素
+            <span class="color-name">Slate 700 (Support)</span>
+            用于中立的、非干扰性的说明
           </div>
         </div>
         <div>
-          <div class="color-box" style="background: var(--accent)">#F59E0B</div>
+          <div class="color-box" style="background: var(--accent)">#B45309</div>
           <div class="color-info">
-            <span class="color-name">Amber 500 (Accent)</span>
-            用于💡灵感、高光提示词
+            <span class="color-name">Amber 700 (Highlight)</span>
+            用于关键提示，稳重而不刺眼
           </div>
         </div>
       </div>
@@ -236,41 +240,29 @@
 
     <!-- 按钮 -->
     <div class="section">
-      <div class="title">按钮示例</div>
+      <div class="title">专业组件示例</div>
       <div class="card">
-        <el-button type="primary" size="large">开始学习 Prompt</el-button>
-        <el-button type="success" size="large">测试通过</el-button>
-        <el-button type="warning" size="large">思路启发</el-button>
-        <el-button type="danger" size="large">清空对话</el-button>
-        <el-button size="large">查看文档</el-button>
-      </div>
-    </div>
-
-    <!-- 标签 -->
-    <div class="section">
-      <div class="title">状态标签</div>
-      <div class="card" style="display: flex; gap: 12px; flex-wrap: wrap;">
-        <el-tag type="primary" effect="light" size="large" round># 角色扮演</el-tag>
-        <el-tag type="success" effect="light" size="large" round>结构规范</el-tag>
-        <el-tag type="warning" effect="dark" size="large" round>💡 小贴士</el-tag>
-        <el-tag type="danger" effect="light" size="large" round>缺失变量</el-tag>
-        <el-tag type="info" size="large" round>基础概念</el-tag>
+        <el-button type="primary" size="large">获取课程路径</el-button>
+        <el-button type="success" size="large">校验通过</el-button>
+        <el-button type="warning" size="large">查看提示</el-button>
+        <el-button type="danger" size="large">永久删除</el-button>
+        <el-button size="large">返回首页</el-button>
       </div>
     </div>
 
     <!-- 表单 -->
     <div class="section">
-      <div class="title">交互式提示词表单</div>
+      <div class="title">结构化输入表单</div>
       <div class="card">
         <el-form label-position="top">
-          <el-form-item label="你想让 AI 扮演什么角色？">
-            <el-input placeholder="例如：你是一位拥有20年经验的高级前端工程师..." size="large"></el-input>
+          <el-form-item label="核心职能描述 (Role Definition)">
+            <el-input placeholder="请输入该提示词对应的专业背景..." size="large"></el-input>
           </el-form-item>
-          <el-form-item label="选择你的应用场景">
-            <el-select placeholder="选择场景" size="large" style="width: 100%;">
-              <el-option label="📚 结构化知识学习" value="study"></el-option>
-              <el-option label="✍️ 高效写作与润色" value="write"></el-option>
-              <el-option label="💻 编程代码辅助" value="code"></el-option>
+          <el-form-item label="预期输出合规性">
+            <el-select placeholder="选择合规标准" size="large" style="width: 100%;">
+              <el-option label="✅ 结构化数据输出 (JSON/Markdown)" value="struct"></el-option>
+              <div class="divider" style="margin: 4px 0; border-top: 1px solid var(--border);"></div>
+              <el-option label="📝 自由文本叙述" value="free"></el-option>
             </el-select>
           </el-form-item>
         </el-form>
@@ -279,24 +271,22 @@
 
     <!-- 卡片 -->
     <div class="section">
-      <div class="title">教程与案例卡片布局</div>
+      <div class="title">信息架构展示</div>
       <div class="grid">
         <div class="card">
-          <h3 style="margin-top:0; color:var(--primary); font-family: 'Nunito', sans-serif;">Prompt 技巧卡片</h3>
-          <p style="color: var(--text-secondary); line-height: 1.6;">
-            <strong>Context (背景信息)</strong> <br/>
-            给模型提供充足的背景，能大幅减少大模型的幻觉现象。
+          <h3 style="margin-top:0; color:var(--primary); font-family: 'Inter', sans-serif;">专业 Prompt 框架</h3>
+          <p style="color: var(--text-secondary); line-height: 1.6; font-size: 14px;">
+            基于学术与工业标准的提示词工程方法论。强调上下文的严密性与逻辑转换的透明度。
           </p>
-          <el-button type="primary" plain style="width: 100%;">查看详情</el-button>
+          <el-button type="primary" plain style="width: 100%;">深入研究</el-button>
         </div>
 
         <div class="card">
-          <h3 style="margin-top:0; color:var(--accent); font-family: 'Nunito', sans-serif;">学习路线案例</h3>
-          <p style="color: var(--text-secondary); line-height: 1.6;">
-            <strong>分阶段掌握提示词工程</strong> <br/>
-            从基础定义到 Meta-prompting 的系统性实操指引。
+          <h3 style="margin-top:0; color:var(--accent); font-family: 'Inter', sans-serif;">知识库引用</h3>
+          <p style="color: var(--text-secondary); line-height: 1.6; font-size: 14px;">
+            通过 RAG 技术确保模型输出在稳定的事实库框架内。减少幻觉，提升可回答性。
           </p>
-          <el-button type="warning" style="width: 100%;">进入案例</el-button>
+          <el-button type="warning" plain style="width: 100%;">配置引用源</el-button>
         </div>
       </div>
     </div>
@@ -311,6 +301,3 @@ const app = createApp({})
 app.use(ElementPlus)
 app.mount('#app')
 </script>
-
-</body>
-</html>
