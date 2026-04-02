@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}我的收藏 - 知道更多论坛{% endblock %}
+
+{% block layout_content %}
+<div class="container mt-4">
+    <h2 class="mb-4">我的收藏</h2>
+    
+    <div class="card">
+        <div class="card-body">
+            {% for favorite in page_obj %}
+            <div class="post-item border-bottom py-3">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h5>
+                            <a href="{% url 'forum:post_detail' favorite.post.id %}" class="text-decoration-none">
+                                {{ favorite.post.title }}
+                            </a>
+                        </h5>
+                        <p class="text-muted mb-1">
+                            <small>
+                                作者：{{ favorite.post.author.username }} |
+                                收藏于：{{ favorite.created_at|date:"Y-m-d H:i" }}
+                            </small>
+                        </p>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <div class="stats">
+                            <span class="badge bg-secondary me-2">{{ favorite.post.view_count }} 浏览</span>
+                            <span class="badge bg-info">{{ favorite.post.reply_count }} 回复</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="text-center py-5 text-muted">
+                暂无收藏的帖子
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <!-- 分页 -->
+    {% if page_obj.has_other_pages %}
+    <nav aria-label="Page navigation" class="mt-4">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">上一页</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">上一页</span>
+            </li>
+            {% endif %}
+            
+            <li class="page-item active">
+                <span class="page-link">
+                    第 {{ page_obj.number }} / {{ page_obj.paginator.num_pages }} 页
+                </span>
+            </li>
+            
+            {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}">下一页</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">下一页</span>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+</div>
+{% endblock %}

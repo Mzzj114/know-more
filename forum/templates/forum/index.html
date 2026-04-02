@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}论坛首页 - 知道更多{% endblock %}
+
+{% block layout_content %}
+<div class="container mt-4">
+    <h1 class="mb-4">论坛首页</h1>
+    
+    <!-- 分类列表 -->
+    <div class="row">
+        <div class="col-md-8">
+            {% for category in categories %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{% url 'forum:category_detail' category.slug %}" class="text-decoration-none">
+                            {{ category.name }}
+                        </a>
+                    </h5>
+                    <p class="card-text text-muted">{{ category.description|default:"暂无描述" }}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted">
+                            <span class="me-3">帖子数：{{ category.post_count }}</span>
+                            {% if category.last_post_time %}
+                            <span>最后回复：{{ category.last_post_time|date:"Y-m-d H:i" }}</span>
+                            {% endif %}
+                        </small>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="alert alert-info">暂无分类</div>
+            {% endfor %}
+        </div>
+        
+        <!-- 侧边栏：最新帖子 -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5>最新帖子</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    {% for post in latest_posts %}
+                    <li class="list-group-item">
+                        <a href="{% url 'forum:post_detail' post.id %}" class="text-decoration-none">
+                            {{ post.title|truncatechars:30 }}
+                        </a>
+                        <br>
+                        <small class="text-muted">
+                            by {{ post.author.username }} | 
+                            {{ post.reply_count }} 回复 | 
+                            {{ post.view_count }} 浏览
+                        </small>
+                    </li>
+                    {% empty %}
+                    <li class="list-group-item text-muted">暂无帖子</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            
+            <!-- 快捷操作 -->
+            {% if user.is_authenticated %}
+            <div class="card mt-3">
+                <div class="card-body">
+                    <a href="{% url 'forum:create_post' %}" class="btn btn-primary w-100">
+                        发布新帖子
+                    </a>
+                </div>
+            </div>
+            {% else %}
+            <div class="card mt-3">
+                <div class="card-body text-center">
+                    <p class="mb-2">登录后即可发帖</p>
+                    <a href="/admin/login/" class="btn btn-outline-primary">登录</a>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

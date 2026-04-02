@@ -72,7 +72,7 @@ tags: [intro, about]
 #### D. 内容渲染
 *   使用 `markdown` 库将 MD 转为 HTML。
 *   配合 `Pygments` 进行代码高亮。
-*   将生成的 HTML 交给 Django 模板，放在 `{% block content %}` 中。
+*   将生成的 HTML 交给 Django 模板，放在 `{% block layout_content %}` 中。
 
 ---
 
