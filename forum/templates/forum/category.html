@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ category.name }} - 知道更多论坛{% endblock %}
+
+{% block layout_content %}
+<div class="container mt-4">
+    <!-- 分类标题 -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'forum:forum_index' %}">论坛首页</a></li>
+                    <li class="breadcrumb-item active">{{ category.name }}</li>
+                </ol>
+            </nav>
+            <h2>{{ category.name }}</h2>
+            <p class="text-muted">{{ category.description|default:"" }}</p>
+        </div>
+    </div>
+    
+    <!-- 发帖按钮 -->
+    {% if user.is_authenticated %}
+    <div class="mb-3">
+        <a href="{% url 'forum:create_post' %}" class="btn btn-primary">
+            发布新帖子
+        </a>
+    </div>
+    {% endif %}
+    
+    <!-- 帖子列表 -->
+    <div class="card">
+        <div class="card-body">
+            {% for post in page_obj %}
+            <div class="post-item border-bottom py-3 {% if post.is_pinned %}bg-light{% endif %}">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h5>
+                            {% if post.is_pinned %}
+                            <span class="badge bg-danger me-2">置顶</span>
+                            {% endif %}
+                            {% if post.is_locked %}
+                            <span class="badge bg-secondary me-2">锁定</span>
+                            {% endif %}
+                            <a href="{% url 'forum:post_detail' post.id %}" class="text-decoration-none">
+                                {{ post.title }}
+                            </a>
+                        </h5>
+                        <p class="text-muted mb-1">
+                            <small>
+                                作者：{{ post.author.username }} |
+                                发布于：{{ post.created_at|date:"Y-m-d H:i" }} |
+                                最后回复：{{ post.last_reply_at|date:"Y-m-d H:i"|default:"无" }}
+                            </small>
+                        </p>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <div class="stats">
+                            <span class="badge bg-secondary me-2">{{ post.view_count }} 浏览</span>
+                            <span class="badge bg-info">{{ post.reply_count }} 回复</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="text-center py-5 text-muted">
+                暂无帖子，快来发第一帖吧！
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <!-- 分页 -->
+    {% if page_obj.has_other_pages %}
+    <nav aria-label="Page navigation" class="mt-4">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">上一页</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">上一页</span>
+            </li>
+            {% endif %}
+            
+            <li class="page-item active">
+                <span class="page-link">
+                    第 {{ page_obj.number }} / {{ page_obj.paginator.num_pages }} 页
+                </span>
+            </li>
+            
+            {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}">下一页</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">下一页</span>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+</div>
+{% endblock %}
