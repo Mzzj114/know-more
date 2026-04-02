@@ -1,39 +1,90 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}编辑个人资料 - 知道更多论坛{% endblock %}
+{% block title %}编辑个人资料 - Know More 论坛{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/forum.css' %}" />
+{% endblock %}
 
 {% block layout_content %}
-<div class="container mt-4">
-    <h2 class="mb-4">编辑个人资料</h2>
-    
-    <div class="card">
-        <div class="card-body">
-            <form method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                
-                <div class="mb-3">
-                    <label for="{{ form.signature.id_for_label }}" class="form-label">个人签名</label>
-                    {{ form.signature }}
-                    {% if form.signature.errors %}
-                    <div class="text-danger">{{ form.signature.errors }}</div>
-                    {% endif %}
-                    <small class="form-text text-muted">255 字符以内</small>
-                </div>
-                
-                <div class="mb-3">
-                    <label for="{{ form.bio.id_for_label }}" class="form-label">个人简介</label>
-                    {{ form.bio }}
-                    {% if form.bio.errors %}
-                    <div class="text-danger">{{ form.bio.errors }}</div>
-                    {% endif %}
-                </div>
-                
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <a href="{% url 'forum:user_profile' user.username %}" class="btn btn-secondary">取消</a>
-                    <button type="submit" class="btn btn-primary">保存</button>
-                </div>
-            </form>
-        </div>
+<div class="forum-form-page">
+    <!-- 面包屑 -->
+    <div class="forum-breadcrumb">
+        <el-breadcrumb separator="/">
+            <el-breadcrumb-item>
+                <a href="{% url 'forum:forum_index' %}">论坛</a>
+            </el-breadcrumb-item>
+            <el-breadcrumb-item>
+                <a href="{% url 'forum:user_profile' user.username %}">个人主页</a>
+            </el-breadcrumb-item>
+            <el-breadcrumb-item>编辑资料</el-breadcrumb-item>
+        </el-breadcrumb>
     </div>
+
+    <div class="forum-page-header">
+        <h1 class="forum-page-title">
+            <el-icon><setting /></el-icon>
+            编辑个人资料
+        </h1>
+    </div>
+
+    <el-card class="forum-form-card" shadow="never">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- 个人签名 -->
+            <div style="margin-bottom: 24px;">
+                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">
+                    个人签名
+                </label>
+                <el-input
+                    v-model="signature"
+                    name="signature"
+                    placeholder="个人签名（255 字符以内）"
+                    maxlength="255"
+                    show-word-limit
+                    size="large"
+                ></el-input>
+                {% if form.signature.errors %}
+                <div style="color: var(--error); font-size: 13px; margin-top: 6px;">{{ form.signature.errors.0 }}</div>
+                {% endif %}
+            </div>
+
+            <!-- 个人简介 -->
+            <div style="margin-bottom: 24px;">
+                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">
+                    个人简介
+                </label>
+                <el-input
+                    v-model="bio"
+                    type="textarea"
+                    name="bio"
+                    :rows="6"
+                    resize="vertical"
+                    placeholder="介绍一下自己吧..."
+                ></el-input>
+                {% if form.bio.errors %}
+                <div style="color: var(--error); font-size: 13px; margin-top: 6px;">{{ form.bio.errors.0 }}</div>
+                {% endif %}
+            </div>
+
+            <!-- 操作按钮 -->
+            <div class="form-actions">
+                <el-button size="large" onclick="window.location.href='{% url 'forum:user_profile' user.username %}'">
+                    取消
+                </el-button>
+                <el-button type="primary" size="large" native-type="submit">
+                    <el-icon style="margin-right: 6px;"><check /></el-icon>
+                    保存
+                </el-button>
+            </div>
+        </form>
+    </el-card>
 </div>
+{% endblock %}
+
+{% block vue_data %}
+signature: '{{ form.signature.value|default:""|escapejs }}',
+bio: '{{ form.bio.value|default:""|escapejs }}',
 {% endblock %}

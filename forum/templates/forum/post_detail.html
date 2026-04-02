@@ -1,202 +1,287 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}{{ post.title }} - 知道更多论坛{% endblock %}
+{% block title %}{{ post.title }} - Know More 论坛{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/forum.css' %}" />
+{% endblock %}
 
 {% block layout_content %}
-<div class="container mt-4">
-    <!-- 返回按钮 -->
-    <div class="mb-3">
-        <a href="{% url 'forum:category_detail' post.category.slug %}" class="btn btn-outline-secondary btn-sm">
-            ← 返回 {{ post.category.name }}
-        </a>
+<div class="forum-page" style="max-width: 860px;">
+    <!-- 面包屑 -->
+    <div class="forum-breadcrumb">
+        <el-breadcrumb separator="/">
+            <el-breadcrumb-item>
+                <a href="{% url 'forum:forum_index' %}">论坛</a>
+            </el-breadcrumb-item>
+            {% if post.category %}
+            <el-breadcrumb-item>
+                <a href="{% url 'forum:category_detail' post.category.slug %}">{{ post.category.name }}</a>
+            </el-breadcrumb-item>
+            {% endif %}
+            <el-breadcrumb-item>帖子详情</el-breadcrumb-item>
+        </el-breadcrumb>
     </div>
-    
-    <!-- 帖子内容 -->
-    <div class="card mb-4">
-        <div class="card-header">
-            <h4>{{ post.title }}</h4>
-            <div class="text-muted small">
-                <span class="me-3">作者：{{ post.author.username }}</span>
-                <span class="me-3">发布于：{{ post.created_at|date:"Y-m-d H:i" }}</span>
-                <span class="me-3">浏览：{{ post.view_count }}</span>
-                {% if post.is_pinned %}<span class="badge bg-danger me-2">置顶</span>{% endif %}
-                {% if post.is_locked %}<span class="badge bg-secondary me-2">锁定</span>{% endif %}
+
+    <!-- 帖子主体 -->
+    <el-card class="post-detail-card" shadow="never">
+        <div class="post-detail-header">
+            <h1 class="post-detail-title">
+                {% if post.is_pinned %}
+                <el-tag type="danger" size="small" effect="dark" style="vertical-align: middle; margin-right: 6px;">置顶</el-tag>
+                {% endif %}
+                {% if post.is_locked %}
+                <el-tag type="info" size="small" style="vertical-align: middle; margin-right: 6px;">
+                    <el-icon style="vertical-align: -2px;"><lock /></el-icon> 已锁定
+                </el-tag>
+                {% endif %}
+                {{ post.title }}
+            </h1>
+            <div class="post-detail-info">
+                <div class="post-author-block">
+                    <el-avatar :size="36" style="background: var(--el-color-primary-light-8); color: var(--primary); font-weight: 700;">
+                        {{ post.author.username|make_list|first }}
+                    </el-avatar>
+                    <div>
+                        <a href="{% url 'forum:user_profile' post.author.username %}" class="post-author-name" style="text-decoration: none;">
+                            {{ post.author.username }}
+                        </a>
+                        <div class="post-time">
+                            发布于 {{ post.created_at|date:"Y-m-d H:i" }}
+                            {% if post.updated_at != post.created_at %}
+                             · 编辑于 {{ post.updated_at|date:"Y-m-d H:i" }}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-left: auto; display: flex; gap: 16px; color: var(--text-secondary); font-size: 13px;">
+                    <span><el-icon><view /></el-icon> {{ post.view_count }} 浏览</span>
+                    <span><el-icon><chat-line-square /></el-icon> {{ post.reply_count }} 回复</span>
+                </div>
             </div>
         </div>
-        <div class="card-body">
-            <div class="post-content">
-                {{ post.content|linebreaks }}
-            </div>
-            
-            <!-- 点赞和收藏 -->
-            <div class="mt-4 pt-3 border-top">
+
+        <!-- 正文 -->
+        <div class="post-detail-content">
+            {{ post.content|linebreaks }}
+        </div>
+
+        <!-- 操作栏 -->
+        <div class="post-action-bar">
+            <div class="action-group">
                 {% if user.is_authenticated %}
-                <button id="like-btn" class="btn btn-outline-primary me-2" 
-                        data-url="{% url 'forum:api_like_toggle' 'forum.post' post.id %}">
-                    {% if user_liked %}
-                    <span class="text-primary">✓</span> 已点赞 ({{ post.like_count }})
-                    {% else %}
-                    👍 点赞 ({{ post.like_count }})
-                    {% endif %}
-                </button>
-                
-                <button id="favorite-btn" class="btn btn-outline-warning"
-                        data-url="{% url 'forum:api_favorite_toggle' post.id %}">
-                    {% if user_favorited %}
-                    <span class="text-warning">★</span> 已收藏 ({{ post.favorite_count }})
-                    {% else %}
-                    ☆ 收藏 ({{ post.favorite_count }})
-                    {% endif %}
-                </button>
+                <el-button
+                    :type="postLiked ? 'primary' : 'default'"
+                    :plain="!postLiked"
+                    @click="toggleLike"
+                    :loading="likeLoading"
+                >
+                    <el-icon style="margin-right: 4px;"><thumb-up /></el-icon>
+                    <span v-text="postLiked ? '已点赞' : '点赞'"></span>
+                    (<span v-text="likeCount"></span>)
+                </el-button>
+
+                <el-button
+                    :type="postFavorited ? 'warning' : 'default'"
+                    :plain="!postFavorited"
+                    @click="toggleFavorite"
+                    :loading="favoriteLoading"
+                >
+                    <el-icon style="margin-right: 4px;"><star /></el-icon>
+                    <span v-text="postFavorited ? '已收藏' : '收藏'"></span>
+                    (<span v-text="favoriteCount"></span>)
+                </el-button>
                 {% else %}
-                <small class="text-muted">登录后即可点赞和收藏</small>
+                <span style="color: var(--text-secondary); font-size: 13px;">
+                    <a href="/admin/login/" style="color: var(--primary);">登录</a> 后可点赞和收藏
+                </span>
                 {% endif %}
             </div>
-            
-            <!-- 编辑/删除按钮（仅作者） -->
+
+            <div class="spacer"></div>
+
+            <!-- 编辑/删除（仅作者或管理员） -->
             {% if user == post.author or user.is_staff %}
-            <div class="mt-3">
-                <a href="{% url 'forum:edit_post' post.id %}" class="btn btn-sm btn-outline-primary">编辑</a>
-                <form action="{% url 'forum:delete_post' post.id %}" method="POST" style="display: inline;"
-                      onsubmit="return confirm('确定要删除此帖子吗？')">
+            <div class="action-group">
+                <el-button plain size="small" onclick="window.location.href='{% url 'forum:edit_post' post.id %}'">
+                    <el-icon style="margin-right: 4px;"><edit /></el-icon> 编辑
+                </el-button>
+                <el-button plain size="small" type="danger" @click="confirmDelete">
+                    <el-icon style="margin-right: 4px;"><delete /></el-icon> 删除
+                </el-button>
+                <form id="delete-form" method="POST" action="{% url 'forum:delete_post' post.id %}" style="display: none;">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-sm btn-outline-danger">删除</button>
                 </form>
             </div>
             {% endif %}
         </div>
-    </div>
-    
+    </el-card>
+
     <!-- 回复列表 -->
-    <div class="card mb-4">
-        <div class="card-header d-flex justify-content-between align-items-center">
-            <h5>回复 ({{ post.reply_count }})</h5>
+    <el-card shadow="never" body-style="padding: 0;">
+        <div class="reply-section-header">
+            <el-icon><chat-line-round /></el-icon>
+            全部回复 ({{ post.reply_count }})
         </div>
-        <div class="card-body">
-            {% for reply in replies %}
-            <div class="reply-item border-bottom py-3" id="reply-{{ reply.id }}">
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <strong>{{ reply.author.username }}</strong>
-                        <span class="text-muted ms-2">{{ reply.created_at|date:"Y-m-d H:i" }}</span>
-                        {% if reply.floor > 0 %}
-                        <span class="badge bg-secondary ms-2">#{{ reply.floor }}楼</span>
-                        {% endif %}
-                    </div>
-                    <div>
-                        <span class="text-muted me-2">👍 {{ reply.like_count }}</span>
-                    </div>
+
+        {% for reply in replies %}
+        <div class="reply-item" id="reply-{{ reply.id }}">
+            <div class="reply-header">
+                <div class="reply-author-info">
+                    <el-avatar :size="32" style="background: var(--secondary-light); color: var(--secondary); font-weight: 600; font-size: 13px;">
+                        {{ reply.author.username|make_list|first }}
+                    </el-avatar>
+                    <span class="reply-author-name">
+                        <a href="{% url 'forum:user_profile' reply.author.username %}" style="color: inherit; text-decoration: none;">
+                            {{ reply.author.username }}
+                        </a>
+                    </span>
+                    <span class="reply-time">{{ reply.created_at|timesince }} 前</span>
+                    {% if reply.floor > 0 %}
+                    <el-tag size="small" type="info">#{{ reply.floor }}楼</el-tag>
+                    {% endif %}
                 </div>
-                <div class="reply-content mt-2 ms-3">
-                    {{ reply.content|linebreaks }}
+                <div style="color: var(--text-secondary); font-size: 13px;">
+                    <el-icon><thumb-up /></el-icon> {{ reply.like_count }}
                 </div>
-                
-                <!-- 回复操作 -->
-                {% if user.is_authenticated %}
-                <div class="mt-2 ms-3">
-                    <button class="btn btn-sm btn-link reply-to-btn" 
-                            data-reply-id="{{ reply.id }}"
-                            data-reply-author="{{ reply.author.username }}">
-                        回复 TA
-                    </button>
-                </div>
-                {% endif %}
             </div>
-            {% empty %}
-            <div class="text-center py-4 text-muted">
-                暂无回复，快来抢沙发吧！
+            <div class="reply-content">
+                {{ reply.content|linebreaks }}
             </div>
-            {% endfor %}
         </div>
-    </div>
-    
+        {% empty %}
+        <div class="forum-empty">
+            <el-empty description="暂无回复，快来抢沙发吧！" :image-size="100">
+            </el-empty>
+        </div>
+        {% endfor %}
+    </el-card>
+
     <!-- 回复表单 -->
     {% if user.is_authenticated %}
-    <div class="card">
-        <div class="card-header">
-            <h5>发表回复</h5>
-        </div>
-        <div class="card-body">
-            {% if post.is_locked %}
-            <div class="alert alert-warning">
-                该帖子已被锁定，无法回复
+    <el-card class="reply-form-card" shadow="never">
+        <template #header>
+            <span style="font-weight: 700; font-size: 16px;">
+                <el-icon style="vertical-align: -2px; margin-right: 6px;"><edit-pen /></el-icon>
+                发表回复
+            </span>
+        </template>
+
+        {% if post.is_locked %}
+        <el-alert
+            title="该帖子已被锁定，无法回复"
+            type="warning"
+            show-icon
+            :closable="false"
+        />
+        {% else %}
+        <form method="POST" action="{% url 'forum:create_reply' post.id %}">
+            {% csrf_token %}
+            <el-input
+                type="textarea"
+                name="content"
+                placeholder="请输入回复内容..."
+                :rows="4"
+                resize="vertical"
+                style="margin-bottom: 16px;"
+            ></el-input>
+            <div style="display: flex; justify-content: flex-end;">
+                <el-button type="primary" native-type="submit">
+                    <el-icon style="margin-right: 6px;"><promotion /></el-icon>
+                    提交回复
+                </el-button>
             </div>
-            {% else %}
-            <form method="POST" action="{% url 'forum:create_reply' post.id %}">
-                {% csrf_token %}
-                <div class="mb-3">
-                    <textarea name="content" class="form-control" rows="4" 
-                              placeholder="请输入回复内容..." required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">提交回复</button>
-            </form>
-            {% endif %}
-        </div>
-    </div>
+        </form>
+        {% endif %}
+    </el-card>
     {% else %}
-    <div class="alert alert-info">
-        请 <a href="/admin/login/">登录</a> 后发表回复
-    </div>
+    <el-card shadow="never" style="margin-top: 24px;">
+        <div style="text-align: center; padding: 16px 0; color: var(--text-secondary);">
+            <a href="/admin/login/" style="color: var(--primary); text-decoration: none; font-weight: 600;">登录</a>
+            后即可发表回复
+        </div>
+    </el-card>
     {% endif %}
 </div>
+{% endblock %}
 
-<script>
-// 点赞功能
-document.getElementById('like-btn')?.addEventListener('click', async function() {
-    const url = this.dataset.url;
-    try {
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'X-CSRFToken': getCookie('csrftoken')
-            }
-        });
-        const data = await response.json();
-        if (data.success) {
-            location.reload();
-        } else {
-            alert('操作失败：' + data.error);
-        }
-    } catch (error) {
-        alert('网络错误');
-    }
-});
+{% block vue_data %}
+postLiked: {{ user_liked|yesno:"true,false" }},
+postFavorited: {{ user_favorited|yesno:"true,false" }},
+likeCount: {{ post.like_count }},
+favoriteCount: {{ post.favorite_count }},
+likeLoading: false,
+favoriteLoading: false,
+{% endblock %}
 
-// 收藏功能
-document.getElementById('favorite-btn')?.addEventListener('click', async function() {
-    const url = this.dataset.url;
-    try {
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'X-CSRFToken': getCookie('csrftoken')
-            }
-        });
-        const data = await response.json();
-        if (data.success) {
-            location.reload();
-        } else {
-            alert('操作失败：' + data.error);
-        }
-    } catch (error) {
-        alert('网络错误');
-    }
-});
-
-// 获取 CSRF Token
-function getCookie(name) {
-    let cookieValue = null;
+{% block vue_methods %}
+getCookie(name) {
+    let v = null;
     if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        for (const c of document.cookie.split(';')) {
+            const t = c.trim();
+            if (t.startsWith(name + '=')) {
+                v = decodeURIComponent(t.substring(name.length + 1));
                 break;
             }
         }
     }
-    return cookieValue;
-}
-</script>
+    return v;
+},
+
+async toggleLike() {
+    this.likeLoading = true;
+    try {
+        const res = await fetch('{% url "forum:api_like_toggle" "forum.post" post.id %}', {
+            method: 'POST',
+            headers: { 'X-CSRFToken': this.getCookie('csrftoken') }
+        });
+        const data = await res.json();
+        if (data.success) {
+            this.postLiked = data.liked;
+            this.likeCount = data.like_count;
+        } else {
+            ElementPlus.ElMessage.error('操作失败：' + data.error);
+        }
+    } catch (e) {
+        ElementPlus.ElMessage.error('网络错误，请重试');
+    }
+    this.likeLoading = false;
+},
+
+async toggleFavorite() {
+    this.favoriteLoading = true;
+    try {
+        const res = await fetch('{% url "forum:api_favorite_toggle" post.id %}', {
+            method: 'POST',
+            headers: { 'X-CSRFToken': this.getCookie('csrftoken') }
+        });
+        const data = await res.json();
+        if (data.success) {
+            this.postFavorited = data.favorited;
+            this.favoriteCount = data.favorite_count;
+        } else {
+            ElementPlus.ElMessage.error('操作失败：' + data.error);
+        }
+    } catch (e) {
+        ElementPlus.ElMessage.error('网络错误，请重试');
+    }
+    this.favoriteLoading = false;
+},
+
+confirmDelete() {
+    ElementPlus.ElMessageBox.confirm(
+        '删除后将无法恢复，确定要删除此帖子吗？',
+        '确认删除',
+        {
+            confirmButtonText: '确定删除',
+            cancelButtonText: '取消',
+            type: 'warning',
+            confirmButtonClass: 'el-button--danger',
+        }
+    ).then(() => {
+        document.getElementById('delete-form').submit();
+    }).catch(() => {});
+},
 {% endblock %}

@@ -1,81 +1,111 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}论坛首页 - 知道更多{% endblock %}
+{% block title %}社区论坛 - Know More{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/forum.css' %}" />
+{% endblock %}
 
 {% block layout_content %}
-<div class="container mt-4">
-    <h1 class="mb-4">论坛首页</h1>
-    
-    <!-- 分类列表 -->
-    <div class="row">
-        <div class="col-md-8">
+<div class="forum-page">
+    <!-- 页面标题 -->
+    <div class="forum-page-header">
+        <h1 class="forum-page-title">
+            <el-icon><chat-dot-round /></el-icon>
+            社区论坛
+        </h1>
+        <p class="forum-page-desc">在这里分享提示词、交流学习经验，与社区一起成长。</p>
+    </div>
+
+    <div class="forum-layout">
+        <!-- 主体：分类列表 -->
+        <div class="forum-main">
             {% for category in categories %}
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <a href="{% url 'forum:category_detail' category.slug %}" class="text-decoration-none">
+            <el-card class="category-card forum-card-enter" shadow="hover"
+                     @click="window.location.href='{% url 'forum:category_detail' category.slug %}'">
+                <div class="category-header">
+                    <div class="category-icon" style="background: var(--primary-light); color: var(--primary);">
+                        <el-icon><folder /></el-icon>
+                    </div>
+                    <div>
+                        <a href="{% url 'forum:category_detail' category.slug %}" class="category-name"
+                           @click.stop>
                             {{ category.name }}
                         </a>
-                    </h5>
-                    <p class="card-text text-muted">{{ category.description|default:"暂无描述" }}</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <small class="text-muted">
-                            <span class="me-3">帖子数：{{ category.post_count }}</span>
-                            {% if category.last_post_time %}
-                            <span>最后回复：{{ category.last_post_time|date:"Y-m-d H:i" }}</span>
-                            {% endif %}
-                        </small>
                     </div>
                 </div>
-            </div>
+                <div class="category-desc">{{ category.description|default:"暂无描述" }}</div>
+                <div class="category-meta">
+                    <span class="meta-item">
+                        <el-icon><document /></el-icon> {{ category.post_count }} 篇帖子
+                    </span>
+                    {% if category.last_post_time %}
+                    <span class="meta-item">
+                        <el-icon><clock /></el-icon> 最后活跃 {{ category.last_post_time|timesince }} 前
+                    </span>
+                    {% else %}
+                    <span class="meta-item">
+                        <el-icon><clock /></el-icon> 暂无活动
+                    </span>
+                    {% endif %}
+                </div>
+            </el-card>
             {% empty %}
-            <div class="alert alert-info">暂无分类</div>
+            <div class="forum-empty">
+                <el-empty description="暂无论坛分类">
+                </el-empty>
+            </div>
             {% endfor %}
         </div>
-        
-        <!-- 侧边栏：最新帖子 -->
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">
-                    <h5>最新帖子</h5>
-                </div>
-                <ul class="list-group list-group-flush">
-                    {% for post in latest_posts %}
-                    <li class="list-group-item">
-                        <a href="{% url 'forum:post_detail' post.id %}" class="text-decoration-none">
-                            {{ post.title|truncatechars:30 }}
-                        </a>
-                        <br>
-                        <small class="text-muted">
-                            by {{ post.author.username }} | 
-                            {{ post.reply_count }} 回复 | 
-                            {{ post.view_count }} 浏览
-                        </small>
-                    </li>
-                    {% empty %}
-                    <li class="list-group-item text-muted">暂无帖子</li>
-                    {% endfor %}
-                </ul>
-            </div>
-            
-            <!-- 快捷操作 -->
+
+        <!-- 侧边栏 -->
+        <aside class="forum-sidebar">
+            <!-- 发帖按钮 -->
             {% if user.is_authenticated %}
-            <div class="card mt-3">
-                <div class="card-body">
-                    <a href="{% url 'forum:create_post' %}" class="btn btn-primary w-100">
-                        发布新帖子
-                    </a>
-                </div>
+            <div style="margin-bottom: 20px;">
+                <el-button type="primary" size="large" style="width: 100%;"
+                           onclick="window.location.href='{% url 'forum:create_post' %}'">
+                    <el-icon style="margin-right: 6px;"><edit /></el-icon>
+                    发布新帖子
+                </el-button>
             </div>
             {% else %}
-            <div class="card mt-3">
-                <div class="card-body text-center">
-                    <p class="mb-2">登录后即可发帖</p>
-                    <a href="/admin/login/" class="btn btn-outline-primary">登录</a>
+            <el-card class="sidebar-widget" shadow="never">
+                <div style="text-align: center; padding: 8px 0;">
+                    <p style="color: var(--text-secondary); margin: 0 0 12px; font-size: 14px;">登录后即可发帖</p>
+                    <el-button type="primary" plain onclick="window.location.href='/admin/login/'">
+                        登录
+                    </el-button>
                 </div>
-            </div>
+            </el-card>
             {% endif %}
-        </div>
+
+            <!-- 最新帖子 -->
+            <el-card class="sidebar-widget" shadow="never">
+                <template #header>
+                    <div class="widget-header" style="padding: 0; border: none;">
+                        <el-icon><trend-charts /></el-icon> 最新帖子
+                    </div>
+                </template>
+                {% for post in latest_posts %}
+                <div class="sidebar-post-item">
+                    <a href="{% url 'forum:post_detail' post.id %}">
+                        {{ post.title|truncatechars:40 }}
+                    </a>
+                    <div class="sidebar-post-meta">
+                        <span>{{ post.author.username }}</span>
+                        <span>{{ post.reply_count }} 回复</span>
+                        <span>{{ post.view_count }} 浏览</span>
+                    </div>
+                </div>
+                {% empty %}
+                <div style="padding: 24px 20px; text-align: center; color: var(--text-secondary); font-size: 14px;">
+                    暂无帖子
+                </div>
+                {% endfor %}
+            </el-card>
+        </aside>
     </div>
 </div>
 {% endblock %}

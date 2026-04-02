@@ -1,0 +1,603 @@
+/*
+  Know More - Forum Stylesheet
+  论坛页面专属样式，基于 theme.css 设计系统
+*/
+
+/* === 页面布局 === */
+.forum-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+}
+
+.forum-page-header {
+  margin-bottom: 32px;
+  animation: km-fadeIn 0.5s ease-in-out backwards;
+}
+
+.forum-page-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.forum-page-desc {
+  color: var(--text-secondary);
+  font-size: 15px;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* === 两栏布局 === */
+.forum-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 28px;
+  align-items: start;
+}
+
+.forum-main {
+  min-width: 0; /* prevent grid blowout */
+}
+
+.forum-sidebar {
+  position: sticky;
+  top: 80px;
+}
+
+/* === 分类卡片 === */
+.category-card {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 16px;
+}
+
+.category-card:hover {
+  border-color: var(--el-color-primary-light-5) !important;
+  box-shadow: 0 4px 12px rgba(30, 58, 138, 0.08);
+}
+
+.category-card .category-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+.category-card .category-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.category-card .category-name {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.category-card .category-name:hover {
+  color: var(--primary);
+}
+
+.category-card .category-desc {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+.category-card .category-meta {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.category-card .category-meta .el-icon {
+  margin-right: 4px;
+  vertical-align: -1px;
+}
+
+/* === 帖子列表项 === */
+.post-list-item {
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--border);
+  transition: background-color 0.15s ease;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.post-list-item:last-child {
+  border-bottom: none;
+}
+
+.post-list-item:hover {
+  background-color: var(--primary-light);
+}
+
+.post-list-item.is-pinned {
+  background-color: #FFFBEB;
+  border-left: 3px solid var(--accent);
+}
+
+.post-item-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.post-item-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.post-item-title a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.post-item-title a:hover {
+  color: var(--primary);
+}
+
+.post-item-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  flex-wrap: wrap;
+}
+
+.post-item-meta .meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.post-item-stats {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+  font-size: 13px;
+  color: var(--text-secondary);
+  padding-top: 2px;
+}
+
+.post-item-stats .stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 40px;
+}
+
+.post-item-stats .stat-num {
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.post-item-stats .stat-label {
+  font-size: 11px;
+  margin-top: 3px;
+}
+
+/* === 帖子详情页 === */
+.post-detail-card {
+  margin-bottom: 24px;
+}
+
+.post-detail-header {
+  margin-bottom: 20px;
+}
+
+.post-detail-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 16px;
+  line-height: 1.4;
+}
+
+.post-detail-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.post-author-block {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.post-author-name {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+.post-time {
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.post-detail-content {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--text-primary);
+  padding: 20px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin: 16px 0;
+  word-wrap: break-word;
+}
+
+.post-detail-content p {
+  margin-bottom: 12px;
+}
+
+.post-action-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 16px;
+  flex-wrap: wrap;
+}
+
+.post-action-bar .action-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.post-action-bar .spacer {
+  flex: 1;
+}
+
+/* === 回复区域 === */
+.reply-section-header {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.reply-item {
+  padding: 20px;
+  border-bottom: 1px solid var(--border);
+  transition: background-color 0.15s;
+}
+
+.reply-item:last-child {
+  border-bottom: none;
+}
+
+.reply-item:hover {
+  background-color: #FAFBFD;
+}
+
+.reply-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.reply-author-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.reply-author-name {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.reply-time {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.reply-content {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-primary);
+  padding-left: 46px; /* align with name after avatar */
+}
+
+.reply-content p {
+  margin-bottom: 8px;
+}
+
+.reply-actions {
+  padding-left: 46px;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* === 回复表单 === */
+.reply-form-card {
+  margin-top: 24px;
+}
+
+.reply-form-card .el-card__header {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+/* === 表单页面 === */
+.forum-form-page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+}
+
+.forum-form-card .form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+/* === 用户资料页 === */
+.profile-layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.profile-card {
+  text-align: center;
+  padding: 32px 24px;
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--el-color-primary-light-8);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 auto 16px;
+}
+
+.profile-username {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.profile-signature {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.profile-stats {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  padding: 16px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+
+.profile-stat {
+  text-align: center;
+}
+
+.profile-stat .stat-num {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 1;
+}
+
+.profile-stat .stat-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.profile-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* === 侧边栏小部件 === */
+.sidebar-widget {
+  margin-bottom: 20px;
+}
+
+.sidebar-widget .widget-header {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sidebar-post-item {
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--border);
+  transition: background-color 0.15s;
+}
+
+.sidebar-post-item:last-child {
+  border-bottom: none;
+}
+
+.sidebar-post-item:hover {
+  background-color: var(--primary-light);
+}
+
+.sidebar-post-item a {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  text-decoration: none;
+  display: block;
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+.sidebar-post-item a:hover {
+  color: var(--primary);
+}
+
+.sidebar-post-item .sidebar-post-meta {
+  font-size: 12px;
+  color: var(--text-secondary);
+  display: flex;
+  gap: 10px;
+}
+
+/* === 分页容器 === */
+.forum-pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 28px;
+}
+
+/* === 空状态 === */
+.forum-empty {
+  padding: 48px 24px;
+  text-align: center;
+}
+
+/* === 面包屑间距 === */
+.forum-breadcrumb {
+  margin-bottom: 20px;
+}
+
+/* === 动画 === */
+.forum-card-enter {
+  animation: km-fadeIn 0.5s ease-in-out backwards;
+}
+
+.forum-card-enter:nth-child(1) { animation-delay: 0.0s; }
+.forum-card-enter:nth-child(2) { animation-delay: 0.05s; }
+.forum-card-enter:nth-child(3) { animation-delay: 0.10s; }
+.forum-card-enter:nth-child(4) { animation-delay: 0.15s; }
+.forum-card-enter:nth-child(5) { animation-delay: 0.20s; }
+.forum-card-enter:nth-child(6) { animation-delay: 0.25s; }
+
+/* === 响应式 === */
+@media (max-width: 900px) {
+  .forum-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .forum-sidebar {
+    position: static;
+  }
+
+  .profile-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .post-list-item {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .post-item-stats {
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .post-item-stats .stat {
+    flex-direction: row;
+    gap: 4px;
+  }
+
+  .post-item-stats .stat-num {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 600px) {
+  .forum-page,
+  .forum-form-page {
+    padding: 20px 16px 48px;
+  }
+
+  .forum-page-title {
+    font-size: 22px;
+  }
+
+  .post-detail-title {
+    font-size: 20px;
+  }
+
+  .reply-content,
+  .reply-actions {
+    padding-left: 0;
+  }
+
+  .post-action-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .post-action-bar .spacer {
+    display: none;
+  }
+
+  .profile-stats {
+    gap: 16px;
+  }
+
+  .category-card .category-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}

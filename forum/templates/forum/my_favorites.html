@@ -1,76 +1,94 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}我的收藏 - 知道更多论坛{% endblock %}
+{% block title %}我的收藏 - Know More 论坛{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/forum.css' %}" />
+{% endblock %}
 
 {% block layout_content %}
-<div class="container mt-4">
-    <h2 class="mb-4">我的收藏</h2>
-    
-    <div class="card">
-        <div class="card-body">
-            {% for favorite in page_obj %}
-            <div class="post-item border-bottom py-3">
-                <div class="row">
-                    <div class="col-md-8">
-                        <h5>
-                            <a href="{% url 'forum:post_detail' favorite.post.id %}" class="text-decoration-none">
-                                {{ favorite.post.title }}
-                            </a>
-                        </h5>
-                        <p class="text-muted mb-1">
-                            <small>
-                                作者：{{ favorite.post.author.username }} |
-                                收藏于：{{ favorite.created_at|date:"Y-m-d H:i" }}
-                            </small>
-                        </p>
-                    </div>
-                    <div class="col-md-4 text-end">
-                        <div class="stats">
-                            <span class="badge bg-secondary me-2">{{ favorite.post.view_count }} 浏览</span>
-                            <span class="badge bg-info">{{ favorite.post.reply_count }} 回复</span>
-                        </div>
-                    </div>
+<div class="forum-page" style="max-width: 860px;">
+    <!-- 面包屑 -->
+    <div class="forum-breadcrumb">
+        <el-breadcrumb separator="/">
+            <el-breadcrumb-item>
+                <a href="{% url 'forum:forum_index' %}">论坛</a>
+            </el-breadcrumb-item>
+            <el-breadcrumb-item>
+                <a href="{% url 'forum:user_profile' user.username %}">个人主页</a>
+            </el-breadcrumb-item>
+            <el-breadcrumb-item>我的收藏</el-breadcrumb-item>
+        </el-breadcrumb>
+    </div>
+
+    <div class="forum-page-header">
+        <h1 class="forum-page-title">
+            <el-icon><star-filled /></el-icon>
+            我的收藏
+        </h1>
+        <p class="forum-page-desc">你收藏的精选帖子都在这里。</p>
+    </div>
+
+    <!-- 收藏列表 -->
+    <el-card shadow="never" body-style="padding: 0;">
+        {% for favorite in page_obj %}
+        <div class="post-list-item">
+            <div class="post-item-body">
+                <div class="post-item-title">
+                    <a href="{% url 'forum:post_detail' favorite.post.id %}">{{ favorite.post.title }}</a>
+                </div>
+                <div class="post-item-meta">
+                    <span class="meta-item">
+                        <el-icon><user /></el-icon> {{ favorite.post.author.username }}
+                    </span>
+                    <span class="meta-item">
+                        <el-icon><star /></el-icon> 收藏于 {{ favorite.created_at|timesince }} 前
+                    </span>
                 </div>
             </div>
-            {% empty %}
-            <div class="text-center py-5 text-muted">
-                暂无收藏的帖子
+            <div class="post-item-stats">
+                <div class="stat">
+                    <span class="stat-num">{{ favorite.post.view_count }}</span>
+                    <span class="stat-label">浏览</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-num">{{ favorite.post.reply_count }}</span>
+                    <span class="stat-label">回复</span>
+                </div>
             </div>
-            {% endfor %}
         </div>
-    </div>
-    
+        {% empty %}
+        <div class="forum-empty">
+            <el-empty description="暂无收藏的帖子">
+                <el-button type="primary" onclick="window.location.href='{% url 'forum:forum_index' %}'">
+                    去论坛逛逛
+                </el-button>
+            </el-empty>
+        </div>
+        {% endfor %}
+    </el-card>
+
     <!-- 分页 -->
     {% if page_obj.has_other_pages %}
-    <nav aria-label="Page navigation" class="mt-4">
-        <ul class="pagination justify-content-center">
-            {% if page_obj.has_previous %}
-            <li class="page-item">
-                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">上一页</a>
-            </li>
-            {% else %}
-            <li class="page-item disabled">
-                <span class="page-link">上一页</span>
-            </li>
-            {% endif %}
-            
-            <li class="page-item active">
-                <span class="page-link">
-                    第 {{ page_obj.number }} / {{ page_obj.paginator.num_pages }} 页
-                </span>
-            </li>
-            
-            {% if page_obj.has_next %}
-            <li class="page-item">
-                <a class="page-link" href="?page={{ page_obj.next_page_number }}">下一页</a>
-            </li>
-            {% else %}
-            <li class="page-item disabled">
-                <span class="page-link">下一页</span>
-            </li>
-            {% endif %}
-        </ul>
-    </nav>
+    <div class="forum-pagination">
+        <el-pagination
+            background
+            layout="prev, pager, next"
+            :total="{{ page_obj.paginator.count }}"
+            :page-size="20"
+            :current-page="{{ page_obj.number }}"
+            @current-change="goToPage"
+        />
+    </div>
     {% endif %}
 </div>
+{% endblock %}
+
+{% block vue_methods %}
+goToPage(page) {
+    const url = new URL(window.location.href);
+    url.searchParams.set('page', page);
+    window.location.href = url.toString();
+},
 {% endblock %}
