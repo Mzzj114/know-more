@@ -1,4 +1,5 @@
 {% load static %}
+{% load version_tags %}
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -95,8 +96,29 @@
                     <!-- Placeholder route for forum -->
                     <a href="{% url 'forum:forum_index' %}" class="nav-link">论坛</a> 
                 </nav>
+
+                <!-- Version Info -->
+                {% version_info as version %}
+                <div style="display: flex; align-items: center; gap: 8px; padding: 6px 9px; font-size: 10px; color: var(--text-secondary); background-color: var(--primary-light); border-radius: var(--el-border-radius-base);">
+                {% if version %}
+                    <span style="font-weight: 600;">
+                    Version: 
+                    {% if version.version_tag %}
+                        {{ version.version_tag }}
+                    {% else %}
+                        {{ version.commit_hash }}
+                    {% endif %}
+                    </span>
+                    <span style="margin: 0 4px; opacity: 0.5;">•</span>
+                    <span>{{ version.commit_date }}</span>
+                {% else %}
+                    <span>Version: Development</span>
+                {% endif %}
+                </div>
             </div>
             <div class="header-right">
+                <!-- GitHub Repository Link -->
+                <el-button onclick="window.open('https://github.com/Mzzj114/know-more', '_blank')" plain round>Github</el-button>
                 <!-- Reserved for user system -->
                 <el-button type="primary" plain round>登录 / 注册</el-button>
             </div>

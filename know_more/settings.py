@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     
+    'know_more.apps.KnowMoreConfig',
     'docs.apps.DocsConfig',
     'main.apps.MainConfig',
     'forum.apps.ForumConfig',
