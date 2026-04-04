@@ -1,15 +1,548 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}提示词工程互动式教程 | Know More{% endblock %}
 
+{% block extra_head %}
+<!-- Markdown Parser -->
+<script src="{% static 'marked/lib/marked.umd.js' %}"></script>
+<style>
+/* --- 全局与布局样式 --- */
+.tutorial-layout {
+    display: flex;
+    height: calc(100vh - 60px); /* Header is 60px */
+    width: 100%;
+    overflow: hidden;
+    background: var(--bg);
+}
+
+/* --- 左侧目录 (Directory) --- */
+.sidebar-wrapper {
+    width: 260px;
+    border-right: 1px solid var(--border);
+    background: var(--surface);
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+}
+.sidebar-header {
+    padding: 20px;
+    border-bottom: 1px solid var(--border);
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--primary);
+}
+.sidebar-menu {
+    flex: 1;
+    overflow-y: auto;
+}
+.tutorial-item {
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    border-left: 3px solid transparent;
+    transition: all 0.2s ease;
+}
+.tutorial-item:hover {
+    background: var(--secondary-light);
+}
+.tutorial-item.active {
+    background: var(--primary-light);
+    border-left-color: var(--primary);
+    color: var(--primary);
+    font-weight: 600;
+}
+
+/* --- 中间展示区 (Content) --- */
+.content-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    background: var(--bg);
+}
+.content-scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding: 40px 60px;
+    scroll-behavior: smooth;
+}
+.markdown-body {
+    max-width: 800px;
+    margin: 0 auto;
+    color: var(--text-primary);
+    line-height: 1.8;
+    font-size: 16px;
+    animation: km-fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+.markdown-body h1, .markdown-body h2 {
+    color: var(--primary-dark-2);
+    margin-top: 32px;
+    margin-bottom: 16px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+.markdown-body p {
+    margin-bottom: 20px;
+}
+.markdown-body pre {
+    background: #1e1E1E;
+    color: #D4D4D4;
+    padding: 20px;
+    border-radius: var(--el-border-radius-base);
+    overflow-x: auto;
+    font-family: Consolas, Monaco, monospace;
+    font-size: 14px;
+    margin: 24px 0;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1);
+}
+.markdown-body code:not(pre code) {
+    background: var(--primary-light);
+    color: var(--primary-dark-2);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-family: Consolas, Monaco, monospace;
+}
+.markdown-body blockquote {
+    margin: 24px 0;
+    padding-left: 16px;
+    border-left: 4px solid var(--accent);
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.step-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 800px;
+    margin: 40px auto 0;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+}
+
+/* --- 右侧游乐场 (Playground) --- */
+.playground-wrapper {
+    width: 380px;
+    border-left: 1px solid var(--border);
+    background: var(--surface);
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+}
+.playground-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--surface);
+}
+.playground-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    background: #F8FAFC;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.chat-bubble {
+    max-width: 85%;
+    padding: 14px 18px;
+    border-radius: 16px;
+    font-size: 14px;
+    line-height: 1.5;
+    animation: km-fadeInUp 0.4s ease-out backwards;
+}
+.chat-bubble.user {
+    align-self: flex-end;
+    background: var(--primary);
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+.chat-bubble.ai {
+    align-self: flex-start;
+    background: white;
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    border-bottom-left-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+}
+.chat-bubble.error {
+    align-self: flex-start;
+    background: #FEF2F2;
+    color: var(--error);
+    border: 1px solid #FECACA;
+    border-bottom-left-radius: 4px;
+}
+.playground-input {
+    padding: 20px;
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+}
+
+@keyframes km-fadeInUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- 移动端响应式 --- */
+.mobile-nav-toggle {
+    display: none;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 50;
+}
+@media (max-width: 900px) {
+    .tutorial-layout {
+        flex-direction: column;
+        overflow-y: auto;
+        height: auto;
+        min-height: calc(100vh - 60px);
+    }
+    .sidebar-wrapper {
+        display: none; /* Handled by drawer */
+    }
+    .mobile-nav-toggle {
+        display: flex;
+    }
+    .content-wrapper {
+        flex: none;
+        padding-top: 60px; /* Space for toggle */
+    }
+    .content-scroll {
+        padding: 20px;
+        overflow: visible;
+    }
+    .playground-wrapper {
+        width: 100%;
+        border-left: none;
+        border-top: 1px solid var(--border);
+        flex: none;
+        height: 600px; /* Fixed height on mobile so user can scroll down to it */
+    }
+}
+
+.loading-dot {
+    width: 6px; height: 6px; background: #CBD5E1; border-radius: 50%;
+    animation: km-bounce 1.4s infinite ease-in-out both;
+}
+.loading-dot:nth-child(1) { animation-delay: -0.32s; }
+.loading-dot:nth-child(2) { animation-delay: -0.16s; }
+@keyframes km-bounce {
+    0%, 80%, 100% { transform: scale(0); }
+    40% { transform: scale(1); }
+}
+</style>
+{% endblock %}
+
 {% block layout_content %}
-<div class="container" style="padding: 20px;">
-    <h2>交互式教程前端占位</h2>
-    <p>教程前端页面加载中... 本页面将由 Vue 响应式呈现具体 UI。</p>
-    <p v-if="currentSlug">即将加载教程内容: [[ currentSlug ]]</p>
+<div class="tutorial-layout" v-loading="loading">
+    
+    <!-- 移动端侧边栏切换按钮 -->
+    <el-button class="mobile-nav-toggle" circle icon="menu" @click="drawerVisible = true" shadow="hover"></el-button>
+    
+    <!-- 桌面端侧边栏 -->
+    <div class="sidebar-wrapper hidden-sm-and-down">
+        <div class="sidebar-header">
+            <el-icon><Reading /></el-icon> 教程目录
+        </div>
+        <div class="sidebar-menu">
+            <div v-for="t in tutorials" :key="t.slug" 
+                 class="tutorial-item" 
+                 :class="{ active: activeSlug === t.slug }"
+                 @click="loadTutorial(t.slug)">
+                 [[ t.title ]]
+            </div>
+            <div v-if="tutorials.length === 0" style="padding: 20px; color: #999; font-size: 13px; text-align: center;">
+                暂无教程数据
+            </div>
+        </div>
+    </div>
+    
+    <!-- 移动端侧边栏 Drawer -->
+    <el-drawer v-model="drawerVisible" title="教程目录" direction="ltr" size="260px">
+        <div class="sidebar-menu" style="height: 100%; overflow: auto;">
+            <div v-for="t in tutorials" :key="t.slug" 
+                 class="tutorial-item" 
+                 :class="{ active: activeSlug === t.slug }"
+                 @click="loadTutorial(t.slug); drawerVisible = false;">
+                 [[ t.title ]]
+            </div>
+        </div>
+    </el-drawer>
+
+    <!-- 中间内容区 -->
+    <div class="content-wrapper">
+        <div class="content-scroll" ref="contentScroll">
+            <div v-if="tutorialData && tutorialData.steps">
+                <div class="title" style="margin-bottom: 12px; margin-top: 0;">
+                    [[ tutorialData.title ]] <el-tag size="small" type="info" round style="margin-left:8px;">Step [[ currentStepIndex + 1 ]] / [[ totalSteps ]]</el-tag>
+                </div>
+                
+                <!-- Markdown 内容 -->
+                <div class="markdown-body" v-html="renderedMarkdown" :key="currentStepIndex"></div>
+                
+                <!-- 底部交互导航 -->
+                <div class="step-nav">
+                    <el-button @click="prevStep" :disabled="currentStepIndex <= 0" icon="Back">上一步</el-button>
+                    <!-- 提示建议 -->
+                    <el-button v-if="hasInteraction" type="primary" plain @click="applyInteractionPrompt">
+                        填入建议提示词 <el-icon class="el-icon--right"><Edit /></el-icon>
+                    </el-button>
+                    <el-button v-else disabled style="opacity:0">Placeholder</el-button>
+                    
+                    <el-button type="primary" @click="nextStep" :disabled="currentStepIndex >= totalSteps - 1">下一步 <el-icon class="el-icon--right"><Right /></el-icon></el-button>
+                </div>
+            </div>
+            
+            <div v-else-if="!loading" style="padding: 100px; text-align: center; color: #999;">
+                <el-empty description="请在左侧选择一个教程"></el-empty>
+            </div>
+        </div>
+    </div>
+
+    <!-- 右侧 AI 游乐场 -->
+    <div class="playground-wrapper">
+        <div class="playground-header">
+            <el-icon><chat-dot-round /></el-icon> AI 交互测试
+        </div>
+        
+        <div class="playground-content" ref="playgroundScroll">
+            <div v-if="chatHistory.length === 0" style="text-align: center; color: #999; margin-top: 40px; font-size: 13px;">
+                <el-icon style="font-size: 24px; margin-bottom: 8px;"><chat-line-round /></el-icon>
+                <p>根据左侧步骤指引<br>在这里测试不同的提示词</p>
+            </div>
+            <div v-for="(msg, idx) in chatHistory" :key="idx" class="chat-bubble" :class="msg.role">
+                <div v-if="msg.role === 'user'">
+                    [[ msg.content ]]
+                </div>
+                <div v-else-if="msg.role === 'ai'" v-html="renderMarkdownInline(msg.content)"></div>
+                <div v-else-if="msg.role === 'error'">
+                    <el-icon style="vertical-align: middle; margin-right:4px;"><Warning /></el-icon>
+                    [[ msg.content ]]
+                </div>
+            </div>
+            
+            <!-- loading 状态球 -->
+            <div v-if="aiLoading" class="chat-bubble ai" style="display: flex; gap: 4px; padding: 18px;">
+                <span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span>
+            </div>
+        </div>
+        
+        <div class="playground-input">
+            <el-input 
+                v-model="promptInput" 
+                type="textarea" 
+                :rows="4" 
+                placeholder="输入提示词进行测试..." 
+                resize="none"
+                @keydown.enter.exact.prevent="simulateAIChat"
+            ></el-input>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px;">
+                <span style="font-size: 12px; color: #999;">按 Enter 发送，Shift+Enter 换行</span>
+                <el-button type="primary" :loading="aiLoading" @click="simulateAIChat" icon="Position" circle></el-button>
+            </div>
+        </div>
+    </div>
+
 </div>
 {% endblock %}
 
 {% block vue_data %}
-    currentSlug: "{{ current_slug|default:'' }}",
+    loading: true,
+    tutorials: [],
+    activeSlug: "{{ current_slug|default:'' }}",
+    tutorialData: null,
+    currentStepIndex: 0,
+    
+    drawerVisible: false,
+    
+    // Playground State
+    promptInput: "",
+    chatHistory: [],
+    aiLoading: false,
+{% endblock %}
+
+
+
+{% block vue_methods %}
+    async fetchDirectory() {
+        try {
+            const res = await fetch('/api/tutorials/');
+            const data = await res.json();
+            this.tutorials = data.tutorials || [];
+            
+            // If we have tutorials but no active slug, pick the first one
+            if (!this.activeSlug && this.tutorials.length > 0) {
+                this.loadTutorial(this.tutorials[0].slug, false); // Don't push state on initial auto-load
+            } else if (this.activeSlug) {
+                // Initial load of specific tutorial based on Django context
+                this.loadTutorial(this.activeSlug, false);
+            } else {
+                this.loading = false;
+            }
+        } catch (e) {
+            console.error("Failed to fetch tutorials directory", e);
+            this.loading = false;
+            ElementPlus.ElMessage.error("获取教程目录失败");
+        }
+    },
+    async loadTutorial(slug, pushState = true) {
+        if (!slug) return;
+        this.loading = true;
+        
+        try {
+            const res = await fetch(`/api/tutorials/${slug}/`);
+            if (res.ok) {
+                this.tutorialData = await res.json();
+                this.activeSlug = slug;
+                this.currentStepIndex = 0;
+                this.chatHistory = []; // Reset chat history on new tutorial
+                
+                // Update URL via HTML5 History without reloading
+                if (pushState) {
+                    window.history.pushState({slug: slug}, '', `/tutorial/${slug}/`);
+                }
+            } else {
+                ElementPlus.ElMessage.warning("无法加载选择的教程");
+            }
+        } catch (e) {
+            console.error("Error loading tutorial detail", e);
+        } finally {
+            this.loading = false;
+        }
+    },
+    nextStep() {
+        if (this.currentStepIndex < this.totalSteps - 1) {
+            this.currentStepIndex++;
+            this.scrollToTop();
+        }
+    },
+    prevStep() {
+        if (this.currentStepIndex > 0) {
+            this.currentStepIndex--;
+            this.scrollToTop();
+        }
+    },
+    scrollToTop() {
+        this.$nextTick(() => {
+            if (this.$refs.contentScroll) {
+                this.$refs.contentScroll.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+    },
+    applyInteractionPrompt() {
+        if (this.hasInteraction) {
+            const interaction = this.currentInteraction[0];
+            if (interaction.prompt) {
+                this.promptInput = interaction.prompt;
+                // Highlighting UI is possible per spec, we just use a message info for now
+                ElementPlus.ElMessage({
+                    message: '提示词已填入右侧游乐场',
+                    type: 'success',
+                    duration: 2000
+                });
+            }
+        }
+    },
+    renderMarkdownInline(text) {
+        // Fallback or basic inline rendering if needed for chat
+        if (!text) return "";
+        return window.marked ? window.marked.parse(text) : text;
+    },
+    async simulateAIChat() {
+        const text = this.promptInput.trim();
+        if (!text) return;
+        
+        // Push user message
+        this.chatHistory.push({ role: 'user', content: text });
+        this.promptInput = '';
+        this.aiLoading = true;
+        this.$nextTick(this.scrollPlayground);
+        
+        // Use timeout to simulate thinking
+        setTimeout(async () => {
+            try {
+                // For now the backend is not fully implemented for AI calls, so this simulates the proxy call to /api/ai/chat/
+                // (In this mock implementation we'll manually push error since API is known missing)
+                
+                // A future real call would be:
+                // const res = await fetch('/api/ai/chat/', { method: 'POST', body: JSON.stringify({ prompt: text }) });
+                
+                throw new Error("AI 交互功能后端 API 尚未接入");
+                
+            } catch (error) {
+                this.chatHistory.push({
+                    role: 'error',
+                    content: error.message || "请求 AI 时发生错误"
+                });
+            } finally {
+                this.aiLoading = false;
+                this.$nextTick(this.scrollPlayground);
+            }
+        }, 1200);
+    },
+    scrollPlayground() {
+        if (this.$refs.playgroundScroll) {
+            const el = this.$refs.playgroundScroll;
+            el.scrollTop = el.scrollHeight;
+        }
+    }
+{% endblock %}
+
+{% block vue_app_setup %}
+{{ block.super }}
+<script>
+    // Merge computed properties into AppRoot natively
+    AppRoot.computed = {
+        totalSteps() {
+            return this.tutorialData && this.tutorialData.steps ? this.tutorialData.steps.length : 0;
+        },
+        currentStepData() {
+            if (this.totalSteps === 0) return null;
+            return this.tutorialData.steps[this.currentStepIndex];
+        },
+        renderedMarkdown() {
+            if (!this.currentStepData || !this.currentStepData.content) return '';
+            if (window.marked) {
+                return window.marked.parse(this.currentStepData.content);
+            }
+            return this.currentStepData.content;
+        },
+        currentInteraction() {
+            return this.currentStepData ? this.currentStepData.interaction : null;
+        },
+        hasInteraction() {
+            return this.currentInteraction && this.currentInteraction.length > 0 && this.currentInteraction[0].type === 'chat';
+        }
+    };
+    
+    // Handle History PopState (back/forward browser buttons)
+    window.addEventListener('popstate', (event) => {
+        if (event.state && event.state.slug) {
+             // In Vue 3 Native script injection we must find the currently mounted app instance or handle the global event natively.
+             // Since we construct `AppRoot`, it's better to add the listener inside mounted, but we'll bind it generally.
+        }
+    });
+
+    // Override AppRoot's mounted to add the fetch call
+    const originalMounted = AppRoot.mounted;
+    AppRoot.mounted = function() {
+        if (originalMounted) originalMounted.call(this);
+        this.fetchDirectory();
+        
+        window.addEventListener('popstate', (e) => {
+             const pathObj = window.location.pathname.match(/\/tutorial\/([^\/]+)\//);
+             if (pathObj && pathObj[1]) {
+                 this.loadTutorial(pathObj[1], false);
+             }
+        });
+    };
+</script>
 {% endblock %}

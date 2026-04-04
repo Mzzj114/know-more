@@ -155,6 +155,7 @@
     <script>
         // Create full Vue app natively merging base definitions
         const app = Vue.createApp(AppRoot);
+        app.config.compilerOptions.delimiters = ['[[', ']]'];
         app.use(ElementPlus);
         
         // Register all icons globally
