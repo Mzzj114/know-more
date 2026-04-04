@@ -229,3 +229,60 @@
     0%, 80%, 100% { transform: scale(0); }
     40% { transform: scale(1); }
 }
+
+/* --- 互动组件样式 (Interactions) --- */
+.interaction-block {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px dashed var(--border);
+}
+
+.interaction-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.quiz-option {
+    margin-bottom: 12px;
+    display: block;
+}
+
+.quiz-explanation {
+    margin-top: 16px;
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+.quiz-explanation.correct {
+    background: #ECFDF5;
+    border: 1px solid #10B981;
+    color: #065F46;
+}
+.quiz-explanation.incorrect {
+    background: #FEF2F2;
+    border: 1px solid #EF4444;
+    color: #991B1B;
+}
+
+.fill-blank-text {
+    line-height: 2;
+    font-size: 15px;
+}
+
+/* UI 引导高亮动画 */
+.km-highlight {
+    position: relative;
+    z-index: 100;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.5);
+    border-radius: 4px;
+    animation: km-breathe 2s infinite ease-in-out;
+}
+
+@keyframes km-breathe {
+    0%, 100% { box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3); }
+    50% { box-shadow: 0 0 0 6px rgba(59, 130, 246, 0.7); }
+}

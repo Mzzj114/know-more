@@ -15,6 +15,7 @@ Object.assign(AppRoot, {
             activeSlug: config.activeSlug,
             tutorialData: null,
             currentStepIndex: 0,
+            stepStates: [], // Tracks state for quizzes, fill_blanks per step
             drawerVisible: false,
             
             // Playground 状态
@@ -39,11 +40,17 @@ Object.assign(AppRoot, {
             }
             return this.currentStepData.content;
         },
-        currentInteraction() {
-            return this.currentStepData ? this.currentStepData.interaction : null;
-        },
-        hasInteraction() {
-            return this.currentInteraction && this.currentInteraction.length > 0 && this.currentInteraction[0].type === 'chat';
+        currentInteractions() {
+            return this.currentStepData && this.currentStepData.interaction ? this.currentStepData.interaction : [];
+        }
+    },
+    
+    watch: {
+        currentStepIndex: {
+            handler() {
+                this.applyHighlights();
+            },
+            flush: 'post'
         }
     },
 
@@ -88,6 +95,8 @@ Object.assign(AppRoot, {
                     this.activeSlug = slug;
                     this.currentStepIndex = 0;
                     this.chatHistory = [];
+                    this.initStepStates();
+                    this.applyHighlights();
                     
                     if (pushState) {
                         window.history.pushState({ slug: slug }, '', `/tutorial/${slug}/`);
@@ -100,6 +109,49 @@ Object.assign(AppRoot, {
             } finally {
                 this.loading = false;
             }
+        },
+
+        initStepStates() {
+            // 初始化每一步的特定状态（用于跨步骤保留做题记录和填空内容）
+            this.stepStates = [];
+            if (this.tutorialData && this.tutorialData.steps) {
+                for (let i = 0; i < this.tutorialData.steps.length; i++) {
+                    const step = this.tutorialData.steps[i];
+                    let state = { quizAnswer: null, quizSubmitted: false, blanks: {} };
+                    
+                    if (step.interaction) {
+                        step.interaction.forEach(inter => {
+                            // 初始化填空
+                            if (inter.type === 'fill_blank' && inter.blanks) {
+                                inter.blanks.forEach((_, idx) => {
+                                    state.blanks[idx] = '';
+                                });
+                            }
+                        });
+                    }
+                    this.stepStates.push(state);
+                }
+            }
+        },
+
+        applyHighlights() {
+            // 清除旧高亮
+            document.querySelectorAll('.km-highlight').forEach(el => {
+                el.classList.remove('km-highlight');
+            });
+            
+            // 应用新高亮
+            if (!this.currentInteractions) return;
+            this.currentInteractions.forEach(inter => {
+                if (inter.type === 'highlights' && inter.selectors) {
+                    inter.selectors.forEach(selector => {
+                        const target = document.querySelector(selector);
+                        if (target) {
+                            target.classList.add('km-highlight');
+                        }
+                    });
+                }
+            });
         },
 
         nextStep() {
@@ -124,20 +176,57 @@ Object.assign(AppRoot, {
             });
         },
 
-        applyInteractionPrompt() {
-            if (this.hasInteraction) {
-                const interaction = this.currentInteraction[0];
-                if (interaction.prompt) {
-                    this.promptInput = interaction.prompt;
-                    if (window.ElementPlus) {
-                        ElementPlus.ElMessage({
-                            message: '提示词已填入右侧游乐场',
-                            type: 'success',
-                            duration: 2000
-                        });
-                    }
+        applyAndSimulateChat(promptStr) {
+            if (promptStr) {
+                this.promptInput = promptStr;
+                if (window.ElementPlus) {
+                    ElementPlus.ElMessage({
+                        message: '自动填充完毕，执行测试',
+                        type: 'success',
+                        duration: 1500
+                    });
                 }
+                this.simulateAIChat();
             }
+        },
+
+        submitQuiz(idx, interaction) {
+            const state = this.stepStates[this.currentStepIndex];
+            state.quizSubmitted = true;
+        },
+
+        getFillBlankParts(templateStr) {
+            // 将 "你是一个{0}，请帮我{1}。" 拆分为数组
+            const parts = [];
+            const regex = /\{(\d+)\}/g;
+            let lastIndex = 0;
+            let match;
+            
+            while ((match = regex.exec(templateStr)) !== null) {
+                if (match.index > lastIndex) {
+                    parts.push({ type: 'text', text: templateStr.substring(lastIndex, match.index) });
+                }
+                parts.push({ type: 'blank', index: parseInt(match[1], 10) });
+                lastIndex = regex.lastIndex;
+            }
+            if (lastIndex < templateStr.length) {
+                parts.push({ type: 'text', text: templateStr.substring(lastIndex) });
+            }
+            return parts;
+        },
+
+        submitFillBlank(interaction) {
+            let result = interaction.template;
+            const blanks = this.stepStates[this.currentStepIndex].blanks;
+            
+            // 替换逻辑
+            for (let i = 0; i < interaction.blanks.length; i++) {
+                const val = blanks[i] ? blanks[i] : `[${interaction.blanks[i]}]`; // Default placeholder if empty
+                result = result.replace(new RegExp(`\\{${i}\\}`, 'g'), val);
+            }
+            
+            this.promptInput = result;
+            this.simulateAIChat();
         },
 
         renderMarkdownInline(text) {

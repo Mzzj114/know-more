@@ -19,7 +19,7 @@
     <!-- 桌面端侧边栏 -->
     <div class="sidebar-wrapper hidden-sm-and-down">
         <div class="sidebar-header">
-            <el-icon><Reading /></el-icon> 教程目录
+            <el-icon><reading /></el-icon> 教程目录
         </div>
         <div class="sidebar-menu">
             <div v-for="t in tutorials" :key="t.slug" 
@@ -57,16 +57,70 @@
                 <!-- Markdown 内容 -->
                 <div class="markdown-body" v-html="renderedMarkdown" :key="currentStepIndex"></div>
                 
+                <!-- 互动内容区块 -->
+                <div v-if="currentInteractions && currentInteractions.length > 0" class="interaction-block">
+                    <div v-for="(interaction, idx) in currentInteractions" :key="idx" class="interaction-card">
+                        <!-- Chat 互动 -->
+                        <div v-if="interaction.type === 'chat'">
+                            <p style="margin-bottom: 12px; font-weight: 600; font-size: 15px;"><el-icon><chat-dot-square /></el-icon> 示例对话</p>
+                            <p style="font-size: 14px; margin-bottom: 16px; color: var(--text-secondary);">你可以自动填入以下预设的提示词并在右侧体验 AI 返回的结果：</p>
+                            <el-button type="primary" @click="applyAndSimulateChat(interaction.prompt)">
+                                执行预设对话 <el-icon class="el-icon--right"><video-play /></el-icon>
+                            </el-button>
+                        </div>
+                        
+                        <!-- Quiz 互动 -->
+                        <div v-else-if="interaction.type === 'quiz'">
+                            <p style="margin-bottom: 16px; font-weight: 600; font-size: 15px; line-height: 1.5;"><el-icon><question-filled /></el-icon> 知识测验：[[ interaction.question ]]</p>
+                            <el-radio-group v-model="stepStates[currentStepIndex].quizAnswer" @change="submitQuiz(idx, interaction)">
+                                <el-radio v-for="(opt, oIdx) in interaction.options" :key="oIdx" :label="oIdx" class="quiz-option" border>
+                                    [[ String.fromCharCode(65 + oIdx) ]]. [[ opt ]]
+                                </el-radio>
+                            </el-radio-group>
+                            
+                            <div v-if="stepStates[currentStepIndex].quizSubmitted && stepStates[currentStepIndex].quizAnswer !== null" 
+                                 class="quiz-explanation" 
+                                 :class="stepStates[currentStepIndex].quizAnswer === interaction.correctIndex ? 'correct' : 'incorrect'">
+                                <strong>[[ stepStates[currentStepIndex].quizAnswer === interaction.correctIndex ? '回答正确！' : '回答错误。' ]]</strong>
+                                <p style="margin-top: 8px;">[[ interaction.explanation ]]</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Fill Blank 互动 -->
+                        <div v-else-if="interaction.type === 'fill_blank'">
+                            <p style="margin-bottom: 12px; font-weight: 600; font-size: 15px;"><el-icon><edit-pen /></el-icon> 填空练习</p>
+                            <div class="fill-blank-text" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 16px;">
+                                <template v-for="(part, pIdx) in getFillBlankParts(interaction.template)" :key="pIdx">
+                                    <span v-if="part.type === 'text'">[[ part.text ]]</span>
+                                    <span v-else-if="part.type === 'blank'">
+                                        <el-input 
+                                            v-model="stepStates[currentStepIndex].blanks[part.index]" 
+                                            :placeholder="interaction.blanks[part.index]"
+                                            style="width: 140px;"
+                                            size="small"
+                                        ></el-input>
+                                    </span>
+                                </template>
+                            </div>
+                            <el-button type="primary" @click="submitFillBlank(interaction)">
+                                测试我的指令 <el-icon class="el-icon--right"><position /></el-icon>
+                            </el-button>
+                        </div>
+
+                        <!-- Highlights 提示 -->
+                        <div v-else-if="interaction.type === 'highlights'">
+                            <p><el-icon><sunny /></el-icon> 请查看 <span style="box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.5); border-radius: 4px;">高亮</span> 内容</p>
+                        </div>
+
+                    </div>
+                </div>
+                
                 <!-- 底部交互导航 -->
                 <div class="step-nav">
-                    <el-button @click="prevStep" :disabled="currentStepIndex <= 0" icon="Back">上一步</el-button>
-                    <!-- 提示建议 -->
-                    <el-button v-if="hasInteraction" type="primary" plain @click="applyInteractionPrompt">
-                        填入建议提示词 <el-icon class="el-icon--right"><Edit /></el-icon>
-                    </el-button>
-                    <el-button v-else disabled style="opacity:0">Placeholder</el-button>
-                    
-                    <el-button type="primary" @click="nextStep" :disabled="currentStepIndex >= totalSteps - 1">下一步 <el-icon class="el-icon--right"><Right /></el-icon></el-button>
+                    <el-button @click="prevStep" :disabled="currentStepIndex <= 0" icon="back">上一步</el-button>
+                    <!-- 中间的站位 -->
+                    <el-button disabled style="opacity:0">Placeholder</el-button>
+                    <el-button type="primary" @click="nextStep" :disabled="currentStepIndex >= totalSteps - 1">下一步 <el-icon class="el-icon--right"><right /></el-icon></el-button>
                 </div>
             </div>
             
@@ -93,7 +147,7 @@
                 </div>
                 <div v-else-if="msg.role === 'ai'" v-html="renderMarkdownInline(msg.content)"></div>
                 <div v-else-if="msg.role === 'error'">
-                    <el-icon style="vertical-align: middle; margin-right:4px;"><Warning /></el-icon>
+                    <el-icon style="vertical-align: middle; margin-right:4px;"><warning /></el-icon>
                     [[ msg.content ]]
                 </div>
             </div>
@@ -115,7 +169,7 @@
             ></el-input>
             <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px;">
                 <span style="font-size: 12px; color: #999;">按 Enter 发送，Shift+Enter 换行</span>
-                <el-button type="primary" :loading="aiLoading" @click="simulateAIChat" icon="Position" circle></el-button>
+                <el-button type="primary" :loading="aiLoading" @click="simulateAIChat" icon="position" circle></el-button>
             </div>
         </div>
     </div>
