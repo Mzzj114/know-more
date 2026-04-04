@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}提示词工程互动式教程 | Know More{% endblock %}
+
+{% block layout_content %}
+<div class="container" style="padding: 20px;">
+    <h2>交互式教程前端占位</h2>
+    <p>教程前端页面加载中... 本页面将由 Vue 响应式呈现具体 UI。</p>
+    <p v-if="currentSlug">即将加载教程内容: [[ currentSlug ]]</p>
+</div>
+{% endblock %}
+
+{% block vue_data %}
+    currentSlug: "{{ current_slug|default:'' }}",
+{% endblock %}

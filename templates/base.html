@@ -92,11 +92,11 @@
                 </a>
                 <nav class="nav-links">
                     <a href="{% url 'home' %}" class="nav-link {% if nav_active == 'home' %}active{% endif %}">首页</a>
+                    <a href="{% url 'tutorial' %}" class="nav-link {% if nav_active == 'tutorial' %}active{% endif %}">教程</a>
                     <a href="{% url 'doc_index' %}" class="nav-link {% if nav_active == 'docs' %}active{% endif %}">文档</a>
                     <!-- Placeholder route for forum -->
                     <a href="{% url 'forum:forum_index' %}" class="nav-link">论坛</a> 
                 </nav>
-
                 <!-- Version Info -->
                 {% version_info as version %}
                 <div style="display: flex; align-items: center; gap: 8px; padding: 6px 9px; font-size: 10px; color: var(--text-secondary); background-color: var(--primary-light); border-radius: var(--el-border-radius-base);">
