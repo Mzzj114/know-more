@@ -171,3 +171,4 @@ cython_debug/
 .lingma/
 
 node_modules
+secret.env

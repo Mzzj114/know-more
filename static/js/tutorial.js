@@ -235,7 +235,7 @@ Object.assign(AppRoot, {
         },
 
         /**
-         * 模拟 AI 聊天交互
+         * 启动真正的 AI 聊天交互
          */
         async simulateAIChat() {
             const text = this.promptInput.trim();
@@ -246,20 +246,41 @@ Object.assign(AppRoot, {
             this.aiLoading = true;
             this.$nextTick(this.scrollPlayground);
             
-            setTimeout(async () => {
-                try {
-                    // 后端 API 尚未接入，抛出模拟错误
-                    throw new Error("AI 交互功能后端 API 尚未接入");
-                } catch (error) {
-                    this.chatHistory.push({
-                        role: 'error',
-                        content: error.message || "请求 AI 时发生错误"
-                    });
-                } finally {
-                    this.aiLoading = false;
-                    this.$nextTick(this.scrollPlayground);
+            try {
+                // 剔除无效信息，只传给大模型合法角色的消息记录 (将前端的 ai 角色映射为 openAI 要求的 assistant)
+                const messagesToSend = this.chatHistory
+                    .filter(msg => ['user', 'ai', 'system', 'assistant'].includes(msg.role))
+                    .map(msg => ({ 
+                        role: (msg.role === 'ai') ? 'assistant' : msg.role, 
+                        content: msg.content 
+                    }));
+
+                const response = await fetch('/ai/chat/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ messages: messagesToSend })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || `请求失败，状态码: ${response.status}`);
                 }
-            }, 1200);
+
+                // 成功，将回答加入历史，注意前端气泡渲染使用的是 role='ai'
+                this.chatHistory.push({
+                    role: 'ai',
+                    content: data.content
+                });
+            } catch (error) {
+                this.chatHistory.push({
+                    role: 'error',
+                    content: error.message || "请求 AI 时发生未知错误"
+                });
+            } finally {
+                this.aiLoading = false;
+                this.$nextTick(this.scrollPlayground);
+            }
         },
 
         scrollPlayground() {

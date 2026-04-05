@@ -8,6 +8,10 @@ from openai import OpenAI
 from .models import UserTokenUsage
 
 def check_and_reset_session_tokens(request):
+    """
+    检查并重置匿名用户的 Session Token。
+    按自然周进行重置：如果当前日期与上次重置日期不在同一周，则恢复至 5,000 tokens。
+    """
     now = timezone.now().date()
     last_reset = request.session.get('ai_last_reset_date')
     if last_reset:
@@ -25,6 +29,10 @@ def check_and_reset_session_tokens(request):
     return request.session.get('ai_remaining_tokens', 5000)
 
 def check_and_reset_user_tokens(user):
+    """
+    检查并重置已登录用户的数据库 Token。
+    按自然周进行重置：如果当前日期与上次重置日期不在同一周，则恢复至 50,000 tokens。
+    """
     usage, created = UserTokenUsage.objects.get_or_create(user=user)
     now = timezone.now().date()
     if created or usage.last_reset_date.isocalendar()[1] != now.isocalendar()[1] or usage.last_reset_date.year != now.year:
@@ -32,6 +40,17 @@ def check_and_reset_user_tokens(user):
         usage.last_reset_date = now
         usage.save()
     return usage
+
+# 全局 OpenAI 客户端单例，复用连接池以提高性能
+_openai_client = None
+
+def get_openai_client():
+    global _openai_client
+    if _openai_client is None:
+        api_key = os.environ.get('api_key')
+        if api_key:
+            _openai_client = OpenAI(api_key=api_key)
+    return _openai_client
 
 @csrf_exempt
 def chat_api(request):
@@ -59,17 +78,17 @@ def chat_api(request):
         return JsonResponse({'error': 'Weekly token limit exceeded.'}, status=403)
 
     # 2. Call OpenAI
-    api_key = os.environ.get('api_key')
-    if not api_key:
+    client = get_openai_client()
+    if not client:
         return JsonResponse({'error': 'Server configuration error (missing api_key).'}, status=500)
 
-    client = OpenAI(api_key=api_key)
     try:
         response = client.chat.completions.create(
             model=model_name,
             messages=messages
         )
     except Exception as e:
+        print(f"LLM API Error: {e}")
         return JsonResponse({'error': str(e)}, status=502)
 
     # 3. Deduct tokens
