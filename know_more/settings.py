@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'docs.apps.DocsConfig',
     'main.apps.MainConfig',
     'forum.apps.ForumConfig',
+    'ai.apps.AiConfig',
 ]
 
 MIDDLEWARE = [
