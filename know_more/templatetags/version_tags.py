@@ -1,3 +1,5 @@
+# Git needs to work in the system ternimal for this tag to work
+
 import subprocess
 from django import template
 
