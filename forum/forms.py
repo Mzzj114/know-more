@@ -64,6 +64,32 @@ class ReplyForm(forms.ModelForm):
         return content
 
 
+class UserEditForm(forms.ModelForm):
+    """用户信息编辑表单 (User 模型)"""
+    
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'first_name', 'last_name']
+        widgets = {
+            'username': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': '用户名',
+            }),
+            'email': forms.EmailInput(attrs={
+                'class': 'form-control',
+                'placeholder': '电子邮箱',
+            }),
+            'first_name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': '名',
+            }),
+            'last_name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': '姓',
+            }),
+        }
+
+
 class UserProfileForm(forms.ModelForm):
     """用户资料编辑表单"""
     

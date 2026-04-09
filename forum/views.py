@@ -16,7 +16,7 @@ from rest_framework.response import Response
 # Models and Forms
 from django.contrib.auth.models import User
 from .models import Category, Post, Reply, Like, Favorite, UserProfile
-from .forms import PostForm, ReplyForm, UserProfileForm
+from .forms import PostForm, ReplyForm, UserProfileForm, UserEditForm
 from .services import PostService, ReplyService, InteractionService
 from .serializers import (
     CategorySerializer, PostSerializer, PostDetailSerializer,
@@ -249,20 +249,28 @@ def my_favorites(request):
 @login_required
 def edit_profile(request):
     """编辑个人资料"""
-    profile = request.user.profile
+    user = request.user
+    profile = user.profile
     
     if request.method == 'POST':
-        form = UserProfileForm(request.POST, request.FILES, instance=profile)
-        if form.is_valid():
-            form.save()
+        user_form = UserEditForm(request.POST, instance=user)
+        profile_form = UserProfileForm(request.POST, request.FILES, instance=profile)
+        
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
             messages.success(request, '个人资料更新成功！')
-            return redirect('forum:user_profile', username=request.user.username)
+            return redirect('forum:user_profile', username=user.username)
         else:
             messages.error(request, '请检查表单填写是否正确')
     else:
-        form = UserProfileForm(instance=profile)
+        user_form = UserEditForm(instance=user)
+        profile_form = UserProfileForm(instance=profile)
     
-    context = {'form': form}
+    context = {
+        'user_form': user_form,
+        'profile_form': profile_form
+    }
     return render(request, 'forum/edit_profile.html', context)
 
 

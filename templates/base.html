@@ -116,11 +116,39 @@
                 {% endif %}
                 </div>
             </div>
-            <div class="header-right">
+            <div class="header-right" style="display: flex; align-items: center; gap: 12px;">
                 <!-- GitHub Repository Link -->
                 <el-button onclick="window.open('https://github.com/Mzzj114/know-more', '_blank')" plain round>Github</el-button>
-                <!-- Reserved for user system -->
-                <el-button type="primary" plain round>登录 / 注册</el-button>
+                
+                {% if user.is_authenticated %}
+                    <el-dropdown trigger="click">
+                        <el-button type="primary" plain round class="user-btn">
+                            <el-icon style="margin-right: 4px;"><user-filled /></el-icon>
+                            {{ user.username }}
+                            <el-icon class="el-icon--right"><arrow-down /></el-icon>
+                        </el-button>
+                        <template #dropdown>
+                            <el-dropdown-menu>
+                                <el-dropdown-item onclick="location.href='{% url 'forum:user_profile' user.username %}'">
+                                    <template #default>
+                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                            <el-icon><user /></el-icon> 个人主页
+                                        </div>
+                                    </template>
+                                </el-dropdown-item>
+                                <el-dropdown-item divided onclick="location.href='{% url 'logout' %}'">
+                                    <template #default>
+                                        <div style="display: flex; align-items: center; gap: 8px; color: var(--error);">
+                                            <el-icon><switch-button /></el-icon> 退出登录
+                                        </div>
+                                    </template>
+                                </el-dropdown-item>
+                            </el-dropdown-menu>
+                        </template>
+                    </el-dropdown>
+                {% else %}
+                    <el-button type="primary" plain round onclick="location.href='{% url 'login' %}'">登录 / 注册</el-button>
+                {% endif %}
             </div>
         </header>
 

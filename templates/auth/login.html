@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}登录 - Know More{% endblock %}
+
+{% block extra_head %}
+<style>
+    .auth-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: calc(100vh - 120px);
+        background: radial-gradient(circle at top right, var(--primary-light) 0%, transparent 40%),
+                    radial-gradient(circle at bottom left, var(--primary-light) 0%, transparent 40%);
+    }
+    .auth-card {
+        width: 100%;
+        max-width: 420px;
+        padding: 40px;
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        animation: km-fadeIn 0.6s ease-out;
+    }
+    .auth-header {
+        text-align: center;
+        margin-bottom: 32px;
+    }
+    .auth-header h1 {
+        font-size: 28px;
+        font-weight: 800;
+        color: var(--primary);
+        margin: 0 0 8px 0;
+        letter-spacing: -0.025em;
+    }
+    .auth-header p {
+        color: var(--text-secondary);
+        font-size: 14px;
+        margin: 0;
+    }
+    .auth-footer {
+        margin-top: 24px;
+        text-align: center;
+        font-size: 14px;
+        color: var(--text-secondary);
+    }
+    .auth-footer a {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 600;
+    }
+    .auth-footer a:hover {
+        text-decoration: underline;
+    }
+    .error-info {
+        margin-bottom: 20px;
+    }
+</style>
+{% endblock %}
+
+{% block layout_content %}
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <h1>欢迎回来</h1>
+            <p>登录您的 Know More 账号以继续</p>
+        </div>
+
+        {% if form.errors %}
+        <div class="error-info">
+            <el-alert title="登录失败" type="error" show-icon :closable="false">
+                用户名或密码不正确，请重试。
+            </el-alert>
+        </div>
+        {% endif %}
+
+        <el-form 
+            ref="loginForm" 
+            :model="loginData" 
+            label-position="top"
+            @submit.prevent="handleSubmit"
+        >
+            <el-form-item label="用户名" required>
+                <el-input 
+                    v-model="loginData.username" 
+                    placeholder="请输入用户名" 
+                    prefix-icon="User"
+                    size="large"
+                ></el-input>
+            </el-form-item>
+            
+            <el-form-item label="密码" required>
+                <el-input 
+                    v-model="loginData.password" 
+                    type="password" 
+                    placeholder="请输入密码" 
+                    prefix-icon="Lock"
+                    show-password
+                    size="large"
+                ></el-input>
+            </el-form-item>
+
+            <div style="margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center;">
+                <el-checkbox v-model="loginData.remember">记住我</el-checkbox>
+                <a href="#" style="font-size: 14px; color: var(--primary); text-decoration: none;">忘记密码？</a>
+            </div>
+
+            <el-button 
+                type="primary" 
+                native-type="submit" 
+                size="large" 
+                style="width: 100%; font-weight: 600; height: 48px;"
+                :loading="submitting"
+            >
+                立即登录
+            </el-button>
+        </el-form>
+
+        <!-- Hidden Native Form for Submission -->
+        <form method="post" ref="nativeForm" style="display: none;">
+            {% csrf_token %}
+            <input type="hidden" name="username" :value="loginData.username">
+            <input type="hidden" name="password" :value="loginData.password">
+            <input type="hidden" name="next" value="{{ next }}">
+        </form>
+
+        <div class="auth-footer">
+            还需要账号吗？ <a href="{% url 'register' %}">立即注册</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block vue_data %}
+loginData: {
+    username: '',
+    password: '',
+    remember: false
+},
+submitting: false,
+{% endblock %}
+
+{% block vue_methods %}
+handleSubmit() {
+    if (!this.loginData.username || !this.loginData.password) {
+        this.$message.warning('请填写完整的登录信息');
+        return;
+    }
+    this.submitting = true;
+    this.$nextTick(() => {
+        this.$refs.nativeForm.submit();
+    });
+}
+{% endblock %}
