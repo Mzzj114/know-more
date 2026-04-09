@@ -5,6 +5,21 @@
 
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/forum.css' %}" />
+<link rel="stylesheet" href="{% static 'vditor/dist/index.css' %}" />
+<script src="{% static 'vditor/dist/index.min.js' %}"></script>
+<style>
+    .vditor {
+        border-color: var(--border) !important;
+        border-radius: 8px !important;
+    }
+    .vditor-toolbar {
+        background-color: var(--surface) !important;
+        border-bottom: 1px solid var(--border) !important;
+    }
+    .vditor--fullscreen {
+        z-index: 2000 !important;
+    }
+</style>
 {% endblock %}
 
 {% block layout_content %}
@@ -84,14 +99,8 @@
                 <label style="display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">
                     帖子内容
                 </label>
-                <el-input
-                    v-model="content"
-                    type="textarea"
-                    name="content"
-                    :rows="12"
-                    resize="vertical"
-                    placeholder="请输入帖子内容"
-                ></el-input>
+                <div id="vditor"></div>
+                <textarea name="content" v-model="content" style="display: none;"></textarea>
                 {% if form.content.errors %}
                 <div style="color: var(--error); font-size: 13px; margin-top: 6px;">{{ form.content.errors.0 }}</div>
                 {% endif %}
@@ -127,4 +136,45 @@ updateCategorySelect(val) {
 
 {% block vue_mounted %}
 this.updateCategorySelect(this.selectedCategory);
+
+// Initialize Vditor
+this.vditor = new Vditor('vditor', {
+    cdn: '/static/vditor',
+    height: 480,
+    placeholder: '请输入帖子内容',
+    theme: 'classic',
+    icon: 'ant',
+    input: (value) => {
+        this.content = value;
+    },
+    after: () => {
+        if (this.content) {
+            this.vditor.setValue(this.content);
+        }
+    },
+    cache: {
+        enable: false,
+    },
+    toolbar: [
+        "emoji", "headings", "bold", "italic", "strike", "link", "|",
+        "list", "ordered-list", "check", "outdent", "indent", "|",
+        "quote", "line", "code", "inline-code", "insert-before", "insert-after", "|",
+        "table", "|",
+        "undo", "redo", "|",
+        "fullscreen", "edit-mode",
+        {
+            name: "more",
+            toolbar: [
+                "both",
+                "code-theme",
+                "content-theme",
+                "export",
+                "outline",
+                "preview",
+                "info",
+                "help",
+            ],
+        }
+    ]
+});
 {% endblock %}
