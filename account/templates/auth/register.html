@@ -108,6 +108,36 @@
                 <div class="form-tip">必填。150个字符或更少。包含字母，数字和仅有的 @/./+/-/_ 字符。</div>
             </el-form-item>
             
+            <el-form-item label="邮箱地址" required>
+                <el-input 
+                    v-model="regData.email" 
+                    placeholder="请输入你的有效邮箱" 
+                    prefix-icon="Message"
+                    size="large"
+                ></el-input>
+            </el-form-item>
+
+            <el-form-item label="验证码" required>
+                <div style="display: flex; gap: 12px; width: 100%;">
+                    <el-input 
+                        v-model="regData.verifyCode" 
+                        placeholder="请输入 6 位验证码" 
+                        prefix-icon="Key"
+                        size="large"
+                        style="flex: 1;"
+                    ></el-input>
+                    <el-button 
+                        size="large" 
+                        @click="sendVerifyCode" 
+                        :disabled="countdown > 0"
+                        style="width: 120px;"
+                    >
+                        <span v-if="countdown > 0" v-text="countdown + 's'"></span>
+                        <span v-else>发送验证码</span>
+                    </el-button>
+                </div>
+            </el-form-item>
+            
             <el-form-item label="密码" required>
                 <el-input 
                     v-model="regData.password1" 
@@ -151,6 +181,8 @@
         <form method="post" ref="nativeForm" style="display: none;">
             {% csrf_token %}
             <input type="hidden" name="username" :value="regData.username">
+            <input type="hidden" name="email" :value="regData.email">
+            <input type="hidden" name="verification_code" :value="regData.verifyCode">
             <input type="hidden" name="password1" :value="regData.password1">
             <input type="hidden" name="password2" :value="regData.password2">
         </form>
@@ -165,16 +197,19 @@
 {% block vue_data %}
 regData: {
     username: '',
+    email: '',
+    verifyCode: '',
     password1: '',
     password2: '',
     agree: false
 },
 submitting: false,
+countdown: 0,
 {% endblock %}
 
 {% block vue_methods %}
 handleSubmit() {
-    if (!this.regData.username || !this.regData.password1 || !this.regData.password2) {
+    if (!this.regData.username || !this.regData.email || !this.regData.verifyCode || !this.regData.password1 || !this.regData.password2) {
         this.$message.warning('请填写完整的注册信息');
         return;
     }
@@ -185,6 +220,43 @@ handleSubmit() {
     this.submitting = true;
     this.$nextTick(() => {
         this.$refs.nativeForm.submit();
+    });
+},
+sendVerifyCode() {
+    if (!this.regData.email) {
+        this.$message.warning('请先输入邮箱地址');
+        return;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(this.regData.email)) {
+        this.$message.warning('请输入有效的邮箱格式');
+        return;
+    }
+    if (this.countdown > 0) return;
+    
+    fetch('{% url "send_verify_code" %}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+        },
+        body: JSON.stringify({ email: this.regData.email })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            this.$message.success('验证码发送成功，请查收');
+            this.countdown = 60;
+            const timer = setInterval(() => {
+                this.countdown--;
+                if (this.countdown <= 0) clearInterval(timer);
+            }, 1000);
+        } else {
+            this.$message.error(data.message || '发送失败');
+        }
+    })
+    .catch(err => {
+        this.$message.error('请求发送失败，请稍后重试');
     });
 }
 {% endblock %}
