@@ -22,5 +22,6 @@ urlpatterns = [
     path('docs/', include('docs.urls')),
     path('forum/', include('forum.urls', namespace='forum')),
     path('ai/', include('ai.urls')),
+    path('auth/', include('account.urls')),
     path('', include('main.urls')),
 ]
