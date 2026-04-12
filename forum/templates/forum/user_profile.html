@@ -54,11 +54,14 @@
 
                 {% if user == profile_user %}
                 <div class="profile-actions">
+                    <el-button plain type="warning" size="small" onclick="window.location.href='{% url 'forum:my_favorites' %}'">
+                        <el-icon style="margin-right: 4px;"><star /></el-icon> 我的收藏
+                    </el-button>
                     <el-button plain size="small" onclick="window.location.href='{% url 'forum:edit_profile' %}'">
                         <el-icon style="margin-right: 4px;"><setting /></el-icon> 编辑资料
                     </el-button>
-                    <el-button plain type="warning" size="small" onclick="window.location.href='{% url 'forum:my_favorites' %}'">
-                        <el-icon style="margin-right: 4px;"><star /></el-icon> 我的收藏
+                    <el-button plain type="danger" size="small" onclick="window.location.href='{% url 'reset_password' %}'">
+                        <el-icon style="margin-right: 4px;"><lock /></el-icon> 密码修改
                     </el-button>
                 </div>
                 {% endif %}

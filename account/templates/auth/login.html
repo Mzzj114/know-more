@@ -104,7 +104,7 @@
 
             <div style="margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center;">
                 <el-checkbox v-model="loginData.remember">记住我</el-checkbox>
-                <a href="#" style="font-size: 14px; color: var(--primary); text-decoration: none;">忘记密码？</a>
+                <a href="{% url 'reset_password' %}" style="font-size: 14px; color: var(--primary); text-decoration: none;">忘记密码？</a>
             </div>
 
             <el-button 
