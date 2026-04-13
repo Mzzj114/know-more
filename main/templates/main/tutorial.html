@@ -63,7 +63,7 @@
                         <!-- Chat 互动 -->
                         <div v-if="interaction.type === 'chat'">
                             <p style="margin-bottom: 12px; font-weight: 600; font-size: 15px;"><el-icon><chat-dot-square /></el-icon> 示例对话</p>
-                            <p style="font-size: 14px; margin-bottom: 16px; color: var(--text-secondary);">你可以自动填入以下预设的提示词并在右侧体验 AI 返回的结果：</p>
+                            <p style="font-size: 14px; margin-bottom: 16px; color: var(--text-secondary);">"[[ interaction.prompt ]]"</p>
                             <el-button type="primary" @click="applyAndSimulateChat(interaction.prompt)">
                                 执行预设对话 <el-icon class="el-icon--right"><video-play /></el-icon>
                             </el-button>
@@ -72,7 +72,7 @@
                         <!-- Quiz 互动 -->
                         <div v-else-if="interaction.type === 'quiz'">
                             <p style="margin-bottom: 16px; font-weight: 600; font-size: 15px; line-height: 1.5;"><el-icon><question-filled /></el-icon> 知识测验：[[ interaction.question ]]</p>
-                            <el-radio-group v-model="stepStates[currentStepIndex].quizAnswer" @change="submitQuiz(idx, interaction)">
+                            <el-radio-group v-model="stepStates[currentStepIndex].quizAnswer" @change="submitQuiz(idx, interaction)" class="quiz-radio-group">
                                 <el-radio v-for="(opt, oIdx) in interaction.options" :key="oIdx" :label="oIdx" class="quiz-option" border>
                                     [[ String.fromCharCode(65 + oIdx) ]]. [[ opt ]]
                                 </el-radio>

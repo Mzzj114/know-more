@@ -141,12 +141,12 @@
 
 根据`主要站需求.md`中的内容设计，还需完成以下教程：
 
-- [ ] 指示模型多视角回答 (multi-perspective-analysis.json)
-- [ ] 分步骤拆解逻辑 (chain-of-thought.json)
-- [ ] 精确控制输出形式 (control-output-format.json)
-- [ ] 元提示词 (meta-prompt.json)
-- [ ] 结构化提示词 (structured-prompt.json)
-- [ ] 对抗提示词 (adversarial-prompting.json)
+- [x] 指示模型多视角回答 (multi-perspective-analysis.json)
+- [x] 分步骤拆解逻辑 (chain-of-thought.json)
+- [x] 精确控制输出形式 (control-output-format.json)
+- [x] 元提示词 (meta-prompt.json)
+- [x] 结构化提示词 (structured-prompt.json)
+- [x] 对抗提示词 (adversarial-prompting.json)
 - [ ] 案例：设计学习路线 (case-study-learning-path.json)
 
 ---

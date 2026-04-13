@@ -248,7 +248,29 @@
 
 .quiz-option {
     margin-bottom: 12px;
-    display: block;
+    display: flex !important;
+    height: auto !important;
+    min-height: 40px;
+    padding: 10px 15px !important;
+    white-space: normal !important;
+    align-items: center;
+}
+
+.quiz-option .el-radio__label {
+    white-space: normal !important;
+    line-height: 1.5 !important;
+    word-break: break-word;
+}
+
+.quiz-radio-group {
+    display: flex !important;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+}
+
+.quiz-radio-group .el-radio {
+    margin-right: 0 !important;
 }
 
 .quiz-explanation {
