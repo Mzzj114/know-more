@@ -3,6 +3,26 @@ import json
 from django.conf import settings
 from django.http import JsonResponse, Http404
 from django.shortcuts import render, redirect
+from django.utils.translation import get_language_from_request
+
+def root_redirect(request):
+    """
+    Root path redirect view.
+    Automatically redirects user to their preferred language's docs page.
+    Falls back to English if preferred language is not supported.
+    """
+    # Get user's preferred language from request
+    lang_code = get_language_from_request(request)
+    
+    # Map Django language codes to our URL prefixes
+    if lang_code.startswith('zh'):
+        prefix = 'zh-hans'
+    else:
+        prefix = 'en'  # Default to English
+    
+    # Redirect to docs in the detected language
+    return redirect(f'/{prefix}/home')
+
 def home(request):
     """
     主页视图 — 纯前端展示，无后端逻辑。

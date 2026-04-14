@@ -5,21 +5,6 @@ from django.conf import settings
 from pathlib import Path
 from django.http import Http404
 
-def detect_language(request):
-    """
-    Detect user's preferred language from request.
-    Returns 'zh' for Chinese, 'en' for any other language.
-    """
-    # Get Accept-Language header from request
-    accept_language = request.META.get('HTTP_ACCEPT_LANGUAGE', '')
-    
-    # Check if Chinese is preferred (zh, zh-CN, zh-TW, etc.)
-    if accept_language.lower().startswith('zh'):
-        return 'zh'
-    
-    # Default to English for any other language
-    return 'en'
-
 def get_docs_dir(language='zh'):
     """Returns the base directory for documentation based on language"""
     # Validate language parameter to prevent directory traversal

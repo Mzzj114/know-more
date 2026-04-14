@@ -1,13 +1,22 @@
 from django.shortcuts import render, redirect
 from django.http import Http404
-from .utils import get_all_docs, get_doc_content, detect_language
+from .utils import get_all_docs, get_doc_content
+
+def get_language_from_request(request):
+    """Convert Django language code to document directory name"""
+    lang_code = request.LANGUAGE_CODE
+    # Convert 'zh-hans' or 'zh-hant' to 'zh'
+    if lang_code.startswith('zh'):
+        return 'zh'
+    # Default to 'en' for any other language
+    return 'en'
 
 def doc_index(request):
     """
     Renders the index page listing all available documents.
-    Detects user's language preference and serves appropriate docs.
+    Uses Django's i18n to detect user's language preference.
     """
-    language = detect_language(request)
+    language = get_language_from_request(request)
     docs = get_all_docs(language)
     
     # If there are docs, redirect to the first one (or 'about' if exists)
@@ -15,7 +24,7 @@ def doc_index(request):
         # Try to find 'about' doc first, otherwise use the first doc
         about_doc = next((doc for doc in docs if doc['slug'] == 'about'), None)
         target_slug = about_doc['slug'] if about_doc else docs[0]['slug']
-        return redirect('doc_detail', language=language, slug=target_slug)
+        return redirect('doc_detail', slug=target_slug)
     
     # If no docs available, render empty index
     return render(request, 'docs/doc_index.html', {
@@ -24,14 +33,12 @@ def doc_index(request):
         'current_language': language
     })
 
-def doc_detail(request, language, slug):
+def doc_detail(request, slug):
     """
-    Renders a specific document based on its slug and language from URL.
-    Validates language parameter.
+    Renders a specific document based on its slug.
+    Uses Django's i18n to detect user's language preference.
     """
-    # Validate language parameter
-    if language not in ['zh', 'en']:
-        raise Http404("Language not supported")
+    language = get_language_from_request(request)
     
     try:
         doc_data = get_doc_content(slug, language)

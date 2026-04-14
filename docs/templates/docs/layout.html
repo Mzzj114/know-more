@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block title %} Know More - 文档站 {% endblock %}
 
@@ -112,14 +113,15 @@
 {% block layout_content %}
 <el-container class="docs-container">
     <el-aside class="docs-aside">
-        <!-- Language Switcher -->
+        <!-- Language Switcher using direct links -->
         <div class="language-switcher">
-            <a href="{% url 'doc_detail' language='zh' slug='about' %}" 
-               class="language-btn {% if current_language == 'zh' %}active{% endif %}">
+            {% get_current_language as CURRENT_LANGUAGE %}
+            <a href="/zh-hans/docs/{{ request.resolver_match.kwargs.slug }}/" 
+               class="language-btn {% if CURRENT_LANGUAGE == 'zh-hans' %}active{% endif %}">
                 中文
             </a>
-            <a href="{% url 'doc_detail' language='en' slug='about' %}" 
-               class="language-btn {% if current_language == 'en' %}active{% endif %}">
+            <a href="/en/docs/{{ request.resolver_match.kwargs.slug }}/" 
+               class="language-btn {% if CURRENT_LANGUAGE == 'en' %}active{% endif %}">
                 English
             </a>
         </div>
@@ -130,7 +132,7 @@
             class="docs-menu"
         >
             {% for doc in docs %}
-                <a href="{% url 'doc_detail' language=current_language slug=doc.slug %}" style="text-decoration: none;">
+                <a href="{% url 'doc_detail' slug=doc.slug %}" style="text-decoration: none;">
                     <el-menu-item index="{{ doc.slug }}">
                         <span>{{ doc.title }}</span>
                     </el-menu-item>
