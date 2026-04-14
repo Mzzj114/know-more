@@ -5,13 +5,32 @@ from django.conf import settings
 from pathlib import Path
 from django.http import Http404
 
-def get_docs_dir():
-    """Returns the base directory for documentation"""
-    return Path(settings.BASE_DIR) / 'document' / 'zh-Hans'
+def detect_language(request):
+    """
+    Detect user's preferred language from request.
+    Returns 'zh' for Chinese, 'en' for any other language.
+    """
+    # Get Accept-Language header from request
+    accept_language = request.META.get('HTTP_ACCEPT_LANGUAGE', '')
+    
+    # Check if Chinese is preferred (zh, zh-CN, zh-TW, etc.)
+    if accept_language.lower().startswith('zh'):
+        return 'zh'
+    
+    # Default to English for any other language
+    return 'en'
 
-def get_all_docs():
+def get_docs_dir(language='zh'):
+    """Returns the base directory for documentation based on language"""
+    # Validate language parameter to prevent directory traversal
+    if language not in ['zh', 'en']:
+        language = 'en'  # Fallback to English for safety
+    
+    return Path(settings.BASE_DIR) / 'document' / language
+
+def get_all_docs(language='zh'):
     """Returns a list of all documents with their metadata, sorted by 'order'."""
-    docs_dir = get_docs_dir()
+    docs_dir = get_docs_dir(language)
     docs = []
     
     if not docs_dir.exists():
@@ -29,7 +48,8 @@ def get_all_docs():
                         'title': metadata.get('title', file_path.stem),
                         'slug': metadata.get('slug'),
                         'order': metadata.get('order', 999),
-                        'file_path': file_path
+                        'file_path': file_path,
+                        'language': language
                     })
         except Exception as e:
             # Silently skip files that can't be parsed
@@ -39,13 +59,13 @@ def get_all_docs():
     docs.sort(key=lambda x: x.get('order', 999))
     return docs
 
-def get_doc_content(slug):
+def get_doc_content(slug, language='zh'):
     """
     Finds a document by its slug, reads it, and converts markdown to HTML.
     Raises Http404 if not found or if path traversal is detected.
     """
-    docs_dir = get_docs_dir()
-    all_docs = get_all_docs()
+    docs_dir = get_docs_dir(language)
+    all_docs = get_all_docs(language)
     
     # Find the document with the matching slug
     doc_meta = next((doc for doc in all_docs if doc['slug'] == slug), None)
@@ -74,7 +94,8 @@ def get_doc_content(slug):
             
             return {
                 'metadata': post.metadata,
-                'html': html_content
+                'html': html_content,
+                'language': language
             }
     except Exception as e:
         raise Http404(f"Error reading document: {str(e)}")

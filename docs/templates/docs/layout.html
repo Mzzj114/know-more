@@ -79,19 +79,58 @@
         color: var(--text-secondary);
         box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
+    .language-switcher {
+        padding: 16px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+    }
+    .language-btn {
+        padding: 6px 16px;
+        border-radius: 20px;
+        border: 1px solid var(--border);
+        background-color: transparent;
+        color: var(--text-secondary);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 14px;
+    }
+    .language-btn:hover {
+        background-color: var(--primary-light);
+        color: var(--primary);
+        border-color: var(--primary);
+    }
+    .language-btn.active {
+        background-color: var(--primary);
+        color: white;
+        border-color: var(--primary);
+    }
 </style>
 {% endblock %}
 
 {% block layout_content %}
 <el-container class="docs-container">
     <el-aside class="docs-aside">
+        <!-- Language Switcher -->
+        <div class="language-switcher">
+            <a href="{% url 'doc_detail' language='zh' slug='about' %}" 
+               class="language-btn {% if current_language == 'zh' %}active{% endif %}">
+                中文
+            </a>
+            <a href="{% url 'doc_detail' language='en' slug='about' %}" 
+               class="language-btn {% if current_language == 'en' %}active{% endif %}">
+                English
+            </a>
+        </div>
+        
         <!-- Element Plus Menu for Documentation Sidebar -->
         <el-menu 
             :default-active="activeMenu"
             class="docs-menu"
         >
             {% for doc in docs %}
-                <a href="{% url 'doc_detail' doc.slug %}" style="text-decoration: none;">
+                <a href="{% url 'doc_detail' language=current_language slug=doc.slug %}" style="text-decoration: none;">
                     <el-menu-item index="{{ doc.slug }}">
                         <span>{{ doc.title }}</span>
                     </el-menu-item>
