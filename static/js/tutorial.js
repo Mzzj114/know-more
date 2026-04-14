@@ -42,6 +42,16 @@ Object.assign(AppRoot, {
         },
         currentInteractions() {
             return this.currentStepData && this.currentStepData.interaction ? this.currentStepData.interaction : [];
+        },
+        isPrevAvailable() {
+            if (this.currentStepIndex > 0) return true;
+            const currentIndex = this.tutorials.findIndex(t => t.slug === this.activeSlug);
+            return currentIndex > 0;
+        },
+        isNextAvailable() {
+            if (this.currentStepIndex < this.totalSteps - 1) return true;
+            const currentIndex = this.tutorials.findIndex(t => t.slug === this.activeSlug);
+            return currentIndex !== -1 && currentIndex < this.tutorials.length - 1;
         }
     },
     
@@ -84,7 +94,7 @@ Object.assign(AppRoot, {
         /**
          * 加载选定的教程详情
          */
-        async loadTutorial(slug, pushState = true) {
+        async loadTutorial(slug, pushState = true, targetStep = 0) {
             if (!slug) return;
             this.loading = true;
             
@@ -93,7 +103,14 @@ Object.assign(AppRoot, {
                 if (res.ok) {
                     this.tutorialData = await res.json();
                     this.activeSlug = slug;
-                    this.currentStepIndex = 0;
+                    
+                    // 设置初始步数
+                    if (targetStep === 'last') {
+                        this.currentStepIndex = this.totalSteps - 1;
+                    } else {
+                        this.currentStepIndex = targetStep;
+                    }
+
                     this.chatHistory = [];
                     this.initStepStates();
                     this.applyHighlights();
@@ -158,6 +175,16 @@ Object.assign(AppRoot, {
             if (this.currentStepIndex < this.totalSteps - 1) {
                 this.currentStepIndex++;
                 this.scrollToTop();
+            } else {
+                // 尝试跳转到下一个教程
+                const currentIndex = this.tutorials.findIndex(t => t.slug === this.activeSlug);
+                if (currentIndex !== -1 && currentIndex < this.tutorials.length - 1) {
+                    const nextTutorial = this.tutorials[currentIndex + 1];
+                    this.loadTutorial(nextTutorial.slug);
+                    if (window.ElementPlus) {
+                        ElementPlus.ElMessage.info(`进入下一章节: ${nextTutorial.title}`);
+                    }
+                }
             }
         },
 
@@ -165,6 +192,16 @@ Object.assign(AppRoot, {
             if (this.currentStepIndex > 0) {
                 this.currentStepIndex--;
                 this.scrollToTop();
+            } else {
+                // 尝试跳转到上一个教程的最后一步
+                const currentIndex = this.tutorials.findIndex(t => t.slug === this.activeSlug);
+                if (currentIndex !== -1 && currentIndex > 0) {
+                    const prevTutorial = this.tutorials[currentIndex - 1];
+                    this.loadTutorial(prevTutorial.slug, true, 'last');
+                    if (window.ElementPlus) {
+                        ElementPlus.ElMessage.info(`返回上一章节: ${prevTutorial.title}`);
+                    }
+                }
             }
         },
 

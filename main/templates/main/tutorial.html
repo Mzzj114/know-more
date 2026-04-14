@@ -117,10 +117,10 @@
                 
                 <!-- 底部交互导航 -->
                 <div class="step-nav">
-                    <el-button @click="prevStep" :disabled="currentStepIndex <= 0" icon="back">上一步</el-button>
+                    <el-button @click="prevStep" :disabled="!isPrevAvailable" icon="back">上一步</el-button>
                     <!-- 中间的站位 -->
                     <el-button disabled style="opacity:0">Placeholder</el-button>
-                    <el-button type="primary" @click="nextStep" :disabled="currentStepIndex >= totalSteps - 1">下一步 <el-icon class="el-icon--right"><right /></el-icon></el-button>
+                    <el-button type="primary" @click="nextStep" :disabled="!isNextAvailable">下一步 <el-icon class="el-icon--right"><right /></el-icon></el-button>
                 </div>
             </div>
             

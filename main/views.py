@@ -41,10 +41,14 @@ def api_tutorial_list(request):
                         slug = filename[:-5]  # 去除 .json 后缀
                         tutorials.append({
                             'slug': slug,
-                            'title': data.get('title', slug)
+                            'title': data.get('title', slug),
+                            'order': data.get('order', 999)  # 默认排在后面
                         })
                 except Exception:
                     continue
+    
+    # 根据 order 字段从小到大排序
+    tutorials.sort(key=lambda x: x['order'])
                     
     return JsonResponse({'tutorials': tutorials})
 
