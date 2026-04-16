@@ -1,11 +1,16 @@
 {% load static %}
 {% load version_tags %}
+{% load i18n %}
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}Know More{% endblock %}</title>
+    <script>
+        // Provide the active language prefix to global Javascript logic
+        window.LANG_PREFIX = "/{{ LANGUAGE_CODE }}";
+    </script>
 
     <!-- Element Plus CSS -->
     <link rel="stylesheet" href="{% static 'element-plus/dist/index.css' %}" />
@@ -117,6 +122,31 @@
                 </div>
             </div>
             <div class="header-right" style="display: flex; align-items: center; gap: 12px;">
+                <!-- Language Switcher -->
+                <form id="lang-switch-form" action="{% url 'set_language' %}" method="post" style="display:none;">
+                    {% csrf_token %}
+                    <input name="next" type="hidden" value="{{ request.get_full_path }}" />
+                    <input name="language" type="hidden" id="lang-code-input" />
+                </form>
+
+                <el-dropdown trigger="click" @command="switchLanguage">
+                    <el-button plain round>
+                        <el-icon><collection /></el-icon>
+                        <span style="margin-left: 4px;">{{ LANGUAGE_CODE|upper }}</span>
+                        <el-icon class="el-icon--right"><arrow-down /></el-icon>
+                    </el-button>
+                    <template #dropdown>
+                        <el-dropdown-menu>
+                            {% get_available_languages as languages %}
+                            {% for lang_code, lang_name in languages %}
+                                <el-dropdown-item command="{{ lang_code }}" {% if lang_code == LANGUAGE_CODE %}disabled{% endif %}>
+                                    {{ lang_name }}
+                                </el-dropdown-item>
+                            {% endfor %}
+                        </el-dropdown-menu>
+                    </template>
+                </el-dropdown>
+
                 <!-- GitHub Repository Link -->
                 <el-button onclick="window.open('https://github.com/Mzzj114/know-more', '_blank')" plain round>Github</el-button>
                 
@@ -169,6 +199,10 @@
                 }
             },
             methods: {
+                switchLanguage(lang) {
+                    document.getElementById('lang-code-input').value = lang;
+                    document.getElementById('lang-switch-form').submit();
+                },
                 {% block vue_methods %}{% endblock %}
             },
             mounted() {

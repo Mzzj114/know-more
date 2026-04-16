@@ -21,8 +21,12 @@ def tutorial_page(request, slug=None):
         'current_slug': slug,
     })
 
+from django.utils.translation import get_language
+
 def get_tutorials_dir():
-    return os.path.join(settings.BASE_DIR, 'static', 'tutorials')
+    lang = get_language() or 'zh'
+    lang = lang.split('-')[0]
+    return os.path.join(settings.BASE_DIR, 'static', 'tutorials', lang)
 
 def api_tutorial_list(request):
     """

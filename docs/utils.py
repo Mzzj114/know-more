@@ -5,9 +5,13 @@ from django.conf import settings
 from pathlib import Path
 from django.http import Http404
 
+from django.utils.translation import get_language
+
 def get_docs_dir():
     """Returns the base directory for documentation"""
-    return Path(settings.BASE_DIR) / 'document' / 'zh-Hans'
+    lang = get_language() or 'zh'
+    lang = lang.split('-')[0]  # e.g. 'zh-hans' -> 'zh'
+    return Path(settings.BASE_DIR) / 'document' / lang
 
 def get_all_docs():
     """Returns a list of all documents with their metadata, sorted by 'order'."""
