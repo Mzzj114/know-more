@@ -11,6 +11,9 @@ TODO
 3. 国际化
     a. 所有文本(模板、教程、文档)
     b. 教程json按语言分目录
+
+语言 url 似乎有用，但是不同的语言url用 get_language_from_request() 还是会得到默认语言
+
 4. AI接口
     a. 自己算算token限量的开销，调整数值
     b. 增加“沙盒仅测试，应用请去官方AI网站”

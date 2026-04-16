@@ -3,7 +3,7 @@ import json
 from django.conf import settings
 from django.http import JsonResponse, Http404
 from django.shortcuts import render, redirect
-from django.utils.translation import get_language_from_request
+from know_more.utils import get_language
 
 def root_redirect(request):
     """
@@ -11,17 +11,8 @@ def root_redirect(request):
     Automatically redirects user to their preferred language's docs page.
     Falls back to English if preferred language is not supported.
     """
-    # Get user's preferred language from request
-    lang_code = get_language_from_request(request)
-    
-    # Map Django language codes to our URL prefixes
-    if lang_code.startswith('zh'):
-        prefix = 'zh-hans'
-    else:
-        prefix = 'en'  # Default to English
-    
     # Redirect to docs in the detected language
-    return redirect(f'/{prefix}/home')
+    return redirect(f'/{get_language(request)}/home')
 
 def home(request):
     """
@@ -41,14 +32,17 @@ def tutorial_page(request, slug=None):
         'current_slug': slug,
     })
 
-def get_tutorials_dir():
-    return os.path.join(settings.BASE_DIR, 'static', 'tutorials')
+def get_tutorials_dir(lang):
+    return os.path.join(settings.BASE_DIR, 'static', 'tutorials', lang)
 
 def api_tutorial_list(request):
     """
     获取所有可用的教程列表 (用于渲染侧边栏目录)
     """
-    tutorials_dir = get_tutorials_dir()
+
+    lang = get_language(request)
+
+    tutorials_dir = get_tutorials_dir(lang)
     tutorials = []
     
     if os.path.exists(tutorials_dir):
@@ -78,8 +72,9 @@ def api_tutorial_detail(request, slug):
     """
     if not slug or '..' in slug or '/' in slug or '\\' in slug:
         raise Http404("Invalid tutorial slug")
-        
-    tutorials_dir = get_tutorials_dir()
+    
+    lang = get_language(request)
+    tutorials_dir = get_tutorials_dir(lang)
     filepath = os.path.join(tutorials_dir, f"{slug}.json")
     
     if os.path.exists(filepath):

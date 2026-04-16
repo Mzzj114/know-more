@@ -26,6 +26,31 @@ Object.assign(AppRoot, {
     },
     
     computed: {
+        /**
+         * Get language prefix from current URL path
+         * Returns 'zh' or 'en', defaults to 'en'
+         */
+        langPrefix() {
+            const path = window.location.pathname;
+            const parts = path.split('/').filter(Boolean); // Remove empty strings
+            const firstPart = parts[0];
+
+            // Check if first part is a valid language code
+            if (firstPart === 'zh' || firstPart === 'en') {
+                return firstPart;
+            }
+            
+            // Default to English if no valid language prefix found
+            return 'en';
+        },
+
+        /**
+         * Base URL for API requests with language prefix
+         */
+        apiBaseUrl() {
+            return `/${this.langPrefix}`;
+        },
+
         totalSteps() {
             return this.tutorialData && this.tutorialData.steps ? this.tutorialData.steps.length : 0;
         },
@@ -70,7 +95,7 @@ Object.assign(AppRoot, {
          */
         async fetchDirectory() {
             try {
-                const res = await fetch('/api/tutorials/');
+                const res = await fetch(`${this.apiBaseUrl}/api/tutorials/`);
                 const data = await res.json();
                 this.tutorials = data.tutorials || [];
                 
@@ -92,14 +117,14 @@ Object.assign(AppRoot, {
         },
 
         /**
-         * 加载选定的教程详情
+         * 加载指定教程的详细内容
          */
         async loadTutorial(slug, pushState = true, targetStep = 0) {
             if (!slug) return;
             this.loading = true;
             
             try {
-                const res = await fetch(`/api/tutorials/${slug}/`);
+                const res = await fetch(`${this.apiBaseUrl}/api/tutorials/${slug}/`);
                 if (res.ok) {
                     this.tutorialData = await res.json();
                     this.activeSlug = slug;
@@ -116,7 +141,7 @@ Object.assign(AppRoot, {
                     this.applyHighlights();
                     
                     if (pushState) {
-                        window.history.pushState({ slug: slug }, '', `/tutorial/${slug}/`);
+                        window.history.pushState({ slug: slug }, '', `/${this.langPrefix}/tutorial/${slug}/`);
                     }
                 } else {
                     if (window.ElementPlus) ElementPlus.ElMessage.warning("无法加载选择的教程");
@@ -292,7 +317,7 @@ Object.assign(AppRoot, {
                         content: msg.content 
                     }));
 
-                const response = await fetch('/ai/chat/', {
+                const response = await fetch(`${this.apiBaseUrl}/ai/chat/`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ messages: messagesToSend })

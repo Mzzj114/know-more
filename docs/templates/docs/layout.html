@@ -80,52 +80,12 @@
         color: var(--text-secondary);
         box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
-    .language-switcher {
-        padding: 16px;
-        border-bottom: 1px solid var(--border);
-        display: flex;
-        gap: 8px;
-        justify-content: center;
-    }
-    .language-btn {
-        padding: 6px 16px;
-        border-radius: 20px;
-        border: 1px solid var(--border);
-        background-color: transparent;
-        color: var(--text-secondary);
-        cursor: pointer;
-        transition: all 0.3s ease;
-        font-size: 14px;
-    }
-    .language-btn:hover {
-        background-color: var(--primary-light);
-        color: var(--primary);
-        border-color: var(--primary);
-    }
-    .language-btn.active {
-        background-color: var(--primary);
-        color: white;
-        border-color: var(--primary);
-    }
 </style>
 {% endblock %}
 
 {% block layout_content %}
 <el-container class="docs-container">
     <el-aside class="docs-aside">
-        <!-- Language Switcher using direct links -->
-        <div class="language-switcher">
-            {% get_current_language as CURRENT_LANGUAGE %}
-            <a href="/zh-hans/docs/{{ request.resolver_match.kwargs.slug }}/" 
-               class="language-btn {% if CURRENT_LANGUAGE == 'zh-hans' %}active{% endif %}">
-                中文
-            </a>
-            <a href="/en/docs/{{ request.resolver_match.kwargs.slug }}/" 
-               class="language-btn {% if CURRENT_LANGUAGE == 'en' %}active{% endif %}">
-                English
-            </a>
-        </div>
-        
         <!-- Element Plus Menu for Documentation Sidebar -->
         <el-menu 
             :default-active="activeMenu"

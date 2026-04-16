@@ -30,8 +30,8 @@ from django.conf import settings
 from pathlib import Path
 
 def get_doc_path(slug):
-    # 基础目录：BASE_DIR / 'document' / 'zh-Hans'
-    base_dir = Path(settings.BASE_DIR) / 'document' / 'zh-Hans'
+    # 基础目录：BASE_DIR / 'document' / 'zh'
+    base_dir = Path(settings.BASE_DIR) / 'document' / 'zh'
     
     # 假设 slug 是 "intro/getting-started"
     # 根据你的逻辑：如果是子目录，查找同名文件 
@@ -66,7 +66,7 @@ tags: [intro, about]
 使用 `python-frontmatter` 库可以非常轻松地解析它。
 
 #### C. 目录树生成 (The Sidebar)
-你需要一个函数递归扫描 `document/zh-Hans/` 目录，生成一个嵌套的字典或列表，传给模板渲染侧边栏。
+你需要一个函数递归扫描 `document/zh/` 目录，生成一个嵌套的字典或列表，传给模板渲染侧边栏。
 *   建议：**缓存这个目录树**。只有当文件发生变动或项目重启时才更新。
 
 #### D. 内容渲染

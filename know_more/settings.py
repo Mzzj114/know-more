@@ -118,7 +118,7 @@ LANGUAGE_CODE = 'en'
 
 LANGUAGES = [
     ('en', _('English')),
-    ('zh-hans', _('Chinese')),
+    ('zh', _('Chinese')),
 ]
 
 TIME_ZONE = 'Asia/Shanghai'

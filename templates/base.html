@@ -1,5 +1,6 @@
 {% load static %}
 {% load version_tags %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -79,6 +80,35 @@
             display: flex;
             flex-direction: column;
         }
+        /* Language dropdown styling */
+        .language-dropdown-trigger {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 6px 12px;
+            border-radius: var(--el-border-radius-base);
+            cursor: pointer;
+            color: var(--text-secondary);
+            font-weight: 600;
+            transition: all 0.2s;
+            border: 1px solid var(--border);
+            background-color: transparent;
+        }
+        .language-dropdown-trigger:hover {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+        .language-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+        }
+        .language-item.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
     </style>
     {% block extra_head %}{% endblock %}
 </head>
@@ -117,7 +147,37 @@
                 </div>
             </div>
             <div class="header-right" style="display: flex; align-items: center; gap: 12px;">
-                <!-- GitHub Repository Link -->
+                <!-- Language Selector Dropdown -->
+                {% get_current_language as CURRENT_LANGUAGE %}
+                <el-dropdown trigger="click">
+                    <div class="language-dropdown-trigger">
+                        <el-icon><translate /></el-icon>
+                        <span>{% if CURRENT_LANGUAGE == 'zh-hans' or CURRENT_LANGUAGE == 'zh-hant' %}中文{% else %}English{% endif %}</span>
+                        <el-icon class="el-icon--right"><arrow-down /></el-icon>
+                    </div>
+                    <template #dropdown>
+                        <el-dropdown-menu>
+                            <el-dropdown-item {% if CURRENT_LANGUAGE == 'zh-hans' or CURRENT_LANGUAGE == 'zh-hant' %}disabled{% endif %}>
+                                <span class="lang-switcher" data-lang="zh" style="cursor: pointer; width: 100%; display: flex; align-items: center;">
+                                    {% if CURRENT_LANGUAGE == 'zh-hans' or CURRENT_LANGUAGE == 'zh-hant' %}
+                                    <el-icon><check /></el-icon>
+                                    {% endif %}
+                                    <span style="margin-left: 4px;">中文</span>
+                                </span>
+                            </el-dropdown-item>
+                            <el-dropdown-item divided {% if CURRENT_LANGUAGE == 'en' %}disabled{% endif %}>
+                                <span class="lang-switcher" data-lang="en" style="cursor: pointer; width: 100%; display: flex; align-items: center;">
+                                    {% if CURRENT_LANGUAGE == 'en' %}
+                                    <el-icon><check /></el-icon>
+                                    {% endif %}
+                                    <span style="margin-left: 4px;">English</span>
+                                </span>
+                            </el-dropdown-item>
+                        </el-dropdown-menu>
+                    </template>
+                </el-dropdown>
+                
+                <!-- Github Button -->
                 <el-button onclick="window.open('https://github.com/Mzzj114/know-more', '_blank')" plain round>Github</el-button>
                 
                 {% if user.is_authenticated %}
@@ -172,6 +232,23 @@
                 {% block vue_methods %}{% endblock %}
             },
             mounted() {
+                // Add language switcher event listeners using event delegation
+                document.addEventListener('click', (e) => {
+                    const langSwitcher = e.target.closest('.lang-switcher');
+                    if (!langSwitcher) return;
+                    
+                    const lang = langSwitcher.dataset.lang;
+                    if (!lang) return;
+                    
+                    // Get current path without language prefix
+                    const currentPath = window.location.pathname;
+                    // Remove current language prefix (e.g., /zh/ or /en/)
+                    const pathWithoutLang = currentPath.replace(/^\/(zh-hans|zh-hant|zh|en)\//, '/');
+                    // Build new URL with target language
+                    const newPath = `/${lang}${pathWithoutLang}`;
+                    window.location.href = newPath;
+                });
+                
                 {% block vue_mounted %}{% endblock %}
             }
         };

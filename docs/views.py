@@ -1,22 +1,14 @@
 from django.shortcuts import render, redirect
 from django.http import Http404
 from .utils import get_all_docs, get_doc_content
-
-def get_language_from_request(request):
-    """Convert Django language code to document directory name"""
-    lang_code = request.LANGUAGE_CODE
-    # Convert 'zh-hans' or 'zh-hant' to 'zh'
-    if lang_code.startswith('zh'):
-        return 'zh'
-    # Default to 'en' for any other language
-    return 'en'
+from know_more.utils import get_language
 
 def doc_index(request):
     """
     Renders the index page listing all available documents.
     Uses Django's i18n to detect user's language preference.
     """
-    language = get_language_from_request(request)
+    language = get_language(request)
     docs = get_all_docs(language)
     
     # If there are docs, redirect to the first one (or 'about' if exists)
@@ -38,7 +30,7 @@ def doc_detail(request, slug):
     Renders a specific document based on its slug.
     Uses Django's i18n to detect user's language preference.
     """
-    language = get_language_from_request(request)
+    language = get_language(request)
     
     try:
         doc_data = get_doc_content(slug, language)
