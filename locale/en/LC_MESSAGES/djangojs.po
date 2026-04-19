@@ -31,15 +31,15 @@ msgstr "Unable to load selected tutorial"
 
 #: .\static\js\tutorial.js:197
 msgid "进入下一章节: "
-msgstr ""
+msgstr "Enter next chapter: "
 
 #: .\static\js\tutorial.js:214
 msgid "返回上一章节: "
-msgstr ""
+msgstr "Return to previous chapter: "
 
 #: .\static\js\tutorial.js:233
 msgid "自动填充完毕，执行测试"
-msgstr ""
+msgstr "Auto completed, execute test"
 
 #: .\static\js\tutorial.js:318
 msgid "请求失败，状态码: "

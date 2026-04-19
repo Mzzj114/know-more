@@ -1034,11 +1034,11 @@ msgstr ""
 
 #: .\templates\base.html:111
 msgid "Version:"
-msgstr ""
+msgstr "版本："
 
 #: .\templates\base.html:121
 msgid "Version: Development"
-msgstr ""
+msgstr "版本：开发中"
 
 #: .\templates\base.html:166
 msgid "个人主页"
