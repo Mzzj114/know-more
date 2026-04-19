@@ -7,9 +7,14 @@
 const config = window.TUTORIAL_CONFIG || { activeSlug: '' };
 
 // 扩展 AppRoot 配置
+const baseDataFunc = AppRoot.data;
+const baseMethods = AppRoot.methods || {};
+
 Object.assign(AppRoot, {
     data() {
+        const baseData = baseDataFunc ? baseDataFunc() : {};
         return {
+            ...baseData,
             loading: true,
             tutorials: [],
             activeSlug: config.activeSlug,
@@ -65,12 +70,15 @@ Object.assign(AppRoot, {
     },
 
     methods: {
+        ...baseMethods,
         /**
          * 获取所有可用教程目录
          */
         async fetchDirectory() {
             try {
-                const res = await fetch('/api/tutorials/');
+                let prefix = window.LANG_PREFIX || '';
+                if (prefix === '/') prefix = '';
+                const res = await fetch(`${prefix}/api/tutorials/`);
                 const data = await res.json();
                 this.tutorials = data.tutorials || [];
                 
@@ -99,7 +107,9 @@ Object.assign(AppRoot, {
             this.loading = true;
             
             try {
-                const res = await fetch(`/api/tutorials/${slug}/`);
+                let prefix = window.LANG_PREFIX || '';
+                if (prefix === '/') prefix = '';
+                const res = await fetch(`${prefix}/api/tutorials/${slug}/`);
                 if (res.ok) {
                     this.tutorialData = await res.json();
                     this.activeSlug = slug;
@@ -116,7 +126,9 @@ Object.assign(AppRoot, {
                     this.applyHighlights();
                     
                     if (pushState) {
-                        window.history.pushState({ slug: slug }, '', `/tutorial/${slug}/`);
+                        let prefix = window.LANG_PREFIX || '';
+                        if (prefix === '/') prefix = '';
+                        window.history.pushState({ slug: slug }, '', `${prefix}/tutorial/${slug}/`);
                     }
                 } else {
                     if (window.ElementPlus) ElementPlus.ElMessage.warning("无法加载选择的教程");
@@ -292,7 +304,9 @@ Object.assign(AppRoot, {
                         content: msg.content 
                     }));
 
-                const response = await fetch('/ai/chat/', {
+                let prefix = window.LANG_PREFIX || '';
+                if (prefix === '/') prefix = '';
+                const response = await fetch(`${prefix}/ai/chat/`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ messages: messagesToSend })
