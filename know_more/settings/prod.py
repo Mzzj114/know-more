@@ -33,3 +33,6 @@ CSRF_COOKIE_SECURE = env('CSRF_COOKIE_SECURE', cast=bool, default=True)
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = 'DENY'
+
+# Static files root for production (where collectstatic will put files)
+STATIC_ROOT = BASE_DIR / 'staticfiles'
