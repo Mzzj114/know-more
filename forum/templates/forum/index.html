@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}社区论坛 - Know More{% endblock %}
+{% block title %}{% translate "社区论坛" %} - Know More{% endblock %}
 
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/forum.css' %}" />
@@ -13,9 +14,9 @@
     <div class="forum-page-header">
         <h1 class="forum-page-title">
             <el-icon><chat-dot-round /></el-icon>
-            社区论坛
+            {% translate "社区论坛" %}
         </h1>
-        <p class="forum-page-desc">在这里分享提示词、交流学习经验，与社区一起成长。</p>
+        <p class="forum-page-desc">{% translate "在这里分享提示词、交流学习经验，与社区一起成长。" %}</p>
     </div>
 
     <div class="forum-layout">
@@ -35,25 +36,25 @@
                         </a>
                     </div>
                 </div>
-                <div class="category-desc">{{ category.description|default:"暂无描述" }}</div>
+                <div class="category-desc">{{ category.description|default_if_none:"{% translate '暂无描述' %}" }}</div>
                 <div class="category-meta">
                     <span class="meta-item">
-                        <el-icon><document /></el-icon> {{ category.post_count }} 篇帖子
+                        <el-icon><document /></el-icon> {{ category.post_count }} {% translate "篇帖子" %}
                     </span>
                     {% if category.last_post_time %}
                     <span class="meta-item">
-                        <el-icon><clock /></el-icon> 最后活跃 {{ category.last_post_time|timesince }} 前
+                        <el-icon><clock /></el-icon> {% translate "最后活跃" %} {{ category.last_post_time|timesince }} {% translate "前" %}
                     </span>
                     {% else %}
                     <span class="meta-item">
-                        <el-icon><clock /></el-icon> 暂无活动
+                        <el-icon><clock /></el-icon> {% translate "暂无活动" %}
                     </span>
                     {% endif %}
                 </div>
             </el-card>
             {% empty %}
             <div class="forum-empty">
-                <el-empty description="暂无论坛分类">
+                <el-empty description="{% translate '暂无论坛分类' %}">
                 </el-empty>
             </div>
             {% endfor %}
@@ -67,15 +68,15 @@
                 <el-button type="primary" size="large" style="width: 100%;"
                            onclick="window.location.href='{% url 'forum:create_post' %}'">
                     <el-icon style="margin-right: 6px;"><edit /></el-icon>
-                    发布新帖子
+                    {% translate "发布新帖子" %}
                 </el-button>
             </div>
             {% else %}
             <el-card class="sidebar-widget" shadow="never">
                 <div style="text-align: center; padding: 8px 0;">
-                    <p style="color: var(--text-secondary); margin: 0 0 12px; font-size: 14px;">登录后即可发帖</p>
-                    <el-button type="primary" plain onclick="window.location.href='/admin/login/'">
-                        登录
+                    <p style="color: var(--text-secondary); margin: 0 0 12px; font-size: 14px;">{% translate "登录后即可发帖" %}</p>
+                    <el-button type="primary" plain onclick="location.href='{% url 'login' %}'">
+                        {% translate "登录" %}
                     </el-button>
                 </div>
             </el-card>
@@ -85,7 +86,7 @@
             <el-card class="sidebar-widget" shadow="never">
                 <template #header>
                     <div class="widget-header" style="padding: 0; border: none;">
-                        <el-icon><trend-charts /></el-icon> 最新帖子
+                        <el-icon><trend-charts /></el-icon> {% translate "最新帖子" %}
                     </div>
                 </template>
                 {% for post in latest_posts %}
@@ -95,13 +96,13 @@
                     </a>
                     <div class="sidebar-post-meta">
                         <span>{{ post.author.username }}</span>
-                        <span>{{ post.reply_count }} 回复</span>
-                        <span>{{ post.view_count }} 浏览</span>
+                        <span>{{ post.reply_count }} {% translate "回复" %}</span>
+                        <span>{{ post.view_count }} {% translate "浏览" %}</span>
                     </div>
                 </div>
                 {% empty %}
                 <div style="padding: 24px 20px; text-align: center; color: var(--text-secondary); font-size: 14px;">
-                    暂无帖子
+                    {% translate "暂无帖子" %}
                 </div>
                 {% endfor %}
             </el-card>

@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}{{ profile_user.username }} 的主页 - Know More 论坛{% endblock %}
+{% block title %}{{ profile_user.username }} {% translate "的主页" %} - Know More {% translate "论坛" %}{% endblock %}
 
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/forum.css' %}" />
@@ -13,9 +14,9 @@
     <div class="forum-breadcrumb">
         <el-breadcrumb separator="/">
             <el-breadcrumb-item>
-                <a href="{% url 'forum:forum_index' %}">论坛</a>
+                <a href="{% url 'forum:forum_index' %}">{% translate "论坛" %}</a>
             </el-breadcrumb-item>
-            <el-breadcrumb-item>{{ profile_user.username }} 的主页</el-breadcrumb-item>
+            <el-breadcrumb-item>{{ profile_user.username }} {% translate "的主页" %}</el-breadcrumb-item>
         </el-breadcrumb>
     </div>
 
@@ -34,34 +35,34 @@
 
                 <div style="color: var(--text-secondary); font-size: 13px; margin-bottom: 20px;">
                     <el-icon style="vertical-align: -2px;"><calendar /></el-icon>
-                    加入于 {{ profile_user.date_joined|date:"Y 年 m 月 d 日" }}
+                    {% translate "加入于" %} {{ profile_user.date_joined|date:"Y 年 m 月 d 日" }}
                 </div>
 
                 <div class="profile-stats">
                     <div class="profile-stat">
                         <div class="stat-num">{{ profile_user.profile.post_count }}</div>
-                        <div class="stat-label">帖子</div>
+                        <div class="stat-label">{% translate "帖子" %}</div>
                     </div>
                     <div class="profile-stat">
                         <div class="stat-num">{{ profile_user.profile.reply_count }}</div>
-                        <div class="stat-label">回复</div>
+                        <div class="stat-label">{% translate "回复" %}</div>
                     </div>
                     <div class="profile-stat">
                         <div class="stat-num">{{ profile_user.profile.like_count }}</div>
-                        <div class="stat-label">获赞</div>
+                        <div class="stat-label">{% translate "获赞" %}</div>
                     </div>
                 </div>
 
                 {% if user == profile_user %}
                 <div class="profile-actions">
                     <el-button plain type="warning" size="small" onclick="window.location.href='{% url 'forum:my_favorites' %}'">
-                        <el-icon style="margin-right: 4px;"><star /></el-icon> 我的收藏
+                        <el-icon style="margin-right: 4px;"><star /></el-icon> {% translate "我的收藏" %}
                     </el-button>
                     <el-button plain size="small" onclick="window.location.href='{% url 'forum:edit_profile' %}'">
-                        <el-icon style="margin-right: 4px;"><setting /></el-icon> 编辑资料
+                        <el-icon style="margin-right: 4px;"><setting /></el-icon> {% translate "编辑资料" %}
                     </el-button>
                     <el-button plain type="danger" size="small" onclick="window.location.href='{% url 'reset_password' %}'">
-                        <el-icon style="margin-right: 4px;"><lock /></el-icon> 密码修改
+                        <el-icon style="margin-right: 4px;"><lock /></el-icon> {% translate "密码修改" %}
                     </el-button>
                 </div>
                 {% endif %}
@@ -70,7 +71,7 @@
             {% if profile_user.profile.bio %}
             <el-card shadow="never" style="margin-top: 16px;">
                 <template #header>
-                    <span style="font-weight: 700; font-size: 15px;">个人简介</span>
+                    <span style="font-weight: 700; font-size: 15px;">{% translate "个人简介" %}</span>
                 </template>
                 <div style="color: var(--text-secondary); font-size: 14px; line-height: 1.7;">
                     {{ profile_user.profile.bio|linebreaks }}
@@ -85,7 +86,7 @@
             <el-card shadow="never" body-style="padding: 0;" style="margin-bottom: 20px;">
                 <template #header>
                     <span style="font-weight: 700; font-size: 16px; display: flex; align-items: center; gap: 8px;">
-                        <el-icon><document /></el-icon> 最近帖子
+                        <el-icon><document /></el-icon> {% translate "最近帖子" %}
                     </span>
                 </template>
 
@@ -93,14 +94,14 @@
                 <div class="sidebar-post-item">
                     <a href="{% url 'forum:post_detail' post.id %}">{{ post.title }}</a>
                     <div class="sidebar-post-meta">
-                        <span>{{ post.created_at|timesince }} 前</span>
-                        <span>{{ post.view_count }} 浏览</span>
-                        <span>{{ post.reply_count }} 回复</span>
+                        <span>{{ post.created_at|timesince }} {% translate "前" %}</span>
+                        <span>{{ post.view_count }} {% translate "浏览" %}</span>
+                        <span>{{ post.reply_count }} {% translate "回复" %}</span>
                     </div>
                 </div>
                 {% empty %}
                 <div style="padding: 32px 20px; text-align: center; color: var(--text-secondary); font-size: 14px;">
-                    暂无帖子
+                    {% translate "暂无帖子" %}
                 </div>
                 {% endfor %}
             </el-card>
@@ -109,7 +110,7 @@
             <el-card shadow="never" body-style="padding: 0;">
                 <template #header>
                     <span style="font-weight: 700; font-size: 16px; display: flex; align-items: center; gap: 8px;">
-                        <el-icon><chat-line-round /></el-icon> 最近回复
+                        <el-icon><chat-line-round /></el-icon> {% translate "最近回复" %}
                     </span>
                 </template>
 
@@ -122,12 +123,12 @@
                         {{ reply.content|truncatechars:100 }}
                     </div>
                     <div class="sidebar-post-meta">
-                        <span>{{ reply.created_at|timesince }} 前</span>
+                        <span>{{ reply.created_at|timesince }} {% translate "前" %}</span>
                     </div>
                 </div>
                 {% empty %}
                 <div style="padding: 32px 20px; text-align: center; color: var(--text-secondary); font-size: 14px;">
-                    暂无回复
+                    {% translate "暂无回复" %}
                 </div>
                 {% endfor %}
             </el-card>

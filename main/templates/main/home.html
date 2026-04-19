@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}Know More — 掌握提示词工程{% endblock %}
+{% block title %}{% translate "掌握提示词工程" %} | Know More{% endblock %}
 
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/home.css' %}" />
@@ -23,34 +24,34 @@
         <!-- 顶部小标签 -->
         <div class="hero-eyebrow">
             <el-icon><promotion /></el-icon>
-            开源 · 非盈利 · 免费使用
+            {% translate "开源 · 非盈利 · 免费使用" %}
         </div>
 
         <!-- 主标题 -->
         <h1 class="hero-title">
-            让每个人都能<br>
-            驾驭 <span class="brand">AI 提示词工程</span>
+            {% translate "让每个人都能" %}<br>
+            {% translate "驾驭" %} <span class="brand">AI {% translate "提示词工程" %}</span>
         </h1>
 
         <!-- 副标题 -->
         <p class="hero-subtitle">
-            Know More 将复杂的 AI 使用技巧，降维为可复制的模板与交互式教学。<br>
-            从今天起，稳定、高效地从大模型获取你想要的结果。
+            {% translate "Know More 将复杂的 AI 使用技巧，降维为可复制的模板与交互式教学。" %}<br>
+            {% translate "从今天起，稳定、高效地从大模型获取你想要的结果。" %}
         </p>
 
         <!-- 行动按钮 -->
         <div class="hero-cta">
-            <a href="#" class="btn-hero-primary">
+            <a href="{% url 'tutorial' %}" class="btn-hero-primary">
                 <el-icon><video-play /></el-icon>
-                开始互动教程
+                {% translate "开始互动教程" %}
             </a>
             <a href="{% url 'doc_index' %}" class="btn-hero-secondary">
                 <el-icon><document /></el-icon>
-                阅读文档
+                {% translate "阅读文档" %}
             </a>
-            <a href="#" class="btn-hero-secondary">
+            <a href="{% url 'forum:forum_index' %}" class="btn-hero-secondary">
                 <el-icon><chat-line-round /></el-icon>
-                参与论坛
+                {% translate "参与论坛" %}
             </a>
         </div>
     </div>
@@ -59,15 +60,15 @@
     <div class="hero-stats">
         <div class="hero-stat">
             <div class="hero-stat-number">5+</div>
-            <div class="hero-stat-label">核心技巧文档</div>
+            <div class="hero-stat-label">{% translate "核心技巧文档" %}</div>
         </div>
         <div class="hero-stat">
             <div class="hero-stat-number">100%</div>
-            <div class="hero-stat-label">开源免费</div>
+            <div class="hero-stat-label">{% translate "开源免费" %}</div>
         </div>
         <div class="hero-stat">
             <div class="hero-stat-number">3</div>
-            <div class="hero-stat-label">实战案例</div>
+            <div class="hero-stat-label">{% translate "实战案例" %}</div>
         </div>
     </div>
 </section>
@@ -78,9 +79,9 @@
    ============================================================ -->
 <section class="home-section white-bg">
     <div class="section-header">
-        <span class="section-label">丰富功能</span>
-        <h2 class="section-title">一个平台，覆盖你的全部学习需求</h2>
-        <p class="section-desc">从入门到进阶，从理论到实战，Know More 为你提供完整的提示词工程学习生态。</p>
+        <span class="section-label">{% translate "丰富功能" %}</span>
+        <h2 class="section-title">{% translate "一个平台，覆盖你的全部学习需求" %}</h2>
+        <p class="section-desc">{% translate "从入门到进阶，从理论到实战，Know More 为你提供完整的提示词工程学习生态。" %}</p>
     </div>
 
     <div class="features-grid">
@@ -90,13 +91,12 @@
             <div class="feature-icon-wrap">
                 <el-icon><guide /></el-icon>
             </div>
-            <h3 class="feature-card-title">互动式教程</h3>
+            <h3 class="feature-card-title">{% translate "互动式教程" %}</h3>
             <p class="feature-card-desc">
-                通过悬浮提示与表单引导，一步步写出符合规范的结构化提示词。
-                即学即用，所见即所得。
+                {% translate "通过悬浮提示与表单引导，一步步写出符合规范的结构化提示词。即学即用，所见即所得。" %}
             </p>
-            <a href="#" class="feature-card-link">
-                进入教程
+            <a href="{% url 'tutorial' %}" class="feature-card-link">
+                {% translate "进入教程" %}
                 <el-icon><arrow-right /></el-icon>
             </a>
         </div>
@@ -106,13 +106,12 @@
             <div class="feature-icon-wrap">
                 <el-icon><reading /></el-icon>
             </div>
-            <h3 class="feature-card-title">系统知识文档</h3>
+            <h3 class="feature-card-title">{% translate "系统知识文档" %}</h3>
             <p class="feature-card-desc">
-                深入阅读提示词工程的核心理论，包括 Few-shot、Chain-of-Thought、
-                Meta-prompting 等高阶技巧的详细解释与示例。
+                {% translate "深入阅读提示词工程的核心理论，包括 Few-shot、Chain-of-Thought、Meta-prompting 等高阶技巧的详细解释与示例。" %}
             </p>
             <a href="{% url 'doc_index' %}" class="feature-card-link">
-                浏览文档
+                {% translate "浏览文档" %}
                 <el-icon><arrow-right /></el-icon>
             </a>
         </div>
@@ -122,13 +121,12 @@
             <div class="feature-icon-wrap">
                 <el-icon><chat-line-round /></el-icon>
             </div>
-            <h3 class="feature-card-title">社区 Prompt 论坛</h3>
+            <h3 class="feature-card-title">{% translate "社区 Prompt 论坛" %}</h3>
             <p class="feature-card-desc">
-                发现并分享可直接复用的 Prompt 模板。与其他用户讨论最佳实践，
-                共同提升 AI 协作效率。
+                {% translate "发现并分享可直接复用的 Prompt 模板。与其他用户讨论最佳实践，共同提升 AI 协作效率。" %}
             </p>
-            <a href="#" class="feature-card-link">
-                进入论坛
+            <a href="{% url 'forum:forum_index' %}" class="feature-card-link">
+                {% translate "进入论坛" %}
                 <el-icon><arrow-right /></el-icon>
             </a>
         </div>
@@ -143,11 +141,10 @@
    ============================================================ -->
 <section class="home-section alt-bg">
     <div class="section-header">
-        <span class="section-label">核心价值</span>
-        <h2 class="section-title">一个小改变，带来质的飞跃</h2>
+        <span class="section-label">{% translate "核心价值" %}</span>
+        <h2 class="section-title">{% translate "一个小改变，带来质的飞跃" %}</h2>
         <p class="section-desc">
-            相同的问题，不同的提问方式，得到截然不同的答案。
-            了解结构化提示词如何让 AI 真正听懂你的需求。
+            {% translate "相同的问题，不同的提问方式，得到截然不同的答案。了解结构化提示词如何让 AI 真正听懂你的需求。" %}
         </p>
     </div>
 
@@ -157,15 +154,15 @@
         <div class="comparison-panel">
             <div class="comparison-header bad">
                 <el-icon><circle-close /></el-icon>
-                未经优化的提示词
+                {% translate "未经优化的提示词" %}
             </div>
             <div class="comparison-body">
-                <div class="prompt-text">帮我写一份 Python 学习计划</div>
+                <div class="prompt-text">{% translate "帮我写一份 Python 学习计划" %}</div>
             </div>
             <div class="comparison-tags">
-                <el-tag type="danger" effect="light" size="small" round>❌ 目标模糊</el-tag>
-                <el-tag type="danger" effect="light" size="small" round>❌ 缺少背景</el-tag>
-                <el-tag type="danger" effect="light" size="small" round>❌ 无法复用</el-tag>
+                <el-tag type="danger" effect="light" size="small" round>❌ {% translate "目标模糊" %}</el-tag>
+                <el-tag type="danger" effect="light" size="small" round>❌ {% translate "缺少背景" %}</el-tag>
+                <el-tag type="danger" effect="light" size="small" round>❌ {% translate "无法复用" %}</el-tag>
             </div>
         </div>
 
@@ -178,24 +175,22 @@
         <div class="comparison-panel">
             <div class="comparison-header good">
                 <el-icon><circle-check /></el-icon>
-                结构化提示词
+                {% translate "结构化提示词" %}
             </div>
             <div class="comparison-body">
-<div class="prompt-text"><span class="prompt-label">[角色]</span> <br> <span class="prompt-value">你是一位经验丰富的学习规划师</span>
+<div class="prompt-text"><span class="prompt-label">[{% translate "角色" %}]</span> <br> <span class="prompt-value">{% translate "你是一位经验丰富的学习规划师" %}</span>
 <br>
-<span class="prompt-label">[背景]</span><br> <span class="prompt-value">我是零基础的 Python 初学者，
-每天有 1 小时学习时间</span>
+<span class="prompt-label">[{% translate "背景" %}]</span><br> <span class="prompt-value">{% translate "我是零基础的 Python 初学者，每天有 1 小时学习时间" %}</span>
 <br>
-<span class="prompt-label">[任务]</span><br> <span class="prompt-value">为我制定 30 天学习路线</span>
+<span class="prompt-label">[{% translate "任务" %}]</span><br> <span class="prompt-value">{% translate "为我制定 30 天学习路线" %}</span>
 <br>
-<span class="prompt-label">[输出格式]</span><br> <span class="prompt-value">按周分组，每周 3 个目标，
-包含推荐资源</span></div>
+<span class="prompt-label">[{% translate "输出格式" %}]</span><br> <span class="prompt-value">{% translate "按周分组，每周 3 个目标，包含推荐资源" %}</span></div>
             </div>
             <div class="comparison-tags">
-                <el-tag type="success" effect="light" size="small" round>✅ 角色明确</el-tag>
-                <el-tag type="success" effect="light" size="small" round>✅ 背景详尽</el-tag>
-                <el-tag type="success" effect="light" size="small" round>✅ 格式规范</el-tag>
-                <el-tag type="success" effect="light" size="small" round>✅ 可复用</el-tag>
+                <el-tag type="success" effect="light" size="small" round>✅ {% translate "角色明确" %}</el-tag>
+                <el-tag type="success" effect="light" size="small" round>✅ {% translate "背景详尽" %}</el-tag>
+                <el-tag type="success" effect="light" size="small" round>✅ {% translate "格式规范" %}</el-tag>
+                <el-tag type="success" effect="light" size="small" round>✅ {% translate "可复用" %}</el-tag>
             </div>
         </div>
 
@@ -208,10 +203,10 @@
    ============================================================ -->
 <section class="home-section white-bg">
     <div class="section-header">
-        <span class="section-label">学习路径</span>
-        <h2 class="section-title">三步，从零到掌握提示词工程</h2>
+        <span class="section-label">{% translate "学习路径" %}</span>
+        <h2 class="section-title">{% translate "三步，从零到掌握提示词工程" %}</h2>
         <p class="section-desc">
-            我们的教学设计经过精心打磨，带你以最高效的路径建立稳固的能力基础。
+            {% translate "我们的教学设计经过精心打磨，带你以最高效的路径建立稳固的能力基础。" %}
         </p>
     </div>
 
@@ -219,28 +214,25 @@
 
         <div class="journey-step">
             <div class="journey-step-num">1</div>
-            <h3 class="journey-step-title">理解原理</h3>
+            <h3 class="journey-step-title">{% translate "理解原理" %}</h3>
             <p class="journey-step-desc">
-                阅读文档，了解大模型的工作方式，
-                掌握「为什么好的提示词能让 AI 更精准」的底层逻辑。
+                {% translate "阅读文档，了解大模型的工作方式，掌握「为什么好的提示词能让 AI 更精准」的底层逻辑。" %}
             </p>
         </div>
 
         <div class="journey-step">
             <div class="journey-step-num">2</div>
-            <h3 class="journey-step-title">实操教程</h3>
+            <h3 class="journey-step-title">{% translate "实操教程" %}</h3>
             <p class="journey-step-desc">
-                完成互动式教程，在引导下亲手写出结构化提示词，
-                并使用内置 AI 立即测试你的成果。
+                {% translate "完成互动式教程，在引导下亲手写出结构化提示词，并在使用内置 AI 立即测试你的成果。" %}
             </p>
         </div>
 
         <div class="journey-step">
             <div class="journey-step-num">3</div>
-            <h3 class="journey-step-title">运用到案例</h3>
+            <h3 class="journey-step-title">{% translate "运用到案例" %}</h3>
             <p class="journey-step-desc">
-                在「设计学习路线」等真实任务场景中综合运用所学，
-                并在论坛中分享你的 Prompt 模板。
+                {% translate "在「设计学习路线」等真实任务场景中综合运用所学，并在论坛中分享你的 Prompt 模板。" %}
             </p>
         </div>
 
@@ -252,21 +244,21 @@
    区域 5: FINAL CTA — 底部行动召唤
    ============================================================ -->
 <section class="final-cta">
-    <h2 class="final-cta-title">准备好了吗？</h2>
+    <h2 class="final-cta-title">{% translate "准备好了吗？" %}</h2>
     <p class="final-cta-desc">
-        加入 Know More，开始你的提示词工程学习之旅。<br>
-        完全免费，无需注册，立即开始。
+        {% translate "加入 Know More，开始你的提示词工程学习之旅。" %}<br>
+        {% translate "完全免费，无需注册，立即开始。" %}
     </p>
     <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-        <a href="#" class="btn-hero-primary">
+        <a href="{% url 'tutorial' %}" class="btn-hero-primary">
             <el-icon><video-play /></el-icon>
-            立即开始互动教程
+            {% translate "立即开始互动教程" %}
         </a>
         <a href="{% url 'doc_index' %}" class="btn-hero-secondary">
-            先看看文档
+            {% translate "先看看文档" %}
         </a>
-        <a href="#" class="btn-hero-secondary">
-            前往论坛
+        <a href="{% url 'forum:forum_index' %}" class="btn-hero-secondary">
+            {% translate "前往论坛" %}
         </a>
     </div>
 </section>

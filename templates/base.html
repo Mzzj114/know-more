@@ -23,6 +23,7 @@
     <script src="{% static 'element-plus/dist/index.full.js' %}"></script>
     <!-- Element Plus Icons -->
     <script src="{% static '@element-plus/icons-vue/dist/index.iife.min.js' %}"></script>
+    <script src="{% url 'javascript-catalog' %}"></script>
 
     <style>
         /* Specific layout overrides keeping the fixed layout in mind */
@@ -96,18 +97,18 @@
                     <el-icon><monitor /></el-icon> Know More
                 </a>
                 <nav class="nav-links">
-                    <a href="{% url 'home' %}" class="nav-link {% if nav_active == 'home' %}active{% endif %}">首页</a>
-                    <a href="{% url 'tutorial' %}" class="nav-link {% if nav_active == 'tutorial' %}active{% endif %}">教程</a>
-                    <a href="{% url 'doc_index' %}" class="nav-link {% if nav_active == 'docs' %}active{% endif %}">文档</a>
+                    <a href="{% url 'home' %}" class="nav-link {% if nav_active == 'home' %}active{% endif %}">{% translate "首页" %}</a>
+                    <a href="{% url 'tutorial' %}" class="nav-link {% if nav_active == 'tutorial' %}active{% endif %}">{% translate "教程" %}</a>
+                    <a href="{% url 'doc_index' %}" class="nav-link {% if nav_active == 'docs' %}active{% endif %}">{% translate "文档" %}</a>
                     <!-- Placeholder route for forum -->
-                    <a href="{% url 'forum:forum_index' %}" class="nav-link">论坛</a> 
+                    <a href="{% url 'forum:forum_index' %}" class="nav-link">{% translate "论坛" %}</a> 
                 </nav>
                 <!-- Version Info -->
                 {% version_info as version %}
                 <div style="display: flex; align-items: center; gap: 8px; padding: 6px 9px; font-size: 10px; color: var(--text-secondary); background-color: var(--primary-light); border-radius: var(--el-border-radius-base);">
                 {% if version %}
                     <span style="font-weight: 600;">
-                    Version: 
+                    {% translate "Version:" %} 
                     {% if version.version_tag %}
                         {{ version.version_tag }}
                     {% else %}
@@ -117,7 +118,7 @@
                     <span style="margin: 0 4px; opacity: 0.5;">•</span>
                     <span>{{ version.commit_date }}</span>
                 {% else %}
-                    <span>Version: Development</span>
+                    <span>{% translate "Version: Development" %}</span>
                 {% endif %}
                 </div>
             </div>
@@ -162,14 +163,14 @@
                                 <el-dropdown-item onclick="location.href='{% url 'forum:user_profile' user.username %}'">
                                     <template #default>
                                         <div style="display: flex; align-items: center; gap: 8px;">
-                                            <el-icon><user /></el-icon> 个人主页
+                                            <el-icon><user /></el-icon> {% translate "个人主页" %}
                                         </div>
                                     </template>
                                 </el-dropdown-item>
                                 <el-dropdown-item divided onclick="location.href='{% url 'logout' %}'">
                                     <template #default>
                                         <div style="display: flex; align-items: center; gap: 8px; color: var(--error);">
-                                            <el-icon><switch-button /></el-icon> 退出登录
+                                            <el-icon><switch-button /></el-icon> {% translate "退出登录" %}
                                         </div>
                                     </template>
                                 </el-dropdown-item>
@@ -177,7 +178,7 @@
                         </template>
                     </el-dropdown>
                 {% else %}
-                    <el-button type="primary" plain round onclick="location.href='{% url 'login' %}'">登录 / 注册</el-button>
+                    <el-button type="primary" plain round onclick="location.href='{% url 'login' %}'">{% translate "登录 / 注册" %}</el-button>
                 {% endif %}
             </div>
         </header>

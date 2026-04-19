@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.core.cache import cache
 from django.core.mail import send_mail
+from django.utils.translation import gettext as _
 from .forms import CustomUserCreationForm
 
 def send_verify_code(request):
@@ -13,7 +14,7 @@ def send_verify_code(request):
     发送邮箱验证码 API
     """
     if request.method != 'POST':
-        return JsonResponse({'success': False, 'message': '仅支持 POST 请求'})
+        return JsonResponse({'success': False, 'message': _('仅支持 POST 请求')})
     
     try:
         data = json.loads(request.body)
@@ -22,14 +23,14 @@ def send_verify_code(request):
         email = request.POST.get('email')
         
     if not email:
-        return JsonResponse({'success': False, 'message': '缺少邮箱地址'})
+        return JsonResponse({'success': False, 'message': _('缺少邮箱地址')})
         
     if User.objects.filter(email=email).exists():
-        return JsonResponse({'success': False, 'message': '该邮箱已被注册'})
+        return JsonResponse({'success': False, 'message': _('该邮箱已被注册')})
 
     # 简单的频率限制防刷 (60 秒)
     if cache.get(f"verify_lock_{email}"):
-        return JsonResponse({'success': False, 'message': '验证码发送太频繁，请稍后再试'})
+        return JsonResponse({'success': False, 'message': _('验证码发送太频繁，请稍后再试')})
 
     code = f"{random.randint(100000, 999999)}"
     
@@ -40,16 +41,16 @@ def send_verify_code(request):
 
     try:
         send_mail(
-            subject='Know More 注册验证码',
-            message=f'欢迎注册 Know More。您的注册验证码是：{code}，请在 5 分钟内完成输入。如非本人操作，请忽略此邮件。',
+            subject=_('Know More 注册验证码'),
+            message=_('欢迎注册 Know More。您的注册验证码是：%(code)s，请在 5 分钟内完成输入。如非本人操作，请忽略此邮件。') % {'code': code},
             from_email=None,
             recipient_list=[email],
             fail_silently=False,
         )
     except Exception as e:
-        return JsonResponse({'success': False, 'message': f'发送邮件失败: {str(e)}'})
+        return JsonResponse({'success': False, 'message': _('发送邮件失败: %(error)s') % {'error': str(e)}})
 
-    return JsonResponse({'success': True, 'message': '验证码已发送'})
+    return JsonResponse({'success': True, 'message': _('验证码已发送')})
 
 
 def register(request):
@@ -63,13 +64,13 @@ def register(request):
             input_code = request.POST.get('verification_code')
             
             if not input_code:
-                form.add_error(None, "请输入验证码")
+                form.add_error(None, _("请输入验证码"))
             else:
                 cached_code = cache.get(f"verify_code_{email}")
                 if not cached_code:
-                    form.add_error(None, "验证码已过期或不存在，请重新发送")
+                    form.add_error(None, _("验证码已过期或不存在，请重新发送"))
                 elif str(cached_code) != str(input_code):
-                    form.add_error(None, "验证码错误")
+                    form.add_error(None, _("验证码错误"))
                 else:
                     # 验证成功
                     user = form.save()
@@ -87,7 +88,7 @@ def send_reset_code(request):
     发送重置密码的邮箱验证码 API
     """
     if request.method != 'POST':
-        return JsonResponse({'success': False, 'message': '仅支持 POST 请求'})
+        return JsonResponse({'success': False, 'message': _('仅支持 POST 请求')})
     
     try:
         data = json.loads(request.body)
@@ -96,14 +97,14 @@ def send_reset_code(request):
         email = request.POST.get('email')
         
     if not email:
-        return JsonResponse({'success': False, 'message': '缺少邮箱地址'})
+        return JsonResponse({'success': False, 'message': _('缺少邮箱地址')})
         
     if not User.objects.filter(email=email).exists():
-        return JsonResponse({'success': False, 'message': '该邮箱未注册账号'})
+        return JsonResponse({'success': False, 'message': _('该邮箱未注册账号')})
 
     # 简单的频率限制防刷 (60 秒)
     if cache.get(f"reset_lock_{email}"):
-        return JsonResponse({'success': False, 'message': '验证码发送太频繁，请稍后再试'})
+        return JsonResponse({'success': False, 'message': _('验证码发送太频繁，请稍后再试')})
 
     code = f"{random.randint(100000, 999999)}"
     
@@ -112,16 +113,16 @@ def send_reset_code(request):
 
     try:
         send_mail(
-            subject='Know More 重置密码验证码',
-            message=f'您正在申请修改密码。您的验证码是：{code}，请在 5 分钟内完成输入。如非本人操作，请密切关注您的账号安全。',
+            subject=_('Know More 重置密码验证码'),
+            message=_('您正在申请修改密码。您的验证码是：%(code)s，请在 5 分钟内完成输入。如非本人操作，请密切关注您的账号安全。') % {'code': code},
             from_email=None,
             recipient_list=[email],
             fail_silently=False,
         )
     except Exception as e:
-        return JsonResponse({'success': False, 'message': f'发送邮件失败: {str(e)}'})
+        return JsonResponse({'success': False, 'message': _('发送邮件失败: %(error)s') % {'error': str(e)}})
 
-    return JsonResponse({'success': True, 'message': '验证码已发送'})
+    return JsonResponse({'success': True, 'message': _('验证码已发送')})
 
 def reset_password(request):
     """
@@ -135,19 +136,19 @@ def reset_password(request):
 
         error_msg = None
         if not email or not input_code or not password or not confirm_password:
-            error_msg = "请填写所有必填字段"
+            error_msg = _("请填写所有必填字段")
         elif password != confirm_password:
-            error_msg = "两次输入的密码不一致"
+            error_msg = _("两次输入的密码不一致")
         else:
             cached_code = cache.get(f"reset_code_{email}")
             if not cached_code:
-                error_msg = "验证码已过期或不存在，请重新发送"
+                error_msg = _("验证码已过期或不存在，请重新发送")
             elif str(cached_code) != str(input_code):
-                error_msg = "验证码错误"
+                error_msg = _("验证码错误")
             else:
                 user = User.objects.filter(email=email).first()
                 if not user:
-                    error_msg = "系统中找不到该邮箱对应的用户"
+                    error_msg = _("系统中找不到该邮箱对应的用户")
                 else:
                     # 验证成功，执行密码重置
                     user.set_password(password)

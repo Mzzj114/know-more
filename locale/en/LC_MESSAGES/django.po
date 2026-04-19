@@ -1,0 +1,1054 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-19 10:18-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\account\templates\auth\login.html:4 .\forum\templates\forum\index.html:78
+#: .\forum\templates\forum\post_detail.html:97
+#: .\forum\templates\forum\post_detail.html:201
+msgid "登录"
+msgstr "Login"
+
+#: .\account\templates\auth\login.html:67
+msgid "欢迎回来"
+msgstr ""
+
+#: .\account\templates\auth\login.html:68
+msgid "登录您的 Know More 账号以继续"
+msgstr ""
+
+#: .\account\templates\auth\login.html:73
+msgid "登录失败"
+msgstr ""
+
+#: .\account\templates\auth\login.html:74
+msgid "用户名或密码不正确，请重试。"
+msgstr ""
+
+#: .\account\templates\auth\login.html:85
+#: .\account\templates\auth\register.html:101 .\forum\forms.py:77
+msgid "用户名"
+msgstr ""
+
+#: .\account\templates\auth\login.html:88
+#: .\account\templates\auth\register.html:104
+msgid "请输入用户名"
+msgstr ""
+
+#: .\account\templates\auth\login.html:94
+#: .\account\templates\auth\register.html:141
+msgid "密码"
+msgstr ""
+
+#: .\account\templates\auth\login.html:98
+#: .\account\templates\auth\register.html:145
+msgid "请输入密码"
+msgstr ""
+
+#: .\account\templates\auth\login.html:106
+msgid "记住我"
+msgstr ""
+
+#: .\account\templates\auth\login.html:107
+msgid "忘记密码？"
+msgstr ""
+
+#: .\account\templates\auth\login.html:117
+#: .\account\templates\auth\register.html:191
+msgid "立即登录"
+msgstr ""
+
+#: .\account\templates\auth\login.html:130
+msgid "还需要账号吗？"
+msgstr ""
+
+#: .\account\templates\auth\login.html:130
+#: .\account\templates\auth\register.html:176
+msgid "立即注册"
+msgstr "Register Now"
+
+#: .\account\templates\auth\login.html:148
+msgid "请填写完整的登录信息"
+msgstr ""
+
+#: .\account\templates\auth\register.html:4
+msgid "注册"
+msgstr "Register"
+
+#: .\account\templates\auth\register.html:74
+msgid "创建新账号"
+msgstr ""
+
+#: .\account\templates\auth\register.html:75
+msgid "加入 Know More 开启您的学习之旅"
+msgstr ""
+
+#: .\account\templates\auth\register.html:80
+msgid "注册信息有误"
+msgstr ""
+
+#: .\account\templates\auth\register.html:108
+msgid "必填。150个字符或更少。包含字母，数字和仅有的 @/./+/-/_ 字符。"
+msgstr ""
+
+#: .\account\templates\auth\register.html:111
+#: .\account\templates\auth\reset_password.html:70
+msgid "邮箱地址"
+msgstr ""
+
+#: .\account\templates\auth\register.html:114
+msgid "请输入你的有效邮箱"
+msgstr ""
+
+#: .\account\templates\auth\register.html:120
+#: .\account\templates\auth\reset_password.html:80
+msgid "验证码"
+msgstr ""
+
+#: .\account\templates\auth\register.html:124
+msgid "请输入 6 位验证码"
+msgstr ""
+
+#: .\account\templates\auth\register.html:136
+#: .\account\templates\auth\reset_password.html:96
+msgid "发送验证码"
+msgstr ""
+
+#: .\account\templates\auth\register.html:150
+msgid "密码不能过于常见，且至少包含 8 个字符。"
+msgstr ""
+
+#: .\account\templates\auth\register.html:153
+msgid "确认密码"
+msgstr ""
+
+#: .\account\templates\auth\register.html:157
+msgid "请再次键入密码"
+msgstr ""
+
+#: .\account\templates\auth\register.html:165
+msgid "我已阅读并同意"
+msgstr ""
+
+#: .\account\templates\auth\register.html:165
+msgid "服务协议"
+msgstr ""
+
+#: .\account\templates\auth\register.html:165
+msgid "和"
+msgstr ""
+
+#: .\account\templates\auth\register.html:165
+msgid "隐私政策"
+msgstr ""
+
+#: .\account\templates\auth\register.html:191
+msgid "已经有账号了？"
+msgstr ""
+
+#: .\account\templates\auth\register.html:213
+msgid "请填写完整的注册信息"
+msgstr ""
+
+#: .\account\templates\auth\register.html:217
+#: .\account\templates\auth\reset_password.html:164 .\account\views.py:141
+msgid "两次输入的密码不一致"
+msgstr ""
+
+#: .\account\templates\auth\register.html:227
+#: .\account\templates\auth\reset_password.html:174
+msgid "请先输入邮箱地址"
+msgstr ""
+
+#: .\account\templates\auth\register.html:232
+#: .\account\templates\auth\reset_password.html:179
+msgid "请输入有效的邮箱格式"
+msgstr ""
+
+#: .\account\templates\auth\register.html:248
+#: .\account\templates\auth\reset_password.html:195
+msgid "验证码发送成功，请查收"
+msgstr ""
+
+#: .\account\templates\auth\register.html:255
+#: .\account\templates\auth\reset_password.html:202
+msgid "发送失败"
+msgstr ""
+
+#: .\account\templates\auth\register.html:259
+#: .\account\templates\auth\reset_password.html:206
+msgid "请求发送失败，请稍后重试"
+msgstr ""
+
+#: .\account\templates\auth\reset_password.html:4
+msgid "修改密码"
+msgstr ""
+
+#: .\account\templates\auth\reset_password.html:54
+msgid "重置密码"
+msgstr ""
+
+#: .\account\templates\auth\reset_password.html:55
+msgid "通过邮箱验证码重新设置您的密码"
+msgstr ""
+
+#: .\account\templates\auth\reset_password.html:73
+msgid "请输入绑定的邮箱"
+msgstr ""
+
+#: .\account\templates\auth\reset_password.html:84 .\account\views.py:67
+msgid "请输入验证码"
+msgstr ""
+
+#: .\account\templates\auth\reset_password.html:101
+msgid "新密码"
+msgstr ""
+
+#: .\account\templates\auth\reset_password.html:105
+msgid "请输入新密码"
+msgstr ""
+
+#: .\account\templates\auth\reset_password.html:112
+msgid "确认新密码"
+msgstr ""
+
+#: .\account\templates\auth\reset_password.html:116
+msgid "请再次键入新密码"
+msgstr ""
+
+#: .\account\templates\auth\reset_password.html:130
+msgid "确认修改"
+msgstr ""
+
+#: .\account\templates\auth\reset_password.html:160
+msgid "请填写完整的修改信息"
+msgstr ""
+
+#: .\account\views.py:17 .\account\views.py:91
+msgid "仅支持 POST 请求"
+msgstr ""
+
+#: .\account\views.py:26 .\account\views.py:100
+msgid "缺少邮箱地址"
+msgstr ""
+
+#: .\account\views.py:29
+msgid "该邮箱已被注册"
+msgstr ""
+
+#: .\account\views.py:33 .\account\views.py:107
+msgid "验证码发送太频繁，请稍后再试"
+msgstr ""
+
+#: .\account\views.py:44
+msgid "Know More 注册验证码"
+msgstr ""
+
+#: .\account\views.py:45
+#, python-format
+msgid ""
+"欢迎注册 Know More。您的注册验证码是：%(code)s，请在 5 分钟内完成输入。如非本"
+"人操作，请忽略此邮件。"
+msgstr ""
+
+#: .\account\views.py:51 .\account\views.py:123
+#, python-format
+msgid "发送邮件失败: %(error)s"
+msgstr ""
+
+#: .\account\views.py:53 .\account\views.py:125
+msgid "验证码已发送"
+msgstr ""
+
+#: .\account\views.py:71 .\account\views.py:145
+msgid "验证码已过期或不存在，请重新发送"
+msgstr ""
+
+#: .\account\views.py:73 .\account\views.py:147
+msgid "验证码错误"
+msgstr ""
+
+#: .\account\views.py:103
+msgid "该邮箱未注册账号"
+msgstr ""
+
+#: .\account\views.py:116
+msgid "Know More 重置密码验证码"
+msgstr ""
+
+#: .\account\views.py:117
+#, python-format
+msgid ""
+"您正在申请修改密码。您的验证码是：%(code)s，请在 5 分钟内完成输入。如非本人操"
+"作，请密切关注您的账号安全。"
+msgstr ""
+
+#: .\account\views.py:139
+msgid "请填写所有必填字段"
+msgstr ""
+
+#: .\account\views.py:151
+msgid "系统中找不到该邮箱对应的用户"
+msgstr ""
+
+#: .\docs\templates\docs\doc_index.html:5
+msgid "欢迎来到 Know More 知识库"
+msgstr ""
+
+#: .\docs\templates\docs\doc_index.html:7
+msgid ""
+"在这里，你可以结构化地学习提示词工程（Prompt Engineering），获取最新、最可靠"
+"的最佳实践经验。请从左侧边栏选择您感兴趣的主题开始学习。"
+msgstr ""
+
+#: .\docs\templates\docs\doc_index.html:14
+msgid "提示词基础"
+msgstr ""
+
+#: .\docs\templates\docs\doc_index.html:17
+msgid "学习如何构建一个优质的提示词，理解结构化框架与场景化应用的基础理论。"
+msgstr ""
+
+#: .\docs\templates\docs\doc_index.html:23 .\main\templates\main\home.html:70
+msgid "实战案例"
+msgstr ""
+
+#: .\docs\templates\docs\doc_index.html:26
+msgid "深入具体任务场景，看看针对各种需求应该如何制定与优化 Prompt。"
+msgstr ""
+
+#: .\docs\templates\docs\layout.html:3
+msgid "文档站"
+msgstr "Docs"
+
+#: .\forum\forms.py:16 .\forum\templates\forum\create_post.html:56
+#: .\forum\templates\forum\edit_post.html:59
+msgid "请输入帖子标题（5-200 字符）"
+msgstr ""
+
+#: .\forum\forms.py:21 .\forum\templates\forum\create_post.html:145
+msgid "请输入帖子内容（支持 Markdown 语法）"
+msgstr ""
+
+#: .\forum\forms.py:33
+msgid "标题长度不能少于 5 个字符"
+msgstr ""
+
+#: .\forum\forms.py:35
+msgid "标题长度不能超过 200 个字符"
+msgstr ""
+
+#: .\forum\forms.py:42
+msgid "帖子内容不能为空"
+msgstr ""
+
+#: .\forum\forms.py:55 .\forum\templates\forum\post_detail.html:184
+msgid "请输入回复内容..."
+msgstr ""
+
+#: .\forum\forms.py:64
+msgid "回复内容不能为空"
+msgstr ""
+
+#: .\forum\forms.py:81
+msgid "电子邮箱"
+msgstr ""
+
+#: .\forum\forms.py:85
+msgid "名"
+msgstr ""
+
+#: .\forum\forms.py:89
+msgid "姓"
+msgstr ""
+
+#: .\forum\forms.py:103
+msgid "个人签名（255 字符以内）"
+msgstr ""
+
+#: .\forum\forms.py:108 .\forum\templates\forum\user_profile.html:73
+msgid "个人简介"
+msgstr ""
+
+#: .\forum\templates\forum\category.html:4
+#: .\forum\templates\forum\category.html:16
+#: .\forum\templates\forum\create_post.html:4
+#: .\forum\templates\forum\create_post.html:31
+#: .\forum\templates\forum\edit_post.html:4
+#: .\forum\templates\forum\edit_post.html:31
+#: .\forum\templates\forum\post_detail.html:4
+#: .\forum\templates\forum\post_detail.html:16
+#: .\forum\templates\forum\user_profile.html:4
+#: .\forum\templates\forum\user_profile.html:16 .\templates\base.html:104
+msgid "论坛"
+msgstr "Forum"
+
+#: .\forum\templates\forum\category.html:36
+msgid "共"
+msgstr ""
+
+#: .\forum\templates\forum\category.html:36
+#: .\forum\templates\forum\index.html:41
+msgid "篇帖子"
+msgstr ""
+
+#: .\forum\templates\forum\category.html:41
+#: .\forum\templates\forum\create_post.html:4
+#: .\forum\templates\forum\create_post.html:33
+#: .\forum\templates\forum\create_post.html:40
+#: .\forum\templates\forum\index.html:70
+msgid "发布新帖子"
+msgstr ""
+
+#: .\forum\templates\forum\category.html:53
+#: .\forum\templates\forum\post_detail.html:32
+msgid "置顶"
+msgstr ""
+
+#: .\forum\templates\forum\category.html:57
+msgid "锁定"
+msgstr ""
+
+#: .\forum\templates\forum\category.html:67
+#: .\forum\templates\forum\category.html:71
+#: .\forum\templates\forum\index.html:45
+#: .\forum\templates\forum\post_detail.html:140
+#: .\forum\templates\forum\user_profile.html:96
+#: .\forum\templates\forum\user_profile.html:125
+msgid "前"
+msgstr ""
+
+#: .\forum\templates\forum\category.html:71
+msgid "最后回复"
+msgstr ""
+
+#: .\forum\templates\forum\category.html:79
+#: .\forum\templates\forum\index.html:99
+#: .\forum\templates\forum\post_detail.html:59
+#: .\forum\templates\forum\user_profile.html:97
+msgid "浏览"
+msgstr ""
+
+#: .\forum\templates\forum\category.html:83
+#: .\forum\templates\forum\index.html:98
+#: .\forum\templates\forum\post_detail.html:60
+#: .\forum\templates\forum\user_profile.html:47
+#: .\forum\templates\forum\user_profile.html:98
+msgid "回复"
+msgstr ""
+
+#: .\forum\templates\forum\category.html:89
+msgid "暂无帖子，快来发第一帖吧！"
+msgstr ""
+
+#: .\forum\templates\forum\category.html:92
+#: .\forum\templates\forum\create_post.html:116
+msgid "发布帖子"
+msgstr ""
+
+#: .\forum\templates\forum\create_post.html:51
+#: .\forum\templates\forum\edit_post.html:54
+msgid "帖子标题"
+msgstr ""
+
+#: .\forum\templates\forum\create_post.html:69
+#: .\forum\templates\forum\edit_post.html:72
+msgid "选择分类"
+msgstr ""
+
+#: .\forum\templates\forum\create_post.html:80
+#: .\forum\templates\forum\edit_post.html:83
+msgid "请选择分类"
+msgstr ""
+
+#: .\forum\templates\forum\create_post.html:97
+#: .\forum\templates\forum\edit_post.html:100
+msgid "帖子内容"
+msgstr ""
+
+#: .\forum\templates\forum\create_post.html:105
+msgid "支持 Markdown 语法"
+msgstr ""
+
+#: .\forum\templates\forum\create_post.html:112
+#: .\forum\templates\forum\edit_post.html:112
+#: .\forum\templates\forum\post_detail.html:279
+msgid "取消"
+msgstr ""
+
+#: .\forum\templates\forum\edit_post.html:4
+#: .\forum\templates\forum\edit_post.html:36
+#: .\forum\templates\forum\edit_post.html:43
+msgid "编辑帖子"
+msgstr ""
+
+#: .\forum\templates\forum\edit_post.html:116
+msgid "保存修改"
+msgstr ""
+
+#: .\forum\templates\forum\edit_post.html:144
+msgid "请输入帖子内容"
+msgstr ""
+
+#: .\forum\templates\forum\index.html:4 .\forum\templates\forum\index.html:16
+msgid "社区论坛"
+msgstr ""
+
+#: .\forum\templates\forum\index.html:18
+msgid "在这里分享提示词、交流学习经验，与社区一起成长。"
+msgstr ""
+
+#: .\forum\templates\forum\index.html:38
+msgid "暂无描述"
+msgstr ""
+
+#: .\forum\templates\forum\index.html:45
+msgid "最后活跃"
+msgstr ""
+
+#: .\forum\templates\forum\index.html:49
+msgid "暂无活动"
+msgstr ""
+
+#: .\forum\templates\forum\index.html:56
+msgid "暂无论坛分类"
+msgstr ""
+
+#: .\forum\templates\forum\index.html:76
+msgid "登录后即可发帖"
+msgstr ""
+
+#: .\forum\templates\forum\index.html:88
+msgid "最新帖子"
+msgstr ""
+
+#: .\forum\templates\forum\index.html:104
+#: .\forum\templates\forum\user_profile.html:103
+msgid "暂无帖子"
+msgstr ""
+
+#: .\forum\templates\forum\post_detail.html:23
+msgid "帖子详情"
+msgstr ""
+
+#: .\forum\templates\forum\post_detail.html:36
+msgid "已锁定"
+msgstr ""
+
+#: .\forum\templates\forum\post_detail.html:51
+msgid "发布于"
+msgstr ""
+
+#: .\forum\templates\forum\post_detail.html:53
+msgid "编辑于"
+msgstr ""
+
+#: .\forum\templates\forum\post_detail.html:81
+msgid "已点赞"
+msgstr ""
+
+#: .\forum\templates\forum\post_detail.html:81
+msgid "点赞"
+msgstr ""
+
+#: .\forum\templates\forum\post_detail.html:92
+msgid "已收藏"
+msgstr ""
+
+#: .\forum\templates\forum\post_detail.html:92
+msgid "收藏"
+msgstr ""
+
+#: .\forum\templates\forum\post_detail.html:97
+msgid "后可点赞和收藏"
+msgstr ""
+
+#: .\forum\templates\forum\post_detail.html:108
+msgid "编辑"
+msgstr ""
+
+#: .\forum\templates\forum\post_detail.html:111
+msgid "删除"
+msgstr ""
+
+#: .\forum\templates\forum\post_detail.html:125
+msgid "全部回复"
+msgstr ""
+
+#: .\forum\templates\forum\post_detail.html:142
+msgid "楼"
+msgstr ""
+
+#: .\forum\templates\forum\post_detail.html:155
+msgid "暂无回复，快来抢沙发吧！"
+msgstr ""
+
+#: .\forum\templates\forum\post_detail.html:167
+msgid "发表回复"
+msgstr ""
+
+#: .\forum\templates\forum\post_detail.html:173
+msgid "该帖子已被锁定，无法回复"
+msgstr ""
+
+#: .\forum\templates\forum\post_detail.html:192
+msgid "提交回复"
+msgstr ""
+
+#: .\forum\templates\forum\post_detail.html:202
+msgid "后即可发表回复"
+msgstr ""
+
+#: .\forum\templates\forum\post_detail.html:245
+#: .\forum\templates\forum\post_detail.html:265
+msgid "操作失败："
+msgstr ""
+
+#: .\forum\templates\forum\post_detail.html:248
+#: .\forum\templates\forum\post_detail.html:268
+msgid "网络错误，请重试"
+msgstr ""
+
+#: .\forum\templates\forum\post_detail.html:275
+msgid "删除后将无法恢复，确定要删除此帖子吗？"
+msgstr ""
+
+#: .\forum\templates\forum\post_detail.html:276
+msgid "确认删除"
+msgstr ""
+
+#: .\forum\templates\forum\post_detail.html:278
+msgid "确定删除"
+msgstr ""
+
+#: .\forum\templates\forum\user_profile.html:4
+#: .\forum\templates\forum\user_profile.html:18
+msgid "的主页"
+msgstr ""
+
+#: .\forum\templates\forum\user_profile.html:37
+msgid "加入于"
+msgstr ""
+
+#: .\forum\templates\forum\user_profile.html:43
+msgid "帖子"
+msgstr ""
+
+#: .\forum\templates\forum\user_profile.html:51
+msgid "获赞"
+msgstr ""
+
+#: .\forum\templates\forum\user_profile.html:58
+msgid "我的收藏"
+msgstr ""
+
+#: .\forum\templates\forum\user_profile.html:61
+msgid "编辑资料"
+msgstr ""
+
+#: .\forum\templates\forum\user_profile.html:64
+msgid "密码修改"
+msgstr ""
+
+#: .\forum\templates\forum\user_profile.html:88
+msgid "最近帖子"
+msgstr ""
+
+#: .\forum\templates\forum\user_profile.html:112
+msgid "最近回复"
+msgstr ""
+
+#: .\forum\templates\forum\user_profile.html:130
+msgid "暂无回复"
+msgstr ""
+
+#: .\main\templates\main\home.html:4
+msgid "掌握提示词工程"
+msgstr ""
+
+#: .\main\templates\main\home.html:26
+msgid "开源 · 非盈利 · 免费使用"
+msgstr ""
+
+#: .\main\templates\main\home.html:31
+msgid "让每个人都能"
+msgstr ""
+
+#: .\main\templates\main\home.html:32
+msgid "驾驭"
+msgstr ""
+
+#: .\main\templates\main\home.html:32
+msgid "提示词工程"
+msgstr ""
+
+#: .\main\templates\main\home.html:37
+msgid "Know More 将复杂的 AI 使用技巧，降维为可复制的模板与交互式教学。"
+msgstr ""
+
+#: .\main\templates\main\home.html:38
+msgid "从今天起，稳定、高效地从大模型获取你想要的结果。"
+msgstr ""
+
+#: .\main\templates\main\home.html:45
+msgid "开始互动教程"
+msgstr ""
+
+#: .\main\templates\main\home.html:49
+msgid "阅读文档"
+msgstr ""
+
+#: .\main\templates\main\home.html:53
+msgid "参与论坛"
+msgstr ""
+
+#: .\main\templates\main\home.html:62
+msgid "核心技巧文档"
+msgstr ""
+
+#: .\main\templates\main\home.html:66
+msgid "开源免费"
+msgstr ""
+
+#: .\main\templates\main\home.html:81
+msgid "丰富功能"
+msgstr ""
+
+#: .\main\templates\main\home.html:82
+msgid "一个平台，覆盖你的全部学习需求"
+msgstr ""
+
+#: .\main\templates\main\home.html:83
+msgid ""
+"从入门到进阶，从理论到实战，Know More 为你提供完整的提示词工程学习生态。"
+msgstr ""
+
+#: .\main\templates\main\home.html:93
+msgid "互动式教程"
+msgstr ""
+
+#: .\main\templates\main\home.html:95
+msgid ""
+"通过悬浮提示与表单引导，一步步写出符合规范的结构化提示词。即学即用，所见即所"
+"得。"
+msgstr ""
+
+#: .\main\templates\main\home.html:98
+msgid "进入教程"
+msgstr ""
+
+#: .\main\templates\main\home.html:108
+msgid "系统知识文档"
+msgstr ""
+
+#: .\main\templates\main\home.html:110
+msgid ""
+"深入阅读提示词工程的核心理论，包括 Few-shot、Chain-of-Thought、Meta-"
+"prompting 等高阶技巧的详细解释与示例。"
+msgstr ""
+
+#: .\main\templates\main\home.html:113
+msgid "浏览文档"
+msgstr ""
+
+#: .\main\templates\main\home.html:123
+msgid "社区 Prompt 论坛"
+msgstr ""
+
+#: .\main\templates\main\home.html:125
+msgid ""
+"发现并分享可直接复用的 Prompt 模板。与其他用户讨论最佳实践，共同提升 AI 协作"
+"效率。"
+msgstr ""
+
+#: .\main\templates\main\home.html:128
+msgid "进入论坛"
+msgstr ""
+
+#: .\main\templates\main\home.html:143
+msgid "核心价值"
+msgstr ""
+
+#: .\main\templates\main\home.html:144
+msgid "一个小改变，带来质的飞跃"
+msgstr ""
+
+#: .\main\templates\main\home.html:146
+msgid ""
+"相同的问题，不同的提问方式，得到截然不同的答案。了解结构化提示词如何让 AI 真"
+"正听懂你的需求。"
+msgstr ""
+
+#: .\main\templates\main\home.html:156
+msgid "未经优化的提示词"
+msgstr ""
+
+#: .\main\templates\main\home.html:159
+msgid "帮我写一份 Python 学习计划"
+msgstr ""
+
+#: .\main\templates\main\home.html:162
+msgid "目标模糊"
+msgstr ""
+
+#: .\main\templates\main\home.html:163
+msgid "缺少背景"
+msgstr ""
+
+#: .\main\templates\main\home.html:164
+msgid "无法复用"
+msgstr ""
+
+#: .\main\templates\main\home.html:177
+msgid "结构化提示词"
+msgstr ""
+
+#: .\main\templates\main\home.html:180
+msgid "角色"
+msgstr ""
+
+#: .\main\templates\main\home.html:180
+msgid "你是一位经验丰富的学习规划师"
+msgstr ""
+
+#: .\main\templates\main\home.html:182
+msgid "背景"
+msgstr ""
+
+#: .\main\templates\main\home.html:182
+msgid "我是零基础的 Python 初学者，每天有 1 小时学习时间"
+msgstr ""
+
+#: .\main\templates\main\home.html:184
+msgid "任务"
+msgstr ""
+
+#: .\main\templates\main\home.html:184
+msgid "为我制定 30 天学习路线"
+msgstr ""
+
+#: .\main\templates\main\home.html:186
+msgid "输出格式"
+msgstr ""
+
+#: .\main\templates\main\home.html:186
+msgid "按周分组，每周 3 个目标，包含推荐资源"
+msgstr ""
+
+#: .\main\templates\main\home.html:189
+msgid "角色明确"
+msgstr ""
+
+#: .\main\templates\main\home.html:190
+msgid "背景详尽"
+msgstr ""
+
+#: .\main\templates\main\home.html:191
+msgid "格式规范"
+msgstr ""
+
+#: .\main\templates\main\home.html:192
+msgid "可复用"
+msgstr ""
+
+#: .\main\templates\main\home.html:205
+msgid "学习路径"
+msgstr ""
+
+#: .\main\templates\main\home.html:206
+msgid "三步，从零到掌握提示词工程"
+msgstr ""
+
+#: .\main\templates\main\home.html:208
+msgid "我们的教学设计经过精心打磨，带你以最高效的路径建立稳固的能力基础。"
+msgstr ""
+
+#: .\main\templates\main\home.html:216
+msgid "理解原理"
+msgstr ""
+
+#: .\main\templates\main\home.html:218
+msgid ""
+"阅读文档，了解大模型的工作方式，掌握「为什么好的提示词能让 AI 更精准」的底层"
+"逻辑。"
+msgstr ""
+
+#: .\main\templates\main\home.html:224
+msgid "实操教程"
+msgstr ""
+
+#: .\main\templates\main\home.html:226
+msgid ""
+"完成互动式教程，在引导下亲手写出结构化提示词，并在使用内置 AI 立即测试你的成"
+"果。"
+msgstr ""
+
+#: .\main\templates\main\home.html:232
+msgid "运用到案例"
+msgstr ""
+
+#: .\main\templates\main\home.html:234
+msgid ""
+"在「设计学习路线」等真实任务场景中综合运用所学，并在论坛中分享你的 Prompt 模"
+"板。"
+msgstr ""
+
+#: .\main\templates\main\home.html:246
+msgid "准备好了吗？"
+msgstr ""
+
+#: .\main\templates\main\home.html:248
+msgid "加入 Know More，开始你的提示词工程学习之旅。"
+msgstr ""
+
+#: .\main\templates\main\home.html:249
+msgid "完全免费，无需注册，立即开始。"
+msgstr ""
+
+#: .\main\templates\main\home.html:254
+msgid "立即开始互动教程"
+msgstr ""
+
+#: .\main\templates\main\home.html:257
+msgid "先看看文档"
+msgstr ""
+
+#: .\main\templates\main\home.html:260
+msgid "前往论坛"
+msgstr ""
+
+#: .\main\templates\main\tutorial.html:4
+msgid "提示词工程互动式教程"
+msgstr ""
+
+#: .\main\templates\main\tutorial.html:22
+#: .\main\templates\main\tutorial.html:38
+msgid "教程目录"
+msgstr ""
+
+#: .\main\templates\main\tutorial.html:32
+msgid "暂无教程数据"
+msgstr ""
+
+#: .\main\templates\main\tutorial.html:54
+msgid "Step"
+msgstr ""
+
+#: .\main\templates\main\tutorial.html:65
+msgid "示例对话"
+msgstr ""
+
+#: .\main\templates\main\tutorial.html:68
+msgid "执行预设对话"
+msgstr ""
+
+#: .\main\templates\main\tutorial.html:74
+msgid "知识测验"
+msgstr ""
+
+#: .\main\templates\main\tutorial.html:84
+msgid "回答正确！"
+msgstr ""
+
+#: .\main\templates\main\tutorial.html:84
+msgid "回答错误。"
+msgstr ""
+
+#: .\main\templates\main\tutorial.html:91
+msgid "填空练习"
+msgstr ""
+
+#: .\main\templates\main\tutorial.html:106
+msgid "测试我的指令"
+msgstr ""
+
+#: .\main\templates\main\tutorial.html:112
+msgid "请查看"
+msgstr ""
+
+#: .\main\templates\main\tutorial.html:112
+msgid "高亮"
+msgstr ""
+
+#: .\main\templates\main\tutorial.html:112
+msgid "内容"
+msgstr ""
+
+#: .\main\templates\main\tutorial.html:120
+msgid "上一步"
+msgstr ""
+
+#: .\main\templates\main\tutorial.html:123
+msgid "下一步"
+msgstr ""
+
+#: .\main\templates\main\tutorial.html:128
+msgid "请在左侧选择一个教程"
+msgstr ""
+
+#: .\main\templates\main\tutorial.html:136
+msgid "AI 交互测试"
+msgstr ""
+
+#: .\main\templates\main\tutorial.html:142
+msgid "根据左侧步骤指引"
+msgstr ""
+
+#: .\main\templates\main\tutorial.html:142
+msgid "在这里测试不同的提示词"
+msgstr ""
+
+#: .\main\templates\main\tutorial.html:166
+msgid "输入提示词进行测试..."
+msgstr ""
+
+#: .\main\templates\main\tutorial.html:171
+msgid "按 Enter 发送，Shift+Enter 换行"
+msgstr ""
+
+#: .\templates\base.html:100
+msgid "首页"
+msgstr "Home"
+
+#: .\templates\base.html:101
+msgid "教程"
+msgstr "Tutorials"
+
+#: .\templates\base.html:102
+msgid "文档"
+msgstr "Docs"
+
+#: .\templates\base.html:111
+msgid "Version:"
+msgstr ""
+
+#: .\templates\base.html:121
+msgid "Version: Development"
+msgstr ""
+
+#: .\templates\base.html:166
+msgid "个人主页"
+msgstr ""
+
+#: .\templates\base.html:173
+msgid "退出登录"
+msgstr ""
+
+#: .\templates\base.html:181
+msgid "登录 / 注册"
+msgstr "Login / Register"

@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}发布新帖子 - Know More 论坛{% endblock %}
+{% block title %}{% translate "发布新帖子" %} - Know More {% translate "论坛" %}{% endblock %}
 
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/forum.css' %}" />
@@ -28,16 +29,16 @@
     <div class="forum-breadcrumb">
         <el-breadcrumb separator="/">
             <el-breadcrumb-item>
-                <a href="{% url 'forum:forum_index' %}">论坛</a>
+                <a href="{% url 'forum:forum_index' %}">{% translate "论坛" %}</a>
             </el-breadcrumb-item>
-            <el-breadcrumb-item>发布新帖子</el-breadcrumb-item>
+            <el-breadcrumb-item>{% translate "发布新帖子" %}</el-breadcrumb-item>
         </el-breadcrumb>
     </div>
 
     <div class="forum-page-header">
         <h1 class="forum-page-title">
             <el-icon><edit /></el-icon>
-            发布新帖子
+            {% translate "发布新帖子" %}
         </h1>
     </div>
 
@@ -48,12 +49,12 @@
             <!-- 标题 -->
             <div style="margin-bottom: 24px;">
                 <label style="display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">
-                    帖子标题
+                    {% translate "帖子标题" %}
                 </label>
                 <el-input
                     v-model="title"
                     name="title"
-                    placeholder="请输入帖子标题（5-200 字符）"
+                    placeholder="{% translate '请输入帖子标题（5-200 字符）' %}"
                     maxlength="200"
                     show-word-limit
                     size="large"
@@ -66,7 +67,7 @@
             <!-- 分类 -->
             <div style="margin-bottom: 24px;">
                 <label style="display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">
-                    选择分类
+                    {% translate "选择分类" %}
                 </label>
                 <select name="category" style="display: none;">
                     {% for category in categories %}
@@ -77,7 +78,7 @@
                 </select>
                 <el-select
                     v-model="selectedCategory"
-                    placeholder="请选择分类"
+                    placeholder="{% translate '请选择分类' %}"
                     size="large"
                     style="width: 100%;"
                     @change="updateCategorySelect"
@@ -94,7 +95,7 @@
             <!-- 内容 -->
             <div style="margin-bottom: 24px;">
                 <label style="display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">
-                    帖子内容
+                    {% translate "帖子内容" %}
                 </label>
                 <div id="vditor"></div>
                 <textarea name="content" v-model="content" style="display: none;"></textarea>
@@ -102,18 +103,18 @@
                 <div style="color: var(--error); font-size: 13px; margin-top: 6px;">{{ form.content.errors.0 }}</div>
                 {% endif %}
                 <div style="color: var(--text-secondary); font-size: 13px; margin-top: 6px;">
-                    <el-icon style="vertical-align: -2px;"><info-filled /></el-icon> 支持 Markdown 语法
+                    <el-icon style="vertical-align: -2px;"><info-filled /></el-icon> {% translate "支持 Markdown 语法" %}
                 </div>
             </div>
 
             <!-- 操作按钮 -->
             <div class="form-actions">
                 <el-button size="large" onclick="window.location.href='{% url 'forum:forum_index' %}'">
-                    取消
+                    {% translate "取消" %}
                 </el-button>
                 <el-button type="primary" size="large" native-type="submit">
                     <el-icon style="margin-right: 6px;"><promotion /></el-icon>
-                    发布帖子
+                    {% translate "发布帖子" %}
                 </el-button>
             </div>
         </form>
@@ -142,7 +143,7 @@ this.updateCategorySelect(this.selectedCategory);
 this.vditor = new Vditor('vditor', {
     cdn: '/static/vditor',
     height: 480,
-    placeholder: '请输入帖子内容（支持 Markdown 语法）',
+    placeholder: "{% translate '请输入帖子内容（支持 Markdown 语法）' %}",
     theme: 'classic',
     icon: 'ant',
     input: (value) => {

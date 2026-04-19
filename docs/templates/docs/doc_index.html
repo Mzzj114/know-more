@@ -1,30 +1,30 @@
 {% extends "docs/layout.html" %}
+{% load i18n %}
 
 {% block doc_content %}
 <div class="welcome-hero" style="animation: km-fadeIn 0.6s ease-out backwards;">
-    <h1 style="color: var(--primary); font-size: 36px; margin-bottom: 16px;">欢迎来到 Know More 知识库</h1>
+    <h1 style="color: var(--primary); font-size: 36px; margin-bottom: 16px;">{% translate "欢迎来到 Know More 知识库" %}</h1>
     <p style="color: var(--text-secondary); font-size: 18px; max-width: 600px; line-height: 1.6;">
-        在这里，你可以结构化地学习提示词工程（Prompt Engineering），获取最新、最可靠的最佳实践经验。
-        请从左侧边栏选择您感兴趣的主题开始学习。
+        {% translate "在这里，你可以结构化地学习提示词工程（Prompt Engineering），获取最新、最可靠的最佳实践经验。请从左侧边栏选择您感兴趣的主题开始学习。" %}
     </p>
 
     <div style="margin-top: 48px; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px;">
         <el-card shadow="hover" style="border-radius: 16px; border-color: var(--primary-light);">
             <template #header>
                 <div style="font-weight: bold; color: var(--primary); font-size: 18px; display: flex; align-items: center; gap: 8px;">
-                    <el-icon><reading /></el-icon> 提示词基础
+                    <el-icon><reading /></el-icon> {% translate "提示词基础" %}
                 </div>
             </template>
-            <p style="color: var(--text-secondary); margin: 0; line-height: 1.6;">学习如何构建一个优质的提示词，理解结构化框架与场景化应用的基础理论。</p>
+            <p style="color: var(--text-secondary); margin: 0; line-height: 1.6;">{% translate "学习如何构建一个优质的提示词，理解结构化框架与场景化应用的基础理论。" %}</p>
         </el-card>
 
         <el-card shadow="hover" style="border-radius: 16px; border-color: var(--el-color-warning-light-8);">
             <template #header>
                 <div style="font-weight: bold; color: var(--warning); font-size: 18px; display: flex; align-items: center; gap: 8px;">
-                    <el-icon><postcard /></el-icon> 实战案例
+                    <el-icon><postcard /></el-icon> {% translate "实战案例" %}
                 </div>
             </template>
-            <p style="color: var(--text-secondary); margin: 0; line-height: 1.6;">深入具体任务场景，看看针对各种需求应该如何制定与优化 Prompt。</p>
+            <p style="color: var(--text-secondary); margin: 0; line-height: 1.6;">{% translate "深入具体任务场景，看看针对各种需求应该如何制定与优化 Prompt。" %}</p>
         </el-card>
     </div>
 </div>

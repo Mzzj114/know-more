@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}{{ post.title }} - Know More 论坛{% endblock %}
+{% block title %}{{ post.title }} - Know More {% translate "论坛" %}{% endblock %}
 
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/forum.css' %}" />
@@ -13,14 +14,14 @@
     <div class="forum-breadcrumb">
         <el-breadcrumb separator="/">
             <el-breadcrumb-item>
-                <a href="{% url 'forum:forum_index' %}">论坛</a>
+                <a href="{% url 'forum:forum_index' %}">{% translate "论坛" %}</a>
             </el-breadcrumb-item>
             {% if post.category %}
             <el-breadcrumb-item>
                 <a href="{% url 'forum:category_detail' post.category.slug %}">{{ post.category.name }}</a>
             </el-breadcrumb-item>
             {% endif %}
-            <el-breadcrumb-item>帖子详情</el-breadcrumb-item>
+            <el-breadcrumb-item>{% translate "帖子详情" %}</el-breadcrumb-item>
         </el-breadcrumb>
     </div>
 
@@ -29,11 +30,11 @@
         <div class="post-detail-header">
             <h1 class="post-detail-title">
                 {% if post.is_pinned %}
-                <el-tag type="danger" size="small" effect="dark" style="vertical-align: middle; margin-right: 6px;">置顶</el-tag>
+                <el-tag type="danger" size="small" effect="dark" style="vertical-align: middle; margin-right: 6px;">{% translate "置顶" %}</el-tag>
                 {% endif %}
                 {% if post.is_locked %}
                 <el-tag type="info" size="small" style="vertical-align: middle; margin-right: 6px;">
-                    <el-icon style="vertical-align: -2px;"><lock /></el-icon> 已锁定
+                    <el-icon style="vertical-align: -2px;"><lock /></el-icon> {% translate "已锁定" %}
                 </el-tag>
                 {% endif %}
                 {{ post.title }}
@@ -48,16 +49,16 @@
                             {{ post.author.username }}
                         </a>
                         <div class="post-time">
-                            发布于 {{ post.created_at|date:"Y-m-d H:i" }}
+                            {% translate "发布于" %} {{ post.created_at|date:"Y-m-d H:i" }}
                             {% if post.updated_at != post.created_at %}
-                             · 编辑于 {{ post.updated_at|date:"Y-m-d H:i" }}
+                             · {% translate "编辑于" %} {{ post.updated_at|date:"Y-m-d H:i" }}
                             {% endif %}
                         </div>
                     </div>
                 </div>
                 <div style="margin-left: auto; display: flex; gap: 16px; color: var(--text-secondary); font-size: 13px;">
-                    <span><el-icon><view /></el-icon> {{ post.view_count }} 浏览</span>
-                    <span><el-icon><chat-line-square /></el-icon> {{ post.reply_count }} 回复</span>
+                    <span><el-icon><view /></el-icon> {{ post.view_count }} {% translate "浏览" %}</span>
+                    <span><el-icon><chat-line-square /></el-icon> {{ post.reply_count }} {% translate "回复" %}</span>
                 </div>
             </div>
         </div>
@@ -78,7 +79,7 @@
                     :loading="likeLoading"
                 >
                     <el-icon style="margin-right: 4px;"><thumb-up /></el-icon>
-                    <span v-text="postLiked ? '已点赞' : '点赞'"></span>
+                    <span v-text="postLiked ? '{% translate "已点赞" %}' : '{% translate "点赞" %}'"></span>
                     (<span v-text="likeCount"></span>)
                 </el-button>
 
@@ -89,12 +90,12 @@
                     :loading="favoriteLoading"
                 >
                     <el-icon style="margin-right: 4px;"><star /></el-icon>
-                    <span v-text="postFavorited ? '已收藏' : '收藏'"></span>
+                    <span v-text="postFavorited ? '{% translate "已收藏" %}' : '{% translate "收藏" %}'"></span>
                     (<span v-text="favoriteCount"></span>)
                 </el-button>
                 {% else %}
                 <span style="color: var(--text-secondary); font-size: 13px;">
-                    <a href="/admin/login/" style="color: var(--primary);">登录</a> 后可点赞和收藏
+                    <a href="{% url 'login' %}" style="color: var(--primary);">{% translate "登录" %}</a> {% translate "后可点赞和收藏" %}
                 </span>
                 {% endif %}
             </div>
@@ -105,10 +106,10 @@
             {% if user == post.author or user.is_staff %}
             <div class="action-group">
                 <el-button plain size="small" onclick="window.location.href='{% url 'forum:edit_post' post.id %}'">
-                    <el-icon style="margin-right: 4px;"><edit /></el-icon> 编辑
+                    <el-icon style="margin-right: 4px;"><edit /></el-icon> {% translate "编辑" %}
                 </el-button>
                 <el-button plain size="small" type="danger" @click="confirmDelete">
-                    <el-icon style="margin-right: 4px;"><delete /></el-icon> 删除
+                    <el-icon style="margin-right: 4px;"><delete /></el-icon> {% translate "删除" %}
                 </el-button>
                 <form id="delete-form" method="POST" action="{% url 'forum:delete_post' post.id %}" style="display: none;">
                     {% csrf_token %}
@@ -122,7 +123,7 @@
     <el-card shadow="never" body-style="padding: 0;">
         <div class="reply-section-header">
             <el-icon><chat-line-round /></el-icon>
-            全部回复 ({{ post.reply_count }})
+            {% translate "全部回复" %} ({{ post.reply_count }})
         </div>
 
         {% for reply in replies %}
@@ -137,9 +138,9 @@
                             {{ reply.author.username }}
                         </a>
                     </span>
-                    <span class="reply-time">{{ reply.created_at|timesince }} 前</span>
+                    <span class="reply-time">{{ reply.created_at|timesince }} {% translate "前" %}</span>
                     {% if reply.floor > 0 %}
-                    <el-tag size="small" type="info">#{{ reply.floor }}楼</el-tag>
+                    <el-tag size="small" type="info">#{{ reply.floor }}{% translate "楼" %}</el-tag>
                     {% endif %}
                 </div>
                 <div style="color: var(--text-secondary); font-size: 13px;">
@@ -152,7 +153,7 @@
         </div>
         {% empty %}
         <div class="forum-empty">
-            <el-empty description="暂无回复，快来抢沙发吧！" :image-size="100">
+            <el-empty description="{% translate '暂无回复，快来抢沙发吧！' %}" :image-size="100">
             </el-empty>
         </div>
         {% endfor %}
@@ -164,13 +165,13 @@
         <template #header>
             <span style="font-weight: 700; font-size: 16px;">
                 <el-icon style="vertical-align: -2px; margin-right: 6px;"><edit-pen /></el-icon>
-                发表回复
+                {% translate "发表回复" %}
             </span>
         </template>
 
         {% if post.is_locked %}
         <el-alert
-            title="该帖子已被锁定，无法回复"
+            title="{% translate '该帖子已被锁定，无法回复' %}"
             type="warning"
             show-icon
             :closable="false"
@@ -181,7 +182,7 @@
             <el-input
                 type="textarea"
                 name="content"
-                placeholder="请输入回复内容..."
+                placeholder="{% translate '请输入回复内容...' %}"
                 :rows="4"
                 resize="vertical"
                 style="margin-bottom: 16px;"
@@ -189,7 +190,7 @@
             <div style="display: flex; justify-content: flex-end;">
                 <el-button type="primary" native-type="submit">
                     <el-icon style="margin-right: 6px;"><promotion /></el-icon>
-                    提交回复
+                    {% translate "提交回复" %}
                 </el-button>
             </div>
         </form>
@@ -198,8 +199,8 @@
     {% else %}
     <el-card shadow="never" style="margin-top: 24px;">
         <div style="text-align: center; padding: 16px 0; color: var(--text-secondary);">
-            <a href="/admin/login/" style="color: var(--primary); text-decoration: none; font-weight: 600;">登录</a>
-            后即可发表回复
+            <a href="{% url 'login' %}" style="color: var(--primary); text-decoration: none; font-weight: 600;">{% translate "登录" %}</a>
+            {% translate "后即可发表回复" %}
         </div>
     </el-card>
     {% endif %}
@@ -242,10 +243,10 @@ async toggleLike() {
             this.postLiked = data.liked;
             this.likeCount = data.like_count;
         } else {
-            ElementPlus.ElMessage.error('操作失败：' + data.error);
+            ElementPlus.ElMessage.error("{% translate '操作失败：' %}" + data.error);
         }
     } catch (e) {
-        ElementPlus.ElMessage.error('网络错误，请重试');
+        ElementPlus.ElMessage.error("{% translate '网络错误，请重试' %}");
     }
     this.likeLoading = false;
 },
@@ -262,21 +263,21 @@ async toggleFavorite() {
             this.postFavorited = data.favorited;
             this.favoriteCount = data.favorite_count;
         } else {
-            ElementPlus.ElMessage.error('操作失败：' + data.error);
+            ElementPlus.ElMessage.error("{% translate '操作失败：' %}" + data.error);
         }
     } catch (e) {
-        ElementPlus.ElMessage.error('网络错误，请重试');
+        ElementPlus.ElMessage.error("{% translate '网络错误，请重试' %}");
     }
     this.favoriteLoading = false;
 },
 
 confirmDelete() {
     ElementPlus.ElMessageBox.confirm(
-        '删除后将无法恢复，确定要删除此帖子吗？',
-        '确认删除',
+        "{% translate '删除后将无法恢复，确定要删除此帖子吗？' %}",
+        "{% translate '确认删除' %}",
         {
-            confirmButtonText: '确定删除',
-            cancelButtonText: '取消',
+            confirmButtonText: "{% translate '确定删除' %}",
+            cancelButtonText: "{% translate '取消' %}",
             type: 'warning',
             confirmButtonClass: 'el-button--danger',
         }

@@ -91,10 +91,10 @@ Object.assign(AppRoot, {
                     this.loading = false;
                 }
             } catch (e) {
-                console.error("Failed to fetch tutorials directory", e);
+                console.error(gettext("Failed to fetch tutorials directory"), e);
                 this.loading = false;
                 if (window.ElementPlus) {
-                    ElementPlus.ElMessage.error("获取教程目录失败");
+                    ElementPlus.ElMessage.error(gettext("获取教程目录失败"));
                 }
             }
         },
@@ -131,7 +131,7 @@ Object.assign(AppRoot, {
                         window.history.pushState({ slug: slug }, '', `${prefix}/tutorial/${slug}/`);
                     }
                 } else {
-                    if (window.ElementPlus) ElementPlus.ElMessage.warning("无法加载选择的教程");
+                    if (window.ElementPlus) ElementPlus.ElMessage.warning(gettext("无法加载选择的教程"));
                 }
             } catch (e) {
                 console.error("Error loading tutorial detail", e);
@@ -194,7 +194,7 @@ Object.assign(AppRoot, {
                     const nextTutorial = this.tutorials[currentIndex + 1];
                     this.loadTutorial(nextTutorial.slug);
                     if (window.ElementPlus) {
-                        ElementPlus.ElMessage.info(`进入下一章节: ${nextTutorial.title}`);
+                        ElementPlus.ElMessage.info(gettext("进入下一章节: ") + nextTutorial.title);
                     }
                 }
             }
@@ -211,7 +211,7 @@ Object.assign(AppRoot, {
                     const prevTutorial = this.tutorials[currentIndex - 1];
                     this.loadTutorial(prevTutorial.slug, true, 'last');
                     if (window.ElementPlus) {
-                        ElementPlus.ElMessage.info(`返回上一章节: ${prevTutorial.title}`);
+                        ElementPlus.ElMessage.info(gettext("返回上一章节: ") + prevTutorial.title);
                     }
                 }
             }
@@ -230,7 +230,7 @@ Object.assign(AppRoot, {
                 this.promptInput = promptStr;
                 if (window.ElementPlus) {
                     ElementPlus.ElMessage({
-                        message: '自动填充完毕，执行测试',
+                        message: gettext('自动填充完毕，执行测试'),
                         type: 'success',
                         duration: 1500
                     });
@@ -315,7 +315,7 @@ Object.assign(AppRoot, {
                 const data = await response.json();
 
                 if (!response.ok) {
-                    throw new Error(data.error || `请求失败，状态码: ${response.status}`);
+                    throw new Error(data.error || gettext("请求失败，状态码: ") + response.status);
                 }
 
                 // 成功，将回答加入历史，注意前端气泡渲染使用的是 role='ai'
@@ -326,7 +326,7 @@ Object.assign(AppRoot, {
             } catch (error) {
                 this.chatHistory.push({
                     role: 'error',
-                    content: error.message || "请求 AI 时发生未知错误"
+                    content: error.message || gettext("请求 AI 时发生未知错误")
                 });
             } finally {
                 this.aiLoading = false;

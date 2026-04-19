@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}登录 - Know More{% endblock %}
+{% block title %}{% translate "登录" %} - Know More{% endblock %}
 
 {% block extra_head %}
 <style>
@@ -64,14 +65,14 @@
 <div class="auth-container">
     <div class="auth-card">
         <div class="auth-header">
-            <h1>欢迎回来</h1>
-            <p>登录您的 Know More 账号以继续</p>
+            <h1>{% translate "欢迎回来" %}</h1>
+            <p>{% translate "登录您的 Know More 账号以继续" %}</p>
         </div>
 
         {% if form.errors %}
         <div class="error-info">
-            <el-alert title="登录失败" type="error" show-icon :closable="false">
-                用户名或密码不正确，请重试。
+            <el-alert title="{% translate '登录失败' %}" type="error" show-icon :closable="false">
+                {% translate "用户名或密码不正确，请重试。" %}
             </el-alert>
         </div>
         {% endif %}
@@ -82,20 +83,20 @@
             label-position="top"
             @submit.prevent="handleSubmit"
         >
-            <el-form-item label="用户名" required>
+            <el-form-item label="{% translate '用户名' %}" required>
                 <el-input 
                     v-model="loginData.username" 
-                    placeholder="请输入用户名" 
+                    placeholder="{% translate '请输入用户名' %}" 
                     prefix-icon="User"
                     size="large"
                 ></el-input>
             </el-form-item>
             
-            <el-form-item label="密码" required>
+            <el-form-item label="{% translate '密码' %}" required>
                 <el-input 
                     v-model="loginData.password" 
                     type="password" 
-                    placeholder="请输入密码" 
+                    placeholder="{% translate '请输入密码' %}" 
                     prefix-icon="Lock"
                     show-password
                     size="large"
@@ -103,8 +104,8 @@
             </el-form-item>
 
             <div style="margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center;">
-                <el-checkbox v-model="loginData.remember">记住我</el-checkbox>
-                <a href="{% url 'reset_password' %}" style="font-size: 14px; color: var(--primary); text-decoration: none;">忘记密码？</a>
+                <el-checkbox v-model="loginData.remember">{% translate "记住我" %}</el-checkbox>
+                <a href="{% url 'reset_password' %}" style="font-size: 14px; color: var(--primary); text-decoration: none;">{% translate "忘记密码？" %}</a>
             </div>
 
             <el-button 
@@ -114,7 +115,7 @@
                 style="width: 100%; font-weight: 600; height: 48px;"
                 :loading="submitting"
             >
-                立即登录
+                {% translate "立即登录" %}
             </el-button>
         </el-form>
 
@@ -127,7 +128,7 @@
         </form>
 
         <div class="auth-footer">
-            还需要账号吗？ <a href="{% url 'register' %}">立即注册</a>
+            {% translate "还需要账号吗？" %} <a href="{% url 'register' %}">{% translate "立即注册" %}</a>
         </div>
     </div>
 </div>
@@ -145,7 +146,7 @@ submitting: false,
 {% block vue_methods %}
 handleSubmit() {
     if (!this.loginData.username || !this.loginData.password) {
-        this.$message.warning('请填写完整的登录信息');
+        this.$message.warning('{% translate "请填写完整的登录信息" %}');
         return;
     }
     this.submitting = true;

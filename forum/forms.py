@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from django.utils.translation import gettext_lazy as _
 from .models import Post, Reply, Category, UserProfile
 
 
@@ -12,12 +13,12 @@ class PostForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': '请输入帖子标题（5-200 字符）',
+                'placeholder': _('请输入帖子标题（5-200 字符）'),
                 'maxlength': 200,
             }),
             'content': forms.Textarea(attrs={
                 'class': 'form-control',
-                'placeholder': '请输入帖子内容（支持 Markdown 语法）',
+                'placeholder': _('请输入帖子内容（支持 Markdown 语法）'),
                 'rows': 10,
             }),
             'category': forms.Select(attrs={
@@ -29,16 +30,16 @@ class PostForm(forms.ModelForm):
         """验证标题"""
         title = self.cleaned_data.get('title')
         if len(title) < 5:
-            raise forms.ValidationError('标题长度不能少于 5 个字符')
+            raise forms.ValidationError(_('标题长度不能少于 5 个字符'))
         if len(title) > 200:
-            raise forms.ValidationError('标题长度不能超过 200 个字符')
+            raise forms.ValidationError(_('标题长度不能超过 200 个字符'))
         return title
     
     def clean_content(self):
         """验证内容"""
         content = self.cleaned_data.get('content')
         if len(content.strip()) == 0:
-            raise forms.ValidationError('帖子内容不能为空')
+            raise forms.ValidationError(_('帖子内容不能为空'))
         return content
 
 
@@ -51,7 +52,7 @@ class ReplyForm(forms.ModelForm):
         widgets = {
             'content': forms.Textarea(attrs={
                 'class': 'form-control',
-                'placeholder': '请输入回复内容...',
+                'placeholder': _('请输入回复内容...'),
                 'rows': 4,
             }),
         }
@@ -60,7 +61,7 @@ class ReplyForm(forms.ModelForm):
         """验证内容"""
         content = self.cleaned_data.get('content')
         if len(content.strip()) == 0:
-            raise forms.ValidationError('回复内容不能为空')
+            raise forms.ValidationError(_('回复内容不能为空'))
         return content
 
 
@@ -73,19 +74,19 @@ class UserEditForm(forms.ModelForm):
         widgets = {
             'username': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': '用户名',
+                'placeholder': _('用户名'),
             }),
             'email': forms.EmailInput(attrs={
                 'class': 'form-control',
-                'placeholder': '电子邮箱',
+                'placeholder': _('电子邮箱'),
             }),
             'first_name': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': '名',
+                'placeholder': _('名'),
             }),
             'last_name': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': '姓',
+                'placeholder': _('姓'),
             }),
         }
 
@@ -99,12 +100,12 @@ class UserProfileForm(forms.ModelForm):
         widgets = {
             'signature': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': '个人签名（255 字符以内）',
+                'placeholder': _('个人签名（255 字符以内）'),
                 'maxlength': 255,
             }),
             'bio': forms.Textarea(attrs={
                 'class': 'form-control',
-                'placeholder': '个人简介',
+                'placeholder': _('个人简介'),
                 'rows': 5,
             }),
         }

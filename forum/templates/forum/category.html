@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}{{ category.name }} - Know More 论坛{% endblock %}
+{% block title %}{{ category.name }} - Know More {% translate "论坛" %}{% endblock %}
 
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/forum.css' %}" />
@@ -13,7 +14,7 @@
     <div class="forum-breadcrumb">
         <el-breadcrumb separator="/">
             <el-breadcrumb-item>
-                <a href="{% url 'forum:forum_index' %}">论坛</a>
+                <a href="{% url 'forum:forum_index' %}">{% translate "论坛" %}</a>
             </el-breadcrumb-item>
             <el-breadcrumb-item>{{ category.name }}</el-breadcrumb-item>
         </el-breadcrumb>
@@ -33,12 +34,12 @@
     <!-- 操作栏 -->
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
         <div style="color: var(--text-secondary); font-size: 14px;">
-            共 {{ page_obj.paginator.count }} 篇帖子
+            {% translate "共" %} {{ page_obj.paginator.count }} {% translate "篇帖子" %}
         </div>
         {% if user.is_authenticated %}
         <el-button type="primary" onclick="window.location.href='{% url 'forum:create_post' %}'">
             <el-icon style="margin-right: 6px;"><edit /></el-icon>
-            发布新帖子
+            {% translate "发布新帖子" %}
         </el-button>
         {% endif %}
     </div>
@@ -50,11 +51,11 @@
             <div class="post-item-body">
                 <div class="post-item-title">
                     {% if post.is_pinned %}
-                    <el-tag type="danger" size="small" effect="dark">置顶</el-tag>
+                    <el-tag type="danger" size="small" effect="dark">{% translate "置顶" %}</el-tag>
                     {% endif %}
                     {% if post.is_locked %}
                     <el-tag type="info" size="small">
-                        <el-icon style="vertical-align: -2px;"><lock /></el-icon> 锁定
+                        <el-icon style="vertical-align: -2px;"><lock /></el-icon> {% translate "锁定" %}
                     </el-tag>
                     {% endif %}
                     <a href="{% url 'forum:post_detail' post.id %}">{{ post.title }}</a>
@@ -64,11 +65,11 @@
                         <el-icon><user /></el-icon> {{ post.author.username }}
                     </span>
                     <span class="meta-item">
-                        <el-icon><clock /></el-icon> {{ post.created_at|timesince }} 前
+                        <el-icon><clock /></el-icon> {{ post.created_at|timesince }} {% translate "前" %}
                     </span>
                     {% if post.last_reply_at %}
                     <span class="meta-item">
-                        最后回复 {{ post.last_reply_at|timesince }} 前
+                        {% translate "最后回复" %} {{ post.last_reply_at|timesince }} {% translate "前" %}
                     </span>
                     {% endif %}
                 </div>
@@ -76,20 +77,20 @@
             <div class="post-item-stats">
                 <div class="stat">
                     <span class="stat-num">{{ post.view_count }}</span>
-                    <span class="stat-label">浏览</span>
+                    <span class="stat-label">{% translate "浏览" %}</span>
                 </div>
                 <div class="stat">
                     <span class="stat-num">{{ post.reply_count }}</span>
-                    <span class="stat-label">回复</span>
+                    <span class="stat-label">{% translate "回复" %}</span>
                 </div>
             </div>
         </div>
         {% empty %}
         <div class="forum-empty">
-            <el-empty description="暂无帖子，快来发第一帖吧！">
+            <el-empty description="{% translate '暂无帖子，快来发第一帖吧！' %}">
                 {% if user.is_authenticated %}
                 <el-button type="primary" onclick="window.location.href='{% url 'forum:create_post' %}'">
-                    发布帖子
+                    {% translate "发布帖子" %}
                 </el-button>
                 {% endif %}
             </el-empty>
