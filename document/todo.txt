@@ -9,12 +9,21 @@ TODO
 2. 用户系统
     a. SMTP 或其它邮件服务器
 3. 国际化
-    a. 所有文本(模板、教程、文档)
-    b. 教程json按语言分目录
+    a. 文档 md 文件
+    b. 教程 json 文件
 4. AI接口
     a. 自己算算token限量的开销，调整数值
     b. 增加“沙盒仅测试，应用请去官方AI网站”
     c. 提供国内语言模型
+5. 部署
+    a. 开发与生产的 settings.py
+    b. docker 配置与脚本
+        i. nginx 配置
+        ii. uwsgi
+        iii. Dockerfile
+        iv. docker-compose.yml
+    c. Cloudflare 域名与 CDN
+    d. AWS EC2 实例
 
 
 敬请期待
