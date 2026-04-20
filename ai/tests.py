@@ -3,9 +3,12 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from unittest.mock import patch
 import json
+from ai import views
 
 class AIChatAPITestCase(TestCase):
     def setUp(self):
+        # 重置全局单例以防止测试间污染
+        views._openai_client = None
         self.client = Client()
         self.url = reverse('chat_api')
         self.user = User.objects.create_user(username='testuser', password='password123')
