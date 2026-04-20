@@ -1,41 +1,41 @@
 {
     "order": 6,
-    "title": "指示模型多视角回答",
+    "title": "Instructing the Model for Multi-perspective Answers",
     "steps": [
         {
             "step": 1,
-            "content": "### 多视角分析\n\n有时问题没有明确的答案，或者涉及到复杂的利益冲突和不同观点。如果提问过于简单（见下方示例），AI 往往只会给出一个笼统且单一视角的答案。\n\n为了得到更全面、客观的回答，我们应该明确指示大语言模型从多个预设的角度或者多方利益相关者的角度分析问题。",
+            "content": "### Multi-perspective Analysis\n\nSometimes questions do not have a clear-cut answer, or involve complex conflicts of interest and differing viewpoints. If the question is too simple (see the example below), the AI will often only provide a vague and single-perspective answer.\n\nTo get a more comprehensive and objective answer, we should explicitly instruct the large language model to analyze the problem from multiple preset angles or from the perspectives of multiple stakeholders.",
             "interaction": [
                 {
                     "type": "chat",
-                    "prompt": "奥巴马是一位好总统吗？"
+                    "prompt": "Was Obama a good president?"
                 }
             ]
         },
         {
             "step": 2,
-            "content": "刚才的提问非常模糊，AI 可能只会给出一个相对中立但平淡的评价。我们可以通过让模型从特定角度切入来改善结果。\n\n让我们尝试加上多视角的限定词：\n\n**“请从经济、外交、社会的角度分别分析奥巴马表现的好坏。”**",
+            "content": "The previous question was very vague; the AI might only give a relatively neutral but bland evaluation. We can improve the result by having the model approach from specific angles.\n\nLet's try adding multi-perspective qualifiers:\n\n**\"Please analyze Obama's performance from economic, diplomatic, and social perspectives respectively.\"**",
             "interaction": [
                 {
                     "type": "chat",
-                    "prompt": "请从经济、外交、社会的角度分别分析奥巴马表现的好坏。"
+                    "prompt": "Please analyze Obama's performance from economic, diplomatic, and social perspectives respectively."
                 }
             ]
         },
         {
             "step": 3,
-            "content": "### 应对复杂问题\n\n现在的语言模型大多都知道“世上没有非黑即白”的答案，好一点的模型也知道要从经济、外交、社会等角度评价一位总统，但我们现在正在讨论的技巧更多地适用于那些**你也不知道有哪些角度的极端复杂问题**。\n\n此时，我们可以设定几个身份不同的“专家”来共同探讨这个问题。\n\n 现在你已经知道如何让AI从多个角度分析问题了。点击\"下一步\"，让我们继续学习。",
+            "content": "### Dealing with Complex Issues\n\nMost modern language models know that \"the world is not black and white.\" Better models also know they should evaluate a president from economic, diplomatic, and social perspectives. However, the technique we are discussing now is more applicable to those **extremely complex problems where you don't even know what perspectives exist**.\n\nAt this point, we can set several \"experts\" with different identities to discuss the issue together.\n\nNow you know how to let AI analyze problems from multiple perspectives. Click \"Next\" to continue our learning.",
             "interaction": [
                 {
                     "type": "quiz",
-                    "question": "现有一个面积中等的相对孤立的岛国，它正在面临劳动力以及农产品短缺，你想分析这个岛国的经济情况。为了得到最客观的解答，以下哪种提示词效果最好？",
+                    "question": "Suppose there is a relatively isolated island nation of medium area currently facing labor and agricultural shortages, and you want to analyze its economic situation. To get the most objective answer, which of the following prompts would be most effective?",
                     "options": [
-                        "告诉我关于这个岛国经济的一切信息。",
-                        "这个岛国的经济是好还是坏？",
-                        "让三位不同流派的现代经济学家，分别对这个岛国的现状发表不同的看法。"
+                        "Tell me everything about this island nation's economy.",
+                        "Is this island nation's economy good or bad?",
+                        "Have three modern economists from different schools of thought provide different views on the current situation of this island nation."
                     ],
                     "correctIndex": 2,
-                    "explanation": "通过设定多位专家和不同流派，可以强制AI跳出固定范式，生成多元化的深度专业见解，而不仅仅是罗列表面信息。"
+                    "explanation": "By setting multiple experts and different schools of thought, you can force the AI to jump out of fixed paradigms and generate diversified, in-depth professional insights rather than just listing surface-level information."
                 }
             ]
         }

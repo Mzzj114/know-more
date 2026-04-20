@@ -1,66 +1,66 @@
 {
     "order": 4,
-    "title": "提供上下文背景",
+    "title": "Providing Contextual Background",
     "steps": [
         {
             "step": 1,
-            "content": "## 提供上下文背景\n\n在提示词工程中，**补充必要的背景信息**至关重要。\n\n### 为什么需要背景信息？\n\n模型没办法知道你所在的环境。背景越清晰，建议越实用。\n\n想象一下：如果你向一个完全不了解你情况的人求助，你会先告诉他什么？肯定是相关的背景信息，对吧？与AI交流也是同样的道理。",
+            "content": "## Providing Contextual Background\n\nIn prompt engineering, **supplementing necessary background information** is crucial.\n\n### Why is background information needed?\n\nThe model cannot know the environment you are in. The clearer the background, the more practical the suggestions.\n\nImagine this: if you asked for help from someone who completely doesn't understand your situation, what would you tell them first? Certainly the relevant background information, right? Communicating with AI follows the same logic.",
             "interaction": [{
                 "type": "quiz",
-                "question": "为什么要在使用AI时提供背景信息？",
+                "question": "Why should you provide background information when using AI?",
                 "options": [
-                    "因为AI喜欢听故事",
-                    "因为模型不知道你所在的环境，背景越清晰建议越实用",
-                    "为了让对话看起来更专业"
+                    "Because AI likes listening to stories",
+                    "Because the model doesn't know the environment you are in; the clearer the background, the more practical the suggestions",
+                    "To make the conversation look more professional"
                 ],
                 "correctIndex": 1,
-                "explanation": "正确！AI没有你的生活经验和上下文，你需要主动提供足够的背景信息，它才能给出针对性的建议。"
+                "explanation": "Correct! AI does not have your life experience or context. You need to proactively provide enough background information so it can give targeted suggestions."
             }]
         },
         {
             "step": 2,
-            "content": "## 对比示例\n\n让我们看一个实际的例子，看看有无背景信息的差异有多大。\n\n**❌ 反面示例（缺少背景）：**\n```\n我的项目文件上传报错 500 了，该怎么修？\n```\n\n这个提问缺少太多关键信息：\n- 使用的是什么技术栈？\n- 部署环境是什么？\n- 具体的错误信息是什么？\n\n这极易导致排查方向出现偏差。",
+            "content": "## Comparison Examples\n\nLet's look at a practical example to see how big the difference is between having and not having background information.\n\n**❌ Negative Example (Missing background):**\n```\nMy project file upload reported a 500 error, how do I fix it?\n```\n\nThis question lacks too much key information:\n- What technology stack is used?\n- What is the deployment environment?\n- What is the specific error message?\n\nThis easily leads to the wrong direction in troubleshooting.",
             "interaction": [{
                 "type": "chat",
-                "prompt": "我的项目文件上传报错 500 了，该怎么修？"
+                "prompt": "My project file upload reported a 500 error, how do I fix it?"
             }]
         },
         {
             "step": 3,
-            "content": "看到了吗？由于缺乏背景信息，AI 只能给出非常笼统的建议，可能完全不适用你的情况。\n\n现在让我们试试提供完整背景的提问：\n\n**✅ 正面示例（包含背景）：**\n```\n我正在开发一个基于 Django 的开源项目，目前在 Docker 环境中遇到了文件上传导致 500 错误的现象。服务器使用 Nginx，系统为 Ubuntu。请帮我分析原因并给出排查步骤。\n```",
+            "content": "See that? Due to the lack of background information, the AI can only give very general suggestions that might not even apply to your situation.\n\nNow let's try a question that provides full background:\n\n**✅ Positive Example (Including background):**\n```\nI am developing an open-source project based on Django and am currently encountering a 500 error caused by file uploading in a Docker environment. The server uses Nginx, and the OS is Ubuntu. Please help me analyze the cause and provide troubleshooting steps.\n```",
             "interaction": [{
                 "type": "chat",
-                "prompt": "我正在开发一个基于 Django 的开源项目，目前在 Docker 环境中遇到了文件上传导致 500 错误的现象。服务器使用 Nginx，系统为 Ubuntu。请帮我分析原因并给出排查步骤。"
+                "prompt": "I am developing an open-source project based on Django and am currently encountering a 500 error caused by file uploading in a Docker environment. The server uses Nginx, and the OS is Ubuntu. Please help me analyze the cause and provide troubleshooting steps."
             }]
         },
         {
             "step": 4,
-            "content": "这次的回答是不是具体多了？因为 AI 知道了：\n- 🛠️ **技术栈**：Django\n- 🐳 **部署环境**：Docker + Nginx + Ubuntu\n- 🎯 **具体问题**：文件上传导致 500 错误\n\n有了这些信息，AI 就能给出更有针对性的排查建议。\n\n## 实践练习\n\n现在请你尝试为一个场景补充背景信息。假设你想让 AI 帮你优化一段代码，你应该提供哪些背景信息？",
+            "content": "Is this answer much more specific? Because the AI now knows:\n- 🛠️ **Tech Stack**: Django\n- 🐳 **Deployment Environment**: Docker + Nginx + Ubuntu\n- 🎯 **Specific Problem**: 500 error caused by file uploading\n\nWith this information, the AI can provide more targeted troubleshooting suggestions.\n\n## Practice Exercise\n\nNow try to supplement background information for a scenario. Suppose you want the AI to help you optimize a piece of code. What background information should you provide?",
             "interaction": [{
                 "type": "fill_blank",
-                "template": "我想优化一段{0}语言的代码。这段代码运行在{1}环境中，主要功能是{2}。目前遇到的问题是{3}。请帮我优化这段代码。",
-                "blanks": ["编程语言 (如: Python)", "运行环境 (如: Linux服务器)", "代码功能 (如: 处理用户上传的图片)", "具体问题 (如: 处理大文件时内存溢出)"]
+                "template": "I want to optimize a piece of {0} code. This code runs in a {1} environment, and its main function is to {2}. The problem I'm currently facing is {3}. Please help me optimize this code.",
+                "blanks": ["Programming language (e.g., Python)", "Running environment (e.g., Linux server)", "Code function (e.g., handling user-uploaded images)", "Specific problem (e.g., memory overflow when processing large files)"]
             }]
         },
         {
             "step": 5,
-            "content": "## 背景信息的关键要素\n\n在提供背景时，通常需要考虑以下要素：\n\n1. **技术栈/工具** - 你正在使用什么技术或软件\n2. **环境配置** - 运行环境、操作系统、版本信息等\n3. **目标受众/场景** - 最终用户是谁，在什么场景下使用\n4. **约束条件** - 有什么限制（时间、资源、规范等）\n5. **已有尝试** - 你已经试过什么方法，结果如何\n\n记住：**宁可多说，不要少说**。多余的背景信息最多被忽略，但缺少的关键信息会导致完全不同的结果。",
+            "content": "## Key Elements of Background Information\n\nWhen providing background, you usually need to consider the following elements:\n\n1. **Tech Stack/Tools** - What technology or software you are using\n2. **Environment Configuration** - Running environment, operating system, version information, etc.\n3. **Target Audience/Scenario** - Who the end user is and in what scenario it's used\n4. **Constraints** - Any limitations (time, resources, standards, etc.)\n5. **Previous Attempts** - What methods you have already tried and what the results were\n\nRemember: **Better to say too much than too little**. Extra background information will at most be ignored, but missing key information will lead to completely different results.",
             "interaction": [{
                 "type": "quiz",
-                "question": "以下哪项**不是**提供背景信息时需要考虑的要素？",
+                "question": "Which of the following is **not** an element to consider when providing background information?",
                 "options": [
-                    "使用的技术栈和工具",
-                    "AI模型的训练数据来源",
-                    "目标受众和使用场景",
-                    "已有的尝试和结果"
+                    "The tech stack and tools used",
+                    "The source of the AI model's training data",
+                    "Target audience and usage scenario",
+                    "Previous attempts and results"
                 ],
                 "correctIndex": 1,
-                "explanation": "正确！AI模型的训练数据来源与你当前的任务无关，不需要在背景信息中提及。应该关注的是你的具体使用场景和需求。"
+                "explanation": "Correct! The source of the AI model's training data is irrelevant to your current task and does not need to be mentioned in the background information. What you should focus on is your specific usage scenario and needs."
             }]
         },
         {
             "step": 6,
-            "content": "## 小结\n\n提供充分的背景信息是写出好提示词的基础。它能让 AI：\n\n - ✅ 理解你的具体情境\n - ✅ 给出针对性的建议\n - ✅ 避免无效的方向探索\n - ✅ 节省反复澄清的时间\n\n在接下来的教程中，你将学习另一个重要技巧：**使用示例引导（Few-shot）**，通过提供参考样本来告诉 AI\"什么是好的结果\"。",
+            "content": "## Summary\n\nProviding sufficient background information is the foundation of writing good prompts. It allows the AI to:\n\n - ✅ Understand your specific situation\n - ✅ Give targeted suggestions\n - ✅ Avoid exploring ineffective directions\n - ✅ Save time spent on repeated clarifications\n\nIn the next tutorial, you will learn another important technique: **Guiding with Examples (Few-shot)**, where you tell the AI \"what a good result looks like\" by providing reference samples.",
             "interaction": []
         }
     ]

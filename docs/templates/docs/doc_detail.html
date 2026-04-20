@@ -1,4 +1,5 @@
 {% extends "docs/layout.html" %}
+{% load i18n %}
 
 {% block title %} {{ title }} - Know More Docs {% endblock %}
 
@@ -12,7 +13,7 @@
     <!-- Bottom navigation / action area -->
     <div style="margin-top: 64px; border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center;">
         <div style="color: var(--text-secondary); font-size: 14px;">
-            更新于近期 · 文档代码开源
+            {% translate "更新于近期 · 文档代码开源" %}
         </div>
         <div>
             <el-popover
@@ -23,11 +24,11 @@
             >
                 <template #reference>
                     <el-button type="primary" plain round>
-                        <el-icon style="margin-right: 4px"><share /></el-icon> 分享此文档
+                        <el-icon style="margin-right: 4px"><share /></el-icon> {% translate "分享此文档" %} 
                     </el-button>
                 </template>
                 <div style="display: flex; flex-direction: column; gap: 12px;">
-                    <span style="font-weight: 600; font-size: 14px; color: var(--text-primary);">分享此文档</span>
+                    <span style="font-weight: 600; font-size: 14px; color: var(--text-primary);">{% translate "分享此文档" %}</span>
                     <div style="display: flex; gap: 8px;">
                         <el-input 
                             v-model="shareUrl" 
@@ -39,7 +40,7 @@
                             </template>
                         </el-input>
                         <el-button type="primary" @click="copyShareLink">
-                            复制
+                            {% translate "复制" %}
                         </el-button>
                     </div>
                 </div>

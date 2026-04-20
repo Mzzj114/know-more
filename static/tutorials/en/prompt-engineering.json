@@ -1,56 +1,56 @@
 {
     "order": 2,
-    "title": "提示词工程",
+    "title": "Prompt Engineering",
     "steps": [
         {
             "step": 1,
-            "content": "## 什么是提示词工程？\n\n谷歌指出： **\"提示工程是一门设计和优化提示的艺术和科学\"** 。\n\n### 为什么需要提示词工程？\n\n在实际使用 AI 时，许多人会发现：同一个问题，有时能得到高质量、结构清晰的回答，有时却显得模糊甚至偏离主题。\n\n这种差异往往并非来自模型本身，而是来自输入给模型的**\"提示词\"（Prompt）**。\n\n提示词可以理解为人与模型之间的沟通接口。它不仅描述\"要做什么\"，还隐含\"如何做\"\"在什么背景下做\"。",
+            "content": "## What is Prompt Engineering?\n\nGoogle points out: **\"Prompt Engineering is the art and science of designing and optimizing prompts.\"**\n\n### Why is Prompt Engineering needed?\n\nIn practical use of AI, many people find that for the same question, they sometimes get high-quality, clearly structured answers, and other times the answers seem vague or even off-topic.\n\nThis difference often does not come from the model itself, but from the **\"Prompt\"** input to the model.\n\nPrompts can be understood as the communication interface between humans and the model. They describe not only \"what to do\" but also implicitly \"how to do it\" and \"in what context to do it.\"",
             "interaction": [{
                 "type": "quiz",
-                "question": "为什么同样的问题有时会得到不同的回答质量？",
+                "question": "Why do identical questions sometimes get different output qualities?",
                 "options": [
-                    "因为大语言模型本身不稳定",
-                    "因为输入的提示词质量和清晰度不同",
-                    "因为网络连接速度影响了回答质量"
+                    "Because large language models themselves are unstable",
+                    "Because the quality and clarity of the input prompts are different",
+                    "Because network connection speed affects the quality of the answers"
                 ],
                 "correctIndex": 1,
-                "explanation": "正确！提示词的质量直接决定了模型输出的质量。清晰、具体的提示词能引导模型产生更好的结果。"
+                "explanation": "Correct! The quality of the prompt directly determines the quality of the model's output. Clear and specific prompts can guide the model to produce better results."
             }]
         },
         {
             "step": 2,
-            "content": "## 提示词工程的本质\n\n提示词工程的本质，并不是寻找\"最巧妙的表达方式\"，而是**将需求表达得更加清晰、完整和可执行**。\n\n从实践经验来看：\n\n- ✅ 模糊的输入往往带来模糊的输出\n- ✅ 清晰的结构可以显著提升稳定性\n- ✅ 提示词本身可以被设计、复用与优化\n\n然而，提示词工程不是一项孤立的技巧，而是一种**新的学习与表达方式**。掌握它，意味着你可以更有效地与人工智能协作。",
+            "content": "## The Essence of Prompt Engineering\n\nThe essence of prompt engineering is not searching for the \"most ingenious way of expression,\" but **expressing requirements more clearly, completely, and executably**.\n\nFrom practical experience:\n\n- ✅ Vague inputs often bring vague outputs\n- ✅ Clear structure can significantly improve stability\n- ✅ Prompts themselves can be designed, reused, and optimized\n\nHowever, prompt engineering is not an isolated skill, but a **new way of learning and expressing**. Mastering it means you can collaborate more effectively with artificial intelligence.",
             "interaction": [{
                 "type": "quiz",
-                "question": "提示词工程的核心目标是什么？",
+                "question": "What is the core goal of prompt engineering?",
                 "options": [
-                    "学习最复杂的编程技巧来控制AI",
-                    "将需求表达得更清晰、完整和可执行",
-                    "找到能让AI说真话的神奇咒语"
+                    "Learning the most complex programming skills to control AI",
+                    "Expressing requirements more clearly, completely, and executably",
+                    "Finding a magical incantation that makes AI tell the truth"
                 ],
                 "correctIndex": 1,
-                "explanation": "正确！提示词工程不是魔法，而是通过清晰表达需求来改善与AI的沟通效果。"
+                "explanation": "Correct! Prompt engineering is not magic, but a way to improve communication with AI by clearly expressing requirements."
             }]
         },
         {
             "step": 3,
-            "content": "## 门槛低但上限高\n\n提示词工程有一个很有趣的特点：**门槛很低，但上限很高**。\n\n**为什么说门槛低？**\n- 你只需要用自然语言与AI交流\n- 不需要学习编程语言或特殊语法\n- 任何人都可以立即开始尝试\n\n**为什么说上限高？**\n- 高级的提示词技巧可以大幅提升输出质量\n- 结构化提示词可以处理极其复杂的任务\n- 需要不断实践和优化才能达到精通\n\n让我们通过一个简单对比来看看效果差异：",
+            "content": "## Low Barrier but High Ceiling\n\nPrompt engineering has a very interesting characteristic: **the barrier to entry is low, but the ceiling is high**.\n\n**Why is the barrier low?**\n- You only need to communicate with AI in natural language\n- No need to learn programming languages or special syntax\n- Anyone can start trying immediately\n\n**Why is the ceiling high?**\n- Advanced prompt techniques can significantly improve output quality\n- Structured prompts can handle extremely complex tasks\n- It requires continuous practice and optimization to achieve mastery\n\nLet's see the difference in effect through a simple comparison:",
             "interaction": [{
                 "type": "chat",
-                "prompt": "写一篇关于量子纠缠的文章。"
+                "prompt": "Write an article about quantum entanglement."
             }]
         },
         {
             "step": 4,
-            "content": "上面的提示词比较模糊，AI 可能会生成一篇学术性很强、难以理解的文章。\n\n现在让我们试试更明确的提示词：",
+            "content": "The prompt above is quite vague; the AI might generate an article that is highly academic and difficult to understand.\n\nNow let's try a more explicit prompt:",
             "interaction": [{
                 "type": "chat",
-                "prompt": "请为中学生写一篇关于'量子纠缠'的科普短文，字数 500 字左右，要求语言生动幽默，能够激发读者的好奇心。"
+                "prompt": "Please write a popular science short article about 'quantum entanglement' for middle school students, about 500 words, using vivid and humorous language that can stimulate the reader's curiosity."
             }]
         },
         {
             "step": 5,
-            "content": "看到了吗？第二个提示词因为明确了**受众**（中学生）、**长度**（500字）、**风格**（生动幽默）和**目标**（激发好奇心），所以得到了更适合的结果。\n\n## 接下来学什么？\n\n在接下来的教程中，你将系统学习各种提示词技巧，包括：\n\n1. 📝 **提供信息的技巧** - 如何明确任务、提供背景、使用示例\n2. 🔍 **多视角分析** - 让AI从不同角度思考问题\n3. 🧩 **分步骤拆解逻辑** - Chain-of-Thought 思维链技巧\n4. 📋 **精确控制输出形式** - 指定格式、让AI编程等\n5. 🎭 **元提示词** - 让AI帮你写提示词\n6. 🏗️ **结构化提示词** - 构建专业级的提示词模板\n\n准备好了吗？让我们开始第一个技巧的学习！",
+            "content": "See that? The second prompt, because it clarified the **audience** (middle school students), **length** (500 words), **style** (vivid and humorous), and **goal** (stimulate curiosity), obtained a more suitable result.\n\n## What to Learn Next?\n\nIn the following tutorials, you will systematically learn various prompt techniques, including:\n\n1. 📝 **Techniques for Providing Information** - How to clarify tasks, provide context, and use examples\n2. 🔍 **Multi-perspective Analysis** - Let AI think about problems from different angles\n3. 🧩 **Step-by-Step Logical Decomposition** - Chain-of-Thought (CoT) techniques\n4. 📋 **Precisely Controlling Output Formats** - Specifying formats, letting AI code, etc.\n5. 🎭 **Meta Prompting** - Letting AI write prompts for you\n6. 🏗️ **Structured Prompts** - Building professional-grade prompt templates\n\nReady? Let's start learning the first technique!",
             "interaction": []
         }
     ]

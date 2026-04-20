@@ -1,55 +1,55 @@
 {
     "order": 8,
-    "title": "精确控制输出形式",
+    "title": "Precisely Controlling Output Formats",
     "steps": [
         {
             "step": 1,
-            "content": "### 精确控制输出形式\n\n当今的大语言模型大多都经过了专门的调整，能够自然地使用 **Markdown** 格式输出文本效果排版。明确要求的输出格式，能够大幅提升内容的可读性和复用价值。\n\n试试要求AI处理一堆凌乱的数据，如果完全不加格式限制，AI会尝试猜测你的意图（当然，它不能读心，所以输出的结果可能不尽如人意）",
+            "content": "### Precisely Controlling Output Formats\n\nMost modern large language models have been specifically adjusted to naturally use **Markdown** formatting for text layout. Explicitly requiring an output format can significantly improve content readability and reuse value.\n\nTry asking the AI to organize a pile of cluttered data. If no format constraints are added, the AI will try to guess your intention (of course, it can't read your mind, so the output results might not be what you want).",
             "interaction": [
                 {
                     "type": "chat",
-                    "prompt": "把下面这些数据整理好：张三语文90数学80，李四语文85数学95，王五语文92数学88。"
+                    "prompt": "Organize these data pieces: John Doe English 90 Math 80, Jane Smith English 85 Math 95, Bob Jones English 92 Math 88."
                 }
             ]
         },
         {
             "step": 2,
-            "content": "大语言模型是“语言模型”，显然在输出二进制文件（如 .docx, .pptx, .xlsx, .pdf）时极其吃力。\n\n但是许多常见文件类型本身正是由纯文本构成的！例如，Excel 表格常常可以替代使用使用逗号分隔数据的 `CSV` (comma-separated values) 格式。\n\n所以只要改变思维方式，直接要求AI输出纯文本类的特定格式代码就能避开这个限制：",
+            "content": "Large language models are \"language models\" and obviously struggle significantly when outputting binary files (such as .docx, .pptx, .xlsx, .pdf).\n\nHowever, many common file types are actually composed of plain text! For example, Excel spreadsheets can often be replaced by using the `CSV` (comma-separated values) format where data is separated by commas.\n\nSo by changing your way of thinking and directly asking the AI to output specific format code of the plain-text variety, you can bypass this limitation:",
             "interaction": [
                 {
                     "type": "chat",
-                    "prompt": "帮我把这些数据以 csv 格式输出。张三语文90数学80，李四语文85数学95，王五语文92数学88。要求包含表头：姓名,语文,数学。"
+                    "prompt": "Help me output these data pieces in CSV format: John Doe English 90 Math 80, Jane Smith English 85 Math 95, Bob Jones English 92 Math 88. Include headers: Name, English, Math."
                 }
             ]
         },
         {
             "step": 3,
-            "content": "### 借助编程的力量\n\n既然 AI 不能直接准确生成不可读的复杂二进制文件，但 AI 可以写程序！然后我们可以借助运行 AI 写好的本地脚本程序生成任何复杂的本地特定文件。\n\n这一方法非常关键，很多时候能够完全替代人类低效的操作流程。",
+            "content": "### Leveraging the Power of Programming\n\nSince AI cannot directly and accurately generate unreadable complex binary files, AI can write programs! Then we can use local script programs written by the AI to generate any complex local specific files.\n\nThis method is crucial and can often completely replace inefficient human operational flows.",
             "interaction": [
                 {
                     "type": "quiz",
-                    "question": "如果我们需要把上千条杂乱的文本利用大模型技术整理并且输出为带有特定颜色的 `.xlsx` 表格文件，最好的方法是？",
+                    "question": "If we need to organize thousands of cluttered text entries using large model technology and output them as a `.xlsx` spreadsheet file with specific colors, what is the best method?",
                     "options": [
-                        "直接对AI说：“帮我把这些数据生成一个带颜色的 .xlsx 文件发给我。”",
-                        "让AI先跑出基础数据文本表格内容格式，然后自己手动复制粘贴到本机的Excel里面加颜色。",
-                        "先跟AI约定格式，说“请写一份Python脚本，利用诸如pandas等库分析我的文本并生成特定的带颜色的 .xlsx 文件”"
+                        "Directly say to the AI: 'Help me generate a .xlsx file with colors for these data and send it to me.'",
+                        "Let the AI first produce the basic data in a table format, then manually copy and paste it into Excel on your local machine and add colors.",
+                        "First agree on a format with the AI and say, 'Please write a Python script using libraries like pandas to analyze my text and generate a specific colored .xlsx file.'"
                     ],
                     "correctIndex": 2,
-                    "explanation": "让AI作为编程助手为你写特定数据转化的代码，并提示执行说明，是当今处理复杂且需带富格式属性文件极高效的手段。"
+                    "explanation": "Having the AI act as a programming assistant to write specific data conversion code for you, and providing execution instructions, is an extremely efficient means of handling complex files that require rich format attributes."
                 }
             ]
         },
         {
             "step": 4,
-            "content": "无论是输出简单的纯文本数据格式（如JSON，CSV）或者写辅助代码，这些技巧的核心都在于“透明表达”沟通——更清晰的需求指示形式，意味着事半功倍的信息成果。\n\n请再深入思考一步，将处理文件的需求模板补充完整。",
+            "content": "Whether outputting simple plain-text data formats (such as JSON, CSV) or writing auxiliary code, the core of these techniques lies in \"transparent expression\" communication—clearer demand indication forms mean doubling the effectiveness of information results.\n\nPlease think one step deeper and complete the file processing demand template.",
             "interaction": [
                 {
                     "type": "fill_blank",
-                    "template": "我现有很多数据 {0}，请写一个运行在本地环境的 {1} 脚本，使用相关的库组件读取数据，整理后以 {2} 格式保存为文件，并且提供这份脚本在终端正确运行的使用说明。",
+                    "template": "I have a lot of data {0}, please write a {1} script that runs in a local environment, uses relevant library components to read the data, organizes it, and saves it as a file in {2} format, and provide usage instructions for correctly running this script in the terminal.",
                     "blanks": [
-                        "你的数据",
-                        "如：Python/JS等代码语言",
-                        "如：.xlsx / .pdf 等后缀格式"
+                        "Your data here",
+                        "e.g., Python/JS/other programming languages",
+                        "e.g., .xlsx / .pdf and other extensions"
                     ]
                 }
             ]

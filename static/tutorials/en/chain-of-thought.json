@@ -1,54 +1,54 @@
 {
     "order": 7,
-    "title": "分步骤拆解逻辑",
+    "title": "Step-by-Step Logical Decomposition",
     "steps": [
         {
             "step": 1,
-            "content": "### 分步骤拆解逻辑\n\n面对复杂或涉及推理的任务，直接向 AI 要最终结果往往容易出错。将任务拆分为多个中间步骤，引导模型逐步思考，能显著提升逻辑运算的准确率。这就是著名的 **思维链 (Chain-of-Thought)**。",
+            "content": "### Step-by-Step Logical Decomposition\n\nWhen faced with complex tasks or those involving reasoning, directly asking AI for the final result often leads to errors. Splitting the task into several intermediate steps and guiding the model to think progressively can significantly improve the accuracy of logical operations. This is the famous **Chain-of-Thought (CoT)**.",
             "interaction": [
                 {
                     "type": "chat",
-                    "prompt": "两车相距 300 公里，速度分别是 60 和 40，相向而出发，请问 A 跑了多远？"
+                    "prompt": "Two cars are 300 km apart, traveling at speeds of 60 and 40 respectively, moving towards each other. How far did Car A travel?"
                 }
             ]
         },
         {
             "step": 2,
-            "content": "对于上面的问题，缺乏明确的思维链路提示时，复杂计算模型偶尔会跳步得出错误结论。\n\n我们可以尝试在提示词中一次性指出分拆后的步骤。例如：\n\n**“请分步骤解答：甲乙两地相距 300 公里，A 车速度 60km/h，B 车速度 40km/h，两车相向而行。请先计算相遇所需的时间，再计算相遇时 A 车行驶的总距离。”**",
+            "content": "For the above question, without explicit chain-of-thought prompts, complex calculation models occasionally skip steps and reach wrong conclusions.\n\nWe can try to point out the decomposed steps all at once in the prompt. For example:\n\n**\"Please solve step by step: Town A and Town B are 300 km apart. Car A travels at 60 km/h, and Car B travels at 40 km/h. They are moving towards each other. Please first calculate the time needed for them to meet, and then calculate the total distance Car A traveled at the moment of meeting.\"**",
             "interaction": [
                 {
                     "type": "chat",
-                    "prompt": "请分步骤解答：甲乙两地相距 300 公里，A 车速度 60km/h，B 车速度 40km/h，两车相向而行。请先计算相遇所需的时间，再计算相遇时 A 车行驶的总距离。"
+                    "prompt": "Please solve step by step: Town A and Town B are 300 km apart. Car A travels at 60 km/h, and Car B travels at 40 km/h. They are moving towards each other. Please first calculate the time needed for them to meet, and then calculate the total distance Car A traveled at the moment of meeting."
                 }
             ]
         },
         {
             "step": 3,
-            "content": "### 制作并执行任务清单\n\n对于一些非常复杂的文字创作任务，我们甚至不知道如何拆分步骤。\n\n这时候，我们可以先让 AI 拆分任务，制作整个任务的流程清单 (todo list) 或大纲，然后再引导 AI 按照他自己制定清单一步步执行操作。",
+            "content": "### Creating and Executing Task Lists\n\nFor some very complex writing tasks, we might not even know how to break down the steps.\n\nIn such cases, we can first have the AI decompose the task, creating a flow checklist (todo list) or outline for the entire task, and then guide the AI to follow its own checklist step by step.",
             "interaction": [
                 {
                     "type": "quiz",
-                    "question": "使用“先让AI生成大纲，再依据大纲分段让AI生成”的策略，相比于由AI一次性直接生成长文，有哪些好处？",
+                    "question": "What are the benefits of using the strategy 'first have AI generate an outline, then have AI generate sections based on the outline' compared to having AI generate a long text directly all at once?",
                     "options": [
-                        "能让最终生成的总字数变得非常长，进而直接突破系统字数上限",
-                        "用户可掌握整体结构（可以自行修改任务清单），输出内容容易更改",
-                        "无需人工干涉，一劳永逸"
+                        "It can make the final generated word count extremely long, directly breaking through system word limits.",
+                        "The user can grasp the overall structure (can modify the task list themselves), and the output content is easier to change.",
+                        "No human intervention is needed, solving it once and for all."
                     ],
                     "correctIndex": 1,
-                    "explanation": "拆解长文创作可以有效提高可控性，同时由于每次生成的内容较短，输出的质量与连贯性通常也会更好。"
+                    "explanation": "Decomposing long-text creation can effectively improve controllability. Also, since the content generated each time is shorter, the quality and coherence of the output are usually better."
                 }
             ]
         },
         {
             "step": 4,
-            "content": "让AI分次生成内容其实就是大模型技术中最强大的应用之一！有些深度思考大语言模型就是利用这一基本逻辑，在后台自动打草稿进行推演迭代。\n\n让我们亲自练习一下这种思维方式，补全下面的交互式长文写作流程：",
+            "content": "Having AI generate content in installments is actually one of the most powerful applications of large model technology! Some deep-thinking large language models use this basic logic to automatically create drafts in the background for reasoning and iteration.\n\nLet's practice this way of thinking personally and complete the following interactive long-text writing flow:",
             "interaction": [
                 {
                     "type": "fill_blank",
-                    "template": "第一步：请先根据我的需求，生成科普文章的 {0}。 \n第二步：根据上述确认的结果，开始为你撰写文章的 {1}。\n第三步：根据上下文背景要求，生成下一个相关的段落...",
+                    "template": "Step 1: Please first generate a(n) {0} for a popular science article based on my needs. \nStep 2: Based on the confirmed results above, start writing the {1} of the article.\nStep 3: According to the contextual background requirements, generate the next related paragraph...",
                     "blanks": [
-                        "如：提纲/大纲/框架",
-                        "如：第一部分/第一段/前言"
+                        "e.g., outline/framework",
+                        "e.g., first part/first paragraph/introduction"
                     ]
                 }
             ]
