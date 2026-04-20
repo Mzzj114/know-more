@@ -6,15 +6,12 @@ AI不要参考其中的内容。
 
 TODO
 1. 构想案例所需的新工具
-2. 用户系统
-    a. SMTP 或其它邮件服务器
 3. 国际化
     a. 文档 md 文件
     b. 教程 json 文件
 4. AI接口
     a. 自己算算token限量的开销，调整数值
     b. 增加“沙盒仅测试，应用请去官方AI网站”
-    c. 提供国内语言模型
 5. 部署
     a. 开发与生产的 settings.py
     b. docker 配置与脚本
@@ -24,8 +21,15 @@ TODO
         iv. docker-compose.yml
     c. Cloudflare 域名与 CDN
     d. AWS EC2 实例
+    e. AWS Simple Email Service(SES)
 
 
 敬请期待
 1. 论坛机器人(不靠请求/响应出发，而是根据时间触发，需要新架构)
-2. 用户上传文件，头像系统 与 S3 存储
+
+
+不太可能的敬请期待
+1. 中美两服务器节点
+2. 支持中国模型
+3. Reddis
+4. 用户上传文件，头像系统 与 S3 存储

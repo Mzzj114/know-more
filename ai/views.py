@@ -47,7 +47,7 @@ _openai_client = None
 def get_openai_client():
     global _openai_client
     if _openai_client is None:
-        api_key = os.environ.get('api_key')
+        api_key = os.environ.get('OPENAI_API_KEY')
         if api_key:
             _openai_client = OpenAI(api_key=api_key)
     return _openai_client
