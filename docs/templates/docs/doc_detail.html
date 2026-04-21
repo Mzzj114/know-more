@@ -4,6 +4,17 @@
 {% block title %} {{ title }} - Know More Docs {% endblock %}
 
 {% block doc_content %}
+
+<div class="docs-breadcrumb-container">
+    <el-breadcrumb separator="/">
+        <el-breadcrumb-item><a href="{% url 'home' %}" class="breadcrumb-link">{% translate "首页" %}</a></el-breadcrumb-item>
+        <el-breadcrumb-item><a href="{% url 'doc_index' %}" class="breadcrumb-link">{% translate "文档" %}</a></el-breadcrumb-item>
+        {% if title %}
+            <el-breadcrumb-item>{{ title }}</el-breadcrumb-item>
+        {% endif %}
+    </el-breadcrumb>
+</div>
+
 <div class="markdown-container" style="animation: km-fadeIn 0.6s ease-out backwards;">
     <!-- Rendered Markdown Output -->
     <article class="markdown-body">
@@ -52,10 +63,16 @@
 
 {% block vue_data %}
     {{ block.super }}
-    shareUrl: window.location.href,
+    shareUrl: '',
+{% endblock %}
+
+{% block vue_mounted %}
+    {{ block.super }}
+    this.shareUrl = window.location.href;
 {% endblock %}
 
 {% block vue_methods %}
+    {{ block.super }}
     copyShareLink() {
         navigator.clipboard.writeText(this.shareUrl).then(() => {
             ElementPlus.ElMessage({
