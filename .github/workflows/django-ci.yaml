@@ -4,10 +4,6 @@ name: Django CI
 on:
   push:
     branches: [ "main" ]
-    paths:
-      - '**.py'                # 所有 Python 文件
-      - '**.html'              # Django 模板
-      - 'requirements.txt'     # 依赖文件
     paths-ignore:
       - 'document/**'
       - 'static/tutorials/**'
