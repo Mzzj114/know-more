@@ -33,12 +33,12 @@
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
 
-            <div style="margin-bottom: 32px; padding-bottom: 16px; border-bottom: 1px solid var(--border);">
-                <h3 style="margin: 0 0 16px 0; color: var(--primary);">核心账户信息</h3>
+            <div class="form-section">
+                <h3 class="form-section-title">核心账户信息</h3>
                 
                 <!-- 用户名 -->
-                <div style="margin-bottom: 20px;">
-                    <label style="display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">
+                <div class="form-field-sm">
+                    <label class="form-label">
                         用户名
                     </label>
                     <el-input
@@ -50,13 +50,13 @@
                         <template #prefix><el-icon><user /></el-icon></template>
                     </el-input>
                     {% if user_form.username.errors %}
-                    <div style="color: var(--error); font-size: 13px; margin-top: 6px;">{{ user_form.username.errors.0 }}</div>
+                    <div class="form-error">{{ user_form.username.errors.0 }}</div>
                     {% endif %}
                 </div>
 
                 <!-- 邮箱 -->
-                <div style="margin-bottom: 20px;">
-                    <label style="display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">
+                <div class="form-field-sm">
+                    <label class="form-label">
                         电子邮箱
                     </label>
                     <el-input
@@ -68,23 +68,23 @@
                         <template #prefix><el-icon><message /></el-icon></template>
                     </el-input>
                     {% if user_form.email.errors %}
-                    <div style="color: var(--error); font-size: 13px; margin-top: 6px;">{{ user_form.email.errors.0 }}</div>
+                    <div class="form-error">{{ user_form.email.errors.0 }}</div>
                     {% endif %}
                 </div>
 
                 <!-- 姓名 -->
                 <el-row :gutter="20">
                     <el-col :span="12">
-                        <div style="margin-bottom: 20px;">
-                            <label style="display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">
+                        <div class="form-field-sm">
+                            <label class="form-label">
                                 姓 (Last Name)
                             </label>
                             <el-input v-model="lastName" name="last_name" placeholder="姓" size="large"></el-input>
                         </div>
                     </el-col>
                     <el-col :span="12">
-                        <div style="margin-bottom: 20px;">
-                            <label style="display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">
+                        <div class="form-field-sm">
+                            <label class="form-label">
                                 名 (First Name)
                             </label>
                             <el-input v-model="firstName" name="first_name" placeholder="名" size="large"></el-input>
@@ -93,12 +93,12 @@
                 </el-row>
             </div>
 
-            <div style="margin-bottom: 24px;">
-                <h3 style="margin: 0 0 16px 0; color: var(--primary);">论坛个人资料</h3>
+            <div class="form-field">
+                <h3 class="form-section-title">论坛个人资料</h3>
                 
                 <!-- 个人签名 -->
-                <div style="margin-bottom: 20px;">
-                    <label style="display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">
+                <div class="form-field-sm">
+                    <label class="form-label">
                         个人签名
                     </label>
                     <el-input
@@ -110,13 +110,13 @@
                         size="large"
                     ></el-input>
                     {% if profile_form.signature.errors %}
-                    <div style="color: var(--error); font-size: 13px; margin-top: 6px;">{{ profile_form.signature.errors.0 }}</div>
+                    <div class="form-error">{{ profile_form.signature.errors.0 }}</div>
                     {% endif %}
                 </div>
 
                 <!-- 个人简介 -->
-                <div style="margin-bottom: 24px;">
-                    <label style="display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">
+                <div class="form-field">
+                    <label class="form-label">
                         个人简介
                     </label>
                     <el-input
@@ -128,18 +128,18 @@
                         placeholder="介绍一下自己吧..."
                     ></el-input>
                     {% if profile_form.bio.errors %}
-                    <div style="color: var(--error); font-size: 13px; margin-top: 6px;">{{ profile_form.bio.errors.0 }}</div>
+                    <div class="form-error">{{ profile_form.bio.errors.0 }}</div>
                     {% endif %}
                 </div>
             </div>
 
             <!-- 操作按钮 -->
-            <div class="form-actions" style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 32px;">
+            <div class="form-actions">
                 <el-button size="large" onclick="window.history.back()">
                     取消
                 </el-button>
                 <el-button type="primary" size="large" native-type="submit">
-                    <el-icon style="margin-right: 6px;"><check /></el-icon>
+                    <el-icon class="icon-mr-6"><check /></el-icon>
                     保存资料
                 </el-button>
             </div>

@@ -606,3 +606,13 @@
         justify-content: center;
     }
 }
+
+/* =============================================
+   6. UTILITIES
+   ============================================= */
+.final-cta-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}

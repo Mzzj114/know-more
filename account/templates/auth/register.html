@@ -5,67 +5,7 @@
 {% block title %}{% translate "注册" %} - Know More{% endblock %}
 
 {% block extra_head %}
-<style>
-    .auth-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: calc(100vh - 120px);
-        background: radial-gradient(circle at top left, var(--primary-light) 0%, transparent 40%),
-                    radial-gradient(circle at bottom right, var(--primary-light) 0%, transparent 40%);
-        padding: 40px 0;
-    }
-    .auth-card {
-        width: 100%;
-        max-width: 480px;
-        padding: 40px;
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(10px);
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        animation: km-fadeIn 0.6s ease-out;
-    }
-    .auth-header {
-        text-align: center;
-        margin-bottom: 32px;
-    }
-    .auth-header h1 {
-        font-size: 28px;
-        font-weight: 800;
-        color: var(--primary);
-        margin: 0 0 8px 0;
-        letter-spacing: -0.025em;
-    }
-    .auth-header p {
-        color: var(--text-secondary);
-        font-size: 14px;
-        margin: 0;
-    }
-    .auth-footer {
-        margin-top: 24px;
-        text-align: center;
-        font-size: 14px;
-        color: var(--text-secondary);
-    }
-    .auth-footer a {
-        color: var(--primary);
-        text-decoration: none;
-        font-weight: 600;
-    }
-    .auth-footer a:hover {
-        text-decoration: underline;
-    }
-    .error-info {
-        margin-bottom: 20px;
-    }
-    .form-tip {
-        font-size: 12px;
-        color: var(--text-secondary);
-        margin-top: 4px;
-        line-height: 1.4;
-    }
-</style>
+<link rel="stylesheet" href="{% static 'css/auth.css' %}" />
 {% endblock %}
 
 {% block layout_content %}
@@ -79,7 +19,7 @@
         {% if form.errors %}
         <div class="error-info">
             <el-alert title="{% translate '注册信息有误' %}" type="error" show-icon :closable="false">
-                <ul style="margin: 0; padding-left: 18px;">
+                <ul class="auth-error-list">
                     {% for field in form %}
                         {% for error in field.errors %}
                             <li>{{ error }}</li>
@@ -119,19 +59,19 @@
             </el-form-item>
 
             <el-form-item label="{% translate '验证码' %}" required>
-                <div style="display: flex; gap: 12px; width: 100%;">
+                <div class="verify-code-row">
                     <el-input 
                         v-model="regData.verifyCode" 
                         placeholder="{% translate '请输入 6 位验证码' %}" 
                         prefix-icon="Key"
                         size="large"
-                        style="flex: 1;"
+                        class="verify-code-input"
                     ></el-input>
                     <el-button 
                         size="large" 
                         @click="sendVerifyCode" 
                         :disabled="countdown > 0"
-                        style="width: 120px;"
+                        class="verify-code-btn"
                     >
                         <span v-if="countdown > 0" v-text="countdown + 's'"></span>
                         <span v-else>{% translate "发送验证码" %}</span>
@@ -162,15 +102,15 @@
                 ></el-input>
             </el-form-item>
 
-            <div style="margin: 24px 0;">
-                <el-checkbox v-model="regData.agree">{% translate "我已阅读并同意" %} <a href="#" style="color: var(--primary);">{% translate "服务协议" %}</a> {% translate "和" %} <a href="#" style="color: var(--primary);">{% translate "隐私政策" %}</a></el-checkbox>
+            <div class="auth-agree-row">
+                <el-checkbox v-model="regData.agree">{% translate "我已阅读并同意" %} <a href="#" class="auth-forgot-link">{% translate "服务协议" %}</a> {% translate "和" %} <a href="#" class="auth-forgot-link">{% translate "隐私政策" %}</a></el-checkbox>
             </div>
 
             <el-button 
                 type="primary" 
                 native-type="submit" 
                 size="large" 
-                style="width: 100%; font-weight: 600; height: 48px;"
+                class="auth-submit-btn"
                 :loading="submitting"
                 :disabled="!regData.agree"
             >

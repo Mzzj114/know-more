@@ -78,7 +78,7 @@
                     @click="toggleLike"
                     :loading="likeLoading"
                 >
-                    <el-icon style="margin-right: 4px;"><thumb-up /></el-icon>
+                    <el-icon class="icon-mr"><thumb-up /></el-icon>
                     <span v-text="postLiked ? '{% translate "已点赞" %}' : '{% translate "点赞" %}'"></span>
                     (<span v-text="likeCount"></span>)
                 </el-button>
@@ -89,12 +89,12 @@
                     @click="toggleFavorite"
                     :loading="favoriteLoading"
                 >
-                    <el-icon style="margin-right: 4px;"><star /></el-icon>
+                    <el-icon class="icon-mr"><star /></el-icon>
                     <span v-text="postFavorited ? '{% translate "已收藏" %}' : '{% translate "收藏" %}'"></span>
                     (<span v-text="favoriteCount"></span>)
                 </el-button>
                 {% else %}
-                <span style="color: var(--text-secondary); font-size: 13px;">
+                <span class="text-meta">
                     <a href="{% url 'login' %}" style="color: var(--primary);">{% translate "登录" %}</a> {% translate "后可点赞和收藏" %}
                 </span>
                 {% endif %}
@@ -106,10 +106,10 @@
             {% if user == post.author or user.is_staff %}
             <div class="action-group">
                 <el-button plain size="small" onclick="window.location.href='{% url 'forum:edit_post' post.id %}'">
-                    <el-icon style="margin-right: 4px;"><edit /></el-icon> {% translate "编辑" %}
+                    <el-icon class="icon-mr"><edit /></el-icon> {% translate "编辑" %}
                 </el-button>
                 <el-button plain size="small" type="danger" @click="confirmDelete">
-                    <el-icon style="margin-right: 4px;"><delete /></el-icon> {% translate "删除" %}
+                    <el-icon class="icon-mr"><delete /></el-icon> {% translate "删除" %}
                 </el-button>
                 <form id="delete-form" method="POST" action="{% url 'forum:delete_post' post.id %}" style="display: none;">
                     {% csrf_token %}
@@ -134,7 +134,7 @@
                         {{ reply.author.username|make_list|first }}
                     </el-avatar>
                     <span class="reply-author-name">
-                        <a href="{% url 'forum:user_profile' reply.author.username %}" style="color: inherit; text-decoration: none;">
+                        <a href="{% url 'forum:user_profile' reply.author.username %}" class="link-plain" style="color: inherit;">
                             {{ reply.author.username }}
                         </a>
                     </span>
@@ -143,7 +143,7 @@
                     <el-tag size="small" type="info">#{{ reply.floor }}{% translate "楼" %}</el-tag>
                     {% endif %}
                 </div>
-                <div style="color: var(--text-secondary); font-size: 13px;">
+                <div class="reply-like-count">
                     <el-icon><thumb-up /></el-icon> {{ reply.like_count }}
                 </div>
             </div>
@@ -163,8 +163,8 @@
     {% if user.is_authenticated %}
     <el-card class="reply-form-card" shadow="never">
         <template #header>
-            <span style="font-weight: 700; font-size: 16px;">
-                <el-icon style="vertical-align: -2px; margin-right: 6px;"><edit-pen /></el-icon>
+            <span class="reply-form-title">
+                <el-icon class="icon-valign icon-mr-6"><edit-pen /></el-icon>
                 {% translate "发表回复" %}
             </span>
         </template>
@@ -189,7 +189,7 @@
             ></el-input>
             <div style="display: flex; justify-content: flex-end;">
                 <el-button type="primary" native-type="submit">
-                    <el-icon style="margin-right: 6px;"><promotion /></el-icon>
+                    <el-icon class="icon-mr-6"><promotion /></el-icon>
                     {% translate "提交回复" %}
                 </el-button>
             </div>
@@ -198,8 +198,8 @@
     </el-card>
     {% else %}
     <el-card shadow="never" style="margin-top: 24px;">
-        <div style="text-align: center; padding: 16px 0; color: var(--text-secondary);">
-            <a href="{% url 'login' %}" style="color: var(--primary); text-decoration: none; font-weight: 600;">{% translate "登录" %}</a>
+        <div class="post-login-prompt">
+            <a href="{% url 'login' %}">{% translate "登录" %}</a>
             {% translate "后即可发表回复" %}
         </div>
     </el-card>

@@ -1,0 +1,153 @@
+/*
+  Know More - 跨页面复用组件样式 (components.css)
+  从 inline style 中提取的语义化公共类
+  配合 theme.css 使用
+*/
+
+/* === 布局工具类 === */
+.flex-center-gap-8 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.flex-col-gap-8 {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.flex-col-gap-12 {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* === el-icon 间距修正 === */
+.icon-mr {
+  margin-right: 4px;
+}
+
+.icon-mr-6 {
+  margin-right: 6px;
+}
+
+.icon-valign {
+  vertical-align: -2px;
+}
+
+/* === 按钮工具 === */
+.btn-full {
+  width: 100%;
+}
+
+.btn-full-center {
+  width: 100%;
+  justify-content: center;
+}
+
+/* === 表单组件 === */
+.form-field {
+  margin-bottom: 24px;
+}
+
+.form-field-sm {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.form-error {
+  color: var(--error);
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+.form-hint {
+  color: var(--text-secondary);
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+/* === 表单区块分隔 === */
+.form-section {
+  margin-bottom: 32px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.form-section-title {
+  margin: 0 0 16px 0;
+  color: var(--primary);
+}
+
+/* === 文本工具 === */
+.text-meta {
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.footer-text {
+  font-size: 12px;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.link-plain {
+  text-decoration: none;
+}
+
+.link-plain-block {
+  text-decoration: none;
+  display: block;
+}
+
+.empty-state-text {
+  padding: 24px 20px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+/* === 卡片区块标题 === */
+.card-section-title {
+  font-weight: 700;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-section-title-sm {
+  font-weight: 700;
+  font-size: 15px;
+}
+
+/* === 间距快捷方式 === */
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.ml-4 {
+  margin-left: 4px;
+}
+
+/* === 验证码输入行 === */
+.verify-code-row {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.verify-code-input {
+  flex: 1;
+}
+
+.verify-code-btn {
+  width: 120px;
+}

@@ -29,7 +29,7 @@
                  @click="loadTutorial(t.slug)">
                  [[ t.title ]]
             </div>
-            <div v-if="tutorials.length === 0" style="padding: 20px; color: #999; font-size: 13px; text-align: center;">
+            <div v-if="tutorials.length === 0" class="tutorial-empty">
                 {% translate "暂无教程数据" %}
             </div>
         </div>
@@ -37,7 +37,7 @@
     
     <!-- 移动端侧边栏 Drawer -->
     <el-drawer v-model="drawerVisible" title="{% translate '教程目录' %}" direction="ltr" size="260px">
-        <div class="sidebar-menu" style="height: 100%; overflow: auto;">
+        <div class="sidebar-menu sidebar-height-full">
             <div v-for="t in tutorials" :key="t.slug" 
                  class="tutorial-item" 
                  :class="{ active: activeSlug === t.slug }"
@@ -51,8 +51,8 @@
     <div class="content-wrapper">
         <div class="content-scroll" ref="contentScroll">
             <div v-if="tutorialData && tutorialData.steps">
-                <div class="title" style="margin-bottom: 12px; margin-top: 0;">
-                    [[ tutorialData.title ]] <el-tag size="small" type="info" round style="margin-left:8px;">{% translate "Step" %} [[ currentStepIndex + 1 ]] / [[ totalSteps ]]</el-tag>
+                <div class="title tutorial-step-header">
+                    [[ tutorialData.title ]] <el-tag size="small" type="info" round class="tutorial-step-badge">{% translate "Step" %} [[ currentStepIndex + 1 ]] / [[ totalSteps ]]</el-tag>
                 </div>
                 
                 <!-- Markdown 内容 -->
@@ -63,8 +63,8 @@
                     <div v-for="(interaction, idx) in currentInteractions" :key="idx" class="interaction-card">
                         <!-- Chat 互动 -->
                         <div v-if="interaction.type === 'chat'">
-                            <p style="margin-bottom: 12px; font-weight: 600; font-size: 15px;"><el-icon><chat-dot-square /></el-icon> {% translate "示例对话" %}</p>
-                            <p style="font-size: 14px; margin-bottom: 16px; color: var(--text-secondary);">"[[ interaction.prompt ]]"</p>
+                            <p class="tutorial-chat-title"><el-icon><chat-dot-square /></el-icon> {% translate "示例对话" %}</p>
+                            <p class="tutorial-chat-prompt">"[[ interaction.prompt ]]"</p>
                             <el-button type="primary" @click="applyAndSimulateChat(interaction.prompt)">
                                 {% translate "执行预设对话" %} <el-icon class="el-icon--right"><video-play /></el-icon>
                             </el-button>
@@ -72,7 +72,7 @@
                         
                         <!-- Quiz 互动 -->
                         <div v-else-if="interaction.type === 'quiz'">
-                            <p style="margin-bottom: 16px; font-weight: 600; font-size: 15px; line-height: 1.5;"><el-icon><question-filled /></el-icon> {% translate "知识测验" %}：[[ interaction.question ]]</p>
+                            <p class="tutorial-quiz-title"><el-icon><question-filled /></el-icon> {% translate "知识测验" %}：[[ interaction.question ]]</p>
                             <el-radio-group v-model="stepStates[currentStepIndex].quizAnswer" @change="submitQuiz(idx, interaction)" class="quiz-radio-group">
                                 <el-radio v-for="(opt, oIdx) in interaction.options" :key="oIdx" :label="oIdx" class="quiz-option" border>
                                     [[ String.fromCharCode(65 + oIdx) ]]. [[ opt ]]
@@ -83,21 +83,21 @@
                                  class="quiz-explanation" 
                                  :class="stepStates[currentStepIndex].quizAnswer === interaction.correctIndex ? 'correct' : 'incorrect'">
                                 <strong>[[ stepStates[currentStepIndex].quizAnswer === interaction.correctIndex ? '{% translate "回答正确！" %}' : '{% translate "回答错误。" %}' ]]</strong>
-                                <p style="margin-top: 8px;">[[ interaction.explanation ]]</p>
+                                <p class="tutorial-quiz-explanation-text">[[ interaction.explanation ]]</p>
                             </div>
                         </div>
                         
                         <!-- Fill Blank 互动 -->
                         <div v-else-if="interaction.type === 'fill_blank'">
-                            <p style="margin-bottom: 12px; font-weight: 600; font-size: 15px;"><el-icon><edit-pen /></el-icon> {% translate "填空练习" %}</p>
-                            <div class="fill-blank-text" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 16px;">
+                            <p class="tutorial-fill-title"><el-icon><edit-pen /></el-icon> {% translate "填空练习" %}</p>
+                            <div class="fill-blank-text tutorial-fill-wrap">
                                 <template v-for="(part, pIdx) in getFillBlankParts(interaction.template)" :key="pIdx">
                                     <span v-if="part.type === 'text'">[[ part.text ]]</span>
                                     <span v-else-if="part.type === 'blank'">
                                         <el-input 
                                             v-model="stepStates[currentStepIndex].blanks[part.index]" 
                                             :placeholder="interaction.blanks[part.index]"
-                                            style="width: 140px;"
+                                            class="tutorial-fill-input"
                                             size="small"
                                         ></el-input>
                                     </span>
@@ -110,7 +110,7 @@
 
                         <!-- Highlights 提示 -->
                         <div v-else-if="interaction.type === 'highlights'">
-                            <p><el-icon><sunny /></el-icon> {% translate "请查看" %} <span style="box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.5); border-radius: 4px;">{% translate "高亮" %}</span> {% translate "内容" %}</p>
+                            <p><el-icon><sunny /></el-icon> {% translate "请查看" %} <span class="tutorial-highlight-demo">{% translate "高亮" %}</span> {% translate "内容" %}</p>
                         </div>
 
                     </div>
@@ -120,12 +120,12 @@
                 <div class="step-nav">
                     <el-button @click="prevStep" :disabled="!isPrevAvailable" icon="back">{% translate "上一步" %}</el-button>
                     <!-- 中间的站位 -->
-                    <el-button disabled style="opacity:0">Placeholder</el-button>
+                    <el-button disabled class="tutorial-placeholder">Placeholder</el-button>
                     <el-button type="primary" @click="nextStep" :disabled="!isNextAvailable">{% translate "下一步" %} <el-icon class="el-icon--right"><right /></el-icon></el-button>
                 </div>
             </div>
             
-            <div v-else-if="!loading" style="padding: 100px; text-align: center; color: #999;">
+            <div v-else-if="!loading" class="tutorial-content-empty">
                 <el-empty description="{% translate '请在左侧选择一个教程' %}"></el-empty>
             </div>
         </div>
@@ -138,8 +138,8 @@
         </div>
         
         <div class="playground-content" ref="playgroundScroll">
-            <div v-if="chatHistory.length === 0" style="text-align: center; color: #999; margin-top: 40px; font-size: 13px;">
-                <el-icon style="font-size: 24px; margin-bottom: 8px;"><chat-line-round /></el-icon>
+            <div v-if="chatHistory.length === 0" class="playground-empty-state">
+                <el-icon class="playground-empty-icon"><chat-line-round /></el-icon>
                 <p>{% translate "根据左侧步骤指引" %}<br>{% translate "在这里测试不同的提示词" %}</p>
             </div>
             <div v-for="(msg, idx) in chatHistory" :key="idx" class="chat-bubble" :class="msg.role">
@@ -148,13 +148,13 @@
                 </div>
                 <div v-else-if="msg.role === 'ai'" v-html="renderMarkdownInline(msg.content)"></div>
                 <div v-else-if="msg.role === 'error'">
-                    <el-icon style="vertical-align: middle; margin-right:4px;"><warning /></el-icon>
+                    <el-icon class="playground-error-icon"><warning /></el-icon>
                     [[ msg.content ]]
                 </div>
             </div>
             
             <!-- loading 状态球 -->
-            <div v-if="aiLoading" class="chat-bubble ai" style="display: flex; gap: 4px; padding: 18px;">
+            <div v-if="aiLoading" class="chat-bubble ai playground-loading">
                 <span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span>
             </div>
         </div>
@@ -168,8 +168,8 @@
                 resize="none"
                 @keydown.enter.exact.prevent="simulateAIChat"
             ></el-input>
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px;">
-                <span style="font-size: 12px; color: #999;">{% translate "按 Enter 发送，Shift+Enter 换行" %}</span>
+            <div class="playground-input-footer">
+                <span class="playground-input-hint">{% translate "按 Enter 发送，Shift+Enter 换行" %}</span>
                 <el-button type="primary" :loading="aiLoading" @click="simulateAIChat" icon="position" circle></el-button>
             </div>
         </div>

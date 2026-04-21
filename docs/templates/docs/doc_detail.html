@@ -22,8 +22,8 @@
     </article>
 
     <!-- Bottom navigation / action area -->
-    <div style="margin-top: 64px; border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center;">
-        <div style="color: var(--text-secondary); font-size: 14px;">
+    <div class="docs-bottom-nav">
+        <div class="docs-bottom-nav-info">
             {% translate "更新于近期 · 文档代码开源" %}
         </div>
         <div>
@@ -35,12 +35,12 @@
             >
                 <template #reference>
                     <el-button type="primary" plain round>
-                        <el-icon style="margin-right: 4px"><share /></el-icon> {% translate "分享此文档" %} 
+                        <el-icon class="icon-mr"><share /></el-icon> {% translate "分享此文档" %} 
                     </el-button>
                 </template>
-                <div style="display: flex; flex-direction: column; gap: 12px;">
-                    <span style="font-weight: 600; font-size: 14px; color: var(--text-primary);">{% translate "分享此文档" %}</span>
-                    <div style="display: flex; gap: 8px;">
+                <div class="docs-share-popover-content">
+                    <span class="docs-share-popover-title">{% translate "分享此文档" %}</span>
+                    <div class="docs-share-input-row">
                         <el-input 
                             v-model="shareUrl" 
                             readonly 

@@ -341,3 +341,92 @@
     0%, 100% { box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3); }
     50% { box-shadow: 0 0 0 6px rgba(59, 130, 246, 0.7); }
 }
+
+/* --- Inline Style Replacements --- */
+.tutorial-empty {
+    padding: 20px;
+    color: #999;
+    font-size: 13px;
+    text-align: center;
+}
+.sidebar-height-full {
+    height: 100%;
+    overflow: auto;
+}
+.tutorial-step-header {
+    margin: 0 0 12px 0;
+}
+.tutorial-step-badge {
+    margin-left: 8px;
+}
+.tutorial-chat-title,
+.tutorial-fill-title {
+    margin-bottom: 12px;
+    font-weight: 600;
+    font-size: 15px;
+}
+.tutorial-quiz-title {
+    margin-bottom: 16px;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 1.5;
+}
+.tutorial-chat-prompt {
+    font-size: 14px;
+    margin-bottom: 16px;
+    color: var(--text-secondary);
+}
+.tutorial-quiz-explanation-text {
+    margin-top: 8px;
+}
+.tutorial-fill-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+.tutorial-fill-input {
+    width: 140px;
+}
+.tutorial-highlight-demo {
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.5);
+    border-radius: 4px;
+}
+.tutorial-placeholder {
+    opacity: 0;
+}
+.tutorial-content-empty {
+    padding: 100px;
+    text-align: center;
+    color: #999;
+}
+.playground-empty-state {
+    text-align: center;
+    color: #999;
+    margin-top: 40px;
+    font-size: 13px;
+}
+.playground-empty-icon {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+.playground-error-icon {
+    vertical-align: middle;
+    margin-right: 4px;
+}
+.playground-loading {
+    display: flex;
+    gap: 4px;
+    padding: 18px;
+}
+.playground-input-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+}
+.playground-input-hint {
+    font-size: 12px;
+    color: #999;
+}

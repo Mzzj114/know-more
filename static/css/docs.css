@@ -1,0 +1,277 @@
+/*
+  Know More - 文档站样式 (docs.css)
+  从 docs/layout.html 内嵌 <style> 中提取
+*/
+
+.docs-container {
+    flex: 1;
+    display: flex;
+    background-color: var(--bg);
+}
+
+.docs-aside {
+    width: 280px !important;
+    background-color: var(--surface);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+}
+
+.docs-menu-wrap {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.docs-aside-footer {
+    padding: 20px;
+    border-top: 1px solid var(--border);
+    flex-shrink: 0;
+    background-color: var(--surface);
+}
+
+.docs-menu {
+    border-right: none !important;
+    background-color: transparent;
+}
+
+.docs-menu .el-menu-item {
+    color: var(--text-secondary);
+    font-weight: 500;
+    margin: 4px 12px;
+    border-radius: var(--el-border-radius-base);
+    height: 48px;
+    line-height: 48px;
+}
+
+.docs-menu .el-menu-item:hover, .docs-menu .el-menu-item.is-active {
+    background-color: var(--primary-light);
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.docs-main {
+    flex: 1;
+    padding: 40px;
+    overflow-y: auto;
+    position: relative;
+}
+
+/* Simple Markdown Typography inside main area */
+.markdown-body {
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: var(--el-font-family);
+    color: var(--text-primary);
+    line-height: 1.7;
+}
+
+.markdown-body h1 {
+    font-size: 32px;
+    color: var(--primary);
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+}
+
+.markdown-body h2 {
+    font-size: 24px;
+    margin-top: 32px;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+}
+
+.markdown-body p, .markdown-body li {
+    font-size: 16px;
+    color: var(--text-secondary);
+}
+
+.markdown-body pre {
+    background: #1e1E1E;
+    color: #D4D4D4;
+    padding: 20px;
+    border-radius: var(--el-border-radius-base);
+    overflow-x: auto;
+    font-family: Consolas, Monaco, monospace;
+    font-size: 14px;
+    margin: 24px 0;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1);
+}
+
+.markdown-body code:not(pre code) {
+    background: var(--primary-light);
+    color: var(--primary-dark-2);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-family: Consolas, Monaco, monospace;
+}
+
+.markdown-body blockquote {
+    margin: 24px 0;
+    padding-left: 16px;
+    border-left: 4px solid var(--accent);
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* Breadcrumb styling */
+.docs-breadcrumb-container {
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.breadcrumb-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s;
+    font-weight: 500;
+}
+
+.breadcrumb-link:hover {
+    color: var(--primary);
+}
+
+/* Mobile toggle button */
+.docs-mobile-toggle {
+    display: none;
+}
+
+/* === doc_index.html 欢迎页样式 === */
+.docs-welcome-title {
+    color: var(--primary);
+    font-size: 36px;
+    margin-bottom: 16px;
+}
+
+.docs-welcome-desc {
+    color: var(--text-secondary);
+    font-size: 18px;
+    max-width: 600px;
+    line-height: 1.6;
+}
+
+.docs-welcome-grid {
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.docs-welcome-card {
+    border-radius: 16px;
+}
+
+.docs-welcome-card-header {
+    font-weight: bold;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.docs-welcome-card-header--primary {
+    color: var(--primary);
+}
+
+.docs-welcome-card-header--warning {
+    color: var(--warning);
+}
+
+.docs-welcome-card-desc {
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* === doc_detail.html 底部导航 === */
+.docs-bottom-nav {
+    margin-top: 64px;
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.docs-bottom-nav-info {
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.docs-share-popover-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.docs-share-popover-title {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text-primary);
+}
+
+.docs-share-input-row {
+    display: flex;
+    gap: 8px;
+}
+
+/* === 响应式 === */
+@media (max-width: 900px) {
+    .docs-mobile-toggle {
+        display: flex;
+    }
+    
+    /* Hide desktop sidebar on mobile */
+    .docs-aside,
+    .hidden-sm-and-down {
+        display: none !important;
+    }
+    
+    .docs-main {
+        padding: 24px 16px;
+    }
+    
+    .markdown-body {
+        font-size: 15px;
+    }
+    
+    .markdown-body h1 {
+        font-size: 26px;
+    }
+    
+    .markdown-body h2 {
+        font-size: 20px;
+    }
+    
+    .markdown-body p, 
+    .markdown-body li {
+        font-size: 15px;
+    }
+    
+    .docs-breadcrumb-container {
+        margin-bottom: 16px;
+    }
+}
+
+@media (max-width: 600px) {
+    .docs-main {
+        padding: 20px 12px;
+    }
+    
+    .markdown-body {
+        font-size: 14px;
+    }
+    
+    .markdown-body h1 {
+        font-size: 22px;
+    }
+    
+    .markdown-body pre {
+        padding: 14px;
+        font-size: 12px;
+    }
+}

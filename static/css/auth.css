@@ -1,0 +1,116 @@
+/*
+  Know More - 认证页面共享样式 (auth.css)
+  登录 / 注册 / 重置密码页面公用
+  从 login.html, register.html, reset_password.html 中提取
+*/
+
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 120px);
+    background: radial-gradient(circle at top left, var(--primary-light) 0%, transparent 40%),
+                radial-gradient(circle at bottom right, var(--primary-light) 0%, transparent 40%);
+    padding: 40px 0;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 480px;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    animation: km-fadeIn 0.6s ease-out;
+}
+
+/* login.html 使用较窄的卡片 */
+.auth-card--narrow {
+    max-width: 420px;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.auth-header h1 {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--primary);
+    margin: 0 0 8px 0;
+    letter-spacing: -0.025em;
+}
+
+.auth-header p {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin: 0;
+}
+
+.auth-footer {
+    margin-top: 24px;
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.auth-footer a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
+.error-info {
+    margin-bottom: 20px;
+}
+
+/* register.html 独有 */
+.form-tip {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+    line-height: 1.4;
+}
+
+/* 全宽提交按钮 */
+.auth-submit-btn {
+    width: 100%;
+    font-weight: 600;
+    height: 48px;
+}
+
+/* 记住我 / 忘记密码 行 */
+.auth-options-row {
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.auth-forgot-link {
+    font-size: 14px;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+/* 协议勾选区 */
+.auth-agree-row {
+    margin: 24px 0;
+}
+
+.auth-agree-row a {
+    color: var(--primary);
+}
+
+/* 错误列表 */
+.auth-error-list {
+    margin: 0;
+    padding-left: 18px;
+}

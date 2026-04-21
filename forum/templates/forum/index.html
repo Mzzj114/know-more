@@ -64,17 +64,17 @@
         <aside class="forum-sidebar">
             <!-- 发帖按钮 -->
             {% if user.is_authenticated %}
-            <div style="margin-bottom: 20px;">
-                <el-button type="primary" size="large" style="width: 100%;"
+            <div class="mb-20">
+                <el-button type="primary" size="large" class="btn-full"
                            onclick="window.location.href='{% url 'forum:create_post' %}'">
-                    <el-icon style="margin-right: 6px;"><edit /></el-icon>
+                    <el-icon class="icon-mr-6"><edit /></el-icon>
                     {% translate "发布新帖子" %}
                 </el-button>
             </div>
             {% else %}
             <el-card class="sidebar-widget" shadow="never">
-                <div style="text-align: center; padding: 8px 0;">
-                    <p style="color: var(--text-secondary); margin: 0 0 12px; font-size: 14px;">{% translate "登录后即可发帖" %}</p>
+                <div class="post-login-prompt">
+                    <p class="text-meta" style="margin: 0 0 12px;">{% translate "登录后即可发帖" %}</p>
                     <el-button type="primary" plain onclick="location.href='{% url 'login' %}'">
                         {% translate "登录" %}
                     </el-button>
@@ -101,7 +101,7 @@
                     </div>
                 </div>
                 {% empty %}
-                <div style="padding: 24px 20px; text-align: center; color: var(--text-secondary); font-size: 14px;">
+                <div class="empty-state-text">
                     {% translate "暂无帖子" %}
                 </div>
                 {% endfor %}

@@ -1,186 +1,11 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load static %}
 
 {% block title %} Know More - {% translate "文档站" %} {% endblock %}
 
 {% block extra_head %}
-<style>
-    .docs-container {
-        flex: 1;
-        display: flex;
-        background-color: var(--bg);
-    }
-    .docs-aside {
-        width: 280px !important;
-        background-color: var(--surface);
-        border-right: 1px solid var(--border);
-        display: flex;
-        flex-direction: column;
-    }
-    .docs-menu-wrap {
-        flex: 1;
-        overflow-y: auto;
-    }
-    .docs-aside-footer {
-        padding: 20px;
-        border-top: 1px solid var(--border);
-        flex-shrink: 0;
-        background-color: var(--surface);
-    }
-    .docs-menu {
-        border-right: none !important;
-        background-color: transparent;
-    }
-    .docs-menu .el-menu-item {
-        color: var(--text-secondary);
-        font-weight: 500;
-        margin: 4px 12px;
-        border-radius: var(--el-border-radius-base);
-        height: 48px;
-        line-height: 48px;
-    }
-    .docs-menu .el-menu-item:hover, .docs-menu .el-menu-item.is-active {
-        background-color: var(--primary-light);
-        color: var(--primary);
-        font-weight: 700;
-    }
-    .docs-main {
-        flex: 1;
-        padding: 40px;
-        overflow-y: auto;
-        position: relative;
-    }
-    /* Simple Markdown Typography inside main area */
-    .markdown-body {
-        max-width: 800px;
-        margin: 0 auto;
-        font-family: var(--el-font-family);
-        color: var(--text-primary);
-        line-height: 1.7;
-    }
-    .markdown-body h1 {
-        font-size: 32px;
-        color: var(--primary);
-        margin-bottom: 24px;
-        padding-bottom: 12px;
-        border-bottom: 1px solid var(--border);
-    }
-    .markdown-body h2 {
-        font-size: 24px;
-        margin-top: 32px;
-        margin-bottom: 16px;
-        color: var(--text-primary);
-    }
-    .markdown-body p, .markdown-body li {
-        font-size: 16px;
-        color: var(--text-secondary);
-    }
-    .markdown-body pre {
-        background: #1e1E1E;
-        color: #D4D4D4;
-        padding: 20px;
-        border-radius: var(--el-border-radius-base);
-        overflow-x: auto;
-        font-family: Consolas, Monaco, monospace;
-        font-size: 14px;
-        margin: 24px 0;
-        box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1);
-    }
-    .markdown-body code:not(pre code) {
-        background: var(--primary-light);
-        color: var(--primary-dark-2);
-        padding: 2px 6px;
-        border-radius: 4px;
-        font-size: 0.9em;
-        font-family: Consolas, Monaco, monospace;
-    }
-    .markdown-body blockquote {
-        margin: 24px 0;
-        padding-left: 16px;
-        border-left: 4px solid var(--accent);
-        color: var(--text-secondary);
-        font-style: italic;
-    }
-    /* Breadcrumb styling */
-    .docs-breadcrumb-container {
-        margin-bottom: 24px;
-        padding-bottom: 16px;
-        border-bottom: 1px solid var(--border);
-        max-width: 800px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .breadcrumb-link {
-        color: var(--text-secondary);
-        text-decoration: none;
-        transition: color 0.2s;
-        font-weight: 500;
-    }
-    .breadcrumb-link:hover {
-        color: var(--primary);
-    }
-    
-    /* Mobile toggle button */
-    .docs-mobile-toggle {
-        display: none;
-    }
-    
-    @media (max-width: 900px) {
-        .docs-mobile-toggle {
-            display: flex;
-        }
-        
-        /* Hide desktop sidebar on mobile */
-        .docs-aside,
-        .hidden-sm-and-down {
-            display: none !important;
-        }
-        
-        .docs-main {
-            padding: 24px 16px;
-        }
-        
-        .markdown-body {
-            font-size: 15px;
-        }
-        
-        .markdown-body h1 {
-            font-size: 26px;
-        }
-        
-        .markdown-body h2 {
-            font-size: 20px;
-        }
-        
-        .markdown-body p, 
-        .markdown-body li {
-            font-size: 15px;
-        }
-        
-        .docs-breadcrumb-container {
-            margin-bottom: 16px;
-        }
-    }
-    
-    @media (max-width: 600px) {
-        .docs-main {
-            padding: 20px 12px;
-        }
-        
-        .markdown-body {
-            font-size: 14px;
-        }
-        
-        .markdown-body h1 {
-            font-size: 22px;
-        }
-        
-        .markdown-body pre {
-            padding: 14px;
-            font-size: 12px;
-        }
-    }
-</style>
+<link rel="stylesheet" href="{% static 'css/docs.css' %}" />
 {% endblock %}
 
 {% block layout_content %}
@@ -192,7 +17,7 @@
     <div class="docs-menu-wrap">
         <el-menu :default-active="activeMenu" class="docs-menu">
             {% for doc in docs %}
-                <a href="{% url 'doc_detail' doc.slug %}" style="text-decoration: none;">
+                <a href="{% url 'doc_detail' doc.slug %}" class="link-plain">
                     <el-menu-item index="{{ doc.slug }}">
                         <span>{{ doc.title }}</span>
                     </el-menu-item>
@@ -201,19 +26,19 @@
         </el-menu>
     </div>
     <div class="docs-aside-footer">
-        <div style="display: flex; flex-direction: column; gap: 8px;">
-            <a href="/" style="text-decoration: none; display: block;">
-                <el-button style="width: 100%;">
-                    <el-icon style="margin-right: 4px;"><home-filled /></el-icon>
+        <div class="flex-col-gap-8">
+            <a href="/" class="link-plain-block">
+                <el-button class="btn-full">
+                    <el-icon class="icon-mr"><home-filled /></el-icon>
                     {% translate "返回首页" %}
                 </el-button>
             </a>
-            <el-button style="width: 100%; margin-left: 0;" @click="scrollToTop">
-                <el-icon style="margin-right: 4px;"><top /></el-icon>
+            <el-button class="btn-full" style="margin-left: 0;" @click="scrollToTop">
+                <el-icon class="icon-mr"><top /></el-icon>
                 {% translate "回到顶部" %}
             </el-button>
         </div>
-        <div style="font-size: 12px; color: var(--text-secondary); text-align: center; margin-top: 12px;">
+        <div class="footer-text" style="margin-top: 12px;">
             © 2026 Know More
         </div>
     </div>
@@ -228,7 +53,7 @@
                 class="docs-menu"
             >
                 {% for doc in docs %}
-                    <a href="{% url 'doc_detail' doc.slug %}" style="text-decoration: none;">
+                    <a href="{% url 'doc_detail' doc.slug %}" class="link-plain">
                         <el-menu-item index="{{ doc.slug }}">
                             <span>{{ doc.title }}</span>
                         </el-menu-item>
@@ -238,20 +63,20 @@
         </div>
         
         <!-- Sidebar Bottom Footer -->
-        <div class="docs-aside-footer" style="display: flex; flex-direction: column; gap: 12px;">
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-                <a href="/" style="text-decoration: none; display: block;">
-                    <el-button style="width: 100%;">
-                        <el-icon style="margin-right: 4px;"><home-filled /></el-icon>
+        <div class="docs-aside-footer flex-col-gap-12">
+            <div class="flex-col-gap-8">
+                <a href="/" class="link-plain-block">
+                    <el-button class="btn-full">
+                        <el-icon class="icon-mr"><home-filled /></el-icon>
                         {% translate "返回首页" %}
                     </el-button>
                 </a>
-                <el-button style="width: 100%; margin-left: 0;" @click="scrollToTop">
-                    <el-icon style="margin-right: 4px;"><top /></el-icon>
+                <el-button class="btn-full" style="margin-left: 0;" @click="scrollToTop">
+                    <el-icon class="icon-mr"><top /></el-icon>
                     {% translate "回到顶部" %}
                 </el-button>
             </div>
-            <div style="font-size: 12px; color: var(--text-secondary); text-align: center;">
+            <div class="footer-text">
                 © 2026 Know More
             </div>
         </div>

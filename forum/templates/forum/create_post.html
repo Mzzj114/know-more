@@ -8,19 +8,6 @@
 <link rel="stylesheet" href="{% static 'css/forum.css' %}" />
 <link rel="stylesheet" href="{% static 'vditor/dist/index.css' %}" />
 <script src="{% static 'vditor/dist/index.min.js' %}"></script>
-<style>
-    .vditor {
-        border-color: var(--border) !important;
-        border-radius: 8px !important;
-    }
-    .vditor-toolbar {
-        background-color: var(--surface) !important;
-        border-bottom: 1px solid var(--border) !important;
-    }
-    .vditor--fullscreen {
-        z-index: 2000 !important;
-    }
-</style>
 {% endblock %}
 
 {% block layout_content %}
@@ -47,8 +34,8 @@
             {% csrf_token %}
 
             <!-- 标题 -->
-            <div style="margin-bottom: 24px;">
-                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">
+            <div class="form-field">
+                <label class="form-label">
                     {% translate "帖子标题" %}
                 </label>
                 <el-input
@@ -60,13 +47,13 @@
                     size="large"
                 ></el-input>
                 {% if form.title.errors %}
-                <div style="color: var(--error); font-size: 13px; margin-top: 6px;">{{ form.title.errors.0 }}</div>
+                <div class="form-error">{{ form.title.errors.0 }}</div>
                 {% endif %}
             </div>
 
             <!-- 分类 -->
-            <div style="margin-bottom: 24px;">
-                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">
+            <div class="form-field">
+                <label class="form-label">
                     {% translate "选择分类" %}
                 </label>
                 <select name="category" style="display: none;">
@@ -88,22 +75,22 @@
                     {% endfor %}
                 </el-select>
                 {% if form.category.errors %}
-                <div style="color: var(--error); font-size: 13px; margin-top: 6px;">{{ form.category.errors.0 }}</div>
+                <div class="form-error">{{ form.category.errors.0 }}</div>
                 {% endif %}
             </div>
 
             <!-- 内容 -->
-            <div style="margin-bottom: 24px;">
-                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">
+            <div class="form-field">
+                <label class="form-label">
                     {% translate "帖子内容" %}
                 </label>
                 <div id="vditor"></div>
                 <textarea name="content" v-model="content" style="display: none;"></textarea>
                 {% if form.content.errors %}
-                <div style="color: var(--error); font-size: 13px; margin-top: 6px;">{{ form.content.errors.0 }}</div>
+                <div class="form-error">{{ form.content.errors.0 }}</div>
                 {% endif %}
-                <div style="color: var(--text-secondary); font-size: 13px; margin-top: 6px;">
-                    <el-icon style="vertical-align: -2px;"><info-filled /></el-icon> {% translate "支持 Markdown 语法" %}
+                <div class="form-hint">
+                    <el-icon class="icon-valign"><info-filled /></el-icon> {% translate "支持 Markdown 语法" %}
                 </div>
             </div>
 
@@ -113,7 +100,7 @@
                     {% translate "取消" %}
                 </el-button>
                 <el-button type="primary" size="large" native-type="submit">
-                    <el-icon style="margin-right: 6px;"><promotion /></el-icon>
+                    <el-icon class="icon-mr-6"><promotion /></el-icon>
                     {% translate "发布帖子" %}
                 </el-button>
             </div>

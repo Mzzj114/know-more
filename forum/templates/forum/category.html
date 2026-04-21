@@ -32,13 +32,13 @@
     </div>
 
     <!-- 操作栏 -->
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-        <div style="color: var(--text-secondary); font-size: 14px;">
+    <div class="category-action-bar">
+        <div class="category-action-bar-count">
             {% translate "共" %} {{ page_obj.paginator.count }} {% translate "篇帖子" %}
         </div>
         {% if user.is_authenticated %}
         <el-button type="primary" onclick="window.location.href='{% url 'forum:create_post' %}'">
-            <el-icon style="margin-right: 6px;"><edit /></el-icon>
+            <el-icon class="icon-mr-6"><edit /></el-icon>
             {% translate "发布新帖子" %}
         </el-button>
         {% endif %}
@@ -55,7 +55,7 @@
                     {% endif %}
                     {% if post.is_locked %}
                     <el-tag type="info" size="small">
-                        <el-icon style="vertical-align: -2px;"><lock /></el-icon> {% translate "锁定" %}
+                        <el-icon class="icon-valign"><lock /></el-icon> {% translate "锁定" %}
                     </el-tag>
                     {% endif %}
                     <a href="{% url 'forum:post_detail' post.id %}">{{ post.title }}</a>

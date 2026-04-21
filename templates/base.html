@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="{% static 'element-plus/dist/index.css' %}" />
     <!-- Global Theme CSS -->
     <link rel="stylesheet" href="{% static 'css/theme.css' %}" />
+    <!-- Global Component CSS -->
+    <link rel="stylesheet" href="{% static 'css/components.css' %}" />
 
     <!-- Vue 3 -->
     <script src="{% static 'vue/dist/vue.global.js' %}"></script>
@@ -84,6 +86,28 @@
             flex: 1;
             display: flex;
             flex-direction: column;
+        }
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .version-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 9px;
+            font-size: 10px;
+            color: var(--text-secondary);
+            background-color: var(--primary-light);
+            border-radius: var(--el-border-radius-base);
+        }
+        .version-badge-label {
+            font-weight: 600;
+        }
+        .version-badge-sep {
+            margin: 0 4px;
+            opacity: 0.5;
         }
         
         /* Mobile menu toggle button */
@@ -169,9 +193,9 @@
                 </nav>
                 <!-- Version Info -->
                 {% version_info as version %}
-                <div style="display: flex; align-items: center; gap: 8px; padding: 6px 9px; font-size: 10px; color: var(--text-secondary); background-color: var(--primary-light); border-radius: var(--el-border-radius-base);" class="hidden-sm-and-down">
+                <div class="version-badge hidden-sm-and-down">
                 {% if version %}
-                    <span style="font-weight: 600;">
+                    <span class="version-badge-label">
                     {% translate "Version:" %} 
                     {% if version.version_tag %}
                         {{ version.version_tag }}
@@ -179,16 +203,16 @@
                         {{ version.commit_hash }}
                     {% endif %}
                     </span>
-                    <span style="margin: 0 4px; opacity: 0.5;">•</span>
+                    <span class="version-badge-sep">•</span>
                     <span>{{ version.commit_date }}</span>
                 {% else %}
                     <span>{% translate "Version: Development" %}</span>
                 {% endif %}
                 </div>
             </div>
-            <div class="header-right hidden-sm-and-down" style="display: flex; align-items: center; gap: 12px;">
+            <div class="header-right hidden-sm-and-down">
                 <!-- Language Switcher -->
-                <form id="lang-switch-form" action="{% url 'set_language' %}" method="post" style="display:none;">
+                <form id="lang-switch-form" action="{% url 'set_language' %}" method="post" style="display: none;">
                     {% csrf_token %}
                     <input name="next" type="hidden" value="{{ request.get_full_path }}" />
                     <input name="language" type="hidden" id="lang-code-input" />
@@ -197,7 +221,7 @@
                 <el-dropdown trigger="click" @command="switchLanguage">
                     <el-button plain round>
                         <el-icon><collection /></el-icon>
-                        <span style="margin-left: 4px;">{{ LANGUAGE_CODE|upper }}</span>
+                        <span class="ml-4">{{ LANGUAGE_CODE|upper }}</span>
                         <el-icon class="el-icon--right"><arrow-down /></el-icon>
                     </el-button>
                     <template #dropdown>
@@ -218,7 +242,7 @@
                 {% if user.is_authenticated %}
                     <el-dropdown trigger="click">
                         <el-button type="primary" plain round class="user-btn">
-                            <el-icon style="margin-right: 4px;"><user-filled /></el-icon>
+                            <el-icon class="icon-mr"><user-filled /></el-icon>
                             {{ user.username }}
                             <el-icon class="el-icon--right"><arrow-down /></el-icon>
                         </el-button>
@@ -226,14 +250,14 @@
                             <el-dropdown-menu>
                                 <el-dropdown-item onclick="location.href='{% url 'forum:user_profile' user.username %}'">
                                     <template #default>
-                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                        <div class="flex-center-gap-8">
                                             <el-icon><user /></el-icon> {% translate "个人主页" %}
                                         </div>
                                     </template>
                                 </el-dropdown-item>
                                 <el-dropdown-item divided onclick="location.href='{% url 'logout' %}'">
                                     <template #default>
-                                        <div style="display: flex; align-items: center; gap: 8px; color: var(--error);">
+                                        <div class="flex-center-gap-8" style="color: var(--error);">
                                             <el-icon><switch-button /></el-icon> {% translate "退出登录" %}
                                         </div>
                                     </template>
@@ -258,16 +282,16 @@
                 </nav>
                 <div class="mobile-nav-actions">
                     <!-- Language Switcher -->
-                    <form id="lang-switch-form-mobile" action="{% url 'set_language' %}" method="post" style="display:none;">
+                    <form id="lang-switch-form-mobile" action="{% url 'set_language' %}" method="post" style="display: none;">
                         {% csrf_token %}
                         <input name="next" type="hidden" value="{{ request.get_full_path }}" />
                         <input name="language" type="hidden" id="lang-code-input-mobile" />
                     </form>
                     
                     <el-dropdown trigger="click" @command="switchLanguageMobile">
-                        <el-button plain round style="width: 100%; justify-content: center;">
+                        <el-button plain round class="btn-full-center">
                             <el-icon><collection /></el-icon>
-                            <span style="margin-left: 4px;">{{ LANGUAGE_CODE|upper }}</span>
+                            <span class="ml-4">{{ LANGUAGE_CODE|upper }}</span>
                             <el-icon class="el-icon--right"><arrow-down /></el-icon>
                         </el-button>
                         <template #dropdown>
@@ -282,19 +306,19 @@
                         </template>
                     </el-dropdown>
                     
-                    <el-button onclick="window.open('https://github.com/Mzzj114/know-more', '_blank')" plain round style="width: 100%; justify-content: center;">Github</el-button>
+                    <el-button onclick="window.open('https://github.com/Mzzj114/know-more', '_blank')" plain round class="btn-full-center">Github</el-button>
                     
                     {% if user.is_authenticated %}
-                        <el-button type="primary" plain round onclick="location.href='{% url 'forum:user_profile' user.username %}'" style="width: 100%; justify-content: center;">
-                            <el-icon style="margin-right: 4px;"><user-filled /></el-icon>
+                        <el-button type="primary" plain round onclick="location.href='{% url 'forum:user_profile' user.username %}'" class="btn-full-center">
+                            <el-icon class="icon-mr"><user-filled /></el-icon>
                             {{ user.username }}
                         </el-button>
-                        <el-button plain round onclick="location.href='{% url 'logout' %}'" style="width: 100%; justify-content: center; color: var(--error);">
-                            <el-icon style="margin-right: 4px;"><switch-button /></el-icon>
+                        <el-button plain round onclick="location.href='{% url 'logout' %}'" class="btn-full-center" style="color: var(--error);">
+                            <el-icon class="icon-mr"><switch-button /></el-icon>
                             {% translate "退出登录" %}
                         </el-button>
                     {% else %}
-                        <el-button type="primary" plain round onclick="location.href='{% url 'login' %}'" style="width: 100%; justify-content: center;">{% translate "登录 / 注册" %}</el-button>
+                        <el-button type="primary" plain round onclick="location.href='{% url 'login' %}'" class="btn-full-center">{% translate "登录 / 注册" %}</el-button>
                     {% endif %}
                 </div>
             </div>

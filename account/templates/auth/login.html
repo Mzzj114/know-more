@@ -5,65 +5,12 @@
 {% block title %}{% translate "登录" %} - Know More{% endblock %}
 
 {% block extra_head %}
-<style>
-    .auth-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: calc(100vh - 120px);
-        background: radial-gradient(circle at top right, var(--primary-light) 0%, transparent 40%),
-                    radial-gradient(circle at bottom left, var(--primary-light) 0%, transparent 40%);
-    }
-    .auth-card {
-        width: 100%;
-        max-width: 420px;
-        padding: 40px;
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(10px);
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        animation: km-fadeIn 0.6s ease-out;
-    }
-    .auth-header {
-        text-align: center;
-        margin-bottom: 32px;
-    }
-    .auth-header h1 {
-        font-size: 28px;
-        font-weight: 800;
-        color: var(--primary);
-        margin: 0 0 8px 0;
-        letter-spacing: -0.025em;
-    }
-    .auth-header p {
-        color: var(--text-secondary);
-        font-size: 14px;
-        margin: 0;
-    }
-    .auth-footer {
-        margin-top: 24px;
-        text-align: center;
-        font-size: 14px;
-        color: var(--text-secondary);
-    }
-    .auth-footer a {
-        color: var(--primary);
-        text-decoration: none;
-        font-weight: 600;
-    }
-    .auth-footer a:hover {
-        text-decoration: underline;
-    }
-    .error-info {
-        margin-bottom: 20px;
-    }
-</style>
+<link rel="stylesheet" href="{% static 'css/auth.css' %}" />
 {% endblock %}
 
 {% block layout_content %}
 <div class="auth-container">
-    <div class="auth-card">
+    <div class="auth-card auth-card--narrow">
         <div class="auth-header">
             <h1>{% translate "欢迎回来" %}</h1>
             <p>{% translate "登录您的 Know More 账号以继续" %}</p>
@@ -103,16 +50,16 @@
                 ></el-input>
             </el-form-item>
 
-            <div style="margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center;">
+            <div class="auth-options-row">
                 <el-checkbox v-model="loginData.remember">{% translate "记住我" %}</el-checkbox>
-                <a href="{% url 'reset_password' %}" style="font-size: 14px; color: var(--primary); text-decoration: none;">{% translate "忘记密码？" %}</a>
+                <a href="{% url 'reset_password' %}" class="auth-forgot-link">{% translate "忘记密码？" %}</a>
             </div>
 
             <el-button 
                 type="primary" 
                 native-type="submit" 
                 size="large" 
-                style="width: 100%; font-weight: 600; height: 48px;"
+                class="auth-submit-btn"
                 :loading="submitting"
             >
                 {% translate "立即登录" %}
