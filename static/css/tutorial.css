@@ -184,10 +184,12 @@
 /* --- 移动端响应式 --- */
 .mobile-nav-toggle {
     display: none;
-    position: absolute;
-    top: 20px;
+    position: fixed;
+    bottom: 20px;
     left: 20px;
     z-index: 50;
+    width: 50px;
+    height: 40px;
 }
 @media (max-width: 900px) {
     .tutorial-layout {
@@ -196,26 +198,57 @@
         height: auto;
         min-height: calc(100vh - 60px);
     }
-    .sidebar-wrapper {
-        display: none; /* Handled by drawer */
+    
+    /* Hide desktop sidebar on mobile */
+    .sidebar-wrapper,
+    .hidden-sm-and-down {
+        display: none !important;
     }
+    
     .mobile-nav-toggle {
         display: flex;
     }
     .content-wrapper {
         flex: none;
-        padding-top: 60px; /* Space for toggle */
+        /* padding-top: 60px; Space for toggle */
     }
     .content-scroll {
-        padding: 20px;
+        /* padding: 80px 20px 20px; 为顶部按钮留出空间 */
         overflow: visible;
+    }
+    .markdown-body {
+        font-size: 15px;
+    }
+    .interaction-card {
+        padding: 16px;
+    }
+    .step-nav {
+        flex-direction: column;
+        gap: 12px;
+    }
+    .step-nav .el-button {
+        width: 100%;
     }
     .playground-wrapper {
         width: 100%;
         border-left: none;
         border-top: 1px solid var(--border);
         flex: none;
-        height: 600px; /* Fixed height on mobile so user can scroll down to it */
+        height: 50vh; /* 使用视口高度比例而非固定值 */
+        min-height: 400px;
+    }
+}
+
+@media (max-width: 600px) {
+    .content-scroll {
+        padding: 70px 16px 16px;
+    }
+    .markdown-body {
+        font-size: 14px;
+    }
+    .markdown-body pre {
+        padding: 14px;
+        font-size: 13px;
     }
 }
 

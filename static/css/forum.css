@@ -600,4 +600,17 @@
     align-items: flex-start;
     gap: 6px;
   }
+  
+  .post-item-title {
+    font-size: 15px;
+  }
+  
+  .post-item-meta {
+    font-size: 12px;
+  }
+  
+  .reply-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
