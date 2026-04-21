@@ -135,3 +135,19 @@ body {
   align-items: flex-start;
   gap: 16px;
 }
+
+/* === 响应式基础样式 === */
+@media (max-width: 768px) {
+  :root {
+    --font-size-base: 14px;
+  }
+  
+  body {
+    font-size: var(--font-size-base);
+  }
+  
+  .container {
+    padding: 0 16px;
+    margin: 20px auto;
+  }
+}

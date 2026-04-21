@@ -119,12 +119,108 @@
     .breadcrumb-link:hover {
         color: var(--primary);
     }
+    
+    /* Mobile toggle button */
+    .docs-mobile-toggle {
+        display: none;
+    }
+    
+    @media (max-width: 900px) {
+        .docs-mobile-toggle {
+            display: flex;
+        }
+        
+        /* Hide desktop sidebar on mobile */
+        .docs-aside,
+        .hidden-sm-and-down {
+            display: none !important;
+        }
+        
+        .docs-main {
+            padding: 24px 16px;
+        }
+        
+        .markdown-body {
+            font-size: 15px;
+        }
+        
+        .markdown-body h1 {
+            font-size: 26px;
+        }
+        
+        .markdown-body h2 {
+            font-size: 20px;
+        }
+        
+        .markdown-body p, 
+        .markdown-body li {
+            font-size: 15px;
+        }
+        
+        .docs-breadcrumb-container {
+            margin-bottom: 16px;
+        }
+    }
+    
+    @media (max-width: 600px) {
+        .docs-main {
+            padding: 20px 12px;
+        }
+        
+        .markdown-body {
+            font-size: 14px;
+        }
+        
+        .markdown-body h1 {
+            font-size: 22px;
+        }
+        
+        .markdown-body pre {
+            padding: 14px;
+            font-size: 12px;
+        }
+    }
 </style>
 {% endblock %}
 
 {% block layout_content %}
+<!-- 移动端侧边栏触发按钮 -->
+<el-button class="docs-mobile-toggle" circle icon="collection" @click="docsDrawerVisible = true" style="width: 40px; height: 40px; position: fixed; bottom: 70px; left: 26px; z-index: 99;"></el-button>
+
+<!-- 移动端Drawer -->
+<el-drawer v-model="docsDrawerVisible" title="{% translate '文档目录' %}" direction="ltr" size="280px">
+    <div class="docs-menu-wrap">
+        <el-menu :default-active="activeMenu" class="docs-menu">
+            {% for doc in docs %}
+                <a href="{% url 'doc_detail' doc.slug %}" style="text-decoration: none;">
+                    <el-menu-item index="{{ doc.slug }}">
+                        <span>{{ doc.title }}</span>
+                    </el-menu-item>
+                </a>
+            {% endfor %}
+        </el-menu>
+    </div>
+    <div class="docs-aside-footer">
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+            <a href="/" style="text-decoration: none; display: block;">
+                <el-button style="width: 100%;">
+                    <el-icon style="margin-right: 4px;"><home-filled /></el-icon>
+                    {% translate "返回首页" %}
+                </el-button>
+            </a>
+            <el-button style="width: 100%; margin-left: 0;" @click="scrollToTop">
+                <el-icon style="margin-right: 4px;"><top /></el-icon>
+                {% translate "回到顶部" %}
+            </el-button>
+        </div>
+        <div style="font-size: 12px; color: var(--text-secondary); text-align: center; margin-top: 12px;">
+            © 2026 Know More
+        </div>
+    </div>
+</el-drawer>
+
 <el-container class="docs-container">
-    <el-aside class="docs-aside">
+    <el-aside class="docs-aside hidden-sm-and-down">
         <div class="docs-menu-wrap">
             <!-- Element Plus Menu for Documentation Sidebar -->
             <el-menu 
@@ -174,6 +270,7 @@
 {% block vue_data %}
     // We get the active slug directly from the template context if available
     activeMenu: '{{ request.resolver_match.kwargs.slug|default:"" }}',
+    docsDrawerVisible: false,
 {% endblock %}
 
 {% block vue_methods %}

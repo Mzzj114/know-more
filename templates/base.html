@@ -85,6 +85,67 @@
             display: flex;
             flex-direction: column;
         }
+        
+        /* Mobile menu toggle button */
+        .mobile-menu-toggle {
+            display: none;
+        }
+        
+        /* Mobile navigation styles */
+        @media (max-width: 900px) {
+            .mobile-menu-toggle {
+                display: flex;
+                order: -1;
+                margin-right: 8px;
+            }
+            
+            .header-left {
+                gap: 12px;
+            }
+            
+            /* Hide desktop nav elements on mobile */
+            .nav-links,
+            .header-right,
+            .hidden-sm-and-down {
+                display: none !important;
+            }
+            
+            .mobile-nav-content {
+                padding: 20px;
+            }
+            
+            .mobile-nav-links {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                margin-bottom: 24px;
+            }
+            
+            .mobile-nav-link {
+                padding: 14px 16px;
+                border-radius: 8px;
+                text-decoration: none;
+                color: var(--text-primary);
+                font-weight: 600;
+                font-size: 16px;
+                transition: background-color 0.2s;
+                display: block;
+            }
+            
+            .mobile-nav-link:hover,
+            .mobile-nav-link.active {
+                background-color: var(--primary-light);
+                color: var(--primary);
+            }
+            
+            .mobile-nav-actions {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                padding-top: 16px;
+                border-top: 1px solid var(--border);
+            }
+        }
     </style>
     {% block extra_head %}{% endblock %}
 </head>
@@ -92,11 +153,14 @@
     <div id="app">
         <!-- Global Navbar -->
         <header class="global-header">
+            <!-- 移动端汉堡菜单按钮 -->
+            <el-button class="mobile-menu-toggle" icon="menu" style="width: 40px; height: 40px;" circle @click="mobileMenuVisible = true"></el-button>
+            
             <div class="header-left">
                 <a href="/" class="logo">
                     <el-icon><monitor /></el-icon> Know More
                 </a>
-                <nav class="nav-links">
+                <nav class="nav-links hidden-sm-and-down">
                     <a href="{% url 'home' %}" class="nav-link {% if nav_active == 'home' %}active{% endif %}">{% translate "首页" %}</a>
                     <a href="{% url 'tutorial' %}" class="nav-link {% if nav_active == 'tutorial' %}active{% endif %}">{% translate "教程" %}</a>
                     <a href="{% url 'doc_index' %}" class="nav-link {% if nav_active == 'docs' %}active{% endif %}">{% translate "文档" %}</a>
@@ -105,7 +169,7 @@
                 </nav>
                 <!-- Version Info -->
                 {% version_info as version %}
-                <div style="display: flex; align-items: center; gap: 8px; padding: 6px 9px; font-size: 10px; color: var(--text-secondary); background-color: var(--primary-light); border-radius: var(--el-border-radius-base);">
+                <div style="display: flex; align-items: center; gap: 8px; padding: 6px 9px; font-size: 10px; color: var(--text-secondary); background-color: var(--primary-light); border-radius: var(--el-border-radius-base);" class="hidden-sm-and-down">
                 {% if version %}
                     <span style="font-weight: 600;">
                     {% translate "Version:" %} 
@@ -122,7 +186,7 @@
                 {% endif %}
                 </div>
             </div>
-            <div class="header-right" style="display: flex; align-items: center; gap: 12px;">
+            <div class="header-right hidden-sm-and-down" style="display: flex; align-items: center; gap: 12px;">
                 <!-- Language Switcher -->
                 <form id="lang-switch-form" action="{% url 'set_language' %}" method="post" style="display:none;">
                     {% csrf_token %}
@@ -183,6 +247,59 @@
             </div>
         </header>
 
+        <!-- 移动端全屏导航Drawer -->
+        <el-drawer v-model="mobileMenuVisible" direction="ttb" size="auto" :with-header="false">
+            <div class="mobile-nav-content">
+                <nav class="mobile-nav-links">
+                    <a href="{% url 'home' %}" class="mobile-nav-link {% if nav_active == 'home' %}active{% endif %}">{% translate "首页" %}</a>
+                    <a href="{% url 'tutorial' %}" class="mobile-nav-link {% if nav_active == 'tutorial' %}active{% endif %}">{% translate "教程" %}</a>
+                    <a href="{% url 'doc_index' %}" class="mobile-nav-link {% if nav_active == 'docs' %}active{% endif %}">{% translate "文档" %}</a>
+                    <a href="{% url 'forum:forum_index' %}" class="mobile-nav-link">{% translate "论坛" %}</a>
+                </nav>
+                <div class="mobile-nav-actions">
+                    <!-- Language Switcher -->
+                    <form id="lang-switch-form-mobile" action="{% url 'set_language' %}" method="post" style="display:none;">
+                        {% csrf_token %}
+                        <input name="next" type="hidden" value="{{ request.get_full_path }}" />
+                        <input name="language" type="hidden" id="lang-code-input-mobile" />
+                    </form>
+                    
+                    <el-dropdown trigger="click" @command="switchLanguageMobile">
+                        <el-button plain round style="width: 100%; justify-content: center;">
+                            <el-icon><collection /></el-icon>
+                            <span style="margin-left: 4px;">{{ LANGUAGE_CODE|upper }}</span>
+                            <el-icon class="el-icon--right"><arrow-down /></el-icon>
+                        </el-button>
+                        <template #dropdown>
+                            <el-dropdown-menu>
+                                {% get_available_languages as languages %}
+                                {% for lang_code, lang_name in languages %}
+                                    <el-dropdown-item command="{{ lang_code }}" {% if lang_code == LANGUAGE_CODE %}disabled{% endif %}>
+                                        {{ lang_name }}
+                                    </el-dropdown-item>
+                                {% endfor %}
+                            </el-dropdown-menu>
+                        </template>
+                    </el-dropdown>
+                    
+                    <el-button onclick="window.open('https://github.com/Mzzj114/know-more', '_blank')" plain round style="width: 100%; justify-content: center;">Github</el-button>
+                    
+                    {% if user.is_authenticated %}
+                        <el-button type="primary" plain round onclick="location.href='{% url 'forum:user_profile' user.username %}'" style="width: 100%; justify-content: center;">
+                            <el-icon style="margin-right: 4px;"><user-filled /></el-icon>
+                            {{ user.username }}
+                        </el-button>
+                        <el-button plain round onclick="location.href='{% url 'logout' %}'" style="width: 100%; justify-content: center; color: var(--error);">
+                            <el-icon style="margin-right: 4px;"><switch-button /></el-icon>
+                            {% translate "退出登录" %}
+                        </el-button>
+                    {% else %}
+                        <el-button type="primary" plain round onclick="location.href='{% url 'login' %}'" style="width: 100%; justify-content: center;">{% translate "登录 / 注册" %}</el-button>
+                    {% endif %}
+                </div>
+            </div>
+        </el-drawer>
+
         <!-- Main Workspace -->
         <main class="main-content-layout">
             {% block layout_content %}
@@ -196,6 +313,7 @@
         const AppRoot = {
             data() {
                 return {
+                    mobileMenuVisible: false,
                     {% block vue_data %}{% endblock %}
                 }
             },
@@ -203,6 +321,10 @@
                 switchLanguage(lang) {
                     document.getElementById('lang-code-input').value = lang;
                     document.getElementById('lang-switch-form').submit();
+                },
+                switchLanguageMobile(lang) {
+                    document.getElementById('lang-code-input-mobile').value = lang;
+                    document.getElementById('lang-switch-form-mobile').submit();
                 },
                 {% block vue_methods %}{% endblock %}
             },
