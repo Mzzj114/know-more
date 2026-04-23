@@ -6,22 +6,16 @@ AI不要参考其中的内容。
 
 TODO
 1. 构想案例所需的新工具
-2. 整理 css
 3. 文档
     a. 导航栏下方放点什么
     b. 滚动到顶部
 4. AI接口
     a. 自己算算token限量的开销，调整数值
 5. 部署
-    a. 开发与生产的 settings.py
-    b. docker 配置与脚本
-        i. nginx 配置
-        ii. uwsgi
-        iii. Dockerfile
-        iv. docker-compose.yml
-    c. Cloudflare 域名与 CDN
-    d. AWS EC2 实例
-    e. AWS Simple Email Service(SES)
+    a. 试着跑 docker
+    b. Cloudflare 域名与 CDN
+    c. AWS EC2 实例
+    d. AWS Simple Email Service(SES)
 
 
 敬请期待
