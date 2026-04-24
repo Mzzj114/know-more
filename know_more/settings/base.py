@@ -25,6 +25,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
 
     'rest_framework',
     
@@ -116,6 +118,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Auth redirects
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
+
+# Sites framework
+SITE_ID = 1
 
 # Email Config (Default values)
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='noreply@knowmore.example.com')
