@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-20 17:11-0400\n"
+"POT-Creation-Date: 2026-04-24 17:23-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@example.com>\n"
@@ -24,65 +24,65 @@ msgstr ""
 msgid "登录"
 msgstr "Login"
 
-#: .\account\templates\auth\login.html:68
+#: .\account\templates\auth\login.html:15
 msgid "欢迎回来"
 msgstr "Welcome back"
 
-#: .\account\templates\auth\login.html:69
+#: .\account\templates\auth\login.html:16
 msgid "登录您的 PromptForGood 账号以继续"
 msgstr "Login to your PromptForGood account to continue"
 
-#: .\account\templates\auth\login.html:74
+#: .\account\templates\auth\login.html:21
 msgid "登录失败"
 msgstr "Login failed"
 
-#: .\account\templates\auth\login.html:75
+#: .\account\templates\auth\login.html:22
 msgid "用户名或密码不正确，请重试。"
 msgstr "Incorrect username or password, please try again."
 
-#: .\account\templates\auth\login.html:86
-#: .\account\templates\auth\register.html:102 .\forum\forms.py:77
+#: .\account\templates\auth\login.html:33
+#: .\account\templates\auth\register.html:42 .\forum\forms.py:77
 msgid "用户名"
 msgstr "Username"
 
-#: .\account\templates\auth\login.html:89
-#: .\account\templates\auth\register.html:105
+#: .\account\templates\auth\login.html:36
+#: .\account\templates\auth\register.html:45
 msgid "请输入用户名"
 msgstr "Please enter your username"
 
-#: .\account\templates\auth\login.html:95
-#: .\account\templates\auth\register.html:142
+#: .\account\templates\auth\login.html:42
+#: .\account\templates\auth\register.html:82
 msgid "密码"
 msgstr "Password"
 
-#: .\account\templates\auth\login.html:99
-#: .\account\templates\auth\register.html:146
+#: .\account\templates\auth\login.html:46
+#: .\account\templates\auth\register.html:86
 msgid "请输入密码"
 msgstr "Please enter your password"
 
-#: .\account\templates\auth\login.html:107
+#: .\account\templates\auth\login.html:54
 msgid "记住我"
 msgstr "Remember me"
 
-#: .\account\templates\auth\login.html:108
+#: .\account\templates\auth\login.html:55
 msgid "忘记密码？"
 msgstr "Forgot password?"
 
-#: .\account\templates\auth\login.html:118
-#: .\account\templates\auth\register.html:192
+#: .\account\templates\auth\login.html:65
+#: .\account\templates\auth\register.html:132
 msgid "立即登录"
 msgstr "Login now"
 
-#: .\account\templates\auth\login.html:131
+#: .\account\templates\auth\login.html:78
 msgid "还需要账号吗？"
 msgstr "Need an account?"
 
-#: .\account\templates\auth\login.html:131
-#: .\account\templates\auth\register.html:177
+#: .\account\templates\auth\login.html:78
+#: .\account\templates\auth\register.html:117
 msgid "立即注册"
 msgstr "Register Now"
 
-#: .\account\templates\auth\login.html:149
+#: .\account\templates\auth\login.html:96
 msgid "请填写完整的登录信息"
 msgstr "Please fill in complete login information"
 
@@ -90,108 +90,108 @@ msgstr "Please fill in complete login information"
 msgid "注册"
 msgstr "Register"
 
-#: .\account\templates\auth\register.html:75
+#: .\account\templates\auth\register.html:15
 msgid "创建新账号"
 msgstr "Create a new account"
 
-#: .\account\templates\auth\register.html:76
+#: .\account\templates\auth\register.html:16
 msgid "加入 PromptForGood 开启您的学习之旅"
 msgstr "Join PromptForGood and start your learning journey"
 
-#: .\account\templates\auth\register.html:81
+#: .\account\templates\auth\register.html:21
 msgid "注册信息有误"
 msgstr "Invalid registration details"
 
-#: .\account\templates\auth\register.html:109
+#: .\account\templates\auth\register.html:49
 msgid "必填。150个字符或更少。包含字母，数字和仅有的 @/./+/-/_ 字符。"
 msgstr "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
 
-#: .\account\templates\auth\register.html:112
-#: .\account\templates\auth\reset_password.html:71
+#: .\account\templates\auth\register.html:52
+#: .\account\templates\auth\reset_password.html:31
 msgid "邮箱地址"
 msgstr "Email address"
 
-#: .\account\templates\auth\register.html:115
+#: .\account\templates\auth\register.html:55
 msgid "请输入你的有效邮箱"
 msgstr "Please enter your valid email"
 
-#: .\account\templates\auth\register.html:121
-#: .\account\templates\auth\reset_password.html:81
+#: .\account\templates\auth\register.html:61
+#: .\account\templates\auth\reset_password.html:41
 msgid "验证码"
 msgstr "Verification code"
 
-#: .\account\templates\auth\register.html:125
+#: .\account\templates\auth\register.html:65
 msgid "请输入 6 位验证码"
 msgstr "Please enter 6-digit verification code"
 
-#: .\account\templates\auth\register.html:137
-#: .\account\templates\auth\reset_password.html:97
+#: .\account\templates\auth\register.html:77
+#: .\account\templates\auth\reset_password.html:57
 msgid "发送验证码"
 msgstr "Send verification code"
 
-#: .\account\templates\auth\register.html:151
+#: .\account\templates\auth\register.html:91
 msgid "密码不能过于常见，且至少包含 8 个字符。"
 msgstr "Password cannot be too common and must contain at least 8 characters."
 
-#: .\account\templates\auth\register.html:154
+#: .\account\templates\auth\register.html:94
 msgid "确认密码"
 msgstr "Confirm password"
 
-#: .\account\templates\auth\register.html:158
+#: .\account\templates\auth\register.html:98
 msgid "请再次键入密码"
 msgstr "Please enter your password again"
 
-#: .\account\templates\auth\register.html:166
+#: .\account\templates\auth\register.html:106
 msgid "我已阅读并同意"
 msgstr "I have read and agree to"
 
-#: .\account\templates\auth\register.html:166
+#: .\account\templates\auth\register.html:106
 msgid "服务协议"
 msgstr "Terms of Service"
 
-#: .\account\templates\auth\register.html:166
+#: .\account\templates\auth\register.html:106
 msgid "和"
 msgstr "and"
 
-#: .\account\templates\auth\register.html:166
+#: .\account\templates\auth\register.html:106
 msgid "隐私政策"
 msgstr "Privacy Policy"
 
-#: .\account\templates\auth\register.html:192
+#: .\account\templates\auth\register.html:132
 msgid "已经有账号了？"
 msgstr "Already have an account?"
 
-#: .\account\templates\auth\register.html:214
+#: .\account\templates\auth\register.html:154
 msgid "请填写完整的注册信息"
 msgstr "Please fill in complete registration information"
 
-#: .\account\templates\auth\register.html:218
-#: .\account\templates\auth\reset_password.html:165 .\account\views.py:141
+#: .\account\templates\auth\register.html:158
+#: .\account\templates\auth\reset_password.html:126 .\account\views.py:141
 msgid "两次输入的密码不一致"
 msgstr "Passwords do not match"
 
-#: .\account\templates\auth\register.html:228
-#: .\account\templates\auth\reset_password.html:175
+#: .\account\templates\auth\register.html:168
+#: .\account\templates\auth\reset_password.html:136
 msgid "请先输入邮箱地址"
 msgstr "Please enter email address first"
 
-#: .\account\templates\auth\register.html:233
-#: .\account\templates\auth\reset_password.html:180
+#: .\account\templates\auth\register.html:173
+#: .\account\templates\auth\reset_password.html:141
 msgid "请输入有效的邮箱格式"
 msgstr "Please enter a valid email format"
 
-#: .\account\templates\auth\register.html:249
-#: .\account\templates\auth\reset_password.html:196
+#: .\account\templates\auth\register.html:189
+#: .\account\templates\auth\reset_password.html:157
 msgid "验证码发送成功，请查收"
 msgstr "Verification code sent successfully, please check your inbox"
 
-#: .\account\templates\auth\register.html:256
-#: .\account\templates\auth\reset_password.html:203
+#: .\account\templates\auth\register.html:196
+#: .\account\templates\auth\reset_password.html:164
 msgid "发送失败"
 msgstr "Failed to send"
 
-#: .\account\templates\auth\register.html:260
-#: .\account\templates\auth\reset_password.html:207
+#: .\account\templates\auth\register.html:200
+#: .\account\templates\auth\reset_password.html:168
 msgid "请求发送失败，请稍后重试"
 msgstr "Request failed, please try again later"
 
@@ -199,43 +199,43 @@ msgstr "Request failed, please try again later"
 msgid "修改密码"
 msgstr "Change Password"
 
-#: .\account\templates\auth\reset_password.html:55
+#: .\account\templates\auth\reset_password.html:15
 msgid "重置密码"
 msgstr "Reset Password"
 
-#: .\account\templates\auth\reset_password.html:56
+#: .\account\templates\auth\reset_password.html:16
 msgid "通过邮箱验证码重新设置您的密码"
 msgstr "Reset your password via email verification code"
 
-#: .\account\templates\auth\reset_password.html:74
+#: .\account\templates\auth\reset_password.html:34
 msgid "请输入绑定的邮箱"
 msgstr "Please enter your registered email"
 
-#: .\account\templates\auth\reset_password.html:85 .\account\views.py:67
+#: .\account\templates\auth\reset_password.html:45 .\account\views.py:67
 msgid "请输入验证码"
 msgstr "Please enter the verification code"
 
-#: .\account\templates\auth\reset_password.html:102
+#: .\account\templates\auth\reset_password.html:62
 msgid "新密码"
 msgstr "New Password"
 
-#: .\account\templates\auth\reset_password.html:106
+#: .\account\templates\auth\reset_password.html:66
 msgid "请输入新密码"
 msgstr "Please enter a new password"
 
-#: .\account\templates\auth\reset_password.html:113
+#: .\account\templates\auth\reset_password.html:73
 msgid "确认新密码"
 msgstr "Confirm new password"
 
-#: .\account\templates\auth\reset_password.html:117
+#: .\account\templates\auth\reset_password.html:77
 msgid "请再次键入新密码"
 msgstr "Please enter the new password again"
 
-#: .\account\templates\auth\reset_password.html:131
+#: .\account\templates\auth\reset_password.html:92
 msgid "确认修改"
 msgstr "Confirm Change"
 
-#: .\account\templates\auth\reset_password.html:161
+#: .\account\templates\auth\reset_password.html:122
 msgid "请填写完整的修改信息"
 msgstr "Please fill in all modification info"
 
@@ -256,17 +256,22 @@ msgid "验证码发送太频繁，请稍后再试"
 msgstr "Verification code sent too frequently, please try again later"
 
 #: .\account\views.py:44
-msgid "PromptForGood 注册验证码"
+#, fuzzy
+#| msgid "PromptForGood 注册验证码"
+msgid "Know More 注册验证码"
 msgstr "PromptForGood Registration Verification Code"
 
 #: .\account\views.py:45
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "欢迎注册 PromptForGood。您的注册验证码是：%(code)s，请在 5 分钟内完成输"
+#| "入。如非本人操作，请忽略此邮件。"
 msgid ""
-"欢迎注册 PromptForGood。您的注册验证码是：%(code)s，请在 5 分钟内完成输入。如非本"
+"欢迎注册 Know More。您的注册验证码是：%(code)s，请在 5 分钟内完成输入。如非本"
 "人操作，请忽略此邮件。"
 msgstr ""
-"Welcome to PromptForGood. Your registration code is: %(code)s. Please enter it "
-"within 5 minutes. If this was not you, please ignore this email."
+"Welcome to PromptForGood. Your registration code is: %(code)s. Please enter "
+"it within 5 minutes. If this was not you, please ignore this email."
 
 #: .\account\views.py:51 .\account\views.py:123
 #, python-format
@@ -290,7 +295,9 @@ msgid "该邮箱未注册账号"
 msgstr "This email is not registered"
 
 #: .\account\views.py:116
-msgid "PromptForGood 重置密码验证码"
+#, fuzzy
+#| msgid "PromptForGood 重置密码验证码"
+msgid "Know More 重置密码验证码"
 msgstr "PromptForGood Password Reset Verification Code"
 
 #: .\account\views.py:117
@@ -311,16 +318,26 @@ msgstr "Please fill in all required fields"
 msgid "系统中找不到该邮箱对应的用户"
 msgstr "User not found in the system for this email"
 
-#: .\docs\templates\docs\doc_detail.html:16
+#: .\docs\templates\docs\doc_detail.html:10 .\templates\base.html:188
+#: .\templates\base.html:278
+msgid "首页"
+msgstr "Home"
+
+#: .\docs\templates\docs\doc_detail.html:11 .\templates\base.html:190
+#: .\templates\base.html:280
+msgid "文档"
+msgstr "Docs"
+
+#: .\docs\templates\docs\doc_detail.html:27
 msgid "更新于近期 · 文档代码开源"
 msgstr "Updated recently · Docs open source"
 
-#: .\docs\templates\docs\doc_detail.html:27
-#: .\docs\templates\docs\doc_detail.html:31
+#: .\docs\templates\docs\doc_detail.html:38
+#: .\docs\templates\docs\doc_detail.html:42
 msgid "分享此文档"
 msgstr "Share"
 
-#: .\docs\templates\docs\doc_detail.html:43
+#: .\docs\templates\docs\doc_detail.html:54
 msgid "复制"
 msgstr "Copy"
 
@@ -347,7 +364,7 @@ msgstr ""
 "Learn how to build a high-quality prompt, and understand basic theories of "
 "structural frameworks and scenario-based applications."
 
-#: .\docs\templates\docs\doc_index.html:24 .\main\templates\main\home.html:71
+#: .\docs\templates\docs\doc_index.html:24 .\main\templates\main\home.html:69
 msgid "实战案例"
 msgstr "Practical Examples"
 
@@ -357,16 +374,28 @@ msgstr ""
 "Dive deep into specific task scenarios to see how to formulate and optimize "
 "Prompts for various needs."
 
-#: .\docs\templates\docs\layout.html:4
+#: .\docs\templates\docs\layout.html:5
 msgid "文档站"
 msgstr "Docs"
 
-#: .\forum\forms.py:16 .\forum\templates\forum\create_post.html:57
-#: .\forum\templates\forum\edit_post.html:60
+#: .\docs\templates\docs\layout.html:16
+msgid "文档目录"
+msgstr "Docs Catalog"
+
+#: .\docs\templates\docs\layout.html:33 .\docs\templates\docs\layout.html:71
+msgid "返回首页"
+msgstr "Home"
+
+#: .\docs\templates\docs\layout.html:38 .\docs\templates\docs\layout.html:76
+msgid "回到顶部"
+msgstr "Back to Top"
+
+#: .\forum\forms.py:16 .\forum\templates\forum\create_post.html:44
+#: .\forum\templates\forum\edit_post.html:47
 msgid "请输入帖子标题（5-200 字符）"
 msgstr "Please enter post title (5-200 characters)"
 
-#: .\forum\forms.py:21 .\forum\templates\forum\create_post.html:146
+#: .\forum\forms.py:21 .\forum\templates\forum\create_post.html:133
 msgid "请输入帖子内容（支持 Markdown 语法）"
 msgstr "Please enter post content (Supports Markdown syntax)"
 
@@ -413,13 +442,14 @@ msgstr "Biography"
 #: .\forum\templates\forum\category.html:5
 #: .\forum\templates\forum\category.html:17
 #: .\forum\templates\forum\create_post.html:5
-#: .\forum\templates\forum\create_post.html:32
+#: .\forum\templates\forum\create_post.html:19
 #: .\forum\templates\forum\edit_post.html:5
-#: .\forum\templates\forum\edit_post.html:32
+#: .\forum\templates\forum\edit_post.html:19
 #: .\forum\templates\forum\post_detail.html:5
 #: .\forum\templates\forum\post_detail.html:17
 #: .\forum\templates\forum\user_profile.html:5
-#: .\forum\templates\forum\user_profile.html:17 .\templates\base.html:104
+#: .\forum\templates\forum\user_profile.html:17 .\templates\base.html:192
+#: .\templates\base.html:281
 msgid "论坛"
 msgstr "Forum"
 
@@ -434,8 +464,8 @@ msgstr " posts"
 
 #: .\forum\templates\forum\category.html:42
 #: .\forum\templates\forum\create_post.html:5
-#: .\forum\templates\forum\create_post.html:34
-#: .\forum\templates\forum\create_post.html:41
+#: .\forum\templates\forum\create_post.html:21
+#: .\forum\templates\forum\create_post.html:28
 #: .\forum\templates\forum\index.html:71
 msgid "发布新帖子"
 msgstr "Post New Topic"
@@ -482,51 +512,51 @@ msgid "暂无帖子，快来发第一帖吧！"
 msgstr "No posts yet. Be the first to post!"
 
 #: .\forum\templates\forum\category.html:93
-#: .\forum\templates\forum\create_post.html:117
+#: .\forum\templates\forum\create_post.html:104
 msgid "发布帖子"
 msgstr "Post"
 
-#: .\forum\templates\forum\create_post.html:52
-#: .\forum\templates\forum\edit_post.html:55
+#: .\forum\templates\forum\create_post.html:39
+#: .\forum\templates\forum\edit_post.html:42
 msgid "帖子标题"
 msgstr "Post Title"
 
-#: .\forum\templates\forum\create_post.html:70
-#: .\forum\templates\forum\edit_post.html:73
+#: .\forum\templates\forum\create_post.html:57
+#: .\forum\templates\forum\edit_post.html:60
 msgid "选择分类"
 msgstr "Select Category"
 
-#: .\forum\templates\forum\create_post.html:81
-#: .\forum\templates\forum\edit_post.html:84
+#: .\forum\templates\forum\create_post.html:68
+#: .\forum\templates\forum\edit_post.html:71
 msgid "请选择分类"
 msgstr "Please select a category"
 
-#: .\forum\templates\forum\create_post.html:98
-#: .\forum\templates\forum\edit_post.html:101
+#: .\forum\templates\forum\create_post.html:85
+#: .\forum\templates\forum\edit_post.html:88
 msgid "帖子内容"
 msgstr "Post Content"
 
-#: .\forum\templates\forum\create_post.html:106
+#: .\forum\templates\forum\create_post.html:93
 msgid "支持 Markdown 语法"
 msgstr "Supports Markdown syntax"
 
-#: .\forum\templates\forum\create_post.html:113
-#: .\forum\templates\forum\edit_post.html:113
+#: .\forum\templates\forum\create_post.html:100
+#: .\forum\templates\forum\edit_post.html:100
 #: .\forum\templates\forum\post_detail.html:280
 msgid "取消"
 msgstr "Cancel"
 
 #: .\forum\templates\forum\edit_post.html:5
-#: .\forum\templates\forum\edit_post.html:37
-#: .\forum\templates\forum\edit_post.html:44
+#: .\forum\templates\forum\edit_post.html:24
+#: .\forum\templates\forum\edit_post.html:31
 msgid "编辑帖子"
 msgstr "Edit Post"
 
-#: .\forum\templates\forum\edit_post.html:117
+#: .\forum\templates\forum\edit_post.html:104
 msgid "保存修改"
 msgstr "Save Changes"
 
-#: .\forum\templates\forum\edit_post.html:145
+#: .\forum\templates\forum\edit_post.html:132
 msgid "请输入帖子内容"
 msgstr "Please enter post content"
 
@@ -701,136 +731,107 @@ msgid "暂无回复"
 msgstr "No replies"
 
 #: .\main\templates\main\home.html:5
-msgid "掌握提示词工程"
-msgstr "Master Prompt Engineering"
+msgid "智问善答 | 与AI高效协作的开始"
+msgstr "Prompt For Good | Start collaborating with AI efficiently."
 
-#: .\main\templates\main\home.html:27
+#: .\main\templates\main\home.html:26
 msgid "开源 · 非盈利 · 免费使用"
 msgstr "Open Source · Non-profit · Free to Use"
 
-#: .\main\templates\main\home.html:32
-msgid "让每个人都能"
-msgstr "Enabling everyone to"
+#: .\main\templates\main\home.html:31 .\templates\base.html:9
+msgid "智问善答"
+msgstr "Prompt For Good"
 
-#: .\main\templates\main\home.html:33
-msgid "驾驭"
-msgstr "master"
+#: .\main\templates\main\home.html:36
+msgid "与AI高效协作的开始。"
+msgstr "Start collaborating with AI efficiently."
 
-#: .\main\templates\main\home.html:33
-msgid "提示词工程"
-msgstr "Prompt Engineering"
+#: .\main\templates\main\home.html:37
+msgid "免费、开源、零基础可学。"
+msgstr "Free · Open Source · No prerequisite"
 
-#: .\main\templates\main\home.html:38
-msgid "PromptForGood 将复杂的 AI 使用技巧，降维为可复制的模板与交互式教学。"
-msgstr ""
-"PromptForGood simplifies complex AI techniques into reproducible templates and "
-"interactive tutorials."
+#: .\main\templates\main\home.html:44
+msgid "开始学习"
+msgstr "Start Learning"
 
-#: .\main\templates\main\home.html:39
-msgid "从今天起，稳定、高效地从大模型获取你想要的结果。"
-msgstr "From today, obtain desired results from LLMs stably and efficiently."
+#: .\main\templates\main\home.html:48 .\main\templates\main\home.html:112
+msgid "浏览文档"
+msgstr "Browse Docs"
 
-#: .\main\templates\main\home.html:46
-msgid "开始互动教程"
-msgstr "Start Interactive Tutorial"
-
-#: .\main\templates\main\home.html:50
-msgid "阅读文档"
-msgstr "Read Docs"
-
-#: .\main\templates\main\home.html:54
+#: .\main\templates\main\home.html:52
 msgid "参与论坛"
 msgstr "Join Forum"
 
-#: .\main\templates\main\home.html:63
+#: .\main\templates\main\home.html:61
 msgid "核心技巧文档"
 msgstr "Core Techniques Docs"
 
-#: .\main\templates\main\home.html:67
+#: .\main\templates\main\home.html:65
 msgid "开源免费"
 msgstr "Open Source & Free"
 
-#: .\main\templates\main\home.html:82
+#: .\main\templates\main\home.html:80
 msgid "丰富功能"
 msgstr "Powerful Features"
 
-#: .\main\templates\main\home.html:83
-msgid "一个平台，覆盖你的全部学习需求"
-msgstr "One platform, covering all your learning needs"
+#: .\main\templates\main\home.html:81
+msgid "教程，文档，社区"
+msgstr "Tutorials · Docs · Community"
 
-#: .\main\templates\main\home.html:84
-msgid ""
-"从入门到进阶，从理论到实战，PromptForGood 为你提供完整的提示词工程学习生态。"
+#: .\main\templates\main\home.html:82
+msgid "从入门到进阶，从理论到实战，智问善答为你提供完整的提示词工程学习生态。"
 msgstr ""
 "From beginner to advanced, from theory to practice, PromptForGood provides a "
 "complete Prompt Engineering learning ecosystem."
 
-#: .\main\templates\main\home.html:94
-msgid "互动式教程"
+#: .\main\templates\main\home.html:92
+msgid "手把手互动教程"
 msgstr "Interactive Tutorial"
 
-#: .\main\templates\main\home.html:96
-msgid ""
-"通过悬浮提示与表单引导，一步步写出符合规范的结构化提示词。即学即用，所见即所"
-"得。"
-msgstr ""
-"Learn step-by-step to write compliant structural prompts through floating "
-"tips and form guidance. Learn by doing, what you see is what you get."
+#: .\main\templates\main\home.html:94
+msgid "跟着引导一步步写。"
+msgstr "Work step by step."
 
-#: .\main\templates\main\home.html:99
+#: .\main\templates\main\home.html:97
 msgid "进入教程"
 msgstr "Enter Tutorial"
 
+#: .\main\templates\main\home.html:107
+msgid "系统化知识库"
+msgstr "Systematic Knowledge Base"
+
 #: .\main\templates\main\home.html:109
-msgid "系统知识文档"
-msgstr "Systematic Knowledge Docs"
+msgid "没有晦涩的长篇大论，只有易懂的解释和真实例子。按需查阅。"
+msgstr "No obscure theories, only hands-on guides."
 
-#: .\main\templates\main\home.html:111
-msgid ""
-"深入阅读提示词工程的核心理论，包括 Few-shot、Chain-of-Thought、Meta-"
-"prompting 等高阶技巧的详细解释与示例。"
-msgstr ""
-"Deep dive into core Prompt Engineering theories, including detailed "
-"explanations and examples of advanced techniques like Few-shot, Chain-of-"
-"Thought, and Meta-prompting."
-
-#: .\main\templates\main\home.html:114
-msgid "浏览文档"
-msgstr "Browse Docs"
+#: .\main\templates\main\home.html:122
+msgid "活跃交流社区"
+msgstr "Community"
 
 #: .\main\templates\main\home.html:124
-msgid "社区 Prompt 论坛"
-msgstr "Community Prompt Forum"
-
-#: .\main\templates\main\home.html:126
-msgid ""
-"发现并分享可直接复用的 Prompt 模板。与其他用户讨论最佳实践，共同提升 AI 协作"
-"效率。"
+msgid "找到别人验证过的好提示词，分享你的经验。和同路人一起进步。"
 msgstr ""
-"Discover and share directly reusable Prompt templates. Discuss best "
-"practices with other users and collectively improve AI collaboration "
-"efficiency."
+"Find prompts that work and share your experience. Learn from each other."
 
-#: .\main\templates\main\home.html:129
+#: .\main\templates\main\home.html:127
 msgid "进入论坛"
 msgstr "Enter Forum"
 
-#: .\main\templates\main\home.html:144
+#: .\main\templates\main\home.html:142
 msgid "核心价值"
 msgstr "Core Values"
 
-#: .\main\templates\main\home.html:145
+#: .\main\templates\main\home.html:144
 msgid "一个小改变，带来质的飞跃"
-msgstr "A small change, a giant leap"
+msgstr "A Small Change, A Great Leap"
 
 #: .\main\templates\main\home.html:147
 msgid ""
-"相同的问题，不同的提问方式，得到截然不同的答案。了解结构化提示词如何让 AI 真"
-"正听懂你的需求。"
+"同样的问题，不同的提问方式，得到截然不同的答案。了解提示词工程如何让 AI 真正"
+"听懂你的需求。"
 msgstr ""
-"The same question with different prompting methods yields completely "
-"different answers. Learn how structural prompts help AI truly understand "
-"your needs."
+"Same question, different phrasing, vastly different results. Discover how "
+"Prompt Engineering helps AI truly understand your needs."
 
 #: .\main\templates\main\home.html:157
 msgid "未经优化的提示词"
@@ -919,56 +920,50 @@ msgstr ""
 "efficient path to build a solid foundation of capabilities."
 
 #: .\main\templates\main\home.html:217
-msgid "理解原理"
-msgstr "Understand Principles"
+msgid "看懂AI怎么想"
+msgstr "Understand How AI Thinks"
 
 #: .\main\templates\main\home.html:219
-msgid ""
-"阅读文档，了解大模型的工作方式，掌握「为什么好的提示词能让 AI 更精准」的底层"
-"逻辑。"
+msgid "用大白话解释AI的工作原理，知道为什么好的提示词更有效。"
 msgstr ""
-"Read the documentation, understand how LLMs work, and master the underlying "
-"logic of 'why good prompts make AI more accurate'."
+"Demystify AI logic with plain language and discover why well-crafted prompts "
+"get better results."
 
 #: .\main\templates\main\home.html:225
-msgid "实操教程"
-msgstr "Practical Tutorial"
+msgid "动手写出好提示"
+msgstr "Master Prompt Engineering"
 
 #: .\main\templates\main\home.html:227
-msgid ""
-"完成互动式教程，在引导下亲手写出结构化提示词，并在使用内置 AI 立即测试你的成"
-"果。"
+msgid "跟着教程一步步写，边学边练，立刻用内置AI测试效果。"
 msgstr ""
-"Complete the interactive tutorials, write structured prompts yourself under "
-"guidance, and test your results immediately with the built-in AI."
+"Learn by doing with step-by-step guides and test your results instantly "
+"using our built-in AI."
 
 #: .\main\templates\main\home.html:233
-msgid "运用到案例"
-msgstr "Apply to Cases"
+msgid "实战中见真章"
+msgstr "Learn Through Practice"
 
 #: .\main\templates\main\home.html:235
-msgid ""
-"在「设计学习路线」等真实任务场景中综合运用所学，并在论坛中分享你的 Prompt 模"
-"板。"
+msgid "用真实案例检验学习成果，在论坛分享你的作品，获得反馈。"
 msgstr ""
-"Synthesize what you've learned in real-world task scenarios such as "
-"'Designing a Learning Path' and share your Prompt templates in the forum."
+"Apply your skills to real-world cases, share your work in the community, and "
+"get valuable feedback."
 
 #: .\main\templates\main\home.html:247
-msgid "准备好了吗？"
-msgstr "Are you ready?"
+msgid "与AI高效协作的开始"
+msgstr "The Start of Efficient AI Collaboration"
 
 #: .\main\templates\main\home.html:249
-msgid "加入 PromptForGood，开始你的提示词工程学习之旅。"
-msgstr "Join PromptForGood and start your prompt engineering learning journey."
+msgid "智问善答完全免费，无需注册。"
+msgstr "Completely Free, No Need to Register"
 
 #: .\main\templates\main\home.html:250
-msgid "完全免费，无需注册，立即开始。"
-msgstr "Completely free, no registration required, start now."
+msgid "花10分钟，学会让AI真正听懂你。"
+msgstr "Spend 10 minutes to master the art of making AI truly understand you."
 
 #: .\main\templates\main\home.html:255
-msgid "立即开始互动教程"
-msgstr "Start Interactive Tutorial Now"
+msgid "立即开始学习"
+msgstr "Start Learning Now"
 
 #: .\main\templates\main\home.html:258
 msgid "先看看文档"
@@ -1067,37 +1062,125 @@ msgstr "Enter prompt to test..."
 msgid "按 Enter 发送，Shift+Enter 换行"
 msgstr "Press Enter to send, Shift+Enter for newline"
 
-#: .\templates\base.html:100
-msgid "首页"
-msgstr "Home"
-
-#: .\templates\base.html:101
+#: .\templates\base.html:189 .\templates\base.html:279
 msgid "教程"
 msgstr "Tutorials"
 
-#: .\templates\base.html:102
-msgid "文档"
-msgstr "Docs"
-
-#: .\templates\base.html:111
+#: .\templates\base.html:199
 msgid "Version:"
 msgstr ""
 
-#: .\templates\base.html:121
+#: .\templates\base.html:209
 msgid "Version: Development"
 msgstr ""
 
-#: .\templates\base.html:166
+#: .\templates\base.html:254
 msgid "个人主页"
 msgstr "Profile"
 
-#: .\templates\base.html:173
+#: .\templates\base.html:261 .\templates\base.html:318
 msgid "退出登录"
 msgstr "Logout"
 
-#: .\templates\base.html:181
+#: .\templates\base.html:269 .\templates\base.html:321
 msgid "登录 / 注册"
 msgstr "Login / Register"
+
+#~ msgid "掌握提示词工程"
+#~ msgstr "Master Prompt Engineering"
+
+#~ msgid "让每个人都能"
+#~ msgstr "Enabling everyone to"
+
+#~ msgid "驾驭"
+#~ msgstr "master"
+
+#~ msgid "提示词工程"
+#~ msgstr "Prompt Engineering"
+
+#~ msgid "PromptForGood 将复杂的 AI 使用技巧，降维为可复制的模板与交互式教学。"
+#~ msgstr ""
+#~ "PromptForGood simplifies complex AI techniques into reproducible "
+#~ "templates and interactive tutorials."
+
+#~ msgid "从今天起，稳定、高效地从大模型获取你想要的结果。"
+#~ msgstr ""
+#~ "From today, obtain desired results from LLMs stably and efficiently."
+
+#~ msgid "阅读文档"
+#~ msgstr "Read Docs"
+
+#~ msgid "一个平台，覆盖你的全部学习需求"
+#~ msgstr "One platform, covering all your learning needs"
+
+#~ msgid "互动式教程"
+#~ msgstr "Interactive Tutorial"
+
+#~ msgid ""
+#~ "通过悬浮提示与表单引导，一步步写出符合规范的结构化提示词。即学即用，所见即"
+#~ "所得。"
+#~ msgstr ""
+#~ "Learn step-by-step to write compliant structural prompts through floating "
+#~ "tips and form guidance. Learn by doing, what you see is what you get."
+
+#~ msgid "系统知识文档"
+#~ msgstr "Systematic Knowledge Docs"
+
+#~ msgid ""
+#~ "深入阅读提示词工程的核心理论，包括 Few-shot、Chain-of-Thought、Meta-"
+#~ "prompting 等高阶技巧的详细解释与示例。"
+#~ msgstr ""
+#~ "Deep dive into core Prompt Engineering theories, including detailed "
+#~ "explanations and examples of advanced techniques like Few-shot, Chain-of-"
+#~ "Thought, and Meta-prompting."
+
+#~ msgid "社区 Prompt 论坛"
+#~ msgstr "Community Prompt Forum"
+
+#~ msgid ""
+#~ "发现并分享可直接复用的 Prompt 模板。与其他用户讨论最佳实践，共同提升 AI 协"
+#~ "作效率。"
+#~ msgstr ""
+#~ "Discover and share directly reusable Prompt templates. Discuss best "
+#~ "practices with other users and collectively improve AI collaboration "
+#~ "efficiency."
+
+#~ msgid "理解原理"
+#~ msgstr "Understand Principles"
+
+#~ msgid ""
+#~ "阅读文档，了解大模型的工作方式，掌握「为什么好的提示词能让 AI 更精准」的底"
+#~ "层逻辑。"
+#~ msgstr ""
+#~ "Read the documentation, understand how LLMs work, and master the "
+#~ "underlying logic of 'why good prompts make AI more accurate'."
+
+#~ msgid "实操教程"
+#~ msgstr "Practical Tutorial"
+
+#~ msgid ""
+#~ "完成互动式教程，在引导下亲手写出结构化提示词，并在使用内置 AI 立即测试你的"
+#~ "成果。"
+#~ msgstr ""
+#~ "Complete the interactive tutorials, write structured prompts yourself "
+#~ "under guidance, and test your results immediately with the built-in AI."
+
+#~ msgid "运用到案例"
+#~ msgstr "Apply to Cases"
+
+#~ msgid ""
+#~ "在「设计学习路线」等真实任务场景中综合运用所学，并在论坛中分享你的 Prompt "
+#~ "模板。"
+#~ msgstr ""
+#~ "Synthesize what you've learned in real-world task scenarios such as "
+#~ "'Designing a Learning Path' and share your Prompt templates in the forum."
+
+#~ msgid "准备好了吗？"
+#~ msgstr "Are you ready?"
+
+#~ msgid "加入 PromptForGood，开始你的提示词工程学习之旅。"
+#~ msgstr ""
+#~ "Join PromptForGood and start your prompt engineering learning journey."
 
 #~ msgid "暂无描述"
 #~ msgstr "No description"
