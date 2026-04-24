@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{% block title %}Know More{% endblock %}</title>
+    <title>{% block title %}{% translate '智问善答' %}{% endblock %}</title>
     <script>
         // Provide the active language prefix to global Javascript logic
         window.LANG_PREFIX = "/{{ LANGUAGE_CODE }}";
@@ -182,7 +182,7 @@
             
             <div class="header-left">
                 <a href="/" class="logo">
-                    <el-icon><monitor /></el-icon> Know More
+                    <el-icon><monitor /></el-icon> PromptForGood
                 </a>
                 <nav class="nav-links hidden-sm-and-down">
                     <a href="{% url 'home' %}" class="nav-link {% if nav_active == 'home' %}active{% endif %}">{% translate "首页" %}</a>

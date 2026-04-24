@@ -29,8 +29,8 @@ msgid "欢迎回来"
 msgstr "Welcome back"
 
 #: .\account\templates\auth\login.html:69
-msgid "登录您的 Know More 账号以继续"
-msgstr "Login to your Know More account to continue"
+msgid "登录您的 PromptForGood 账号以继续"
+msgstr "Login to your PromptForGood account to continue"
 
 #: .\account\templates\auth\login.html:74
 msgid "登录失败"
@@ -95,8 +95,8 @@ msgid "创建新账号"
 msgstr "Create a new account"
 
 #: .\account\templates\auth\register.html:76
-msgid "加入 Know More 开启您的学习之旅"
-msgstr "Join Know More and start your learning journey"
+msgid "加入 PromptForGood 开启您的学习之旅"
+msgstr "Join PromptForGood and start your learning journey"
 
 #: .\account\templates\auth\register.html:81
 msgid "注册信息有误"
@@ -256,16 +256,16 @@ msgid "验证码发送太频繁，请稍后再试"
 msgstr "Verification code sent too frequently, please try again later"
 
 #: .\account\views.py:44
-msgid "Know More 注册验证码"
-msgstr "Know More Registration Verification Code"
+msgid "PromptForGood 注册验证码"
+msgstr "PromptForGood Registration Verification Code"
 
 #: .\account\views.py:45
 #, python-format
 msgid ""
-"欢迎注册 Know More。您的注册验证码是：%(code)s，请在 5 分钟内完成输入。如非本"
+"欢迎注册 PromptForGood。您的注册验证码是：%(code)s，请在 5 分钟内完成输入。如非本"
 "人操作，请忽略此邮件。"
 msgstr ""
-"Welcome to Know More. Your registration code is: %(code)s. Please enter it "
+"Welcome to PromptForGood. Your registration code is: %(code)s. Please enter it "
 "within 5 minutes. If this was not you, please ignore this email."
 
 #: .\account\views.py:51 .\account\views.py:123
@@ -290,8 +290,8 @@ msgid "该邮箱未注册账号"
 msgstr "This email is not registered"
 
 #: .\account\views.py:116
-msgid "Know More 重置密码验证码"
-msgstr "Know More Password Reset Verification Code"
+msgid "PromptForGood 重置密码验证码"
+msgstr "PromptForGood Password Reset Verification Code"
 
 #: .\account\views.py:117
 #, python-format
@@ -325,8 +325,8 @@ msgid "复制"
 msgstr "Copy"
 
 #: .\docs\templates\docs\doc_index.html:6
-msgid "欢迎来到 Know More 知识库"
-msgstr "Welcome to Know More Knowledge Base"
+msgid "欢迎来到 PromptForGood 知识库"
+msgstr "Welcome to PromptForGood Knowledge Base"
 
 #: .\docs\templates\docs\doc_index.html:8
 msgid ""
@@ -721,9 +721,9 @@ msgid "提示词工程"
 msgstr "Prompt Engineering"
 
 #: .\main\templates\main\home.html:38
-msgid "Know More 将复杂的 AI 使用技巧，降维为可复制的模板与交互式教学。"
+msgid "PromptForGood 将复杂的 AI 使用技巧，降维为可复制的模板与交互式教学。"
 msgstr ""
-"Know More simplifies complex AI techniques into reproducible templates and "
+"PromptForGood simplifies complex AI techniques into reproducible templates and "
 "interactive tutorials."
 
 #: .\main\templates\main\home.html:39
@@ -760,9 +760,9 @@ msgstr "One platform, covering all your learning needs"
 
 #: .\main\templates\main\home.html:84
 msgid ""
-"从入门到进阶，从理论到实战，Know More 为你提供完整的提示词工程学习生态。"
+"从入门到进阶，从理论到实战，PromptForGood 为你提供完整的提示词工程学习生态。"
 msgstr ""
-"From beginner to advanced, from theory to practice, Know More provides a "
+"From beginner to advanced, from theory to practice, PromptForGood provides a "
 "complete Prompt Engineering learning ecosystem."
 
 #: .\main\templates\main\home.html:94
@@ -959,8 +959,8 @@ msgid "准备好了吗？"
 msgstr "Are you ready?"
 
 #: .\main\templates\main\home.html:249
-msgid "加入 Know More，开始你的提示词工程学习之旅。"
-msgstr "Join Know More and start your prompt engineering learning journey."
+msgid "加入 PromptForGood，开始你的提示词工程学习之旅。"
+msgstr "Join PromptForGood and start your prompt engineering learning journey."
 
 #: .\main\templates\main\home.html:250
 msgid "完全免费，无需注册，立即开始。"

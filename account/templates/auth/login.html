@@ -2,7 +2,7 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}{% translate "登录" %} - Know More{% endblock %}
+{% block title %}{% translate "登录" %} - PromptForGood{% endblock %}
 
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/auth.css' %}" />
@@ -13,7 +13,7 @@
     <div class="auth-card auth-card--narrow">
         <div class="auth-header">
             <h1>{% translate "欢迎回来" %}</h1>
-            <p>{% translate "登录您的 Know More 账号以继续" %}</p>
+            <p>{% translate "登录您的 PromptForGood 账号以继续" %}</p>
         </div>
 
         {% if form.errors %}

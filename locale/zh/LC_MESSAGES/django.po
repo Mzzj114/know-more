@@ -28,7 +28,7 @@ msgid "欢迎回来"
 msgstr ""
 
 #: .\account\templates\auth\login.html:68
-msgid "登录您的 Know More 账号以继续"
+msgid "登录您的 PromptForGood 账号以继续"
 msgstr ""
 
 #: .\account\templates\auth\login.html:73
@@ -94,7 +94,7 @@ msgid "创建新账号"
 msgstr ""
 
 #: .\account\templates\auth\register.html:75
-msgid "加入 Know More 开启您的学习之旅"
+msgid "加入 PromptForGood 开启您的学习之旅"
 msgstr ""
 
 #: .\account\templates\auth\register.html:80
@@ -255,13 +255,13 @@ msgid "验证码发送太频繁，请稍后再试"
 msgstr ""
 
 #: .\account\views.py:44
-msgid "Know More 注册验证码"
+msgid "PromptForGood 注册验证码"
 msgstr ""
 
 #: .\account\views.py:45
 #, python-format
 msgid ""
-"欢迎注册 Know More。您的注册验证码是：%(code)s，请在 5 分钟内完成输入。如非本"
+"欢迎注册 PromptForGood。您的注册验证码是：%(code)s，请在 5 分钟内完成输入。如非本"
 "人操作，请忽略此邮件。"
 msgstr ""
 
@@ -287,7 +287,7 @@ msgid "该邮箱未注册账号"
 msgstr ""
 
 #: .\account\views.py:116
-msgid "Know More 重置密码验证码"
+msgid "PromptForGood 重置密码验证码"
 msgstr ""
 
 #: .\account\views.py:117
@@ -306,7 +306,7 @@ msgid "系统中找不到该邮箱对应的用户"
 msgstr ""
 
 #: .\docs\templates\docs\doc_index.html:5
-msgid "欢迎来到 Know More 知识库"
+msgid "欢迎来到 PromptForGood 知识库"
 msgstr ""
 
 #: .\docs\templates\docs\doc_index.html:7
@@ -697,7 +697,7 @@ msgid "提示词工程"
 msgstr ""
 
 #: .\main\templates\main\home.html:37
-msgid "Know More 将复杂的 AI 使用技巧，降维为可复制的模板与交互式教学。"
+msgid "PromptForGood 将复杂的 AI 使用技巧，降维为可复制的模板与交互式教学。"
 msgstr ""
 
 #: .\main\templates\main\home.html:38
@@ -734,7 +734,7 @@ msgstr ""
 
 #: .\main\templates\main\home.html:83
 msgid ""
-"从入门到进阶，从理论到实战，Know More 为你提供完整的提示词工程学习生态。"
+"从入门到进阶，从理论到实战，PromptForGood 为你提供完整的提示词工程学习生态。"
 msgstr ""
 
 #: .\main\templates\main\home.html:93
@@ -912,7 +912,7 @@ msgid "准备好了吗？"
 msgstr ""
 
 #: .\main\templates\main\home.html:248
-msgid "加入 Know More，开始你的提示词工程学习之旅。"
+msgid "加入 PromptForGood，开始你的提示词工程学习之旅。"
 msgstr ""
 
 #: .\main\templates\main\home.html:249
