@@ -173,3 +173,7 @@ cython_debug/
 node_modules
 secret.env
 production.env
+
+*.pem
+
+document/planning/
