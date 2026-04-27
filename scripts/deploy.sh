@@ -19,6 +19,7 @@ git pull
 # Therefore, using `sudo -u webserver` allows 'ubuntu' to run commands as 'webserver'
 # without needing to know or enter the 'webserver' user's password.
 echo "Restarting docker containers as user 'webserver'..."
-sudo -u webserver docker compose restart
+sudo -u webserver docker compose down
+sudo -u webserver docker compose up -d
 
 echo "Deployment completed successfully!"
