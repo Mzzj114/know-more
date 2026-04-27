@@ -13,6 +13,14 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 ENV DJANGO_ENV=prod
 
+ARG GIT_COMMIT
+ARG GIT_DATE
+ARG GIT_TAG
+
+ENV GIT_COMMIT=${GIT_COMMIT}
+ENV GIT_DATE=${GIT_DATE}
+ENV GIT_TAG=${GIT_TAG}
+
 # Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
