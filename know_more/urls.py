@@ -40,7 +40,7 @@ urlpatterns += [
 ]
 
 urlpatterns += i18n_patterns(
-    path('admin/', admin.site.urls),
+    path('know-more-admin/', admin.site.urls),
     path('docs/', include('docs.urls')),
     path('forum/', include('forum.urls', namespace='forum')),
     path('ai/', include('ai.urls')),

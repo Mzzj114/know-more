@@ -100,7 +100,7 @@ docker-compose exec web python manage.py createsuperuser
 - 主站点：`http://localhost/`
 - 文档站点：`http://localhost/docs/`
 - 论坛站点：`http://localhost/forum/`
-- 管理后台：`http://localhost/admin/`
+- 管理后台：`http://localhost/know-more-admin/`
 
 ## 项目结构
 
