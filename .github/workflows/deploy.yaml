@@ -6,6 +6,7 @@ on:
 
 jobs:
   deploy:
+    environment: Deployment
     runs-on: ubuntu-latest
     # 建议先运行你之前的 CI 任务，确保测试通过后再部署
     # needs: build-and-test 
