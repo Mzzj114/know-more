@@ -1,0 +1,19 @@
+{% extends "admin/index.html" %}
+{% load i18n %}
+
+{% block sidebar %}
+    <div class="app-send-email module" style="margin-bottom: 20px;">
+        <table style="width: 100%;">
+            <caption>
+                <a href="{% url 'send_email' %}" class="section" title="{% translate 'Send an email to a user' %}">{% translate 'Send Email' %}</a>
+            </caption>
+            <tbody>
+                <tr>
+                    <th scope="row"><a href="{% url 'send_email' %}">{% translate 'Compose and Send' %}</a></th>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    {{ block.super }}
+{% endblock %}

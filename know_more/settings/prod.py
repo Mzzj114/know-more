@@ -18,13 +18,13 @@ CACHES = {
     'default': env.cache('CACHE_URL', default='locmemcache://unique-know-more')
 }
 
-# Email Backend (SMTP for production)
-EMAIL_BACKEND = env('EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
-EMAIL_HOST = env('EMAIL_HOST', default='')
-EMAIL_PORT = env('EMAIL_PORT', cast=int, default=587)
-EMAIL_USE_TLS = env('EMAIL_USE_TLS', cast=bool, default=True)
-EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
+# Email Backend (AWS SES for production)
+EMAIL_BACKEND = env('EMAIL_BACKEND', default='django_ses.SESBackend')
+AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID', default='')
+AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY', default='')
+AWS_SESSION_PROFILE = env('AWS_SESSION_PROFILE', default='')
+AWS_SES_REGION_NAME = env('AWS_SES_REGION_NAME', default='us-west-2')
+AWS_SES_REGION_ENDPOINT = env('AWS_SES_REGION_ENDPOINT', default='email.us-west-2.amazonaws.com')
 
 # Security headers
 SECURE_SSL_REDIRECT = env('SECURE_SSL_REDIRECT', cast=bool, default=True)
