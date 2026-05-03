@@ -26,6 +26,9 @@ AWS_SESSION_PROFILE = env('AWS_SESSION_PROFILE', default='')
 AWS_SES_REGION_NAME = env('AWS_SES_REGION_NAME', default='us-west-2')
 AWS_SES_REGION_ENDPOINT = env('AWS_SES_REGION_ENDPOINT', default='email.us-west-2.amazonaws.com')
 
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='noreply@promptforgood.org')
+
+
 # Security headers
 SECURE_SSL_REDIRECT = env('SECURE_SSL_REDIRECT', cast=bool, default=True)
 SESSION_COOKIE_SECURE = env('SESSION_COOKIE_SECURE', cast=bool, default=True)

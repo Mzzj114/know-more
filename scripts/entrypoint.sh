@@ -10,11 +10,12 @@ done
 echo "Database is ready!"
 
 echo "Running migrations..."
+python manage.py makemigrations --noinput
 python manage.py migrate --noinput
 
 echo "Collecting static files..."
 # This gathers files from STATICFILES_DIRS (static/ and node_modules/) into STATIC_ROOT (staticfiles/)
 python manage.py collectstatic --noinput
 
-echo "Starting uWSGI..."
+echo "Setup finished. Starting uWSGI..."
 uwsgi --ini uwsgi.ini

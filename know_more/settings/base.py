@@ -123,4 +123,4 @@ LOGOUT_REDIRECT_URL = 'home'
 SITE_ID = 1
 
 # Email Config (Default values)
-DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='noreply@knowmore.example.com')
+DEFAULT_FROM_EMAIL = "noreply@knowmore.example.com"
