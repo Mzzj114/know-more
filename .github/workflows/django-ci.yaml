@@ -4,9 +4,9 @@ name: Django CI
 on:
   push:
     branches: [ "main" ]
-    paths-ignore:
-      - 'document/**'
-      - 'static/tutorials/**'
+    paths:
+      - "**.py"
+      - "**.html"
   pull_request:
     branches: [ "main" ]
 
