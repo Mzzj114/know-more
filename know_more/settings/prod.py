@@ -28,6 +28,8 @@ AWS_SES_REGION_ENDPOINT = env('AWS_SES_REGION_ENDPOINT', default='email.us-west-
 
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='noreply@promptforgood.org')
 
+# Cloudflare
+CLOUDFLARE_TURNSTILE_SECRET_KEY = env('CLOUDFLARE_TURNSTILE_SECRET_KEY')
 
 # Security headers
 SECURE_SSL_REDIRECT = env('SECURE_SSL_REDIRECT', cast=bool, default=True)

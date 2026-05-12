@@ -6,6 +6,10 @@
 
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/auth.css' %}" />
+
+<!-- cloudflare captcha -->
+<link rel="preconnect" href="https://challenges.cloudflare.com" />
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 {% endblock %}
 
 {% block layout_content %}
@@ -48,7 +52,7 @@
                 ></el-input>
                 <div class="form-tip">{% translate "必填。150个字符或更少。包含字母，数字和仅有的 @/./+/-/_ 字符。" %}</div>
             </el-form-item>
-            
+
             <el-form-item label="{% translate '邮箱地址' %}" required>
                 <el-input 
                     v-model="regData.email" 
@@ -106,6 +110,9 @@
                 <el-checkbox v-model="regData.agree">{% translate "我已阅读并同意" %} <a href="#" class="auth-forgot-link">{% translate "服务协议" %}</a> {% translate "和" %} <a href="#" class="auth-forgot-link">{% translate "隐私政策" %}</a></el-checkbox>
             </div>
 
+            <!-- Turnstile widget -->
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAADOC5qZhb4nXe0PW" style="margin-bottom: 24px;"></div>
+
             <el-button 
                 type="primary" 
                 native-type="submit" 
@@ -133,6 +140,7 @@
         </div>
     </div>
 </div>
+
 {% endblock %}
 
 {% block vue_data %}
@@ -158,6 +166,21 @@ handleSubmit() {
         this.$message.error('{% translate "两次输入的密码不一致" %}');
         return;
     }
+    const turnstileResponse = document.querySelector('[name=cf-turnstile-response]')?.value;
+    if (!turnstileResponse) {
+        this.$message.warning('{% translate "请完成人机验证" %}');
+        return;
+    }
+    
+    let cfInput = this.$refs.nativeForm.querySelector('[name=cf-turnstile-response]');
+    if (!cfInput) {
+        cfInput = document.createElement('input');
+        cfInput.type = 'hidden';
+        cfInput.name = 'cf-turnstile-response';
+        this.$refs.nativeForm.appendChild(cfInput);
+    }
+    cfInput.value = turnstileResponse;
+
     this.submitting = true;
     this.$nextTick(() => {
         this.$refs.nativeForm.submit();

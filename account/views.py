@@ -3,11 +3,53 @@ import random
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, update_session_auth_hash
 from django.contrib.auth.models import User
+from django.contrib.auth.views import LoginView
 from django.http import JsonResponse
 from django.core.cache import cache
 from django.core.mail import send_mail
 from django.utils.translation import gettext as _
+import urllib.request
+import urllib.parse
 from .forms import CustomUserCreationForm
+from django.conf import settings
+
+def validate_turnstile(request):
+    if settings.DEBUG:
+        print('Debug mode is enabled, skipping Turnstile validation')
+        return True
+
+    token = request.POST.get('cf-turnstile-response')
+    secret = settings.CLOUDFLARE_TURNSTILE_SECRET_KEY
+    remoteip = request.META.get('REMOTE_ADDR')
+
+    if not token:
+        return False
+        
+    url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
+    data = urllib.parse.urlencode({
+        'secret': secret,
+        'response': token,
+        'remoteip': remoteip
+    }).encode('utf-8')
+    
+    try:
+        req = urllib.request.Request(url, data=data)
+        response = urllib.request.urlopen(req)
+        result = json.loads(response.read().decode('utf-8'))
+        return result.get('success', False)
+    except Exception:
+        return False
+
+class CustomLoginView(LoginView):
+    template_name = 'auth/login.html'
+
+    def post(self, request, *args, **kwargs):
+        if not validate_turnstile(request):
+            form = self.get_form()
+            form.add_error(None, _("人机验证失败，请重试"))
+            return self.form_invalid(form)
+        return super().post(request, *args, **kwargs)
+
 
 def send_verify_code(request):
     """
@@ -65,6 +107,8 @@ def register(request):
             
             if not input_code:
                 form.add_error(None, _("请输入验证码"))
+            elif not validate_turnstile(request):
+                form.add_error(None, _("人机验证失败，请重试"))
             else:
                 cached_code = cache.get(f"verify_code_{email}")
                 if not cached_code:
@@ -137,6 +181,8 @@ def reset_password(request):
         error_msg = None
         if not email or not input_code or not password or not confirm_password:
             error_msg = _("请填写所有必填字段")
+        elif not validate_turnstile(request):
+            error_msg = _("人机验证失败，请重试")
         elif password != confirm_password:
             error_msg = _("两次输入的密码不一致")
         else:
