@@ -21,6 +21,19 @@ GIT_TAG=$(git describe --tags --always 2>/dev/null || echo "")
 # Therefore, using `sudo -u webserver` allows 'ubuntu' to run commands as 'webserver'
 # without needing to know or enter the 'webserver' user's password.
 echo "Starting docker containers as user 'webserver'..."
-sudo -u webserver env GIT_COMMIT="$GIT_COMMIT" GIT_DATE="$GIT_DATE" GIT_TAG="$GIT_TAG" docker compose up -d --build
+
+# sudo -u webserver sh -c '
+#   GIT_COMMIT="$1" \
+#   GIT_DATE="$2" \
+#   GIT_TAG="$3" \
+#   docker compose build --no-cache
+#   ' sh "$GIT_COMMIT" "$GIT_DATE" "$GIT_TAG"
+
+sudo -u webserver sh -c '
+  GIT_COMMIT="$1" \
+  GIT_DATE="$2" \
+  GIT_TAG="$3" \
+  docker compose up -d --build
+' sh "$GIT_COMMIT" "$GIT_DATE" "$GIT_TAG"
 
 echo "Launching completed successfully!"
