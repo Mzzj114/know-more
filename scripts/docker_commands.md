@@ -10,10 +10,7 @@ docker compose exec web bash
 docker compose down
 ```
 
-
 ---
-
-
 
 # 一、先建立一个心智模型
 
@@ -38,25 +35,27 @@ docker ...
 ```bash
 docker compose ps
 ```
-👉 类似 Docker Desktop 的容器列表
 
+👉 类似 Docker Desktop 的容器列表
 
 ## 2️⃣ 查看日志（非常常用）
 
 ```bash
 docker compose logs -f
 ```
+
 只看一个服务：
+
 ```bash
 docker compose logs -f web
 ```
-
 
 ## 3️⃣ 启动 / 后台运行
 
 ```bash
 docker compose up -d
 ```
+
 重新构建：
 
 ```bash
@@ -64,18 +63,18 @@ docker compose up -d --build
 ```
 
 ## 4️⃣ 停止 / 删除容器
+
 ```bash
 docker compose down
 ```
-👉 会删除容器，但保留 volume（默认）
 
+👉 会删除容器，但保留 volume（默认）
 
 ## 5️⃣ 重启服务
 
 ```bash
 docker compose restart
 ```
-
 
 # 三、进入容器（你会很常用）
 
@@ -90,7 +89,6 @@ docker compose exec web bash
 ```bash
 docker compose exec web sh
 ```
-
 
 # 四、看容器细节（调试用）
 
@@ -119,11 +117,13 @@ docker inspect <container>
 ```bash
 docker inspect <container-id> | grep LogPath
 ```
+
 默认在 /var/lib/docker/containers/<container-id>/
 
 ```bash
 du -sh /var/lib/docker/containers/
 ```
+
 du(disk usage) 列出大小，
 -s 表示汇总，
 -h 表示人类可读
@@ -131,6 +131,7 @@ du(disk usage) 列出大小，
 ```bash
 df -h
 ```
+
 硬盘分区大小
 
 ## 清空日志（紧急用）
@@ -149,13 +150,11 @@ sudo truncate -s 0 /var/lib/docker/containers/*/*.log
 docker images
 ```
 
-
 ## 删除无用镜像（非常推荐定期做）
 
 ```bash
 docker image prune -a
 ```
-
 
 # 七、清理系统（救命命令）
 
@@ -170,7 +169,6 @@ docker system prune -a
 * 网络
 
 ⚠️ 小心用（生产环境别乱执行）
-
 
 # 八、volume（数据库很关键）
 
@@ -198,7 +196,6 @@ docker compose logs -f web
 docker compose exec web bash
 ```
 
-
 # 十、给你一个“日常操作流”（很接近真实使用）
 
 你以后大概率会这样用：
@@ -216,4 +213,3 @@ docker compose logs -f
 # 进容器排查
 docker compose exec web bash
 ```
-
