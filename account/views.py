@@ -13,12 +13,13 @@ import urllib.parse
 from .forms import CustomUserCreationForm
 from django.conf import settings
 
-def validate_turnstile(request):
+def validate_turnstile(request, token=None):
     if settings.DEBUG:
         print('Debug mode is enabled, skipping Turnstile validation')
         return True
 
-    token = request.POST.get('cf-turnstile-response')
+    if not token:
+        token = request.POST.get('cf-turnstile-response')
     secret = settings.CLOUDFLARE_TURNSTILE_SECRET_KEY
     remoteip = request.META.get('REMOTE_ADDR')
 
@@ -61,11 +62,16 @@ def send_verify_code(request):
     try:
         data = json.loads(request.body)
         email = data.get('email')
+        token = data.get('cf-turnstile-response')
     except Exception:
         email = request.POST.get('email')
+        token = request.POST.get('cf-turnstile-response')
         
     if not email:
         return JsonResponse({'success': False, 'message': _('缺少邮箱地址')})
+        
+    if not validate_turnstile(request, token=token):
+        return JsonResponse({'success': False, 'message': _('人机验证失败，请先勾选验证码')})
         
     if User.objects.filter(email=email).exists():
         return JsonResponse({'success': False, 'message': _('该邮箱已被注册')})
@@ -137,11 +143,16 @@ def send_reset_code(request):
     try:
         data = json.loads(request.body)
         email = data.get('email')
+        token = data.get('cf-turnstile-response')
     except Exception:
         email = request.POST.get('email')
+        token = request.POST.get('cf-turnstile-response')
         
     if not email:
         return JsonResponse({'success': False, 'message': _('缺少邮箱地址')})
+        
+    if not validate_turnstile(request, token=token):
+        return JsonResponse({'success': False, 'message': _('人机验证失败，请先勾选验证码')})
         
     if not User.objects.filter(email=email).exists():
         return JsonResponse({'success': False, 'message': _('该邮箱未注册账号')})

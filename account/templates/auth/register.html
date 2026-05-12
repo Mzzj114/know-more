@@ -197,6 +197,12 @@ sendVerifyCode() {
         return;
     }
     if (this.countdown > 0) return;
+
+    const turnstileResponse = document.querySelector('[name=cf-turnstile-response]')?.value;
+    if (!turnstileResponse) {
+        this.$message.warning('{% translate "请先完成人机验证" %}');
+        return;
+    }
     
     fetch('{% url "send_verify_code" %}', {
         method: 'POST',
@@ -204,10 +210,16 @@ sendVerifyCode() {
             'Content-Type': 'application/json',
             'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
         },
-        body: JSON.stringify({ email: this.regData.email })
+        body: JSON.stringify({ 
+            email: this.regData.email,
+            'cf-turnstile-response': turnstileResponse
+        })
     })
     .then(res => res.json())
     .then(data => {
+        if (window.turnstile) {
+            window.turnstile.reset();
+        }
         if (data.success) {
             this.$message.success('{% translate "验证码发送成功，请查收" %}');
             this.countdown = 60;
@@ -220,6 +232,9 @@ sendVerifyCode() {
         }
     })
     .catch(err => {
+        if (window.turnstile) {
+            window.turnstile.reset();
+        }
         this.$message.error('{% translate "请求发送失败，请稍后重试" %}');
     });
 }
