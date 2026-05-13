@@ -23,3 +23,4 @@ CACHES = {
 
 # Email Backend (Console for development)
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = 'messenger@promptforgood.org'

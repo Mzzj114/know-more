@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.sitemaps',
 
+    'anymail',
     'rest_framework',
     
     'know_more.apps.KnowMoreConfig',

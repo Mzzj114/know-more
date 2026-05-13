@@ -18,18 +18,18 @@ CACHES = {
     'default': env.cache('CACHE_URL', default='locmemcache://unique-know-more')
 }
 
-# Email Backend (AWS SES for production)
-EMAIL_BACKEND = env('EMAIL_BACKEND', default='django_ses.SESBackend')
-AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID', default='')
-AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY', default='')
-AWS_SESSION_PROFILE = env('AWS_SESSION_PROFILE', default='')
-AWS_SES_REGION_NAME = env('AWS_SES_REGION_NAME', default='us-west-2')
-AWS_SES_REGION_ENDPOINT = env('AWS_SES_REGION_ENDPOINT', default='email.us-west-2.amazonaws.com')
+# Email Backend (Resend via django-anymail)
+EMAIL_BACKEND = 'anymail.backends.resend.EmailBackend'
+ANYMAIL = {
+    'RESEND_API_KEY': env('RESEND_API_KEY', default=''),
+}
 
-DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='noreply@promptforgood.org')
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='messenger@promptforgood.org')
+
 
 # Cloudflare
-CLOUDFLARE_TURNSTILE_SECRET_KEY = env('CLOUDFLARE_TURNSTILE_SECRET_KEY')
+CLOUDFLARE_TURNSTILE_SECRET_KEY = env('CLOUDFLARE_TURNSTILE_SECRET_KEY', default='')
+CLOUDFLARE_TURNSTILE_SITE_KEY = env('CLOUDFLARE_TURNSTILE_SITE_KEY', default='')
 
 # Security headers
 SECURE_SSL_REDIRECT = env('SECURE_SSL_REDIRECT', cast=bool, default=True)
