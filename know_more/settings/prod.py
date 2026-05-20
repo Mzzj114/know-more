@@ -32,7 +32,9 @@ CLOUDFLARE_TURNSTILE_SECRET_KEY = env('CLOUDFLARE_TURNSTILE_SECRET_KEY', default
 CLOUDFLARE_TURNSTILE_SITE_KEY = env('CLOUDFLARE_TURNSTILE_SITE_KEY', default='')
 
 # Security headers
-SECURE_SSL_REDIRECT = env('SECURE_SSL_REDIRECT', cast=bool, default=True)
+# Cloudflare 负责 http -> https 跳转，这里就不用了
+SECURE_SSL_REDIRECT = env('SECURE_SSL_REDIRECT', cast=bool, default=False)
+# 避免明文 cookie 和 csrftoken
 SESSION_COOKIE_SECURE = env('SESSION_COOKIE_SECURE', cast=bool, default=True)
 CSRF_COOKIE_SECURE = env('CSRF_COOKIE_SECURE', cast=bool, default=True)
 SECURE_BROWSER_XSS_FILTER = True
