@@ -1,0 +1,38 @@
+User-agent: *
+
+# 允许爬取公开内容
+Allow: /zh/
+Allow: /en/
+Allow: /sitemap.xml
+
+# 禁止爬取用户认证相关页面
+Disallow: /zh/auth/
+Disallow: /en/auth/
+
+# 禁止爬取 API 接口（避免不必要的爬虫请求）
+Disallow: /zh/api/
+Disallow: /en/api/
+Disallow: /zh/forum/api/
+Disallow: /en/forum/api/
+Disallow: /jsi18n/
+Disallow: /i18n/
+Disallow: /zh/ai/
+Disallow: /en/ai/
+
+# 禁止爬取用户个人设置页面
+Disallow: /zh/forum/user/
+Disallow: /en/forum/user/
+Disallow: /zh/forum/my-favorites/
+Disallow: /en/forum/my-favorites/
+
+# 允许爬取论坛公开内容
+Allow: /zh/forum/
+Allow: /en/forum/
+
+# 允许爬取文档和教程
+Allow: /zh/docs/
+Allow: /en/docs/
+Allow: /zh/tutorial/
+Allow: /en/tutorial/
+
+Sitemap: https://promptforgood.org/sitemap.xml

@@ -7,6 +7,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}{% translate '智问善答' %}{% endblock %}</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon/favicon.ico' %}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}" />
+    <link rel="apple-touch-icon" href="{% static 'favicon/apple-touch-icon.png' %}" />
+    <link rel="manifest" href="{% static 'favicon/site.webmanifest' %}" />
+
     <script>
         // Provide the active language prefix to global Javascript logic
         window.LANG_PREFIX = "/{{ LANGUAGE_CODE }}";
@@ -182,7 +190,8 @@
             
             <div class="header-left">
                 <a href="/" class="logo">
-                    <el-icon><monitor /></el-icon> PromptForGood
+                    <img src="{% static 'img/logo.png' %}" alt="PromptForGood Logo" style="height: 48px; width: auto;" />
+                    PromptForGood
                 </a>
                 <nav class="nav-links hidden-sm-and-down">
                     <a href="{% url 'home' %}" class="nav-link {% if nav_active == 'home' %}active{% endif %}">{% translate "首页" %}</a>
