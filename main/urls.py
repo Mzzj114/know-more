@@ -13,4 +13,6 @@ urlpatterns = [
     # 获取教程数据的 API
     path('api/tutorials/', views.api_tutorial_list, name='api_tutorial_list'),
     path('api/tutorials/<str:slug>/', views.api_tutorial_detail, name='api_tutorial_detail'),
+
+    path('slides/', views.slides, name='slides'),
 ]

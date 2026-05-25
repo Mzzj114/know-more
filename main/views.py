@@ -75,3 +75,6 @@ def api_tutorial_detail(request, slug):
             raise Http404("Error reading tutorial data")
             
     raise Http404("Tutorial not found")
+
+def slides(request):
+    return render(request, 'main/slides.html')
