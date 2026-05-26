@@ -29,8 +29,8 @@
 
         /* General presentation headers styling */
         .reveal h2 {
-            font-size: 2rem !important;
-            margin-bottom: 1.2rem !important;
+            font-size: 2.6rem !important; /* Increased from 2rem */
+            margin-bottom: 1.5rem !important;
             color: var(--primary);
             position: relative;
             display: inline-block;
@@ -40,10 +40,10 @@
         .reveal h2::after {
             content: '';
             display: block;
-            width: 50px;
-            height: 3.5px;
+            width: 80px; /* Increased from 50px */
+            height: 4.5px; /* Increased from 3.5px */
             background: var(--accent); /* Amber */
-            margin: 0.5rem auto 0;
+            margin: 0.6rem auto 0;
             border-radius: 2px;
         }
 
@@ -68,49 +68,49 @@
         .reveal .slide-dark .project-badge {
             background: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 10px 20px;
+            padding: 12px 24px; /* Increased padding */
             border-radius: 9999px;
             display: inline-flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 2.5rem;
+            gap: 14px;
+            margin-bottom: 3rem;
             backdrop-filter: blur(8px);
             transition: all 0.3s ease;
         }
 
         .reveal .slide-dark .project-badge img {
-            height: 24px;
+            height: 32px; /* Increased from 24px */
             margin: 0 !important;
             display: block;
         }
 
         .reveal .slide-dark .project-badge span {
-            font-size: 14px;
+            font-size: 18px; /* Increased from 14px */
             font-weight: 600;
             color: #EFF6FF;
             letter-spacing: 0.05em;
         }
 
         .reveal .slide-dark h1 {
-            font-size: 2.8rem !important;
+            font-size: 4.2rem !important; /* Increased from 2.8rem */
             line-height: 1.2 !important;
-            margin-bottom: 1.5rem !important;
+            margin-bottom: 2rem !important;
         }
 
         /* Subtle amber accent line */
         .reveal .slide-dark .accent-line {
-            width: 80px;
-            height: 4px;
+            width: 120px; /* Increased from 80px */
+            height: 5px; /* Increased from 4px */
             background: var(--accent); /* Amber 700 */
-            margin: 1.5rem auto 2.5rem;
-            border-radius: 2px;
+            margin: 2rem auto 3rem;
+            border-radius: 2.5px;
         }
 
         .reveal .slide-dark .subtitle {
-            font-size: 1.25rem !important;
+            font-size: 1.8rem !important; /* Increased from 1.25rem */
             color: #93C5FD !important; /* light primary blue for subtitle */
             font-weight: 400;
-            margin-bottom: 3.5rem !important;
+            margin-bottom: 4rem !important;
             opacity: 0.9;
         }
 
@@ -119,19 +119,19 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 24px;
-            font-size: 0.9rem !important;
+            gap: 32px; /* Increased from 24px */
+            font-size: 1.3rem !important; /* Increased from 0.9rem */
             color: #94A3B8 !important; /* Slate 400 */
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 2rem;
-            max-width: 450px;
+            padding-top: 2.5rem;
+            max-width: 600px; /* Increased from 450px */
             margin: 0 auto;
         }
 
         .reveal .slide-dark .meta-item {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
         
         .reveal .slide-dark .meta-item strong {
@@ -141,7 +141,7 @@
 
         .reveal .slide-dark .meta-divider {
             width: 1px;
-            height: 14px;
+            height: 20px; /* Increased from 14px */
             background: rgba(255, 255, 255, 0.15);
         }
 
@@ -156,8 +156,8 @@
         .reveal .compare-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 24px;
-            margin-top: 1rem;
+            gap: 32px; /* Increased from 24px */
+            margin-top: 1.5rem;
             align-items: stretch;
         }
 
@@ -165,7 +165,7 @@
         .reveal .prompt-card {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 14px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
             display: flex;
             flex-direction: column;
@@ -174,32 +174,32 @@
         }
 
         .reveal .prompt-card .card-header {
-            padding: 10px 16px;
-            font-size: 0.85rem;
+            padding: 12px 20px; /* Increased from 10px 16px */
+            font-size: 1.2rem; /* Increased from 0.85rem */
             font-weight: 700;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             color: #FFFFFF;
         }
 
         .reveal .prompt-card.bad {
-            border-top: 4px solid var(--error);
+            border-top: 5px solid var(--error);
         }
         .reveal .prompt-card.bad .card-header {
             background: var(--error);
         }
 
         .reveal .prompt-card.good {
-            border-top: 4px solid var(--success);
+            border-top: 5px solid var(--success);
         }
         .reveal .prompt-card.good .card-header {
             background: var(--success);
         }
 
         .reveal .prompt-card .card-body {
-            padding: 16px;
-            font-size: 0.9rem;
+            padding: 20px; /* Increased from 16px */
+            font-size: 1.25rem; /* Increased from 0.9rem */
             line-height: 1.5;
             color: var(--text-primary);
             flex-grow: 1;
@@ -208,27 +208,31 @@
             justify-content: center;
         }
 
+        .reveal .prompt-card .card-body p {
+            font-size: 1.1rem !important; /* Force description p to be readable */
+        }
+
         .reveal .prompt-card .prompt-text {
             font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
             background: var(--secondary-light);
             border: 1px solid rgba(0,0,0,0.05);
-            border-radius: 6px;
-            padding: 12px;
+            border-radius: 8px;
+            padding: 16px; /* Increased from 12px */
             margin: 0;
             white-space: pre-wrap;
             word-break: break-all;
             color: var(--secondary);
-            font-size: 0.8rem;
+            font-size: 1.15rem; /* Increased from 0.8rem */
             line-height: 1.4;
         }
 
         /* Label inside prompt card body */
         .reveal .prompt-card .card-label {
-            font-size: 0.75rem;
+            font-size: 1.05rem; /* Increased from 0.75rem */
             text-transform: uppercase;
             letter-spacing: 0.05em;
             color: var(--text-secondary);
-            margin-bottom: 6px;
+            margin-bottom: 10px;
             font-weight: 600;
         }
 
@@ -237,13 +241,13 @@
             background: var(--primary-light);
             color: var(--primary);
             border: 1px solid var(--el-color-primary-light-7);
-            padding: 10px 18px;
+            padding: 14px 24px; /* Increased from 10px 18px */
             border-radius: 8px;
-            font-size: 0.9rem;
-            margin-top: 1.5rem;
+            font-size: 1.3rem; /* Increased from 0.9rem */
+            margin-top: 2rem;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             font-weight: 600;
             animation: km-pulse 2s infinite;
         }
@@ -258,16 +262,16 @@
         .reveal .info-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 24px;
-            margin-top: 1.5rem;
+            gap: 32px; /* Increased from 24px */
+            margin-top: 2rem;
             text-align: left;
         }
 
         .reveal .info-card {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 24px;
+            border-radius: 14px;
+            padding: 28px; /* Increased from 24px */
             box-shadow: 0 2px 4px rgba(0,0,0,0.02);
             display: flex;
             flex-direction: column;
@@ -275,32 +279,32 @@
         }
 
         .reveal .info-card h3 {
-            font-size: 1.25rem !important;
+            font-size: 1.7rem !important; /* Increased from 1.25rem */
             color: var(--primary) !important;
             margin-top: 0 !important;
-            margin-bottom: 12px !important;
+            margin-bottom: 16px !important;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             font-weight: 700 !important;
         }
 
         .reveal .info-card p {
-            font-size: 0.9rem !important;
+            font-size: 1.25rem !important; /* Increased from 0.9rem */
             line-height: 1.5 !important;
             color: var(--text-secondary);
-            margin: 0 0 16px 0 !important;
+            margin: 0 0 20px 0 !important;
         }
 
         .reveal .info-card .card-highlight {
             font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
             background: var(--secondary-light);
-            padding: 12px;
-            border-radius: 6px;
-            font-size: 0.8rem;
+            padding: 16px; /* Increased from 12px */
+            border-radius: 8px;
+            font-size: 1.1rem; /* Increased from 0.8rem */
             color: var(--secondary);
             white-space: pre-wrap;
-            border-left: 4px solid var(--accent);
+            border-left: 5px solid var(--accent);
             line-height: 1.4;
         }
 
@@ -308,10 +312,10 @@
         .reveal .closing-container {
             display: grid;
             grid-template-columns: 1.2fr 0.8fr;
-            gap: 40px;
+            gap: 48px; /* Increased from 40px */
             align-items: center;
             text-align: left;
-            margin-top: 1.5rem;
+            margin-top: 2rem;
         }
 
         .reveal .closing-left h2 {
@@ -323,18 +327,23 @@
             margin: 0.5rem 0 0 !important;
         }
 
+        .reveal .closing-left p {
+            font-size: 1.5rem !important;
+            line-height: 1.6 !important;
+        }
+
         .reveal .closing-right {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 16px;
         }
 
         .reveal .qr-box {
             background: #FFFFFF;
-            padding: 4px;
-            border-radius: 14px;
+            padding: 8px;
+            border-radius: 18px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.3);
             display: flex;
             align-items: center;
@@ -349,7 +358,7 @@
         }
 
         .reveal .qr-label {
-            font-size: 0.85rem;
+            font-size: 1.2rem; /* Increased from 0.85rem */
             color: #94A3B8;
             font-weight: 500;
             letter-spacing: 0.05em;
@@ -394,7 +403,6 @@
             <!-- Slide 2: 基础提示词技巧 - 提供上下文背景 -->
             <section data-background-color="var(--bg)">
                 <h2>技巧一：提供上下文背景</h2>
-                <!--<div style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 0.5rem;">技巧一：提供上下文背景</div>-->
                 <div class="compare-container">
                     <div class="prompt-card bad">
                         <div class="card-header">
@@ -403,7 +411,7 @@
                         <div class="card-body">
                             <div class="card-label">用户输入：</div>
                             <pre class="prompt-text">我的电脑蓝屏了，我该怎么办？</pre>
-                            <p style="font-size: 0.8rem; color: var(--error); margin-top: 10px; font-weight: 600; margin-bottom: 0;">AI 只能给出宽泛、无针对性的建议（如重启、检查更新）。</p>
+                            <p style="font-size: 1.1rem; color: var(--error); margin-top: 10px; font-weight: 600; margin-bottom: 0;">AI 只能给出宽泛、无针对性的建议（如重启、检查更新）。</p>
                         </div>
                     </div>
                     <div class="prompt-card good">
@@ -415,7 +423,7 @@
                             <pre class="prompt-text">我的 windows 10 笔记本电脑被狗撞了一下蓝屏了，报错：
 0x00000024-NTFS_FILE_SYSTEM
 我该怎么办？</pre>
-                            <p style="font-size: 0.8rem; color: var(--success); margin-top: 10px; font-weight: 600; margin-bottom: 0;">AI 能准确识别为文件系统（NTFS）问题，并给出具体建议甚至自行修复的方法。</p>
+                            <p style="font-size: 1.1rem; color: var(--success); margin-top: 10px; font-weight: 600; margin-bottom: 0;">AI 能准确识别为文件系统（NTFS）问题，并给出具体建议甚至自行修复的方法。</p>
                         </div>
                     </div>
                 </div>
@@ -424,7 +432,6 @@
             <!-- Slide 3: 基础提示词技巧 - 多角度回答 -->
             <section data-background-color="var(--bg)">
                 <h2>技巧二：明确回答角度</h2>
-                <!--<div style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 0.5rem;">技巧二：明确回答角度</div>-->
                 <div class="compare-container">
                     <div class="prompt-card bad">
                         <div class="card-header">
@@ -433,7 +440,7 @@
                         <div class="card-body">
                             <div class="card-label">用户输入：</div>
                             <pre class="prompt-text">请分析下方段落的人物塑造。</pre>
-                            <p style="font-size: 0.8rem; color: var(--error); margin-top: 10px; font-weight: 600; margin-bottom: 0;">模型切入点随机，输出内容容易泛泛而谈，偏离特定分析框架。</p>
+                            <p style="font-size: 1.1rem; color: var(--error); margin-top: 10px; font-weight: 600; margin-bottom: 0;">模型切入点随机，输出内容容易泛泛而谈，偏离特定分析框架。</p>
                         </div>
                     </div>
                     <div class="prompt-card good">
@@ -442,8 +449,8 @@
                         </div>
                         <div class="card-body">
                             <div class="card-label">用户输入：</div>
-                            <pre class="prompt-text">请从语言、动作、心理、外貌和神态描写的角度来分析下方段落的人物塑造。</pre>
-                            <p style="font-size: 0.8rem; color: var(--success); margin-top: 10px; font-weight: 600; margin-bottom: 0;">模型强力聚焦于五个既定写作维度，回复层次严密、精准度极高。</p>
+                            <pre class="prompt-text">请从语言、动作、心理、外貌 and 神态描写的角度来分析下方段落的人物塑造。</pre>
+                            <p style="font-size: 1.1rem; color: var(--success); margin-top: 10px; font-weight: 600; margin-bottom: 0;">模型强力聚焦于五个既定写作维度，回复层次严密、精准度极高。</p>
                         </div>
                     </div>
                 </div>
@@ -452,7 +459,6 @@
             <!-- Slide 4: 基础提示词技巧 - 示例指引 -->
             <section data-background-color="var(--bg)">
                 <h2>技巧三：示例指引 (Few-Shot)</h2>
-                <!--<div style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 0.5rem;">技巧三：给模型打样 —— 示例指引 (Few-Shot)</div>-->
                 <div class="compare-container">
                     <div class="prompt-card bad">
                         <div class="card-header">
@@ -462,7 +468,7 @@
                             <div class="card-label">用户输入：</div>
                             <pre class="prompt-text">这句话表达了用户对产品的什么态度？
 这个产品具有成本效益。</pre>
-                            <p style="font-size: 0.8rem; color: var(--error); margin-top: 10px; font-weight: 600; margin-bottom: 0;">模型可能会用一段长文进行解释，不方便数据自动抓取与分析。</p>
+                            <p style="font-size: 1.1rem; color: var(--error); margin-top: 10px; font-weight: 600; margin-bottom: 0;">模型可能会用一段长文进行解释，不方便数据自动抓取与分析。</p>
                         </div>
                     </div>
                     <div class="prompt-card good">
@@ -477,7 +483,7 @@
 标签：消极
 输入：这个产品具有成本效益
 输出：</pre>
-                            <p style="font-size: 0.8rem; color: var(--success); margin-top: 10px; font-weight: 600; margin-bottom: 0;">模型会完美对齐输出格式，精确且仅输出单词标签（如“积极”）。</p>
+                            <p style="font-size: 1.1rem; color: var(--success); margin-top: 10px; font-weight: 600; margin-bottom: 0;">模型会完美对齐输出格式，精确且仅输出单词标签（如“积极”）。</p>
                         </div>
                     </div>
                 </div>
@@ -499,8 +505,8 @@
                         </div>
                         <div class="card-body">
                             <div class="card-label">用户输入：</div>
-                            <pre class="prompt-text" style="font-size: 0.85rem;"><br>光的漫反射是什么？<br><br><br></pre>
-                            <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 12px; margin-bottom: 0;">已经足够让模型给出一个通俗、准确且内容丰富的科学定义。</p>
+                            <pre class="prompt-text" style="font-size: 1.2rem;"><br>光的漫反射是什么？<br><br><br></pre>
+                            <p style="font-size: 1.1rem; color: var(--text-secondary); margin-top: 12px; margin-bottom: 0;">已经足够让模型给出一个通俗、准确且内容丰富的科学定义。</p>
                         </div>
                     </div>
                     <div class="prompt-card bad" style="border-top: 4px solid var(--secondary);">
@@ -509,7 +515,7 @@
                         </div>
                         <div class="card-body" style="justify-content: flex-start;">
                             <div class="card-label">用户输入：</div>
-                            <pre class="prompt-text" style="font-size: 0.75rem;">角色：百科全书知识库
+                            <pre class="prompt-text" style="font-size: 1.05rem;">角色：百科全书知识库
 能力：
 - 你知道很多事情，从古诗文到数学，从天文到地理...
 - 你能以档案记录的形式介绍每种东西
@@ -518,7 +524,7 @@
 - 清晰，严谨，有条理
 - 在50到300字之间
 用户输入：光的漫反射是什么？</pre>
-                            <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 12px; margin-bottom: 0;">我们要做勤俭节约的好孩子，不要浪费 Token 额度。</p>
+                            <p style="font-size: 1.1rem; color: var(--text-secondary); margin-top: 12px; margin-bottom: 0;">我们要做勤俭节约的好孩子，不要浪费 Token 额度。</p>
                         </div>
                     </div>
                 </div>
@@ -534,7 +540,7 @@
                         <h3><span>⚙️</span> 元提示词 (Meta-Prompting)</h3>
                         <p>通过巧妙的指引，让 AI 模型自身变成一个“提示词工程专家”，来为你设计和优化提示词。</p>
                         <strong class="card-highlight">优化实例：
-"帮我写一段提示词：我想让 AI 作为一个面试官来模拟 Python 工程师的面试。"</strong>
+"帮我写一段提示词：我想让 AI 作为一个面试官来模拟 Python 工程师 MySql 的面试。"</strong>
                     </div>
                     
                     <div class="info-card">
@@ -557,11 +563,11 @@
                             <span>PromptForGood</span>
                         </div>
                         <h2>感谢您的聆听</h2>
-                        <p style="font-size: 1.15rem; color: #93C5FD; line-height: 1.6; margin-bottom: 2rem;">
+                        <p style="font-size: 1.5rem; color: #93C5FD; line-height: 1.6; margin-bottom: 2rem;">
                             我们相信，用更好的问题，才能得到更好的答案。<br>
-                            欢迎与我们一起，将 AI 真正听懂你。
+                            欢迎与我们一起，让 AI 真正听懂你。
                         </p>
-                        <div style="font-size: 0.9rem; color: #94A3B8;">
+                        <div style="font-size: 1.2rem; color: #94A3B8;">
                             项目官网: <a href="https://promptforgood.org" target="_blank" style="color: #EFF6FF; text-decoration: underline; font-weight: 600;">promptforgood.org</a>
                         </div>
                     </div>
