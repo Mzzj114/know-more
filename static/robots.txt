@@ -25,6 +25,10 @@ Disallow: /en/forum/user/
 Disallow: /zh/forum/my-favorites/
 Disallow: /en/forum/my-favorites/
 
+# 禁止爬取某些静态页面
+Disallow: /en/slides/
+Disallow: /zh/slides/
+
 # 允许爬取论坛公开内容
 Allow: /zh/forum/
 Allow: /en/forum/
