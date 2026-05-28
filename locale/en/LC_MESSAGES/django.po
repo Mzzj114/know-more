@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-27 16:07-0400\n"
+"POT-Creation-Date: 2026-05-28 16:17-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@example.com>\n"
@@ -387,7 +387,7 @@ msgstr ""
 "Learn how to build a high-quality prompt, and understand basic theories of "
 "structural frameworks and scenario-based applications."
 
-#: .\docs\templates\docs\doc_index.html:24 .\main\templates\main\home.html:69
+#: .\docs\templates\docs\doc_index.html:24 .\main\templates\main\home.html:79
 msgid "实战案例"
 msgstr "Practical Examples"
 
@@ -795,94 +795,94 @@ msgstr "Prompt For Good | Start collaborating with AI efficiently."
 msgid "开源 · 非盈利 · 免费使用"
 msgstr "Open Source · Non-profit · Free to Use"
 
-#: .\main\templates\main\home.html:31 .\templates\base.html:9
+#: .\main\templates\main\home.html:32
+msgid "Logo"
+msgstr ""
+
+#: .\main\templates\main\home.html:39 .\templates\base.html:9
 msgid "智问善答"
 msgstr "Prompt For Good"
 
-#: .\main\templates\main\home.html:36
-msgid "与AI高效协作的开始。"
-msgstr "Start collaborating with AI efficiently."
+#: .\main\templates\main\home.html:45
+msgid "为像您一样紧跟时代脚步的求知者打造的教程与社区平台"
+msgstr ""
+"A learning and community platform for curious minds who want to keep pace "
+"with the age of AI."
 
-#: .\main\templates\main\home.html:37
-msgid "免费、开源、零基础可学。"
-msgstr "Free · Open Source · No prerequisite"
-
-#: .\main\templates\main\home.html:44
+#: .\main\templates\main\home.html:54
 msgid "开始学习"
 msgstr "Start Learning"
 
-#: .\main\templates\main\home.html:48 .\main\templates\main\home.html:112
+#: .\main\templates\main\home.html:58 .\main\templates\main\home.html:122
 msgid "浏览文档"
 msgstr "Browse Docs"
 
-#: .\main\templates\main\home.html:52
+#: .\main\templates\main\home.html:62
 msgid "参与论坛"
 msgstr "Join Forum"
 
-#: .\main\templates\main\home.html:61
+#: .\main\templates\main\home.html:71
 msgid "核心技巧文档"
 msgstr "Core Techniques Docs"
 
-#: .\main\templates\main\home.html:65
+#: .\main\templates\main\home.html:75
 msgid "开源免费"
 msgstr "Open Source & Free"
 
-#: .\main\templates\main\home.html:80
+#: .\main\templates\main\home.html:90
 msgid "丰富功能"
 msgstr "Powerful Features"
 
-#: .\main\templates\main\home.html:81
+#: .\main\templates\main\home.html:91
 msgid "教程，文档，社区"
 msgstr "Tutorials · Docs · Community"
 
-#: .\main\templates\main\home.html:82
-msgid "从入门到进阶，从理论到实战，智问善答为你提供完整的提示词工程学习生态。"
-msgstr ""
-"From beginner to advanced, from theory to practice, PromptForGood provides a "
-"complete Prompt Engineering learning ecosystem."
-
 #: .\main\templates\main\home.html:92
+msgid "并非高精尖的技术中的AI，而是最贴近现实的AI"
+msgstr "Not the most technical AI, but the most practical AI"
+
+#: .\main\templates\main\home.html:102
 msgid "手把手互动教程"
 msgstr "Interactive Tutorial"
 
-#: .\main\templates\main\home.html:94
+#: .\main\templates\main\home.html:104
 msgid "跟着引导一步步写。"
 msgstr "Work step by step."
 
-#: .\main\templates\main\home.html:97
+#: .\main\templates\main\home.html:107
 msgid "进入教程"
 msgstr "Enter Tutorial"
 
-#: .\main\templates\main\home.html:107
+#: .\main\templates\main\home.html:117
 msgid "系统化知识库"
 msgstr "Systematic Knowledge Base"
 
-#: .\main\templates\main\home.html:109
-msgid "没有晦涩的长篇大论，只有易懂的解释和真实例子。按需查阅。"
-msgstr "No obscure theories, only hands-on guides."
+#: .\main\templates\main\home.html:119
+msgid "和教程对应，按需查阅。"
+msgstr "Matches the tutorial, check as needed."
 
-#: .\main\templates\main\home.html:122
+#: .\main\templates\main\home.html:132
 msgid "活跃交流社区"
 msgstr "Community"
 
-#: .\main\templates\main\home.html:124
+#: .\main\templates\main\home.html:134
 msgid "找到别人验证过的好提示词，分享你的经验。和同路人一起进步。"
 msgstr ""
 "Find prompts that work and share your experience. Learn from each other."
 
-#: .\main\templates\main\home.html:127
+#: .\main\templates\main\home.html:137
 msgid "进入论坛"
 msgstr "Enter Forum"
 
-#: .\main\templates\main\home.html:142
+#: .\main\templates\main\home.html:152
 msgid "核心价值"
 msgstr "Core Values"
 
-#: .\main\templates\main\home.html:144
+#: .\main\templates\main\home.html:154
 msgid "一个小改变，带来质的飞跃"
 msgstr "A Small Change, A Great Leap"
 
-#: .\main\templates\main\home.html:147
+#: .\main\templates\main\home.html:157
 msgid ""
 "同样的问题，不同的提问方式，得到截然不同的答案。了解提示词工程如何让 AI 真正"
 "听懂你的需求。"
@@ -890,143 +890,143 @@ msgstr ""
 "Same question, different phrasing, vastly different results. Discover how "
 "Prompt Engineering helps AI truly understand your needs."
 
-#: .\main\templates\main\home.html:157
+#: .\main\templates\main\home.html:167
 msgid "未经优化的提示词"
 msgstr "Unoptimized Prompt"
 
-#: .\main\templates\main\home.html:160
+#: .\main\templates\main\home.html:170
 msgid "帮我写一份 Python 学习计划"
 msgstr "Help me write a Python study plan"
 
-#: .\main\templates\main\home.html:163
+#: .\main\templates\main\home.html:173
 msgid "目标模糊"
 msgstr "Vague goals"
 
-#: .\main\templates\main\home.html:164
+#: .\main\templates\main\home.html:174
 msgid "缺少背景"
 msgstr "Lack of context"
 
-#: .\main\templates\main\home.html:165
+#: .\main\templates\main\home.html:175
 msgid "无法复用"
 msgstr "Not reusable"
 
-#: .\main\templates\main\home.html:178
+#: .\main\templates\main\home.html:188
 msgid "结构化提示词"
 msgstr "Structured Prompt"
 
-#: .\main\templates\main\home.html:181
+#: .\main\templates\main\home.html:191
 msgid "角色"
 msgstr "Role"
 
-#: .\main\templates\main\home.html:181
+#: .\main\templates\main\home.html:191
 msgid "你是一位经验丰富的学习规划师"
 msgstr "You are an experienced learning planner"
 
-#: .\main\templates\main\home.html:183
+#: .\main\templates\main\home.html:193
 msgid "背景"
 msgstr "Context"
 
-#: .\main\templates\main\home.html:183
+#: .\main\templates\main\home.html:193
 msgid "我是零基础的 Python 初学者，每天有 1 小时学习时间"
 msgstr "I'm a total Python beginner with 1 hour of study time each day"
 
-#: .\main\templates\main\home.html:185
+#: .\main\templates\main\home.html:195
 msgid "任务"
 msgstr "Task"
 
-#: .\main\templates\main\home.html:185
+#: .\main\templates\main\home.html:195
 msgid "为我制定 30 天学习路线"
 msgstr "Develop a 30-day learning roadmap for me"
 
-#: .\main\templates\main\home.html:187
+#: .\main\templates\main\home.html:197
 msgid "输出格式"
 msgstr "Output Format"
 
-#: .\main\templates\main\home.html:187
+#: .\main\templates\main\home.html:197
 msgid "按周分组，每周 3 个目标，包含推荐资源"
 msgstr "Group by week, 3 goals per week, including recommended resources"
 
-#: .\main\templates\main\home.html:190
+#: .\main\templates\main\home.html:200
 msgid "角色明确"
 msgstr "Clear Role"
 
-#: .\main\templates\main\home.html:191
+#: .\main\templates\main\home.html:201
 msgid "背景详尽"
 msgstr "Detailed Context"
 
-#: .\main\templates\main\home.html:192
+#: .\main\templates\main\home.html:202
 msgid "格式规范"
 msgstr "Standard Format"
 
-#: .\main\templates\main\home.html:193
+#: .\main\templates\main\home.html:203
 msgid "可复用"
 msgstr "Reusable"
 
-#: .\main\templates\main\home.html:206
+#: .\main\templates\main\home.html:216
 msgid "学习路径"
 msgstr "Learning Path"
 
-#: .\main\templates\main\home.html:207
+#: .\main\templates\main\home.html:217
 msgid "三步，从零到掌握提示词工程"
 msgstr "Three steps, from zero to mastering prompt engineering"
 
-#: .\main\templates\main\home.html:209
+#: .\main\templates\main\home.html:219
 msgid "我们的教学设计经过精心打磨，带你以最高效的路径建立稳固的能力基础。"
 msgstr ""
 "Our instructional design is carefully polished to lead you on the most "
 "efficient path to build a solid foundation of capabilities."
 
-#: .\main\templates\main\home.html:217
+#: .\main\templates\main\home.html:227
 msgid "看懂AI怎么想"
 msgstr "Understand How AI Thinks"
 
-#: .\main\templates\main\home.html:219
+#: .\main\templates\main\home.html:229
 msgid "用大白话解释AI的工作原理，知道为什么好的提示词更有效。"
 msgstr ""
 "Demystify AI logic with plain language and discover why well-crafted prompts "
 "get better results."
 
-#: .\main\templates\main\home.html:225
+#: .\main\templates\main\home.html:235
 msgid "动手写出好提示"
 msgstr "Master Prompt Engineering"
 
-#: .\main\templates\main\home.html:227
+#: .\main\templates\main\home.html:237
 msgid "跟着教程一步步写，边学边练，立刻用内置AI测试效果。"
 msgstr ""
 "Learn by doing with step-by-step guides and test your results instantly "
 "using our built-in AI."
 
-#: .\main\templates\main\home.html:233
+#: .\main\templates\main\home.html:243
 msgid "实战中见真章"
 msgstr "Learn Through Practice"
 
-#: .\main\templates\main\home.html:235
+#: .\main\templates\main\home.html:245
 msgid "用真实案例检验学习成果，在论坛分享你的作品，获得反馈。"
 msgstr ""
 "Apply your skills to real-world cases, share your work in the community, and "
 "get valuable feedback."
 
-#: .\main\templates\main\home.html:247
+#: .\main\templates\main\home.html:257
 msgid "与AI高效协作的开始"
 msgstr "The Start of Efficient AI Collaboration"
 
-#: .\main\templates\main\home.html:249
+#: .\main\templates\main\home.html:259
 msgid "智问善答完全免费，无需注册。"
 msgstr "Completely Free, No Need to Register"
 
-#: .\main\templates\main\home.html:250
+#: .\main\templates\main\home.html:260
 msgid "花10分钟，学会让AI真正听懂你。"
 msgstr "Spend 10 minutes to master the art of making AI truly understand you."
 
-#: .\main\templates\main\home.html:255
+#: .\main\templates\main\home.html:265
 msgid "立即开始学习"
 msgstr "Start Learning Now"
 
-#: .\main\templates\main\home.html:258
+#: .\main\templates\main\home.html:268
 msgid "先看看文档"
 msgstr "Check the Docs First"
 
-#: .\main\templates\main\home.html:261
+#: .\main\templates\main\home.html:271
 msgid "前往论坛"
 msgstr "Go to Forum"
 
@@ -1154,6 +1154,21 @@ msgstr "Logout"
 #: .\templates\base.html:278 .\templates\base.html:330
 msgid "登录 / 注册"
 msgstr "Login / Register"
+
+#~ msgid ""
+#~ "从入门到进阶，从理论到实战，智问善答为你提供完整的提示词工程学习生态。"
+#~ msgstr ""
+#~ "From beginner to advanced, from theory to practice, PromptForGood "
+#~ "provides a complete Prompt Engineering learning ecosystem."
+
+#~ msgid "没有晦涩的长篇大论，只有易懂的解释和真实例子。按需查阅。"
+#~ msgstr "No obscure theories, only hands-on guides."
+
+#~ msgid "与AI高效协作的开始。"
+#~ msgstr "Start collaborating with AI efficiently."
+
+#~ msgid "免费、开源、零基础可学。"
+#~ msgstr "Free · Open Source · No prerequisite"
 
 #~ msgid "掌握提示词工程"
 #~ msgstr "Master Prompt Engineering"

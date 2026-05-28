@@ -26,15 +26,24 @@
             {% translate "开源 · 非盈利 · 免费使用" %}
         </div>
 
+        <!-- 网站 Logo -->
+        <transition name="el-fade-in-linear" appear>
+            <div class="hero-logo">
+                <img src="{% static 'img/logo.png' %}" alt="{% translate 'Logo' %}">
+            </div>
+        </transition>
+
         <!-- 主标题 -->
-        <h1 class="hero-title">
-            {% translate "智问善答" %}
-        </h1>
+        <transition name="el-zoom-in-bottom" appear>
+            <h1 class="hero-title">
+                {% translate "智问善答" %}
+            </h1>
+        </transition>
 
         <!-- 副标题 -->
         <p class="hero-subtitle">
-            {% translate "与AI高效协作的开始。" %}<br>
-            {% translate "免费、开源、零基础可学。" %}
+            {% translate "为像您一样紧跟时代脚步的求知者打造的教程与社区平台" %}<br>
+            {% comment %} {% translate "与AI高效协作的开始。" %} {% endcomment %}
         </p>
 
         <!-- 行动按钮 -->
@@ -79,7 +88,7 @@
     <div class="section-header">
         <span class="section-label">{% translate "丰富功能" %}</span>
         <h2 class="section-title">{% translate "教程，文档，社区" %}</h2>
-        <p class="section-desc">{% translate "从入门到进阶，从理论到实战，智问善答为你提供完整的提示词工程学习生态。" %}</p>
+        <p class="section-desc">{% translate "并非高精尖的技术中的AI，而是最贴近现实的AI" %}</p>
     </div>
 
     <div class="features-grid">
@@ -106,7 +115,7 @@
             </div>
             <h3 class="feature-card-title">{% translate "系统化知识库" %}</h3>
             <p class="feature-card-desc">
-                {% translate "没有晦涩的长篇大论，只有易懂的解释和真实例子。按需查阅。" %}
+                {% translate "和教程对应，按需查阅。" %}
             </p>
             <a href="{% url 'doc_index' %}" class="feature-card-link">
                 {% translate "浏览文档" %}
