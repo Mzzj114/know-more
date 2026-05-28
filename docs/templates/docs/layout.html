@@ -10,7 +10,7 @@
 
 {% block layout_content %}
 <!-- 移动端侧边栏触发按钮 -->
-<el-button class="docs-mobile-toggle" circle icon="collection" @click="docsDrawerVisible = true" style="width: 40px; height: 40px; position: fixed; bottom: 70px; left: 26px; z-index: 99;"></el-button>
+<el-button class="docs-mobile-toggle" circle icon="collection" @click="docsDrawerVisible = true"></el-button>
 
 <!-- 移动端Drawer -->
 <el-drawer v-model="docsDrawerVisible" title="{% translate '文档目录' %}" direction="ltr" size="280px">

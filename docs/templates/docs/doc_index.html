@@ -12,7 +12,7 @@
         <el-card shadow="hover" class="docs-welcome-card" style="border-color: var(--primary-light);">
             <template #header>
                 <div class="docs-welcome-card-header docs-welcome-card-header--primary">
-                    <el-icon><reading /></el-icon> {% translate "提示词基础" %}
+                    <el-icon><reading /></el-icon>  <a href="{% url 'doc_detail' 'ai-and-prompt-engineering' %}"> {% translate "提示词基础" %}</a>
                 </div>
             </template>
             <p class="docs-welcome-card-desc">{% translate "学习如何构建一个优质的提示词，理解结构化框架与场景化应用的基础理论。" %}</p>
@@ -21,7 +21,7 @@
         <el-card shadow="hover" class="docs-welcome-card" style="border-color: var(--el-color-warning-light-8);">
             <template #header>
                 <div class="docs-welcome-card-header docs-welcome-card-header--warning">
-                    <el-icon><postcard /></el-icon> {% translate "实战案例" %}
+                    <el-icon><postcard /></el-icon>  <a href="{% url 'doc_detail' 'case-study-learning-path' %}"> {% translate "实战案例" %}</a>
                 </div>
             </template>
             <p class="docs-welcome-card-desc">{% translate "深入具体任务场景，看看针对各种需求应该如何制定与优化 Prompt。" %}</p>

@@ -188,9 +188,19 @@
     bottom: 20px;
     left: 20px;
     z-index: 50;
-    width: 50px;
-    height: 40px;
+    width: 50px !important;
+    height: 50px !important;
 }
+
+.mobile-nav-toggle .el-icon {
+    font-size: 24px;
+}
+
+.mobile-nav-toggle:hover {
+    background-color: var(--primary);
+    color: white;
+}
+
 @media (max-width: 900px) {
     .tutorial-layout {
         flex-direction: column;
