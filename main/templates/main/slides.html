@@ -163,6 +163,7 @@
 
         /* Styling for the comparison cards */
         .reveal .prompt-card {
+            min-height: 350px;
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 14px;
@@ -228,7 +229,7 @@
 
         /* Label inside prompt card body */
         .reveal .prompt-card .card-label {
-            font-size: 1.05rem; /* Increased from 0.75rem */
+            font-size: 1.1rem; /* Increased from 0.75rem */
             text-transform: uppercase;
             letter-spacing: 0.05em;
             color: var(--text-secondary);
@@ -368,7 +369,7 @@
 <body>
     <div class="reveal">
         <div class="slides">
-            <!-- Slide 1 (开场) -->
+            <!-- Slide (开场) -->
             <section data-background-gradient="radial-gradient(circle, #1E3A8A 0%, #172554 100%)" class="slide-dark">
                 <!-- Project logo & name badge -->
                 <div class="project-badge">
@@ -400,7 +401,38 @@
                 </div>
             </section>
 
-            <!-- Slide 2: 基础提示词技巧 - 提供上下文背景 -->
+            <!-- Slide: 开场例子演示-->
+            <section data-background-color="var(--bg)">
+                <h2>演示</h2>
+                <div style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 0.5rem;">你能猜到AI回如何回答吗？</div>
+                <div class="compare-container">
+                    <div class="prompt-card" style="border-top: 5px solid var(--primary);">
+                        <div class="card-header" style="background: var(--primary);">
+                            <span>💬 妈妈的提示词</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-label">用户输入：</div>
+                            <pre class="prompt-text" style="font-size: 1.1rem; line-height: 1.4;">我的孩子最近老是不吃早饭，我可着急了。
+你是一位强调作息规律和饮食纪律的健康建议者。早餐是不是应该尽量规律地吃？是不是对早上的学习状态，对稳定血糖和一天的营养基础都很重要？
+为什么不建议长期跳过早餐？</pre>
+                            <!--<p style="font-size: 1.1rem; color: var(--text-secondary); margin-top: 10px; margin-bottom: 0;">🎯 效果预估：模型将强烈论证早餐的绝对必要性，验证用户设定的前提。</p>-->
+                        </div>
+                    </div>
+                    <div class="prompt-card" style="border-top: 5px solid var(--accent);">
+                        <div class="card-header" style="background: var(--accent);">
+                            <span>💬 儿子的提示词</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-label">用户输入：</div>
+                            <pre class="prompt-text" style="font-size: 1.1rem; line-height: 1.4;">我觉得减脂和日常效率很重要。早餐是不是可吃可不吃？请从节省早上时间，控制热量，维持专注，减少不必要进食的角度，给出明确建议。
+说明为什么很多人其实不必强迫自己吃早餐。</pre>
+                            <!--<p style="font-size: 1.1rem; color: var(--text-secondary); margin-top: 10px; margin-bottom: 0;">🎯 效果预估：模型将偏向支持不必吃早餐，提供科学研究与专注度的正面论证。</p>-->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide: 基础提示词技巧 - 提供上下文背景 -->
             <section data-background-color="var(--bg)">
                 <h2>技巧一：提供上下文背景</h2>
                 <div class="compare-container">
@@ -429,7 +461,7 @@
                 </div>
             </section>
 
-            <!-- Slide 3: 基础提示词技巧 - 多角度回答 -->
+            <!-- Slide: 基础提示词技巧 - 多角度回答 -->
             <section data-background-color="var(--bg)">
                 <h2>技巧二：明确回答角度</h2>
                 <div class="compare-container">
@@ -449,14 +481,14 @@
                         </div>
                         <div class="card-body">
                             <div class="card-label">用户输入：</div>
-                            <pre class="prompt-text">请从语言、动作、心理、外貌 and 神态描写的角度来分析下方段落的人物塑造。</pre>
+                            <pre class="prompt-text">请从语言、动作、心理、外貌和神态描写的角度来分析下方段落的人物塑造。</pre>
                             <p style="font-size: 1.1rem; color: var(--success); margin-top: 10px; font-weight: 600; margin-bottom: 0;">模型强力聚焦于五个既定写作维度，回复层次严密、精准度极高。</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Slide 4: 基础提示词技巧 - 示例指引 -->
+            <!-- Slide: 基础提示词技巧 - 示例指引 -->
             <section data-background-color="var(--bg)">
                 <h2>技巧三：示例指引 (Few-Shot)</h2>
                 <div class="compare-container">
@@ -487,14 +519,50 @@
                         </div>
                     </div>
                 </div>
-                <!-- Interactive Badge -->
-                <div class="interactive-badge">
-                    <span>💡</span>
-                    <span>【互动环节】尝试写下你的提示词，我们将进行现场运行与评价！</span>
+            </section>
+
+            <!-- Slide: 互动环节 -->
+            <section data-background-color="var(--bg)">
+                <h2>互动环节：写下你的提示词</h2>
+                <div style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 0.8rem;">尝试将你们的想法写成提示词，我们将现场运行并进行评价！</div>
+                
+                <div class="compare-container" style="grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 1rem;">
+                    <!-- Card 1 -->
+                    <div class="prompt-card" style="border-top: 4px solid var(--primary);">
+                        <div class="card-header" style="background: var(--primary); padding: 8px 12px; font-size: 1rem;">
+                            <span>🌌 例1</span>
+                        </div>
+                        <div class="card-body" style="padding: 12px; font-size: 1.1rem;">
+                            <div class="card-label" style="font-size: 0.9rem; margin-bottom: 4px;">听众提示词示例：</div>
+                            <pre class="prompt-text" style="font-size: 0.9rem; padding: 10px; line-height: 1.35; height: 180px;"><b>目标</b>：解决怪题<br><br>我偶然在网上看到了一道物理/天文题，这似乎是大学题，但我现在读高中，请给我稍微讲解一下。题目如下：<br>设有由8颗恒星所组成的一个系统,每一颗星的质量都等于太阳的质量,它们分别位于边长为1秒差距的立方体的八个角上,试求它们相互间的引力势能。(不考虑每个恒星的自能)<br></pre>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 2 -->
+                    <div class="prompt-card" style="border-top: 4px solid var(--accent);">
+                        <div class="card-header" style="background: var(--accent); padding: 8px 12px; font-size: 1rem;">
+                            <span>📈 例2</span>
+                        </div>
+                        <div class="card-body" style="padding: 12px; font-size: 1.1rem;">
+                            <div class="card-label" style="font-size: 0.9rem; margin-bottom: 4px;">听众提示词示例：</div>
+                            <pre class="prompt-text" style="font-size: 0.9rem; padding: 10px; line-height: 1.35; height: 180px;"><b>目标</b>：经济学评价<br><br>现有一个经济体，其高科技产业蓬勃发展但是通胀和政府负债严重。请使用供给和需求的理论，从乐观和悲观的角度分别评价这个经济体的经济情况。</pre>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 3 -->
+                    <div class="prompt-card" style="border-top: 4px solid var(--success);">
+                        <div class="card-header" style="background: var(--success); padding: 8px 12px; font-size: 1rem;">
+                            <span>📝 例3</span>
+                        </div>
+                        <div class="card-body" style="padding: 12px; font-size: 1.1rem;">
+                            <div class="card-label" style="font-size: 0.9rem; margin-bottom: 4px;">听众提示词示例：</div>
+                            <pre class="prompt-text" style="font-size: 0.9rem; padding: 10px; line-height: 1.35; height: 180px;"><b>目标</b>：英文写作<br><br>我现在在写一篇高中英文作文，我下一句话想表达xxx，我该如何写呢？以下是前两句话...</pre>
+                        </div>
+                    </div>
                 </div>
             </section>
 
-            <!-- Slide 5: 过度工程 -->
+            <!-- Slide: 过度工程 -->
             <section data-background-color="var(--bg)">
                 <h2>警惕“过度工程”</h2>
                 <div style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 0.5rem;">有时提示词越多越准确，但也有时只是无用功甚至画蛇添足。</div>
@@ -515,9 +583,9 @@
                         </div>
                         <div class="card-body" style="justify-content: flex-start;">
                             <div class="card-label">用户输入：</div>
-                            <pre class="prompt-text" style="font-size: 1.05rem;">角色：百科全书知识库
+                            <pre class="prompt-text" style="font-size: 1.1rem;">角色：百科全书知识库
 能力：
-- 你知道很多事情，从古诗文到数学，从天文到地理...
+- 你知道很多事情，从古诗文到数学，从天文到地理
 - 你能以档案记录的形式介绍每种东西
 - 你严格扮演你的角色，不说角色之外的话。
 输出要求：
@@ -530,17 +598,17 @@
                 </div>
             </section>
 
-            <!-- Slide 6: 初步深入 -->
+            <!-- Slide: 初步深入 -->
             <section data-background-color="var(--bg)">
                 <h2>初步深入：前沿安全与优化</h2>
-                <div style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 0.5rem;">了解真实工业界的提示词应用</div>
+                <div style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 0.5rem;">刁钻，有趣的知识</div>
                 
                 <div class="info-grid">
                     <div class="info-card">
                         <h3><span>⚙️</span> 元提示词 (Meta-Prompting)</h3>
-                        <p>通过巧妙的指引，让 AI 模型自身变成一个“提示词工程专家”，来为你设计和优化提示词。</p>
+                        <p>元(meta)，即“关于自身”。元提示词，也就是生成提示词的提示词</p>
                         <strong class="card-highlight">优化实例：
-"帮我写一段提示词：我想让 AI 作为一个面试官来模拟 Python 工程师 MySql 的面试。"</strong>
+"帮我写一段提示词：我想让 AI 作为一个面试官来模拟xx公司产品销售的面试。以下是该公司去年的招聘信息与岗位要求..."</strong>
                     </div>
                     
                     <div class="info-card">
@@ -554,7 +622,7 @@
                 </div>
             </section>
 
-            <!-- Slide 7: 结尾/广告 -->
+            <!-- Slide: 结尾/广告 -->
             <section data-background-gradient="radial-gradient(circle, #1E3A8A 0%, #172554 100%)" class="slide-dark">
                 <div class="closing-container">
                     <div class="closing-left">
