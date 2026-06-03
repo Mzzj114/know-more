@@ -7,6 +7,15 @@ PROJECT_DIR="/var/www/know-more/"
 
 echo "Launching project..."
 
+# Parse arguments
+BUILD_FLAG=""
+while [[ "$#" -gt 0 ]]; do
+  case $1 in
+    --build) BUILD_FLAG="--build"; shift ;;
+    *) echo "Unknown parameter passed: $1"; exit 1 ;;
+  esac
+done
+
 # Navigate to the project directory
 cd "$PROJECT_DIR" || { echo "Failed to enter directory $PROJECT_DIR"; exit 1; }
 
@@ -33,7 +42,8 @@ sudo -u webserver sh -c '
   GIT_COMMIT="$1" \
   GIT_DATE="$2" \
   GIT_TAG="$3" \
-  docker compose up -d --build
-' sh "$GIT_COMMIT" "$GIT_DATE" "$GIT_TAG"
+  BUILD_FLAG="$4" \
+  docker compose up -d $BUILD_FLAG
+' sh "$GIT_COMMIT" "$GIT_DATE" "$GIT_TAG" "$BUILD_FLAG"
 
 echo "Launching completed successfully!"
