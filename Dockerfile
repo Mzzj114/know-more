@@ -44,10 +44,6 @@ COPY . .
 # Compile i18n messages
 RUN python manage.py compilemessages
 
-# sitemap update
-RUN chmod +x /app/scripts/update_sitemap.sh
-RUN /app/scripts/update_sitemap.sh promptforgood.org "PromptForGood"
-
 # Create necessary directories
 RUN mkdir -p /app/staticfiles /app/logs
 
