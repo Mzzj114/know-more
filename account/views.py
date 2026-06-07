@@ -131,7 +131,7 @@ def register(request):
     else:
         form = CustomUserCreationForm()
     
-    return render(request, 'auth/register.html', {'form': form})
+    return render(request, 'auth/register.html', {'form': form, 'debug': settings.DEBUG})
 
 def send_reset_code(request):
     """

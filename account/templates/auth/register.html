@@ -110,8 +110,12 @@
                 <el-checkbox v-model="regData.agree">{% translate "我已阅读并同意" %} <a href="#" class="auth-forgot-link">{% translate "服务协议" %}</a> {% translate "和" %} <a href="#" class="auth-forgot-link">{% translate "隐私政策" %}</a></el-checkbox>
             </div>
 
-            <!-- Turnstile widget -->
-            <div class="cf-turnstile" data-sitekey="0x4AAAAAADOC5qZhb4nXe0PW" style="margin-bottom: 24px;"></div>
+            {% if debug %}
+            
+            {% else %}
+                <!-- Turnstile widget -->
+                <div class="cf-turnstile" data-sitekey="0x4AAAAAADOC5qZhb4nXe0PW" style="margin-bottom: 24px;"></div>
+            {% endif %}
 
             <el-button 
                 type="primary" 
@@ -166,11 +170,16 @@ handleSubmit() {
         this.$message.error('{% translate "两次输入的密码不一致" %}');
         return;
     }
+
     const turnstileResponse = document.querySelector('[name=cf-turnstile-response]')?.value;
-    if (!turnstileResponse) {
-        this.$message.warning('{% translate "请完成人机验证" %}');
-        return;
-    }
+    {% if debug %}
+        
+    {% else %}
+        if (!turnstileResponse) {
+            this.$message.warning('{% translate "请完成人机验证" %}');
+            return;
+        }
+    {% endif %}
     
     let cfInput = this.$refs.nativeForm.querySelector('[name=cf-turnstile-response]');
     if (!cfInput) {
@@ -199,10 +208,14 @@ sendVerifyCode() {
     if (this.countdown > 0) return;
 
     const turnstileResponse = document.querySelector('[name=cf-turnstile-response]')?.value;
-    if (!turnstileResponse) {
-        this.$message.warning('{% translate "请先完成人机验证" %}');
-        return;
-    }
+    {% if debug %}
+        
+    {% else %}
+        if (!turnstileResponse) {
+            this.$message.warning('{% translate "请先完成人机验证" %}');
+            return;
+        }
+    {% endif %}
     
     fetch('{% url "send_verify_code" %}', {
         method: 'POST',
@@ -217,9 +230,13 @@ sendVerifyCode() {
     })
     .then(res => res.json())
     .then(data => {
-        if (window.turnstile) {
-            window.turnstile.reset();
-        }
+        {% if debug %}
+            
+        {% else %}
+            if (window.turnstile) {
+                window.turnstile.reset();
+            }
+        {% endif %}
         if (data.success) {
             this.$message.success('{% translate "验证码发送成功，请查收" %}');
             this.countdown = 60;
