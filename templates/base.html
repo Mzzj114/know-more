@@ -264,11 +264,14 @@
                                         </div>
                                     </template>
                                 </el-dropdown-item>
-                                <el-dropdown-item divided onclick="location.href='{% url 'logout' %}'">
+                                <el-dropdown-item divided>
                                     <template #default>
-                                        <div class="flex-center-gap-8" style="color: var(--error);">
-                                            <el-icon><switch-button /></el-icon> {% translate "退出登录" %}
-                                        </div>
+                                        <form action="{% url 'logout' %}" method="post" style="margin: 0; padding: 0;">
+                                            {% csrf_token %}
+                                            <button type="submit" class="flex-center-gap-8" style="color: var(--error); background: none; border: none; cursor: pointer; width: 100%; padding: 0;">
+                                                <el-icon><switch-button /></el-icon> {% translate "退出登录" %}
+                                            </button>
+                                        </form>
                                     </template>
                                 </el-dropdown-item>
                             </el-dropdown-menu>
@@ -322,10 +325,13 @@
                             <el-icon class="icon-mr"><user-filled /></el-icon>
                             {{ user.username }}
                         </el-button>
-                        <el-button plain round onclick="location.href='{% url 'logout' %}'" class="btn-full-center" style="color: var(--error);">
-                            <el-icon class="icon-mr"><switch-button /></el-icon>
-                            {% translate "退出登录" %}
-                        </el-button>
+                        <form action="{% url 'logout' %}" method="post" style="margin: 0; padding: 0; display: inline-block; width: 100%;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-full-center" style="color: var(--error); background: none; border: none; cursor: pointer; padding: 0; width: 100%;">
+                                <el-icon class="icon-mr"><switch-button /></el-icon>
+                                {% translate "退出登录" %}
+                            </button>
+                        </form>
                     {% else %}
                         <el-button type="primary" plain round onclick="location.href='{% url 'login' %}'" class="btn-full-center">{% translate "登录 / 注册" %}</el-button>
                     {% endif %}
