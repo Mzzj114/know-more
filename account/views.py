@@ -127,7 +127,7 @@ def register(request):
                     cache.delete(f"verify_code_{email}")
                     cache.delete(f"verify_lock_{email}")
                     login(request, user)
-                    return redirect('user_profile')
+                    return redirect('forum:user_profile')
     else:
         form = CustomUserCreationForm()
     
@@ -218,7 +218,7 @@ def reset_password(request):
                     
                     if request.user.is_authenticated:
                         # 已经是登录状态，回修改前所在的主页或主站
-                        return redirect('user_profile')
+                        return redirect('forum:user_profile')
                     else:
                         # 未登录状态，要求回到登录页
                         return redirect('login')
