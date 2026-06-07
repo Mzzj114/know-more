@@ -44,6 +44,11 @@ def validate_turnstile(request, token=None):
 class CustomLoginView(LoginView):
     template_name = 'auth/login.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['debug'] = settings.DEBUG
+        return context
+
     def post(self, request, *args, **kwargs):
         if not validate_turnstile(request):
             form = self.get_form()

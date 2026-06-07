@@ -64,8 +64,12 @@
                 <a href="{% url 'reset_password' %}" class="auth-forgot-link">{% translate "忘记密码？" %}</a>
             </div>
 
-            <!-- Turnstile widget -->
-            <div class="cf-turnstile" data-sitekey="0x4AAAAAADOC5qZhb4nXe0PW" style="margin-bottom: 24px;"></div>
+            {% if debug %}
+            
+            {% else %}
+                <!-- Turnstile widget -->
+                <div class="cf-turnstile" data-sitekey="0x4AAAAAADOC5qZhb4nXe0PW" style="margin-bottom: 24px;"></div>
+            {% endif %}
 
             <el-button 
                 type="primary" 
@@ -109,10 +113,14 @@ handleSubmit() {
         return;
     }
     const turnstileResponse = document.querySelector('[name=cf-turnstile-response]')?.value;
-    if (!turnstileResponse) {
-        this.$message.warning('{% translate "请完成人机验证" %}');
-        return;
-    }
+    {% if debug %}
+        
+    {% else %}
+        if (!turnstileResponse) {
+            this.$message.warning('{% translate "请完成人机验证" %}');
+            return;
+        }
+    {% endif %}
     
     let cfInput = this.$refs.nativeForm.querySelector('[name=cf-turnstile-response]');
     if (!cfInput) {
