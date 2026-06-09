@@ -16,12 +16,6 @@ while [[ "$#" -gt 0 ]]; do
   esac
 done
 
-if [ -z "$BUILD_FLAG" ]; then
-  echo "Build flag is empty. Not building."
-else
-  echo "Build flag is set. Rebuilding..."
-fi
-
 # Navigate to the project directory
 cd "$PROJECT_DIR" || { echo "Failed to enter directory $PROJECT_DIR"; exit 1; }
 
@@ -37,19 +31,30 @@ GIT_TAG=$(git describe --tags --always 2>/dev/null || echo "")
 # without needing to know or enter the 'webserver' user's password.
 echo "Starting docker containers as user 'webserver'..."
 
-# sudo -u webserver sh -c '
-#   GIT_COMMIT="$1" \
-#   GIT_DATE="$2" \
-#   GIT_TAG="$3" \
-#   docker compose build --no-cache
-#   ' sh "$GIT_COMMIT" "$GIT_DATE" "$GIT_TAG"
+if [ -z "$BUILD_FLAG" ]; then
+  echo "Build flag is empty. Not building."
+  sudo -u webserver sh -c '
+    GIT_COMMIT="$1" \
+    GIT_DATE="$2" \
+    GIT_TAG="$3" \
+    BUILD_FLAG="$4" \
+    docker compose up -d $BUILD_FLAG
+  ' sh "$GIT_COMMIT" "$GIT_DATE" "$GIT_TAG" "$BUILD_FLAG"
 
-sudo -u webserver sh -c '
-  GIT_COMMIT="$1" \
-  GIT_DATE="$2" \
-  GIT_TAG="$3" \
-  BUILD_FLAG="$4" \
-  docker compose up -d $BUILD_FLAG
-' sh "$GIT_COMMIT" "$GIT_DATE" "$GIT_TAG" "$BUILD_FLAG"
+else
+  echo "Build flag is set. Rebuilding..."
+  sudo -u webserver sh -c '
+    GIT_COMMIT="$1" \
+    GIT_DATE="$2" \
+    GIT_TAG="$3" \
+    docker compose build --no-cache
+  ' sh "$GIT_COMMIT" "$GIT_DATE" "$GIT_TAG"
+  sudo -u webserver sh -c '
+    GIT_COMMIT="$1" \
+    GIT_DATE="$2" \
+    GIT_TAG="$3" \
+    docker compose up -d
+  ' sh "$GIT_COMMIT" "$GIT_DATE" "$GIT_TAG"
+fi
 
 echo "Launching completed successfully!"
