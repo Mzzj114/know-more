@@ -35,9 +35,12 @@ DATABASES = {
     'default': env.db('DATABASE_URL', default='mysql://user:password@localhost:3306/know_more')
 }
 
-# Caching (Redis or equivalent is recommended for production, keeping LocMem for now but configurable)
+# Caching (Local Memory Cache for now)
 CACHES = {
-    'default': env.cache('CACHE_URL', default='locmemcache://unique-know-more')
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-know-more',
+    }
 }
 
 # Email Backend (Resend via django-anymail)

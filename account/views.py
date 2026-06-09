@@ -100,8 +100,8 @@ def send_verify_code(request):
 
     try:
         send_mail(
-            subject=_('Know More 注册验证码'),
-            message=_('欢迎注册 Know More。您的注册验证码是：%(code)s，请在 5 分钟内完成输入。如非本人操作，请忽略此邮件。') % {'code': code},
+            subject=_('PromptForGood 注册验证码'),
+            message=_('欢迎注册 PromptForGood。您的注册验证码是：%(code)s，请在 5 分钟内完成输入。如非本人操作，请忽略此邮件。') % {'code': code},
             from_email=None,
             recipient_list=[email],
             fail_silently=False,
@@ -181,7 +181,7 @@ def send_reset_code(request):
 
     try:
         send_mail(
-            subject=_('Know More 重置密码验证码'),
+            subject=_('PromptForGood 重置密码验证码'),
             message=_('您正在申请修改密码。您的验证码是：%(code)s，请在 5 分钟内完成输入。如非本人操作，请密切关注您的账号安全。') % {'code': code},
             from_email=None,
             recipient_list=[email],

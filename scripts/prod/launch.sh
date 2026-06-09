@@ -16,6 +16,12 @@ while [[ "$#" -gt 0 ]]; do
   esac
 done
 
+if [ -z "$BUILD_FLAG" ]; then
+  echo "Build flag is empty. Not building."
+else
+  echo "Build flag is set. Rebuilding..."
+fi
+
 # Navigate to the project directory
 cd "$PROJECT_DIR" || { echo "Failed to enter directory $PROJECT_DIR"; exit 1; }
 
