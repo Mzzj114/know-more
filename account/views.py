@@ -1,5 +1,6 @@
 import json
 import random
+import logging
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, update_session_auth_hash
 from django.contrib.auth.models import User
@@ -13,9 +14,11 @@ import urllib.parse
 from .forms import CustomUserCreationForm
 from django.conf import settings
 
+logger = logging.getLogger(__name__)
+
 def validate_turnstile(request, token=None):
     if settings.DEBUG:
-        print('Debug mode is enabled, skipping Turnstile validation')
+        logger.debug('Debug mode is enabled, skipping Turnstile validation')
         return True
 
     if not token:
@@ -92,6 +95,9 @@ def send_verify_code(request):
     # 防刷锁，有效期 60 秒
     cache.set(f"verify_lock_{email}", "locked", 60)
 
+    logger.debug(f"Sending verification code {code} to {email} and writing to cache")
+
+
     try:
         send_mail(
             subject=_('Know More 注册验证码'),
@@ -122,6 +128,7 @@ def register(request):
                 form.add_error(None, _("人机验证失败，请重试"))
             else:
                 cached_code = cache.get(f"verify_code_{email}")
+                logger.debug(f"Registering for {email}, input code {input_code}, cached code {cached_code}")
                 if not cached_code:
                     form.add_error(None, _("验证码已过期或不存在，请重新发送"))
                 elif str(cached_code) != str(input_code):
@@ -129,10 +136,11 @@ def register(request):
                 else:
                     # 验证成功
                     user = form.save()
+                    logger.debug(f"Deleting verification code {cached_code} and lock from cache for {email}")
                     cache.delete(f"verify_code_{email}")
                     cache.delete(f"verify_lock_{email}")
                     login(request, user)
-                    return redirect('forum:user_profile')
+                    return redirect('forum:user_profile', username=user.username)
     else:
         form = CustomUserCreationForm()
     
@@ -223,7 +231,7 @@ def reset_password(request):
                     
                     if request.user.is_authenticated:
                         # 已经是登录状态，回修改前所在的主页或主站
-                        return redirect('forum:user_profile')
+                        return redirect('forum:user_profile', username=user.username)
                     else:
                         # 未登录状态，要求回到登录页
                         return redirect('login')

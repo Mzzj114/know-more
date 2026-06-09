@@ -7,6 +7,28 @@ SECRET_KEY = env('SECRET_KEY')
 
 ALLOWED_HOSTS = env('ALLOWED_HOSTS', cast=list)
 
+if env('DEBUG_LOG', cast=bool, default=False):
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'handlers': {
+            'console': {
+                'class': 'logging.StreamHandler',
+            },
+        },
+        'root': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+        'loggers': {
+            'account': {
+                'handlers': ['console'],
+                'level': 'DEBUG',
+                'propagate': False,
+            },
+        },
+    }
+
 # Database configuration (Defaults to MySQL as per user request)
 # Expected DB URL format: mysql://user:password@host:port/dbname
 DATABASES = {
