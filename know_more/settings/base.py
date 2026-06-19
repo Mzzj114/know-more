@@ -123,7 +123,7 @@ DEFAULT_FROM_EMAIL = "noreply@knowmore.example.com"
 # Django Q2 Configuration
 Q_CLUSTER = {
     'name': 'forum-bot',
-    'workers': 4,
+    'workers': 3,
     'timeout': 90,
     'retry': 120,
     'queue_limit': 50,

@@ -57,6 +57,19 @@ services:
         max-size: "10m"
         max-file: "3"
 
+  qcluster:
+    build:
+      context: .
+    restart: always
+    depends_on:
+      - web
+    command: python manage.py qcluster
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
 volumes:
   mysql_data:
   static_volume:
