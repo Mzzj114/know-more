@@ -8,6 +8,7 @@ import logging
 from openai import OpenAI
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.conf import settings
 from .models import BotProfile, BotActionLog
 from .forum_tools import (
     exit_bot, add_to_favourite, like, reply, post, 
@@ -132,13 +133,14 @@ TOOL_DISPATCH = {
 }
 
 
-def execute_bot_action(bot_user_id):
+def execute_bot_action(bot_user_id, **kwargs):
     """
     执行机器人行动的主函数
     由 django-q2 异步调用
     
     Args:
         bot_user_id: 机器人绑定的用户ID
+        **kwargs: 接受 Django-Q 传递的额外参数（如 group 等）
     """
     try:
         bot_user = User.objects.get(id=bot_user_id)
@@ -175,11 +177,7 @@ def execute_bot_action(bot_user_id):
         ]
         
         # 获取 OpenAI 客户端（复用 ai app 的配置）
-        api_key = os.environ.get('OPENAI_API_KEY')
-        if not api_key:
-            raise Exception("未配置 OPENAI_API_KEY 环境变量")
-        
-        client = OpenAI(api_key=api_key)
+        client = OpenAI(api_key=settings.AI_API_KEY, base_url=settings.AI_API_URL)
         
         # 多轮工具调用循环
         max_iterations = 20  # 防止无限循环
@@ -190,7 +188,7 @@ def execute_bot_action(bot_user_id):
             
             # 调用模型
             response = client.chat.completions.create(
-                model="deepseek-chat",  # 可根据需要调整模型
+                model=settings.AI_MODEL,  # 可根据需要调整模型
                 messages=input_messages,
                 tools=TOOLS
             )
@@ -214,12 +212,25 @@ def execute_bot_action(bot_user_id):
                 logger.info(f"工具调用: {name}, 参数: {args}")
                 
                 # 记录行动日志
+                # 安全地序列化消息历史（排除不可序列化的对象）
+                try:
+                    serializable_messages = []
+                    for msg in input_messages[-3:]:
+                        if isinstance(msg, dict):
+                            serializable_messages.append(msg)
+                        else:
+                            # 跳过不可序列化的对象
+                            serializable_messages.append({"role": "unknown", "content": str(msg)[:200]})
+                    ai_prompt_used = json.dumps(serializable_messages, ensure_ascii=False)[:1000]
+                except Exception:
+                    ai_prompt_used = ''
+                
                 log_entry = BotActionLog.objects.create(
                     bot=bot_profile,
                     action_type=_map_tool_to_action_type(name),
                     target_id=args.get('post_id') or args.get('target_id'),
                     content_preview=str(args.get('content', ''))[:200],
-                    ai_prompt_used=json.dumps(input_messages[-3:], ensure_ascii=False)[:1000] if len(input_messages) >= 3 else '',
+                    ai_prompt_used=ai_prompt_used,
                     ai_response=message.content or '',
                     status='pending',
                     scheduled_at=bot_profile.last_action_at or bot_profile.created_at,

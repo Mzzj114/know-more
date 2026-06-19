@@ -1,5 +1,12 @@
 from .base import *
 
+# Read .env file if it exists
+if os.path.exists(BASE_DIR / "development.env"):
+    print("Reading development.env file")
+    environ.Env.read_env(BASE_DIR / "development.env")
+else:
+    print("No development.env file found")
+
 DEBUG = True
 
 SECRET_KEY = env('SECRET_KEY', default='django-insecure-gjpu_d6@sp%%yx*0hvsaaugfhip2aj&6^e%16nmb&8xixdqu3x')
@@ -29,10 +36,6 @@ LOGGING = {
             'class': 'logging.StreamHandler',
         },
     },
-    'root': {
-        'handlers': ['console'],
-        'level': 'DEBUG',
-    },
     'loggers': {
         'account': {
             'handlers': ['console'],
@@ -41,7 +44,7 @@ LOGGING = {
         },
         'ai': {
             'handlers': ['console'],
-            'level': 'INFO',
+            'level': 'DEBUG',
             'propagate': False,
         },
     },

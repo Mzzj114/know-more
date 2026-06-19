@@ -13,10 +13,6 @@ env = environ.Env(
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-# Read .env file if it exists
-if os.path.exists(BASE_DIR / ".env"):
-    environ.Env.read_env(BASE_DIR / ".env")
-
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -135,37 +131,9 @@ Q_CLUSTER = {
     'orm': 'default',
 }
 
-# Logging Configuration
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
-            'style': '{',
-        },
-        'simple': {
-            'format': '{levelname} {message}',
-            'style': '{',
-        },
-    },
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-            'formatter': 'simple',
-        },
-        'file': {
-            'class': 'logging.FileHandler',
-            'filename': BASE_DIR / 'logs' / 'forum_bot.log',
-            'formatter': 'verbose',
-            'level': 'INFO',
-        },
-    },
-    'loggers': {
-        'ai': {
-            'handlers': ['console', 'file'],
-            'level': 'INFO',
-            'propagate': True,
-        },
-    },
-}
+# Logging Configuration, will be override
+LOGGING = {}
+
+AI_API_KEY = env('AI_API_KEY', default='')
+AI_API_URL = env('AI_API_URL', default='')
+AI_MODEL = env('AI_MODEL', default='')
