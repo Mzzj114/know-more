@@ -30,6 +30,7 @@ INSTALLED_APPS = [
 
     'anymail',
     'rest_framework',
+    'django_q',  # django-q2
     
     'know_more.apps.KnowMoreConfig',
     'docs.apps.DocsConfig',
@@ -122,3 +123,49 @@ SITE_ID = 1
 
 # Email Config (Default values)
 DEFAULT_FROM_EMAIL = "noreply@knowmore.example.com"
+
+# Django Q2 Configuration
+Q_CLUSTER = {
+    'name': 'forum-bot',
+    'workers': 4,
+    'timeout': 90,
+    'retry': 120,
+    'queue_limit': 50,
+    'bulk': 10,
+    'orm': 'default',
+}
+
+# Logging Configuration
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+        'file': {
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'logs' / 'forum_bot.log',
+            'formatter': 'verbose',
+            'level': 'INFO',
+        },
+    },
+    'loggers': {
+        'ai': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+    },
+}

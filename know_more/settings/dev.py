@@ -39,6 +39,11 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': False,
         },
+        'ai': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
     },
 }
 
