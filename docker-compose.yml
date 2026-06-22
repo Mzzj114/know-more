@@ -59,10 +59,13 @@ services:
 
   qcluster:
     build:
-      context: .
+      context: . # build context contains all the code
     restart: always
+    env_file:
+      - env/production.env
     depends_on:
-      - web
+      db:
+        condition: service_healthy
     command: python manage.py qcluster
     logging:
       driver: json-file
