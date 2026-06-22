@@ -27,6 +27,12 @@ CACHES = {
         'LOCATION': 'unique-know-more',
     }
 }
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+#         'LOCATION': 'cache_table',
+#     }
+# }
 
 LOGGING = {
     'version': 1,

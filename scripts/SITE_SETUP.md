@@ -75,3 +75,20 @@ http://your-domain/sitemap.xml
 - 每次创建新数据库时都需要运行 setup_site 脚本
 - 如果更改了域名，需要重新运行 setup_site 脚本更新配置
 - Sitemap 会自动更新，无需手动维护
+
+## DB CACHE 说明
+
+新数据库需要运行
+```
+python manage.py createcachetable
+```
+这依赖于 settings 里的
+```
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.db.DatabaseCache",
+        "LOCATION": "my_cache_table",
+    }
+}
+```
+只有这样DB Cache才能用

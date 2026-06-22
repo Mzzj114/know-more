@@ -43,6 +43,7 @@ from main.admin_views import send_email_view
 
 urlpatterns += i18n_patterns(
     path('know-more-admin/send-email/', admin.site.admin_view(send_email_view), name='send_email'),
+    path('know-more-admin/dj_cache_panel/', include('dj_cache_panel.urls')),
     path('know-more-admin/', admin.site.urls),
     path('docs/', include('docs.urls')),
     path('forum/', include('forum.urls', namespace='forum')),

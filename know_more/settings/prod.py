@@ -35,11 +35,12 @@ DATABASES = {
     'default': env.db('DATABASE_URL', default='mysql://user:password@localhost:3306/know_more')
 }
 
-# Caching (Local Memory Cache for now)
+# Caching
+# Because there are multiple workers, localmem aren't shared between them
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'LOCATION': 'unique-know-more',
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'cache_table',
     }
 }
 

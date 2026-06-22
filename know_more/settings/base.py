@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'anymail',
     'rest_framework',
     'django_q',  # django-q2
+    'dj_cache_panel',
     
     'know_more.apps.KnowMoreConfig',
     'docs.apps.DocsConfig',
