@@ -191,7 +191,7 @@ msgstr "Please enter a valid email format"
 #: .\account\templates\auth\register.html:203
 #: .\account\templates\auth\reset_password.html:169
 msgid "请先完成人机验证"
-msgstr ""
+msgstr "Please complete CAPTCHA"
 
 #: .\account\templates\auth\register.html:224
 #: .\account\templates\auth\reset_password.html:190
@@ -256,7 +256,7 @@ msgstr "Please fill in all modification info"
 #, fuzzy
 #| msgid "请求发送失败，请稍后重试"
 msgid "人机验证失败，请重试"
-msgstr "Request failed, please try again later"
+msgstr "CAPTCHA failed, please try again later"
 
 #: .\account\views.py:60 .\account\views.py:141
 msgid "仅支持 POST 请求"
@@ -268,7 +268,7 @@ msgstr "Missing email address"
 
 #: .\account\views.py:74 .\account\views.py:155
 msgid "人机验证失败，请先勾选验证码"
-msgstr ""
+msgstr "CAPTCHA failed, please check verification code"
 
 #: .\account\views.py:77
 msgid "该邮箱已被注册"
@@ -739,11 +739,11 @@ msgstr "Edit Profile"
 
 #: .\forum\templates\forum\user_profile.html:65
 msgid "密码修改"
-msgstr ""
+msgstr "Change Password"
 
 #: .\forum\templates\forum\user_profile.html:89
 msgid "最近帖子"
-msgstr ""
+msgstr "Recent Posts"
 
 #: .\forum\templates\forum\user_profile.html:113
 msgid "最近回复"
@@ -797,7 +797,7 @@ msgstr "Open Source · Non-profit · Free to Use"
 
 #: .\main\templates\main\home.html:32
 msgid "Logo"
-msgstr ""
+msgstr "Logo"
 
 #: .\main\templates\main\home.html:39 .\templates\base.html:9
 msgid "智问善答"
@@ -1045,7 +1045,7 @@ msgstr "No tutorial data available"
 
 #: .\main\templates\main\tutorial.html:55
 msgid "Step"
-msgstr ""
+msgstr "Step"
 
 #: .\main\templates\main\tutorial.html:66
 msgid "示例对话"
