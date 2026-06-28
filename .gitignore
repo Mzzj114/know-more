@@ -177,4 +177,4 @@ development.env
 
 scripts/prod/remote_deploy.sh
 
-document/planning/
+planning/
