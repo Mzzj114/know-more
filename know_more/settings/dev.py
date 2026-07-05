@@ -1,9 +1,9 @@
 from .base import *
 
 # Read .env file if it exists
-if os.path.exists(BASE_DIR / "development.env"):
+if os.path.exists(BASE_DIR / "env" / "development.env"):
     print("Reading development.env file")
-    environ.Env.read_env(BASE_DIR / "development.env")
+    environ.Env.read_env(BASE_DIR / "env" / "development.env")
 else:
     print("No development.env file found")
 
@@ -59,3 +59,7 @@ LOGGING = {
 # Email Backend (Console for development)
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = 'messenger@promptforgood.org'
+
+# Cloudflare
+CLOUDFLARE_TURNSTILE_SECRET_KEY = "1x0000000000000000000000000000000AA"
+CLOUDFLARE_TURNSTILE_SITE_KEY = "1x00000000000000000000AA"

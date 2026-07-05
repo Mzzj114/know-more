@@ -17,9 +17,9 @@ from django.conf import settings
 logger = logging.getLogger(__name__)
 
 def validate_turnstile(request, token=None):
-    if settings.DEBUG:
-        logger.debug('Debug mode is enabled, skipping Turnstile validation')
-        return True
+    # if settings.DEBUG:
+    #     logger.debug('Debug mode is enabled, skipping Turnstile validation')
+    #     return True
 
     if not token:
         token = request.POST.get('cf-turnstile-response')
@@ -150,7 +150,7 @@ def register(request):
     else:
         form = CustomUserCreationForm()
     
-    return render(request, 'auth/register.html', {'form': form, 'debug': settings.DEBUG})
+    return render(request, 'auth/register.html', {'form': form, 'TURNSTILE_SITE_KEY': settings.CLOUDFLARE_TURNSTILE_SITE_KEY})
 
 def send_reset_code(request):
     """
@@ -241,8 +241,8 @@ def reset_password(request):
                         # 未登录状态，要求回到登录页
                         return redirect('login')
         
-        return render(request, 'auth/reset_password.html', {'error_msg': error_msg, 'email': email})
+        return render(request, 'auth/reset_password.html', {'error_msg': error_msg, 'email': email, 'TURNSTILE_SITE_KEY': settings.CLOUDFLARE_TURNSTILE_SITE_KEY})
 
     # GET 端回显已有的绑定邮箱保障逻辑（若登录则只读回显）
     initial_email = request.user.email if request.user.is_authenticated else ""
-    return render(request, 'auth/reset_password.html', {'email': initial_email})
+    return render(request, 'auth/reset_password.html', {'email': initial_email, 'TURNSTILE_SITE_KEY': settings.CLOUDFLARE_TURNSTILE_SITE_KEY})
