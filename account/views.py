@@ -24,9 +24,11 @@ def validate_turnstile(request, token=None):
     if not token:
         token = request.POST.get('cf-turnstile-response')
     secret = settings.CLOUDFLARE_TURNSTILE_SECRET_KEY
-    remoteip = request.META.get('REMOTE_ADDR')
+    # 优先使用 Cloudflare 传递的真实客户端 IP，回退到 REMOTE_ADDR
+    remoteip = request.META.get('HTTP_CF_CONNECTING_IP') or request.META.get('REMOTE_ADDR')
 
     if not token:
+        logger.warning('Turnstile validation failed: no token provided')
         return False
         
     url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
@@ -40,8 +42,12 @@ def validate_turnstile(request, token=None):
         req = urllib.request.Request(url, data=data)
         response = urllib.request.urlopen(req)
         result = json.loads(response.read().decode('utf-8'))
-        return result.get('success', False)
-    except Exception:
+        if not result.get('success', False):
+            logger.warning('Turnstile verification rejected: %s', result)
+            return False
+        return True
+    except Exception as e:
+        logger.exception('Turnstile verification request failed: %s', e)
         return False
 
 class CustomLoginView(LoginView):
@@ -226,10 +232,9 @@ def reset_password(request):
                     cache.delete(f"reset_code_{email}")
                     cache.delete(f"reset_lock_{email}")
                     
-                    # 保持已有会话并且不需要踢人下线
-                    update_session_auth_hash(request, user)
-                    
                     if request.user.is_authenticated:
+                        # 保持已有会话并且不需要踢人下线
+                        update_session_auth_hash(request, user)
                         # 已经是登录状态，回修改前所在的主页或主站
                         return redirect('forum:user_profile', username=user.username)
                     else:
