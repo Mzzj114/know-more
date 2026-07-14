@@ -18,4 +18,14 @@ echo "Collecting static files..."
 python manage.py collectstatic --noinput
 
 echo "Setup finished. Starting uWSGI..."
-uwsgi --ini uwsgi.ini
+echo "Setup finished."
+
+# If a custom command is provided (e.g. via docker-compose command:), execute it.
+# Otherwise default to uWSGI for the web service.
+if [ $# -gt 0 ]; then
+  echo "Executing: $*"
+  exec "$@"
+else
+  echo "Starting uWSGI..."
+  exec uwsgi --ini uwsgi.ini
+fi
