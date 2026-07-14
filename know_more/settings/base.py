@@ -130,6 +130,7 @@ Q_CLUSTER = {
     'queue_limit': 50,
     'bulk': 10,
     'orm': 'default',
+    'poll': 0.5,
 }
 
 # Logging Configuration, will be override

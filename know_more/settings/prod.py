@@ -31,6 +31,13 @@ LOGGING = {
 
 # Database configuration (Defaults to MySQL as per user request)
 # Expected DB URL format: mysql://user:password@host:port/dbname
+# DATABASES = {
+#     'default': {
+#         **env.db('DATABASE_URL', default='mysql://user:password@localhost:3306/know_more'),
+#         'CONN_MAX_AGE': 600,           # 每 10 分钟回收连接，远小于 MySQL 的 8 小时
+#         'CONN_HEALTH_CHECKS': True,    # Django 4.1+，每次使用前检查连接是否存活
+#     }
+# }
 DATABASES = {
     'default': env.db('DATABASE_URL', default='mysql://user:password@localhost:3306/know_more')
 }

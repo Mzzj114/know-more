@@ -6,6 +6,7 @@ import random
 import logging
 from datetime import datetime, timedelta
 from django.utils import timezone
+from django.db import connections
 from django_q.tasks import schedule
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
@@ -48,6 +49,11 @@ def schedule_bot_actions():
     为所有激活的机器人生成本周的行动计划并提交到 django-q2
     由 APScheduler 每周一8点触发
     """
+
+    logger.info("准备安排任务，先清除旧数据库连接")
+    for conn in connections.all():
+        conn.close()
+
     logger.info("开始为机器人安排本周行动...")
     
     # 获取所有激活的机器人
