@@ -8,10 +8,10 @@ PROJECT_DIR="/var/www/know-more/"
 echo "Starting deployment..."
 
 # Parse arguments
-BUILD_FLAG=""
+PASS_THROUGH_ARGS=""
 while [[ "$#" -gt 0 ]]; do
   case $1 in
-    --build) BUILD_FLAG="--build"; shift ;;
+    --build|--no-cache) PASS_THROUGH_ARGS="$PASS_THROUGH_ARGS $1"; shift ;;
     *) echo "Unknown parameter passed: $1"; exit 1 ;;
   esac
 done
@@ -27,4 +27,4 @@ sudo -u webserver docker compose down
 
 # 2. Run launch.sh
 echo "Launching project..."
-./scripts/prod/launch.sh $BUILD_FLAG
+./scripts/prod/launch.sh $PASS_THROUGH_ARGS

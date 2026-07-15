@@ -9,9 +9,11 @@ echo "Launching project..."
 
 # Parse arguments
 BUILD_FLAG=""
+NO_CACHE=""
 while [[ "$#" -gt 0 ]]; do
   case $1 in
     --build) BUILD_FLAG="--build"; shift ;;
+    --no-cache) NO_CACHE="--no-cache"; shift ;;
     *) echo "Unknown parameter passed: $1"; exit 1 ;;
   esac
 done
@@ -37,12 +39,11 @@ if [ -z "$BUILD_FLAG" ]; then
     GIT_COMMIT="$1" \
     GIT_DATE="$2" \
     GIT_TAG="$3" \
-    BUILD_FLAG="$4" \
-    docker compose up -d $BUILD_FLAG
-  ' sh "$GIT_COMMIT" "$GIT_DATE" "$GIT_TAG" "$BUILD_FLAG"
+    docker compose up -d
+  ' sh "$GIT_COMMIT" "$GIT_DATE" "$GIT_TAG"
 
-else
-  echo "Build flag is set. Rebuilding..."
+elif [ -n "$NO_CACHE" ]; then
+  echo "Build flag is set with --no-cache. Rebuilding from scratch..."
   sudo -u webserver sh -c '
     GIT_COMMIT="$1" \
     GIT_DATE="$2" \
@@ -54,6 +55,15 @@ else
     GIT_DATE="$2" \
     GIT_TAG="$3" \
     docker compose up -d
+  ' sh "$GIT_COMMIT" "$GIT_DATE" "$GIT_TAG"
+
+else
+  echo "Build flag is set. Rebuilding with cache..."
+  sudo -u webserver sh -c '
+    GIT_COMMIT="$1" \
+    GIT_DATE="$2" \
+    GIT_TAG="$3" \
+    docker compose up -d --build
   ' sh "$GIT_COMMIT" "$GIT_DATE" "$GIT_TAG"
 fi
 
