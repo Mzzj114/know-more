@@ -79,12 +79,14 @@
                                 </el-radio>
                             </el-radio-group>
                             
-                            <div v-if="stepStates[currentStepIndex].quizSubmitted && stepStates[currentStepIndex].quizAnswer !== null" 
-                                 class="quiz-explanation" 
-                                 :class="stepStates[currentStepIndex].quizAnswer === interaction.correctIndex ? 'correct' : 'incorrect'">
-                                <strong>[[ stepStates[currentStepIndex].quizAnswer === interaction.correctIndex ? '{% translate "回答正确！" %}' : '{% translate "回答错误。" %}' ]]</strong>
-                                <p class="tutorial-quiz-explanation-text">[[ interaction.explanation ]]</p>
-                            </div>
+                            <transition name="quiz-fade">
+                                <div v-if="stepStates[currentStepIndex].quizSubmitted && stepStates[currentStepIndex].quizAnswer !== null" 
+                                     class="quiz-explanation" 
+                                     :class="stepStates[currentStepIndex].quizAnswer === interaction.correctIndex ? 'correct' : 'incorrect'">
+                                    <strong>[[ stepStates[currentStepIndex].quizAnswer === interaction.correctIndex ? '{% translate "回答正确！" %}' : '{% translate "回答错误。" %}' ]]</strong>
+                                    <p class="tutorial-quiz-explanation-text">[[ interaction.explanation ]]</p>
+                                </div>
+                            </transition>
                         </div>
                         
                         <!-- Fill Blank 互动 -->

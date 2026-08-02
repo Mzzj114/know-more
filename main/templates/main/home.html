@@ -21,10 +21,12 @@
     <div class="hero-content">
 
         <!-- 顶部小标签 -->
-        <div class="hero-eyebrow">
-            <el-icon><promotion /></el-icon>
-            {% translate "开源 · 非盈利 · 免费使用" %}
-        </div>
+        <transition name="el-fade-in-linear" appear>
+            <div class="hero-eyebrow">
+                <el-icon><promotion /></el-icon>
+                {% translate "开源 · 非盈利 · 免费使用" %}
+            </div>
+        </transition>
 
         <!-- 网站 Logo -->
         <transition name="el-fade-in-linear" appear>
@@ -41,43 +43,49 @@
         </transition>
 
         <!-- 副标题 -->
-        <p class="hero-subtitle">
-            {% translate "为像您一样紧跟时代脚步的求知者打造的教程与社区平台" %}<br>
-            {% comment %} {% translate "与AI高效协作的开始。" %} {% endcomment %}
-        </p>
+        <transition name="el-fade-in-linear" appear>
+            <p class="hero-subtitle">
+                {% translate "为像您一样紧跟时代脚步的求知者打造的教程与社区平台" %}<br>
+                {% comment %} {% translate "与AI高效协作的开始。" %} {% endcomment %}
+            </p>
+        </transition>
 
         <!-- 行动按钮 -->
-        <div class="hero-cta">
-            <a href="{% url 'tutorial' %}" class="btn-hero-primary">
-                <el-icon><video-play /></el-icon>
-                {% translate "开始学习" %}
-            </a>
-            <a href="{% url 'doc_index' %}" class="btn-hero-secondary">
-                <el-icon><document /></el-icon>
-                {% translate "浏览文档" %}
-            </a>
-            <a href="{% url 'forum:forum_index' %}" class="btn-hero-secondary">
-                <el-icon><chat-line-round /></el-icon>
-                {% translate "参与论坛" %}
-            </a>
-        </div>
+        <transition name="el-fade-in-linear" appear>
+            <div class="hero-cta">
+                <a href="{% url 'tutorial' %}" class="btn-hero-primary">
+                    <el-icon><video-play /></el-icon>
+                    {% translate "开始学习" %}
+                </a>
+                <a href="{% url 'doc_index' %}" class="btn-hero-secondary">
+                    <el-icon><document /></el-icon>
+                    {% translate "浏览文档" %}
+                </a>
+                <a href="{% url 'forum:forum_index' %}" class="btn-hero-secondary">
+                    <el-icon><chat-line-round /></el-icon>
+                    {% translate "参与论坛" %}
+                </a>
+            </div>
+        </transition>
     </div>
 
     <!-- 底部统计数据条 -->
-    <div class="hero-stats">
-        <div class="hero-stat">
-            <div class="hero-stat-number">5+</div>
-            <div class="hero-stat-label">{% translate "核心技巧文档" %}</div>
+    <transition name="el-fade-in-linear" appear>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <div class="hero-stat-number">5+</div>
+                <div class="hero-stat-label">{% translate "核心技巧文档" %}</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-number">100%</div>
+                <div class="hero-stat-label">{% translate "开源免费" %}</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-number">3</div>
+                <div class="hero-stat-label">{% translate "实战案例" %}</div>
+            </div>
         </div>
-        <div class="hero-stat">
-            <div class="hero-stat-number">100%</div>
-            <div class="hero-stat-label">{% translate "开源免费" %}</div>
-        </div>
-        <div class="hero-stat">
-            <div class="hero-stat-number">3</div>
-            <div class="hero-stat-label">{% translate "实战案例" %}</div>
-        </div>
-    </div>
+    </transition>
 </section>
 
 
@@ -272,4 +280,30 @@
     </div>
 </section>
 
+{% endblock %}
+
+{% block vue_mounted %}
+    this.$nextTick(() => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const sections = document.querySelectorAll('.home-section');
+        if (sections.length === 0) return;
+        const reveal = (el) => el.classList.add('in-view');
+        if (!('IntersectionObserver' in window)) {
+            sections.forEach(reveal);
+            return;
+        }
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    reveal(entry.target);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        sections.forEach((section) => {
+            const rect = section.getBoundingClientRect();
+            if (rect.top < window.innerHeight) reveal(section);
+            else observer.observe(section);
+        });
+    });
 {% endblock %}
