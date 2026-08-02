@@ -22,7 +22,7 @@
 
 **PromptForGood** (Chinese name: 智问善答) is a non-profit learning platform dedicated to popularizing and improving prompt engineering skills. Users can learn prompt engineering concepts through interactive tutorials, practice crafting prompts in real-world scenarios, and share and exchange experiences in the community forum.
 
-The platform is live at **[know-more.mzzj.org](https://know-more.mzzj.org)**.
+The platform is live at **[promptforgood.org](https://promptforgood.org)**.
 
 ## Key Features
 
@@ -229,7 +229,7 @@ This project is licensed under the [GNU v3 License](LICENSE).
 ## Contact
 
 - Project Homepage: [GitHub Repository](https://github.com/Mzzj114/know-more)
-- Live Site: [know-more.mzzj.org](https://know-more.mzzj.org)
+- Live Site: [promptforgood.org](https://promptforgood.org)
 - Feedback & Issues: [Issues](https://github.com/Mzzj114/know-more/issues)
 - Email: mzzj139@gmail.com
 

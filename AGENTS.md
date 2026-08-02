@@ -5,7 +5,7 @@
 **PromptForGood** (智问善答) is a non-profit open-source learning platform dedicated to popularizing prompt engineering skills. Users learn through interactive tutorials, test prompts via a built-in LLM chat interface (OpenAI), and engage in a community forum to share prompt templates and techniques.
 
 - **Repository**: https://github.com/Mzzj114/know-more
-- **Live Site**: https://know-more.mzzj.org
+- **Live Site**: https://promptforgood.org
 - **License**: GPLv3
 
 ## Technology Stack

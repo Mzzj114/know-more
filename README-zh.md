@@ -22,7 +22,7 @@
 
 **PromptForGood**（智问善答）是一个面向普及与提升提示词工程（Prompt Engineering）技能的非盈利学习平台。用户可以通过交互式教程学习提示词工程知识，在真实场景中练习制定提示词，并在社区论坛中分享和交流经验。
 
-平台已上线：**[know-more.mzzj.org](https://know-more.mzzj.org)**
+平台已上线：**[promptforgood.org](https://promptforgood.org)**
 
 ## 项目特点
 
@@ -228,7 +228,7 @@ know-more/
 ## 联系方式
 
 - 项目主页：[GitHub Repository](https://github.com/Mzzj114/know-more)
-- 线上站点：[know-more.mzzj.org](https://know-more.mzzj.org)
+- 线上站点：[promptforgood.org](https://promptforgood.org)
 - 问题反馈：[Issues](https://github.com/Mzzj114/know-more/issues)
 - 邮箱：mzzj139@gmail.com
 
