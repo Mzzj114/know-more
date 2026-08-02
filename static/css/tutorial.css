@@ -333,6 +333,31 @@
     color: #991B1B;
 }
 
+/* 测验反馈入场过渡 */
+.quiz-fade-enter-active {
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.quiz-fade-enter-from {
+    opacity: 0;
+    transform: translateY(8px);
+}
+
+.quiz-fade-enter-to {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .quiz-fade-enter-active {
+        transition: opacity 0.2s ease;
+    }
+
+    .quiz-fade-enter-from {
+        transform: none;
+    }
+}
+
 .fill-blank-text {
     line-height: 2;
     font-size: 15px;
