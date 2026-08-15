@@ -131,7 +131,7 @@ Key env vars (configured in `env/` directory):
 2. **`.agents/` directory** contains project rules and skills that guide agent behavior.
 3. **Settings split** into `base.py` / `dev.py` / `prod.py` — use `--settings=know_more.settings.dev` for development.
 4. **i18n**: All URLs use `i18n_patterns` with language prefix (`/en/`, `/zh/`).
-5. **Static files**: Served from `static/` directory; `node_modules/` also included in `STATICFILES_DIRS`.
+5. **Static files**: Served from `static/` directory; frontend dependencies are vendored into `static/vendor/` from `node_modules/` at build time, so `node_modules/` itself is no longer exposed via `/static/`. Change Dockerfile when new frontend dependencies are included.
 6. **Documentation source**: Lives in `document/{lang}/` as Markdown with frontmatter — this is the Flat-file CMS content.
 7. **Tutorial data**: Lives in `static/tutorials/{lang}/*.json` — this is separate from the documentation.
 8. **Requirements.txt** is the exact pip freeze output — use it for venv setup.
