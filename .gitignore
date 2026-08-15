@@ -169,6 +169,7 @@ cython_debug/
 # AI agent configs
 .continue/
 .lingma/
+.omo/
 
 node_modules
 secret.env

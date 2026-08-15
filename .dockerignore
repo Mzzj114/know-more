@@ -1,0 +1,48 @@
+# Git repository and history
+.git
+.gitignore
+
+# Environment and secrets
+env/
+*.env
+.env
+
+# Python virtual environments
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Django generated files
+staticfiles/
+media/
+
+# Node.js dependencies (copied separately in builder stage)
+node_modules/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Documentation and planning (not needed at runtime)
+planning/
+*.md
+
+# Local logs
+*.log
+logs/
